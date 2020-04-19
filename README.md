@@ -28,10 +28,11 @@ decision tree. The basic building blocks to a **treeheatr** plot are
 (yes, you guessed it\!) a decision tree and a heatmap.
 
   - The decision tree is computed with `partkit::ctree()` and plotted
-    with the very well-documented and flexible **ggparty** package. The
-    tree parameters can be passed to **ggparty** functions via the
-    `heat_tree()` and `draw_tree()` functions of **treeheatr**. More
-    details on different **ggparty** *geoms* can be found
+    with the well-documented and flexible
+    [**ggparty**](https://cran.r-project.org/web/packages/ggparty/index.html)
+    package. The tree parameters can be passed to **ggparty** functions
+    via the `heat_tree()` and `draw_tree()` functions of **treeheatr**.
+    More details on different **ggparty** *geoms* can be found
     [here](https://github.com/martin-borkovec/ggparty).
 
   - The heatmap is shown with `ggplot2::geom_tile()`. The user may
