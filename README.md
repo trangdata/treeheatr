@@ -14,16 +14,12 @@ devtools::install_github('trang1618/treeheatr',
 
 ``` r
 library(treeheatr)
-library(gtable)
 
-dat_raw <- iris
-
-my_fig <- heat_tree(dat_raw, class_lab = 'Species')
-
-grid::grid.draw(my_fig)
+heat_tree(iris, class_lab = 'Species') %>% 
+  grid::grid.draw()
 ```
 
-![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ## How to Use
 

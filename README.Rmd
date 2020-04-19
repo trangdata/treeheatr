@@ -12,23 +12,12 @@ devtools::install_github('trang1618/treeheatr',
 ```
 
 ## Example
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      dpi = 300,
-                      fig.path = "man/figures/README-")
-options(warn = -1)
-```
-
 
 ```{r, warning = FALSE, message = FALSE, dpi = 700}
 library(treeheatr)
-library(gtable)
 
-dat_raw <- iris
-
-my_fig <- heat_tree(dat_raw, class_lab = 'Species')
-
-grid::grid.draw(my_fig)
+heat_tree(iris, class_lab = 'Species') %>% 
+  grid::grid.draw()
 ```
   
 ## How to Use
