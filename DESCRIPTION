@@ -12,9 +12,9 @@ LazyData: true
 RoxygenNote: 7.1.0
 Depends:
     R (>= 3.6.1),
-    ggparty,
-    dplyr
+    ggparty
 Imports:
+    dplyr,
     scales
 Suggests:
     cluster
