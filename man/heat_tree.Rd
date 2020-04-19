@@ -2,7 +2,7 @@
 % Please edit documentation in R/heat_tree.R
 \name{heat_tree}
 \alias{heat_tree}
-\title{Draw and align decision tree and heatmap.}
+\title{Draws and aligns decision tree and heatmap.}
 \usage{
 heat_tree(
   dat_raw,
@@ -88,9 +88,11 @@ If feature types are not supplied, infer from column type.}
 \item{trans_type}{Character string specifying transformation type,
 can be 'scale' or 'normalize'.}
 
-\item{cont_cols}{Function determine color scale for continuous variable.}
+\item{cont_cols}{Function determine color scale for continuous variable,
+defaults to viridis option D.}
 
-\item{cate_cols}{Function determine color scale for nominal categorical variable.}
+\item{cate_cols}{Function determine color scale for nominal categorical variable,
+defaults to viridis option D.}
 
 \item{clust_feats}{If TRUE, performs cluster on the features.}
 
@@ -101,10 +103,10 @@ the class label and the rest of the features}
 on heatmap, can be 'top', 'bottom' or 'none'.}
 }
 \value{
-
+A gtable/grob object of the decision tree (top) and heatmap (bottom).
 }
 \description{
-Draw and align decision tree and heatmap.
+Draws and aligns decision tree and heatmap.
 }
 \examples{
 

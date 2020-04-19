@@ -35,15 +35,17 @@
 #' If feature types are not supplied, infer from column type.
 #' @param trans_type Character string specifying transformation type,
 #' can be 'scale' or 'normalize'.
-#' @param cont_cols Function determine color scale for continuous variable.
-#' @param cate_cols Function determine color scale for nominal categorical variable.
+#' @param cont_cols Function determine color scale for continuous variable,
+#' defaults to viridis option D.
+#' @param cate_cols Function determine color scale for nominal categorical variable,
+#' defaults to viridis option D.
 #' @param clust_feats If TRUE, performs cluster on the features.
 #' @param class_space Numeric value indicating spacing between
 #' the class label and the rest of the features
 #' @param class_pos Character string specifying the position of the class label
 #' on heatmap, can be 'top', 'bottom' or 'none'.
 #'
-#' @return
+#' @return A gtable/grob object of the decision tree (top) and heatmap (bottom).
 #' @export
 #'
 #' @examples
@@ -155,11 +157,11 @@ heat_tree <- function(
     unique()
 
   dheat <- draw_heat(
+    dat = scaled_dat,
+    feat_names = feat_names,
     disp_feats = disp_feats,
     class_cols = class_cols,
     panel_space = panel_space,
-    dat = scaled_dat,
-    feat_names = feat_names,
     feat_types = feat_types,
     trans_type = trans_type,
     cont_cols = cont_cols,

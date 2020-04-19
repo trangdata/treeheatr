@@ -1,10 +1,12 @@
 #' Draws the conditional decision tree output from partykit::ctree(),
 #' utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.
 #'
-#' @param fit
-#' @param class_cols
-#' @param layout
-#' @param term_dat Dataframe for terminal nodes, should include these columns:
+#' @param fit ggparty object as output from partykit::ctree()
+#' @param class_cols Vector of RGBs for the class colors,
+#' defaults to a colorblind friendly palette.
+#' @param layout Dataframe of layout of all nodes, must include these columns:
+#' id, x, y and y_hat.
+#' @param term_dat Dataframe for terminal nodes, must include these columns:
 #' id, x, y and y_hat.
 #' @param tree_space_top Numeric value to pass to expand for top margin of tree.
 #' @param tree_space_bottom Numeric value to pass to expand for bottom margin of tree.
@@ -17,7 +19,7 @@
 #' @param edge_text_vars Named list containing arguments to be passed to the
 #' `geom_edge_label()` call for tree edge annotations.
 #'
-#' @return
+#' @return A ggplot2 grob object of the decision tree.
 #' @export
 #'
 #' @examples
