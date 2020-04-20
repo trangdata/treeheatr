@@ -5,6 +5,8 @@ Integrating heatmap in decision tree.
 
 ## Install
 
+Please make sure your version of R \>= 3.6.0 before installation.
+
 ``` r
 devtools::install_github('trang1618/treeheatr',
                          dependencies = TRUE)
@@ -18,6 +20,7 @@ Classification of different types of iris plants.
 
 ``` r
 library(treeheatr)
+library(dplyr)
 
 heat_tree(iris, class_lab = 'Species') %>% 
   grid.draw()
@@ -57,7 +60,7 @@ decision tree. The basic building blocks to a **treeheatr** plot are
     across all samples.
 
 Make sure to check out the
-[*wiki*](https://github.com/trang1618/treeheatr/wiki) or the
+[wiki](https://github.com/trang1618/treeheatr/wiki) or the
 [vignettes](https://github.com/trang1618/treeheatr/vignettes) for
 detailed information on the usage of **treeheatr**.
 
