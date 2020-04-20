@@ -25,20 +25,14 @@ heat_tree(iris, class_lab = 'Species') %>%
 
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-### Wine recognition dataset from the Penn ML Benchmarks ([PMLB](https://github.com/EpistasisLab/penn-ml-benchmarks))
+### Wine recognition dataset
 
 Classification of different cultivars of wine.
 
 ``` r
-library(pmlblite)
-dataset_name <- 'wine-recognition'
-feat_names <- c('Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 
-                'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins',
-                'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Prolin')
-dat_raw <- fetch_data(dataset_name)
-colnames(dat_raw)[2:14] <- feat_names
+data(wine, package = 'rattle')
 
-heat_tree(dat_raw, class_lab = 'target') %>% 
+heat_tree(wine, class_lab = 'Type') %>% 
   grid.draw()
 ```
 
