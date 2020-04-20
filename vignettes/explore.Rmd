@@ -1,0 +1,133 @@
+---
+title: "Explore treeheatr"
+output: html_document
+---
+
+
+```{r}
+# library(tidyverse)
+# library(dplyr)
+# library(ggparty)
+library(treeheatr)
+library(gtable)
+# devtools::install_github("makeyourownmaker/pmlblite")
+library(pmlblite) # fetch PMLB datasets
+```
+
+What datasets are included in PMLB for classification?
+Pick dataset:
+```{r}
+# PMLB datasets
+
+# dataset_name <- 'mushroom'
+# label_map <- c(`0` = 'E', `1` = 'P') # edible or poisonous
+# fig_height <- 7
+# fig_width <- 10
+
+# dataset_name <- 'breast-cancer-wisconsin'
+# label_map <- c(`1` = 'Malignant', `0` = 'Benign')
+
+# dataset_name <- 'yeast'
+
+# dataset_name <- 'breast-cancer'
+#
+# dataset_name <- 'wine-quality-red'
+# my_layout <- data.frame(id = c(2, 29),
+#                         x = c(0.1, 0.9),
+#                         y = c(0.9, 0.9))
+
+# dataset_name <- 'titanic'
+# label_map <- c(`-1` = 'Deceased', `1` = 'Survived') 
+
+# dataset_name <- 'diabetes'
+# label_map <- c(`1` = 'Negative', `2` = 'Positive') # test results
+
+# dataset_name <- 'tic-tac-toe'
+# label_map <- c(`1` = 'Win', `0` = 'Loss/Draw')
+
+# dataset_name <- 'waveform-40'
+# fig_height <- 10
+# fig_width <- 10
+# 
+# classification_dataset_names
+
+```
+
+Let's start with the iris dataset!
+Running the `heat_tree()` function can be as simple as:
+
+```{r fig.height=4, fig.width=5}
+# dataset_name <- 'iris'
+dat_raw <- iris
+
+my_fig <- heat_tree(dat_raw, class_lab = 'Species')
+
+grid::grid.draw(my_fig)
+```
+
+But we can also customize our dtree-heatmap plot:
+
+```{r}
+my_fig <- heat_tree(
+  dat_raw, class_lab = 'Species',
+  tree_space_top = 0.1,
+  tree_space_bottom = 0.05,
+  par_node_vars = list(
+    label.size = 0.2,
+    label.padding = unit(0.1, "lines"),
+    line_list = list(
+      aes(label = paste("Node", id)),
+      aes(label = splitvar),
+      aes(label = paste("p =", formatC(p.value, format = "e", digits = 2)))),
+    line_gpar = list(
+      list(size = 8),
+      list(size = 8),
+      list(size = 6)),
+    id = 'inner'),
+  terminal_vars = list(size = 0),
+  edge_vars = list(size = 1, color = 'grey'))
+
+grid::grid.draw(my_fig)
+```
+
+```{r}
+dataset_name <- 'wine-recognition'
+feat_names <- c('Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Prolin')
+dat_raw <- fetch_data(dataset_name)
+
+colnames(dat_raw)[2:14] <- feat_names
+
+my_fig <- heat_tree(dat_raw, class_lab = 'target')
+grid::grid.newpage()
+grid::grid.draw(my_fig)
+
+# ggsave(filename = paste0('figs/', dataset_name, fig_ext),
+#        grid::grid.draw(my_fig),
+#        height = fig_height,
+#        width = fig_width)
+grid::grid.draw(my_fig)
+```
+
+
+```{r fig.height=3.5, fig.width=6}
+# dataset_name <- 'titanic'
+# colnames(dat_raw)
+# dat_raw <- read.csv('titanic/train.csv') %>%
+#   select(Survived, Pclass, Sex, Age, SibSp, Parch, Fare, Embarked)
+# 
+# my_fig <- heat_tree(
+#   dat_raw,
+#   class_lab = 'Survived',
+#   label_map = c(`1` = 'Survived', `0` = 'Deceased'),
+#   feat_types = c(Pclass = 'factor',
+#                  Sex = 'factor',
+#                  Age = 'numeric',
+#                  SibSp = 'numeric',
+#                  Parch = 'numeric',
+#                  Fare = 'numeric',
+#                  Embarked = 'factor'))
+# 
+# # grid::grid.newpage()
+# grid::grid.draw(my_fig)
+```
+

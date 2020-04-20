@@ -17,4 +17,5 @@ Depends:
 Imports:
     scales
 Suggests:
-    cluster
+    cluster,
+    grid
