@@ -10,16 +10,39 @@ devtools::install_github('trang1618/treeheatr',
                          dependencies = TRUE)
 ```
 
-## Example
+## Examples
+
+### Iris dataset
+
+Classification of different types of iris plants.
 
 ``` r
 library(treeheatr)
 
 heat_tree(iris, class_lab = 'Species') %>% 
-  grid::grid.draw()
+  grid.draw()
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+### Wine recognition dataset from the Penn ML Benchmarks ([PMLB](https://github.com/EpistasisLab/penn-ml-benchmarks))
+
+Classification of different cultivars of wine.
+
+``` r
+library(pmlblite)
+dataset_name <- 'wine-recognition'
+feat_names <- c('Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 
+                'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins',
+                'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Prolin')
+dat_raw <- fetch_data(dataset_name)
+colnames(dat_raw)[2:14] <- feat_names
+
+heat_tree(dat_raw, class_lab = 'target') %>% 
+  grid.draw()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ## How to Use
 
@@ -40,8 +63,9 @@ decision tree. The basic building blocks to a **treeheatr** plot are
     across all samples.
 
 Make sure to check out the
-[**wiki**](https://github.com/trang1618/treeheatr/wiki) or the vignettes
-for detailed information on the usage of **treeheatr**.
+[*wiki*](https://github.com/trang1618/treeheatr/wiki) or the
+[vignettes](https://github.com/trang1618/treeheatr/vignettes) for
+detailed information on the usage of **treeheatr**.
 
 Please [open an
 issue](https://github.com/trang1618/treeheatr/issues/new) for questions
