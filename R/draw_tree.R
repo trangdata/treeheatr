@@ -48,7 +48,7 @@ draw_tree <- function(
             terminal_vars)) +
   ggplot2::scale_x_continuous(expand = c(0,0)) +
   ggplot2::scale_y_continuous(expand = expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
-  ggplot2::scale_fill_manual(values = class_cols) +
+  ggplot2::scale_fill_manual(values = class_cols, drop = F) +
   ggplot2::coord_cartesian(xlim = c(0, 1)) +
   ggplot2::guides(fill = FALSE)
 }
