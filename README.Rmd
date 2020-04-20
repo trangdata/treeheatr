@@ -6,6 +6,9 @@ output: rmarkdown::github_document
 Integrating heatmap in decision tree.
 
 ## Install 
+
+Please make sure your version of R >= 3.6.0 before installation.
+
 ```{r, eval=FALSE}
 devtools::install_github('trang1618/treeheatr',
                          dependencies = TRUE)
@@ -48,7 +51,7 @@ More details on different **ggparty** *geoms* can be found [here](https://github
 * The heatmap is shown with `ggplot2::geom_tile()`.
 The user may choose to cluster the samples within each leaf node or the features across all samples.
 
-Make sure to check out the [*wiki*](https://github.com/trang1618/treeheatr/wiki) or the [vignettes](https://github.com/trang1618/treeheatr/vignettes) for detailed information on the usage of **treeheatr**.  
+Make sure to check out the [wiki](https://github.com/trang1618/treeheatr/wiki) or the [vignettes](https://github.com/trang1618/treeheatr/vignettes) for detailed information on the usage of **treeheatr**.  
 
 Please [open an issue](https://github.com/trang1618/treeheatr/issues/new) for questions related to **treeheatr** usage, bug reports or general inquiries.
 Thank you very much for your support!
