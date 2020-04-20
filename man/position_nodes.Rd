@@ -13,9 +13,9 @@ position_nodes(plot_data, custom_layout, lev_fac, panel_space)
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
 for manually input custom layout.}
 
-\item{lev_fac}{Relative weight of children node positions
+\item{lev_fac}{Relative weight of child node positions
 according to their levels, commonly ranges from 1 to 1.5.
-1 for parent node perfectly in the middle of children nodes.}
+1 for parent node perfectly in the middle of child nodes.}
 
 \item{panel_space}{Spacing between facets relative to viewport,
 recommended to range from 0.001 to 0.01.}

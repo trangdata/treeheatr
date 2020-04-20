@@ -5,7 +5,7 @@ Integrating heatmap in decision tree.
 
 ## Install
 
-Please make sure your version of R \>= 3.6.0 before installation.
+Please make sure your version of R \>= 3.5.0 before installation.
 
 ``` r
 devtools::install_github('trang1618/treeheatr',
@@ -33,8 +33,6 @@ heat_tree(iris, class_lab = 'Species') %>%
 Classification of different cultivars of wine.
 
 ``` r
-data(wine, package = 'rattle')
-
 heat_tree(wine, class_lab = 'Type') %>% 
   grid.draw()
 ```
@@ -66,5 +64,6 @@ detailed information on the usage of **treeheatr**.
 
 Please [open an
 issue](https://github.com/trang1618/treeheatr/issues/new) for questions
-related to **treeheatr** usage, bug reports or general inquiries. Thank
-you very much for your support\!
+related to **treeheatr** usage, bug reports or general inquiries.
+
+Thank you very much for your support\!

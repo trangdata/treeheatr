@@ -47,9 +47,9 @@ e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
 \item{panel_space}{Spacing between facets relative to viewport,
 recommended to range from 0.001 to 0.01.}
 
-\item{lev_fac}{Relative weight of children node positions
+\item{lev_fac}{Relative weight of child node positions
 according to their levels, commonly ranges from 1 to 1.5.
-1 for parent node perfectly in the middle of children nodes.}
+1 for parent node perfectly in the middle of child nodes.}
 
 \item{heat_rel_height}{Relative height of heatmap compared to whole figure (with tree).}
 
