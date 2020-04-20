@@ -1,15 +1,36 @@
 ---
-title: "Explore treeheatr"
-output: html_document
+title: "Explore **treeheatr**"
+author: "Trang Le"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Explore treeheatr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
+**treeheatr** displays a more interpretable decision tree visualization by integrating a heatmap at its terminal nodes.
+Let's explore the package **treeheatr** a little deeper and see what it can do!
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(treeheatr)
+library(dplyr)
+```
 
 
 ```{r}
 # library(tidyverse)
 # library(dplyr)
 # library(ggparty)
-library(treeheatr)
-library(gtable)
+# library(gtable)
 # devtools::install_github("makeyourownmaker/pmlblite")
 library(pmlblite) # fetch PMLB datasets
 ```
@@ -39,8 +60,7 @@ Pick dataset:
 # dataset_name <- 'titanic'
 # label_map <- c(`-1` = 'Deceased', `1` = 'Survived') 
 
-# dataset_name <- 'diabetes'
-# label_map <- c(`1` = 'Negative', `2` = 'Positive') # test results
+
 
 # dataset_name <- 'tic-tac-toe'
 # label_map <- c(`1` = 'Win', `0` = 'Loss/Draw')
@@ -56,19 +76,18 @@ Pick dataset:
 Let's start with the iris dataset!
 Running the `heat_tree()` function can be as simple as:
 
-```{r fig.height=4, fig.width=5}
+```{r fig.height=3, fig.width=5}
 # dataset_name <- 'iris'
 dat_raw <- iris
-
-my_fig <- heat_tree(dat_raw, class_lab = 'Species')
-
-grid::grid.draw(my_fig)
+heat_tree(dat_raw, class_lab = 'Species') %>% 
+  grid.draw()
 ```
 
-But we can also customize our dtree-heatmap plot:
+But we can also customize our heattree by passing parameters through to different **ggparty** geoms.
+For example:
 
-```{r}
-my_fig <- heat_tree(
+```{r fig.height=3.5, fig.width=6}
+heat_tree(
   dat_raw, class_lab = 'Species',
   tree_space_top = 0.1,
   tree_space_bottom = 0.05,
@@ -85,27 +104,33 @@ my_fig <- heat_tree(
       list(size = 6)),
     id = 'inner'),
   terminal_vars = list(size = 0),
-  edge_vars = list(size = 1, color = 'grey'))
+  edge_vars = list(size = 1, color = 'grey')) %>% 
+  grid.draw()
+```
 
-grid::grid.draw(my_fig)
+## Some more examples
+
+```{r  fig.height=4, fig.width=7}
+data(wine, package = 'rattle')
+
+heat_tree(wine, class_lab = 'Type') %>% 
+  grid.draw()
 ```
 
 ```{r}
-dataset_name <- 'wine-recognition'
-feat_names <- c('Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Prolin')
-dat_raw <- fetch_data(dataset_name)
+pmlblite::fetch_data('diabetes') %>% 
+  heat_tree(class_lab = 'target',
+            label_map = c(`1` = 'Negative', `2` = 'Positive')) %>% 
+  grid.draw()
+```
 
-colnames(dat_raw)[2:14] <- feat_names
+### An extreme example
+This visualization may not be very interpretable but serves the purpose of showing the node layout when the tree grows in size.
 
-my_fig <- heat_tree(dat_raw, class_lab = 'target')
-grid::grid.newpage()
-grid::grid.draw(my_fig)
-
-# ggsave(filename = paste0('figs/', dataset_name, fig_ext),
-#        grid::grid.draw(my_fig),
-#        height = fig_height,
-#        width = fig_width)
-grid::grid.draw(my_fig)
+```{r fig.height=7, fig.width=7}
+pmlblite::fetch_data('wine-quality-red') %>% 
+  heat_tree(class_lab = 'target') %>% 
+  grid.draw()
 ```
 
 
