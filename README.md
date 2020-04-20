@@ -59,8 +59,8 @@ decision tree. The basic building blocks to a **treeheatr** plot are
 
 Make sure to check out the
 [wiki](https://github.com/trang1618/treeheatr/wiki) or the
-[vignettes](https://github.com/trang1618/treeheatr/vignettes) for
-detailed information on the usage of **treeheatr**.
+[vignettes](https://github.com/trang1618/treeheatr/tree/master/vignettes)
+for detailed information on the usage of **treeheatr**.
 
 Please [open an
 issue](https://github.com/trang1618/treeheatr/issues/new) for questions
