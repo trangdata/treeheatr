@@ -4,9 +4,9 @@
 #' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
 #' @param custom_layout Dataframe with 3 columns: id, x and y
 #' for manually input custom layout.
-#' @param lev_fac Relative weight of children node positions
+#' @param lev_fac Relative weight of child node positions
 #' according to their levels, commonly ranges from 1 to 1.5.
-#' 1 for parent node perfectly in the middle of children nodes.
+#' 1 for parent node perfectly in the middle of child nodes.
 #' @param panel_space Spacing between facets relative to viewport,
 #' recommended to range from 0.001 to 0.01.
 #'

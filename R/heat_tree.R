@@ -8,9 +8,9 @@
 #' e.g., c(`0` = 'Edible', `1` = 'Poisonous').
 #' @param panel_space Spacing between facets relative to viewport,
 #' recommended to range from 0.001 to 0.01.
-#' @param lev_fac Relative weight of children node positions
+#' @param lev_fac Relative weight of child node positions
 #' according to their levels, commonly ranges from 1 to 1.5.
-#' 1 for parent node perfectly in the middle of children nodes.
+#' 1 for parent node perfectly in the middle of child nodes.
 #' @param heat_rel_height Relative height of heatmap compared to whole figure (with tree).
 #' @param clust_samps If TRUE, hierarhical clustering would be performed
 #' among samples within each leaf node.
@@ -107,6 +107,12 @@ heat_tree <- function(
 
   ################################################################
   ##### Compute conditional inference tree:
+
+  if ('character' %in% sapply(dat, class)){
+    dat <- dat %>%
+      dplyr::mutate_if(is.character, as.factor)
+    warning('Character variables are considered categorical.')
+  }
 
   fit <- partykit::ctree(my_class ~ ., data = dat)
 
