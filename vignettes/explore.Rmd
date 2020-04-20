@@ -20,76 +20,28 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message=FALSE}
 library(treeheatr)
 library(dplyr)
-```
-
-
-```{r}
-# library(tidyverse)
-# library(dplyr)
-# library(ggparty)
-# library(gtable)
-# devtools::install_github("makeyourownmaker/pmlblite")
-library(pmlblite) # fetch PMLB datasets
-```
-
-What datasets are included in PMLB for classification?
-Pick dataset:
-```{r}
-# PMLB datasets
-
-# dataset_name <- 'mushroom'
-# label_map <- c(`0` = 'E', `1` = 'P') # edible or poisonous
-# fig_height <- 7
-# fig_width <- 10
-
-# dataset_name <- 'breast-cancer-wisconsin'
-# label_map <- c(`1` = 'Malignant', `0` = 'Benign')
-
-# dataset_name <- 'yeast'
-
-# dataset_name <- 'breast-cancer'
-#
-# dataset_name <- 'wine-quality-red'
-# my_layout <- data.frame(id = c(2, 29),
-#                         x = c(0.1, 0.9),
-#                         y = c(0.9, 0.9))
-
-# dataset_name <- 'titanic'
-# label_map <- c(`-1` = 'Deceased', `1` = 'Survived') 
-
-
-
-# dataset_name <- 'tic-tac-toe'
-# label_map <- c(`1` = 'Win', `0` = 'Loss/Draw')
-
-# dataset_name <- 'waveform-40'
-# fig_height <- 10
-# fig_width <- 10
-# 
-# classification_dataset_names
-
+library(cowplot)
 ```
 
 Let's start with the iris dataset!
 Running the `heat_tree()` function can be as simple as:
 
 ```{r fig.height=3, fig.width=5}
-# dataset_name <- 'iris'
 dat_raw <- iris
 heat_tree(dat_raw, class_lab = 'Species') %>% 
-  grid.draw()
+  grid::grid.draw()
 ```
 
 But we can also customize our heattree by passing parameters through to different **ggparty** geoms.
 For example:
 
-```{r fig.height=3.5, fig.width=6}
+```{r fig.height=4, fig.width=7}
 heat_tree(
   dat_raw, class_lab = 'Species',
-  tree_space_top = 0.1,
+  tree_space_top = 0.2,
   tree_space_bottom = 0.05,
   par_node_vars = list(
     label.size = 0.2,
@@ -105,54 +57,69 @@ heat_tree(
     id = 'inner'),
   terminal_vars = list(size = 0),
   edge_vars = list(size = 1, color = 'grey')) %>% 
-  grid.draw()
+  grid::grid.draw()
 ```
 
 ## Some more examples
 
-```{r  fig.height=4, fig.width=7}
-data(wine, package = 'rattle')
-
+```{r fig.height=4, fig.width=7}
 heat_tree(wine, class_lab = 'Type') %>% 
-  grid.draw()
+  grid::grid.draw()
 ```
 
-```{r}
-pmlblite::fetch_data('diabetes') %>% 
-  heat_tree(class_lab = 'target',
-            label_map = c(`1` = 'Negative', `2` = 'Positive')) %>% 
-  grid.draw()
+```{r warning=F, fig.height=7, fig.width=7}
+p <- lapply(list(flags, saheart, diabetes), heat_tree, class_lab = 'target')
+
+cowplot::plot_grid(plotlist = p, ncol = 1)
 ```
 
-### An extreme example
-This visualization may not be very interpretable but serves the purpose of showing the node layout when the tree grows in size.
 
-```{r fig.height=7, fig.width=7}
-pmlblite::fetch_data('wine-quality-red') %>% 
-  heat_tree(class_lab = 'target') %>% 
-  grid.draw()
+### Extreme examples
+
+These visualizations may not be very interpretable but serves the purpose of showing the default node layout when the tree grows in size.
+The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches.
+This relative weight can be adjusted with the `lev_fac` parameter in `heat_tree()`.
+The default `lev_fac = 1.3` seems to provide aesthetically pleasing trees, independent of the tree size.
+
+```{r fig.height=6, fig.width=9}
+heat_tree(waveform, class_lab = 'target', heat_rel_height = 0.35) %>% 
+  grid::grid.draw()
 ```
+
+```{r fig.height=6, fig.width=9}
+heat_tree(wine_quality_red, class_lab = 'target') %>% 
+  grid::grid.draw()
+```
+
+`lev_fac = 1` draws parent node perfectly in the middle of child nodes.
+
+```{r fig.height=6, fig.width=9}
+heat_tree(wine_quality_red, class_lab = 'target', lev_fac = 1) %>% 
+  grid::grid.draw()
+```
+
+
+## Mixed data types
+
+**treeheatr** supports mixed data types.
+
+For continuous variables, we can choose to either *scale* (subtract the mean and divide by the standard deviation) or *normalize* (subtract the min and divide by the max) each variable.
+Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
+Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette]( https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
+
+For categorical variables, the tiles are placed one row at a time.
+
+Let's take a closer look at how it handles a dataset like Titanic with categorical variables (`Class`, `Sex`, `Embarked`) and continuous variables (others).
 
 
 ```{r fig.height=3.5, fig.width=6}
-# dataset_name <- 'titanic'
-# colnames(dat_raw)
-# dat_raw <- read.csv('titanic/train.csv') %>%
-#   select(Survived, Pclass, Sex, Age, SibSp, Parch, Fare, Embarked)
-# 
-# my_fig <- heat_tree(
-#   dat_raw,
-#   class_lab = 'Survived',
-#   label_map = c(`1` = 'Survived', `0` = 'Deceased'),
-#   feat_types = c(Pclass = 'factor',
-#                  Sex = 'factor',
-#                  Age = 'numeric',
-#                  SibSp = 'numeric',
-#                  Parch = 'numeric',
-#                  Fare = 'numeric',
-#                  Embarked = 'factor'))
-# 
-# # grid::grid.newpage()
-# grid::grid.draw(my_fig)
+dat_raw <- titanic %>%
+  dplyr::select(Survived, Pclass, Sex, Age, SibSp, Parch, Fare, Embarked) 
+
+heat_tree(
+  dat_raw,
+  class_lab = 'Survived',
+  label_map = c(`1` = 'Survived', `0` = 'Deceased')) %>% 
+  grid::grid.draw()
 ```
 
