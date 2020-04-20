@@ -42,7 +42,7 @@ draw_heat <- function(
   if (is.null(feat_types)){feat_types <- sapply(dat[, feat_names], class)}
 
   # prepare feature orders:
-  feat_list <- prepare_feats(disp_feats, dat, feat_types, clust_feats, trans_type)
+  feat_list <- prepare_feats(dat, disp_feats, feat_types, clust_feats, trans_type)
   tile_cont <- feat_list[['df_cont']]
   tile_cate <- feat_list[['df_cate']]
 
