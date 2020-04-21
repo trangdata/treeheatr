@@ -1,6 +1,7 @@
 #' Draws the conditional decision tree output from partykit::ctree(),
 #' utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.
 #'
+#' @import ggparty
 #' @param fit ggparty object as output from partykit::ctree()
 #' @param class_cols Vector of RGBs for the class colors,
 #' defaults to a colorblind friendly palette.
@@ -30,7 +31,7 @@ draw_tree <- function(
   par_node_vars = list(
     label.size = 0, # no border around labels, unlike terminal nodes
     label.padding = unit(0.15, "lines"),
-    line_list = list(aes(label = splitvar)),
+    line_list = list(ggplot2::aes(label = splitvar)),
     line_gpar = list(list(size = 9))),
   terminal_vars = list(label.padding = unit(0.25, "lines"), size = 3),
   edge_vars = list(color = 'grey70', size = 0.5),
@@ -43,7 +44,7 @@ draw_tree <- function(
   do.call(ggparty::geom_node_label, par_node_vars) +
   do.call(ggparty::geom_node_label,
           c(list(data = term_dat,
-                 mapping = aes(label = y_hat, fill = y_hat),
+                 mapping = ggplot2::aes(label = y_hat, fill = y_hat),
                  col = 'white'),
             terminal_vars)) +
   ggplot2::scale_x_continuous(expand = c(0,0)) +

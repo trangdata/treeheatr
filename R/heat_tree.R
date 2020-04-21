@@ -48,7 +48,7 @@
 #' @return A gtable/grob object of the decision tree (top) and heatmap (bottom).
 #' @export
 #'
-#' @examples
+#' @examples heat_tree(iris, class_lab = 'Species')
 #'
 heat_tree <- function(
   dat_raw, class_lab,
@@ -67,10 +67,10 @@ heat_tree <- function(
   tree_space_bottom = 0.035,
   par_node_vars = list(
     label.size = 0, # no border around labels, unlike terminal nodes
-    label.padding = unit(0.15, "lines"),
-    line_list = list(aes(label = splitvar)),
+    label.padding = ggplot2::unit(0.15, "lines"),
+    line_list = list(ggplot2::aes(label = splitvar)),
     line_gpar = list(list(size = 9))),
-  terminal_vars = list(label.padding = unit(0.25, "lines"), size = 3),
+  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3),
   edge_vars = list(color = 'grey70', size = 0.5),
   edge_text_vars = list(color = 'grey30', size = 3),
 
@@ -154,9 +154,9 @@ heat_tree <- function(
   # important features to display in decision trees
   # (pass p value threshold):
   disp_feats <- partykit::nodeapply(
-    fit, ids = nodeids(fit),
+    fit, ids = partykit::nodeids(fit),
     FUN = function(n) {
-      node_pvals <- info_node(n)$p.value
+      node_pvals <- partykit::info_node(n)$p.value
       names(node_pvals[node_pvals < p_thres])
     }) %>%
     unlist() %>%

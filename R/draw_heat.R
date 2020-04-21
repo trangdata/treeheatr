@@ -26,7 +26,6 @@
 #' @return A ggplot2 grob object of the heatmap.
 #' @export
 #'
-#' @examples
 draw_heat <- function(
   dat, feat_names, disp_feats, class_cols, panel_space,
   feat_types = NULL,
@@ -52,7 +51,7 @@ draw_heat <- function(
   dheat <- ggplot2::ggplot(dat) +
     ggplot2::facet_grid(cols = vars(node_id), scales = 'free_x', space = 'free') +
     ggplot2::geom_tile(
-      aes(y = dplyr::case_when(
+      ggplot2::aes(y = dplyr::case_when(
         class_pos == 'top' ~ (n_feats + 1 + class_space),
         class_pos == 'bottom' ~ (- class_space)), # if 'none', returns NA
           x = Sample, fill = my_class)) +
@@ -62,15 +61,15 @@ draw_heat <- function(
     ggplot2::labs(x = NULL, y = NULL) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      axis.text.x = element_blank(),
-      axis.ticks = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
       legend.position = 'None',
-      strip.background = element_blank(),
-      strip.text.x = element_blank(),
-      panel.spacing = unit(panel_space, 'npc'),
-      plot.margin = unit(c(0, 5.5, 5.5, 5.5), 'pt')
+      strip.background = ggplot2::element_blank(),
+      strip.text.x = ggplot2::element_blank(),
+      panel.spacing = ggplot2::unit(panel_space, 'npc'),
+      plot.margin = ggplot2::unit(c(0, 5.5, 5.5, 5.5), 'pt')
     )
 
   if (!is.null(tile_cate)){
@@ -78,7 +77,7 @@ draw_heat <- function(
       dheat <- dheat +
         ggnewscale::new_scale_fill() +
         ggplot2::geom_tile(data = tile_cate %>% filter(cate_feat == i),
-                           aes(y = cate_feat, x = Sample, fill = value)) +
+                           ggplot2::aes(y = cate_feat, x = Sample, fill = value)) +
         cate_cols
     }
   }
@@ -86,7 +85,8 @@ draw_heat <- function(
   if (!is.null(tile_cont)){
     dheat <- dheat +
       ggnewscale::new_scale_fill() +
-      ggplot2::geom_tile(data = tile_cont, aes(y = cont_feat, x = Sample, fill = value)) +
+      ggplot2::geom_tile(data = tile_cont,
+                         ggplot2::aes(y = cont_feat, x = Sample, fill = value)) +
       cont_cols
   }
 

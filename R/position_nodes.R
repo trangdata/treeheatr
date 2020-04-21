@@ -15,7 +15,6 @@
 #' combined with custom_layout.
 #' @export
 #'
-#' @examples
 position_nodes <- function(plot_data, custom_layout, lev_fac, panel_space){
 
   terminal_data <- plot_data %>%

@@ -19,9 +19,9 @@ heat_tree(
   p_thres = 0.05,
   tree_space_top = 0.05,
   tree_space_bottom = 0.035,
-  par_node_vars = list(label.size = 0, label.padding = unit(0.15, "lines"), line_list =
-    list(aes(label = splitvar)), line_gpar = list(list(size = 9))),
-  terminal_vars = list(label.padding = unit(0.25, "lines"), size = 3),
+  par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
+    line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9))),
+  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3),
   edge_vars = list(color = "grey70", size = 0.5),
   edge_text_vars = list(color = "grey30", size = 3),
   feat_types = NULL,
@@ -109,5 +109,6 @@ A gtable/grob object of the decision tree (top) and heatmap (bottom).
 Draws and aligns decision tree and heatmap.
 }
 \examples{
+heat_tree(iris, class_lab = 'Species')
 
 }

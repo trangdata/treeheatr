@@ -16,7 +16,6 @@
 #' from the original dataset.
 #' @export
 #'
-#' @examples
 prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
   cont_feats <- names(feat_types[feat_types == 'numeric'| feat_types == 'integer'])
   cate_feats <- names(feat_types[feat_types == 'factor'])
@@ -27,7 +26,7 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
   if (n_conts > 0){
     df_cont <- dat %>%
       dplyr::select(- all_of(cate_feats)) %>%
-      dplyr::mutate_at(cont_feats, ~ scale_stand(., trans_type = trans_type)) %>%
+      dplyr::mutate_at(cont_feats, ~ scale_norm(., trans_type = trans_type)) %>%
       tidyr::pivot_longer(all_of(cont_feats), names_to = 'cont_feat') %>%
       dplyr::filter(cont_feat %in% disp_feats) %>%
       dplyr::mutate(cont_feat = as.factor(cont_feat))

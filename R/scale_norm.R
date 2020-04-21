@@ -10,8 +10,7 @@
 #' @return Numeric vector of transformed x.
 #' @export
 #'
-#' @examples
-scale_stand <- function(x, trans_type){
+scale_norm <- function(x, trans_type){
   if (trans_type == 'scale') {
     scale(x)
   } else if (trans_type == 'normalize'){
