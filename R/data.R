@@ -1,0 +1,81 @@
+#' Diabetes
+#'
+#' Fetched from PMLB.
+#'
+#' @format A data frame with 9 variables.
+"diabetes"
+
+#' Flags.
+#'
+#' Fetched from PMLB.
+#' Contains details of 178 nations and their flags with 43 variables.
+#' Unsure what 'target' indicates atm.
+#'
+"flags"
+
+#' saheart.
+#'
+#' Fetched from PMLB.
+#' A retrospective sample of males in a heart-disease high-risk region of the Western Cape, South Africa.
+#'
+#' https://rdrr.io/cran/ElemStatLearn/man/SAheart.html
+#' https://www.rdocumentation.org/packages/BeSS/versions/1.0.6/topics/SAheart
+#' need to check dimensions.
+#'
+#' @format A data frame with nine variables.
+#'
+#'
+"saheart"
+
+#' Titanic.
+#'
+#' Titanic training dataset from titanic::titanic_train.
+#'
+#' @format A data frame with 12 variables: \code{PassengerId}, \code{Survived},
+#'   \code{Pclass}, \code{Name}, \code{Sex}, \code{Age}, \code{SipSp}, \code{Parch},
+#'   \code{Ticket}, \code{Fare}, \code{Cabin} and \code{Embarked}.
+#'
+"titanic"
+
+#' Waveform
+#'
+#' Generator generating 3 classes of waves.
+#' Each class is generated from a combination of 2 of 3 "base" waves.
+#'
+#' @format A data frame with 41 variables attributes describing the waveform,
+#' all of which include noise. The latter 19 attributes are all noise attributes
+#' with mean 0 and variance 1.
+#'
+#' https://datahub.io/machine-learning/waveform-5000
+#'
+#' Breiman,L., Friedman,J.H., Olshen,R.A., and Stone,C.J. (1984).
+#' Classification and Regression Trees. Wadsworth International, pp 49-55, 169.
+#'
+"waveform"
+
+
+#' Wine recognition dataset.
+#'
+#' Import with data(wine, package = 'rattle'). Dependent variable: Type.
+#'
+#' @format A data frame with 14 variables.
+#'
+"wine"
+
+
+#' wine_quality_red.
+#'
+#' Fetched from PMLB.
+#' Wine quality
+#'
+#' @format A data frame with 12 variables: \code{fixed acidity}, \code{volatile acidity},
+#' \code{citric acid}, \code{residual sugar}, \code{chlorides}, \code{free sulfur dioxide},
+#' \code{total sulfur dioxide}, \code{density}, \code{pH}, \code{sulphates},
+#' \code{alcohol}, \code{quality}.
+#'
+#' http://archive.ics.uci.edu/ml/datasets/Wine+Quality
+#'
+#'
+#'
+"wine_quality_red"
+

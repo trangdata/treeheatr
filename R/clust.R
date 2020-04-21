@@ -1,5 +1,7 @@
 #' Performs clustering of samples or features.
 #'
+#' @import dplyr
+#' @importFrom stats hclust
 #' @param leaf_node Integer value indicating terminal node id.
 #' @param dat Dataframe of the original dataset. Samples may be reordered.
 #' @param clust_vec Character vector of variable names to be applied clustering on.

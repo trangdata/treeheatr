@@ -2,6 +2,7 @@
 #' If R does not recognize a categorical feature (input from user) as factor,
 #' converts to factor.
 #'
+#' @import dplyr
 #' @param dat Dataframe with samples from original dataset ordered according to
 #' the clustering within each leaf node.
 #' @param disp_feats Character vector specifying features to be displayed.
@@ -59,7 +60,7 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
     if (n_cates > 1){
       levels(df_cate$cate_feat) <-
         clust(
-          dat = dat %>% mutate_if(is.factor, as.numeric),
+          dat = dat %>% dplyr::mutate_if(is.factor, as.numeric),
           clust_vec = cate_feats[cate_feats %in% disp_feats],
           clust_samps = FALSE,
           clust_feats = clust_feats

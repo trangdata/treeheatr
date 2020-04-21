@@ -16,10 +16,16 @@ Depends:
 Imports:
     scales,
     dplyr,
-    ggnewscale
+    ggnewscale,
+    ggplot2,
+    gtable,
+    partykit,
+    tidyr
 Suggests:
     cluster,
     grid,
     knitr,
-    rmarkdown
+    rmarkdown,
+    cowplot,
+    rlang
 VignetteBuilder: knitr

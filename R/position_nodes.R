@@ -1,6 +1,7 @@
 #' Creates smart node layout from the bottom up and
 #' overwrites ggarpty-precomputed positions in plot_data.
 #'
+#' @import dplyr
 #' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
 #' @param custom_layout Dataframe with 3 columns: id, x and y
 #' for manually input custom layout.
