@@ -138,7 +138,8 @@
   <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>option</span> <span class='kw'>=</span> <span class='st'>"D"</span>, <span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
   <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>class_space</span> <span class='kw'>=</span> <span class='fl'>0.03</span>,
-  <span class='kw'>class_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>
+  <span class='kw'>class_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
+  <span class='kw'>class_lab_disp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -190,7 +191,7 @@ defaults to viridis option D.</p></td>
     </tr>
     <tr>
       <th>clust_feats</th>
-      <td><p>If TRUE, performs cluster on the features.</p></td>
+      <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
     </tr>
     <tr>
       <th>class_space</th>
@@ -201,6 +202,11 @@ the class label and the rest of the features</p></td>
       <th>class_pos</th>
       <td><p>Character string specifying the position of the class label
 on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
+    </tr>
+    <tr>
+      <th>class_lab_disp</th>
+      <td><p>Character string for displaying the label of class label
+if it differs from class_lab.</p></td>
     </tr>
     </table>
 

@@ -139,10 +139,12 @@
   <span class='kw'>clust_class</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>custom_layout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>p_thres</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>show_all_feats</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>tree_space_top</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0.035</span>,
   <span class='kw'>par_node_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.size</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/reexports.html'>unit</a></span>(<span class='fl'>0.15</span>, <span class='st'>"lines"</span>),
-    <span class='kw'>line_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>splitvar</span>)), <span class='kw'>line_gpar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>9</span>))),
+    <span class='kw'>line_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>splitvar</span>)), <span class='kw'>line_gpar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>9</span>)),
+    <span class='kw'>ids</span> <span class='kw'>=</span> <span class='st'>"inner"</span>),
   <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/reexports.html'>unit</a></span>(<span class='fl'>0.25</span>, <span class='st'>"lines"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>),
   <span class='kw'>edge_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey70"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>),
   <span class='kw'>edge_text_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey30"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>),
@@ -152,7 +154,8 @@
   <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>option</span> <span class='kw'>=</span> <span class='st'>"D"</span>, <span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
   <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>class_space</span> <span class='kw'>=</span> <span class='fl'>0.03</span>,
-  <span class='kw'>class_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>
+  <span class='kw'>class_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
+  <span class='kw'>class_lab_disp</span> <span class='kw'>=</span> <span class='no'>class_lab</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -193,12 +196,12 @@ according to their levels, commonly ranges from 1 to 1.5.
     </tr>
     <tr>
       <th>clust_samps</th>
-      <td><p>If TRUE, hierarhical clustering would be performed
+      <td><p>Logical. If TRUE, hierarhical clustering would be performed
 among samples within each leaf node.</p></td>
     </tr>
     <tr>
       <th>clust_class</th>
-      <td><p>If TRUE, class/label would be included in hierarchical clustering
+      <td><p>Logical. If TRUE, class/label would be included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.</p></td>
     </tr>
     <tr>
@@ -209,7 +212,12 @@ for manually input custom layout.</p></td>
     <tr>
       <th>p_thres</th>
       <td><p>Numeric value indicating the p-value threshold of feature importance.
-Feature with p-values below this value will be displayed on the heatmap.</p></td>
+Feature with p-values computed from the decision tree below this value
+will be displayed on the heatmap.</p></td>
+    </tr>
+    <tr>
+      <th>show_all_feats</th>
+      <td><p>Logical. If TRUE, show all features from the dataset, regarless p_thres.</p></td>
     </tr>
     <tr>
       <th>tree_space_top</th>
@@ -262,7 +270,7 @@ defaults to viridis option D.</p></td>
     </tr>
     <tr>
       <th>clust_feats</th>
-      <td><p>If TRUE, performs cluster on the features.</p></td>
+      <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
     </tr>
     <tr>
       <th>class_space</th>
@@ -274,6 +282,11 @@ the class label and the rest of the features</p></td>
       <td><p>Character string specifying the position of the class label
 on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
     </tr>
+    <tr>
+      <th>class_lab_disp</th>
+      <td><p>Character string for displaying the label of class label
+if it differs from class_lab.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -283,33 +296,33 @@ on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>heat_tree</span>(<span class='no'>iris</span>, <span class='kw'>class_lab</span> <span class='kw'>=</span> <span class='st'>'Species'</span>)</div><div class='output co'>#&gt; TableGrob (14 x 15) "layout": 28 grobs
 #&gt;     z         cells       name                                    grob
-#&gt; 1   0 ( 2-14, 1-15) background zeroGrob[plot.background..zeroGrob.117]
-#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.35]
-#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.44]
-#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.53]
-#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.62]
+#&gt; 1   0 ( 2-14, 1-15) background zeroGrob[plot.background..zeroGrob.121]
+#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.36]
+#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.46]
+#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.56]
+#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.66]
 #&gt; 6   3 ( 7- 7, 5- 5)   axis-t-1                          zeroGrob[NULL]
 #&gt; 7   3 ( 7- 7, 7- 7)   axis-t-2                          zeroGrob[NULL]
 #&gt; 8   3 ( 7- 7, 9- 9)   axis-t-3                          zeroGrob[NULL]
 #&gt; 9   3 ( 7- 7,11-11)   axis-t-4                          zeroGrob[NULL]
-#&gt; 10  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.63]
-#&gt; 11  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.64]
-#&gt; 12  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.65]
-#&gt; 13  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.66]
-#&gt; 14  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.70]
+#&gt; 10  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.67]
+#&gt; 11  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.68]
+#&gt; 12  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.69]
+#&gt; 13  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.70]
+#&gt; 14  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.74]
 #&gt; 15  3 ( 9- 9,12-12)   axis-r-1                          zeroGrob[NULL]
-#&gt; 16  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.71]
-#&gt; 17  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.72]
-#&gt; 18  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.73]
-#&gt; 19  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.74]
+#&gt; 16  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.75]
+#&gt; 17  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.76]
+#&gt; 18  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.77]
+#&gt; 19  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.78]
 #&gt; 20  4 ( 6- 6, 5-11)     xlab-t                          zeroGrob[NULL]
 #&gt; 21  5 (11-11, 5-11)     xlab-b                          zeroGrob[NULL]
 #&gt; 22  6 ( 9- 9, 3- 3)     ylab-l                          zeroGrob[NULL]
 #&gt; 23  7 ( 9- 9,13-13)     ylab-r                          zeroGrob[NULL]
-#&gt; 24  8 ( 5- 5, 5-11)   subtitle   zeroGrob[plot.subtitle..zeroGrob.114]
-#&gt; 25  9 ( 4- 4, 5-11)      title      zeroGrob[plot.title..zeroGrob.113]
-#&gt; 26 10 (12-12, 5-11)    caption    zeroGrob[plot.caption..zeroGrob.116]
-#&gt; 27 11 ( 3- 3, 2- 2)        tag        zeroGrob[plot.tag..zeroGrob.115]
+#&gt; 24  8 ( 5- 5, 5-11)   subtitle   zeroGrob[plot.subtitle..zeroGrob.118]
+#&gt; 25  9 ( 4- 4, 5-11)      title      zeroGrob[plot.title..zeroGrob.117]
+#&gt; 26 10 (12-12, 5-11)    caption    zeroGrob[plot.caption..zeroGrob.120]
+#&gt; 27 11 ( 3- 3, 2- 2)        tag        zeroGrob[plot.tag..zeroGrob.119]
 #&gt; 28 12 ( 1- 1, 5-11)     layout                          gtable[layout]</div><div class='input'>
 </div></pre>
   </div>
