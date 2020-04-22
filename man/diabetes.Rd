@@ -3,9 +3,11 @@
 \docType{data}
 \name{diabetes}
 \alias{diabetes}
-\title{Diabetes}
+\title{Diabetes patient records.}
 \format{
 A data frame with 9 variables.
+
+http://archive.ics.uci.edu/ml/datasets/diabetes
 }
 \usage{
 diabetes

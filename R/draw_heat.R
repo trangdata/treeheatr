@@ -1,5 +1,6 @@
-#' Draws the heatmap to be placed below the decision tree.
+#' Draws the heatmap.
 #'
+#' Draws the heatmap to be placed below the decision tree.
 #' @param dat Dataframe with samples from original dataset ordered according to
 #' the clustering within each leaf node.
 #' @param feat_names Character vector specifying the feature names in dat.

@@ -3,7 +3,7 @@
 \docType{data}
 \name{waveform}
 \alias{waveform}
-\title{Waveform}
+\title{Waveform database generator.}
 \format{
 A data frame with 41 variables attributes describing the waveform,
 all of which include noise. The latter 19 attributes are all noise attributes

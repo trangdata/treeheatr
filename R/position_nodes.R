@@ -1,4 +1,6 @@
-#' Creates smart node layout from the bottom up and
+#' Creates smart node layout.
+#'
+#' Create node layout using a bottom-up approach (literally) and
 #' overwrites ggarpty-precomputed positions in plot_data.
 #'
 #' @import dplyr

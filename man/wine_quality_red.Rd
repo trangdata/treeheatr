@@ -3,7 +3,7 @@
 \docType{data}
 \name{wine_quality_red}
 \alias{wine_quality_red}
-\title{wine_quality_red.}
+\title{Red variant of the Portuguese "Vinho Verde" wine.}
 \format{
 A data frame with 12 variables: \code{fixed acidity}, \code{volatile acidity},
 \code{citric acid}, \code{residual sugar}, \code{chlorides}, \code{free sulfur dioxide},
@@ -11,12 +11,16 @@ A data frame with 12 variables: \code{fixed acidity}, \code{volatile acidity},
 \code{alcohol}, \code{quality}.
 
 http://archive.ics.uci.edu/ml/datasets/Wine+Quality
+
+P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis.
+Modeling wine preferences by data mining from physicochemical properties.
+In Decision Support Systems, Elsevier, 47(4):547-553, 2009.
 }
 \usage{
 wine_quality_red
 }
 \description{
 Fetched from PMLB.
-Wine quality
+Physicochemical and quality of wine.
 }
 \keyword{datasets}

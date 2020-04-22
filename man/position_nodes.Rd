@@ -2,8 +2,7 @@
 % Please edit documentation in R/position_nodes.R
 \name{position_nodes}
 \alias{position_nodes}
-\title{Creates smart node layout from the bottom up and
-overwrites ggarpty-precomputed positions in plot_data.}
+\title{Creates smart node layout.}
 \usage{
 position_nodes(plot_data, custom_layout, lev_fac, panel_space)
 }
@@ -25,6 +24,6 @@ Dataframe with 3 columns: id, x and y of smart layout
 combined with custom_layout.
 }
 \description{
-Creates smart node layout from the bottom up and
+Create node layout using a bottom-up approach (literally) and
 overwrites ggarpty-precomputed positions in plot_data.
 }

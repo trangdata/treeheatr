@@ -3,11 +3,13 @@
 \docType{data}
 \name{titanic}
 \alias{titanic}
-\title{Titanic.}
+\title{Fate of passengers on the fatal maiden voyage of the ocean liner *Titanic*.}
 \format{
 A data frame with 12 variables: \code{PassengerId}, \code{Survived},
   \code{Pclass}, \code{Name}, \code{Sex}, \code{Age}, \code{SipSp}, \code{Parch},
   \code{Ticket}, \code{Fare}, \code{Cabin} and \code{Embarked}.
+
+https://www.rdocumentation.org/packages/titanic/versions/0.1.0
 }
 \usage{
 titanic

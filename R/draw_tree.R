@@ -1,3 +1,5 @@
+#' Draws the conditional decision tree.
+#'
 #' Draws the conditional decision tree output from partykit::ctree(),
 #' utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.
 #'

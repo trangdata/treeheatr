@@ -2,7 +2,7 @@
 % Please edit documentation in R/draw_heat.R
 \name{draw_heat}
 \alias{draw_heat}
-\title{Draws the heatmap to be placed below the decision tree.}
+\title{Draws the heatmap.}
 \usage{
 draw_heat(
   dat,

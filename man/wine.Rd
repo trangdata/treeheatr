@@ -3,7 +3,7 @@
 \docType{data}
 \name{wine}
 \alias{wine}
-\title{Wine recognition dataset.}
+\title{Results of a chemical analysis of wines grown in a specific area of Italy.}
 \format{
 A data frame with 14 variables.
 }
@@ -11,6 +11,12 @@ A data frame with 14 variables.
 wine
 }
 \description{
+Three types of wine are represented in the 178 samples,
+with the results of 13 chemical analyses recorded for each sample.
+}
+\details{
 Import with data(wine, package = 'rattle'). Dependent variable: Type.
+https://rdrr.io/cran/rattle.data/man/wine.html
+http://archive.ics.uci.edu/ml/datasets/wine
 }
 \keyword{datasets}
