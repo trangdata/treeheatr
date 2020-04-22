@@ -1,0 +1,55 @@
+destination: docs
+template:
+  params:
+    bootswatch: flatly
+
+reference:
+- title: "Primary functions"
+  desc: >
+    Package primary functions
+- contents:
+  - heat_tree
+  - draw_tree
+  - draw_heat
+- title: "Utility functions"
+  desc: >
+    Package primary functions
+- contents:
+  - prepare_feats
+  - clust
+  - scale_norm
+  - position_nodes
+- title: "Datasets"
+  desc: >
+    Attached datasets available for use via lazy-loading
+- contents:
+  - diabetes
+  - flags
+  - saheart
+  - titanic
+  - waveform
+  - wine
+  - wine_quality_red
+
+navbar:
+  structure:
+    left:  [home, reference, articles]
+    right: [github, twitter]
+  components:
+    home:
+      icon: fa-home
+      href: index.html
+    reference:
+      text: Documentation
+      href: reference/index.html
+    articles:
+      text: Vignette
+      href: articles/explore.html
+    github:
+      icon: fa-github
+      href: https://github.com/trang1618/treeheatr
+    twitter:
+      icon: fa-twitter
+      href: https://twitter.com/trang1618
+
+

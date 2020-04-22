@@ -5,3 +5,8 @@
 ^doc$
 ^Meta$
 ^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^README.Rmd$
+^README_files$
