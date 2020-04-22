@@ -16,3 +16,6 @@ jobs:
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
         shell: Rscript {0}
+      - name: Build webpage
+        run: pkgdown::build_site()
+        shell: Rscript {0}
