@@ -47,23 +47,26 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
 
   if (clust_feats == TRUE) {
     if (n_conts > 1){
-      levels(df_cont$cont_feat) <-
+      clustered_conts <-
         clust(
           dat = dat,
           clust_vec = cont_feats[cont_feats %in% disp_feats],
           clust_samps = FALSE,
           clust_feats = clust_feats
         )
+      df_cont$cont_feat <- factor(df_cont$cont_feat, levels = clustered_conts)
     }
 
     if (n_cates > 1){
-      levels(df_cate$cate_feat) <-
+      clustered_cates <-
         clust(
           dat = dat %>% dplyr::mutate_if(is.factor, as.numeric),
           clust_vec = cate_feats[cate_feats %in% disp_feats],
           clust_samps = FALSE,
           clust_feats = clust_feats
         )
+      df_cate$cate_feat <- factor(df_cate$cate_feat, levels = clustered_cates)
+
     }
   }
 

@@ -95,6 +95,7 @@ draw_heat <- function(
     tile_cont <- tile_cont %>%
       dplyr::mutate(y = cont_feat %>%
                       `levels<-`(seq(n_cates + 1, n_conts + n_cates)) %>%
+                      as.character() %>%
                       as.numeric())
 
     dheat <- dheat +
@@ -108,7 +109,7 @@ draw_heat <- function(
     scale_y_continuous(
       expand = c(0, 0),
       breaks = c(class_y, seq.int(n_feats)),
-      labels = c(class_lab_disp, levels(tile_cont$cont_feat), levels(tile_cate$cate_feat)))
+      labels = c(class_lab_disp, levels(tile_cate$cate_feat), levels(tile_cont$cont_feat)))
 
   return(dheat)
 }
