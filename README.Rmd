@@ -1,9 +1,15 @@
 ---
-title: "treeheatr"
+title: "**treeheatr**: an introduction"
 output: rmarkdown::github_document
 ---
 
-Integrating heatmap in decision tree.
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  fig.path = "man/figures/"
+)
+```
+
+#### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
 ## Install 
 
@@ -22,7 +28,6 @@ Classification of different types of iris plants.
 
 ```{r, fig.height=3.5, message=FALSE, warnings = FALSE}
 library(treeheatr)
-# library(dplyr)
 
 grid.draw(heat_tree(iris, class_lab = 'Species'))
 ```
@@ -48,7 +53,7 @@ More details on different **ggparty** *geoms* can be found [here](https://github
 * The heatmap is shown with `ggplot2::geom_tile()`.
 The user may choose to cluster the samples within each leaf node or the features across all samples.
 
-Make sure to check out the [wiki](https://github.com/trang1618/treeheatr/wiki) or the [vignettes](https://github.com/trang1618/treeheatr/tree/master/vignettes) for detailed information on the usage of **treeheatr**.
+Make sure to check out the [vignettes](https://github.com/trang1618/treeheatr/tree/master/vignettes) for detailed information on the usage of **treeheatr**.
 
 Please [open an issue](https://github.com/trang1618/treeheatr/issues/new) for questions related to **treeheatr** usage, bug reports or general inquiries.
 

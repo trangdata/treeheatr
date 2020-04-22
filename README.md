@@ -1,7 +1,7 @@
-treeheatr
+**treeheatr**: an introduction
 ================
 
-Integrating heatmap in decision tree.
+#### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
 ## Install
 
@@ -20,12 +20,11 @@ Classification of different types of iris plants.
 
 ``` r
 library(treeheatr)
-# library(dplyr)
 
 grid.draw(heat_tree(iris, class_lab = 'Species'))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](man/figures/unnamed-chunk-3-1.png)<!-- -->
 
 ### Wine recognition dataset
 
@@ -35,7 +34,7 @@ Classification of different cultivars of wine.
 grid.draw(heat_tree(wine, class_lab = 'Type'))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 
 ## How to Use
 
@@ -56,7 +55,6 @@ decision tree. The basic building blocks to a **treeheatr** plot are
     across all samples.
 
 Make sure to check out the
-[wiki](https://github.com/trang1618/treeheatr/wiki) or the
 [vignettes](https://github.com/trang1618/treeheatr/tree/master/vignettes)
 for detailed information on the usage of **treeheatr**.
 
