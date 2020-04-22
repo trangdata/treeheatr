@@ -10,7 +10,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
+          install.packages(c("remotes", "rcmdcheck", "pkgdown"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check
@@ -19,3 +19,10 @@ jobs:
       - name: Build webpage
         run: pkgdown::build_site()
         shell: Rscript {0}
+      - name: Deploy
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push' && !github.event.repository.fork
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+
