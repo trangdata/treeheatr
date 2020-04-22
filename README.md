@@ -8,8 +8,7 @@
 Please make sure your version of R \>= 3.5.0 before installation.
 
 ``` r
-devtools::install_github('trang1618/treeheatr',
-                         dependencies = TRUE)
+devtools::install_github('trang1618/treeheatr')
 ```
 
 ## Examples
@@ -55,7 +54,7 @@ decision tree. The basic building blocks to a **treeheatr** plot are
     across all samples.
 
 Make sure to check out the
-[vignettes](https://github.com/trang1618/treeheatr/tree/master/vignettes)
+[vignette](https://trang1618.github.io/treeheatr/articles/explore.html)
 for detailed information on the usage of **treeheatr**.
 
 Please [open an
