@@ -3,7 +3,7 @@
 \docType{data}
 \name{flags}
 \alias{flags}
-\title{Flags.}
+\title{Details of 178 nations and their flags.}
 \format{
 An object of class \code{data.frame} with 178 rows and 44 columns.
 }
@@ -12,7 +12,7 @@ flags
 }
 \description{
 Fetched from PMLB.
-Contains details of 178 nations and their flags with 43 variables.
+Contains 43 variables.
 Unsure what 'target' indicates atm.
 }
 \keyword{datasets}

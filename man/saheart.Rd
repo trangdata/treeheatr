@@ -3,7 +3,7 @@
 \docType{data}
 \name{saheart}
 \alias{saheart}
-\title{saheart.}
+\title{A retrospective sample of males in a heart-disease high-risk region of the Western Cape.}
 \format{
 A data frame with nine variables.
 }
@@ -12,7 +12,6 @@ saheart
 }
 \description{
 Fetched from PMLB.
-A retrospective sample of males in a heart-disease high-risk region of the Western Cape, South Africa.
 }
 \details{
 https://rdrr.io/cran/ElemStatLearn/man/SAheart.html

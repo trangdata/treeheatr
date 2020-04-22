@@ -17,10 +17,12 @@ heat_tree(
   clust_class = TRUE,
   custom_layout = NULL,
   p_thres = 0.05,
+  show_all_feats = FALSE,
   tree_space_top = 0.05,
   tree_space_bottom = 0.035,
   par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
-    line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9))),
+    line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9)),
+    ids = "inner"),
   terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3),
   edge_vars = list(color = "grey70", size = 0.5),
   edge_text_vars = list(color = "grey30", size = 3),
@@ -30,7 +32,8 @@ heat_tree(
   cate_cols = ggplot2::scale_fill_viridis_d(option = "D", begin = 0.3, end = 0.9),
   clust_feats = TRUE,
   class_space = 0.03,
-  class_pos = "top"
+  class_pos = "top",
+  class_lab_disp = class_lab
 )
 }
 \arguments{
@@ -53,17 +56,20 @@ according to their levels, commonly ranges from 1 to 1.5.
 
 \item{heat_rel_height}{Relative height of heatmap compared to whole figure (with tree).}
 
-\item{clust_samps}{If TRUE, hierarhical clustering would be performed
+\item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
 among samples within each leaf node.}
 
-\item{clust_class}{If TRUE, class/label would be included in hierarchical clustering
+\item{clust_class}{Logical. If TRUE, class/label would be included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.}
 
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
 for manually input custom layout.}
 
 \item{p_thres}{Numeric value indicating the p-value threshold of feature importance.
-Feature with p-values below this value will be displayed on the heatmap.}
+Feature with p-values computed from the decision tree below this value
+will be displayed on the heatmap.}
+
+\item{show_all_feats}{Logical. If TRUE, show all features from the dataset, regarless p_thres.}
 
 \item{tree_space_top}{Numeric value to pass to expand for top margin of tree.}
 
@@ -94,13 +100,16 @@ defaults to viridis option D.}
 \item{cate_cols}{Function determine color scale for nominal categorical variable,
 defaults to viridis option D.}
 
-\item{clust_feats}{If TRUE, performs cluster on the features.}
+\item{clust_feats}{Logical. If TRUE, performs cluster on the features.}
 
 \item{class_space}{Numeric value indicating spacing between
 the class label and the rest of the features}
 
 \item{class_pos}{Character string specifying the position of the class label
 on heatmap, can be 'top', 'bottom' or 'none'.}
+
+\item{class_lab_disp}{Character string for displaying the label of class label
+if it differs from class_lab.}
 }
 \value{
 A gtable/grob object of the decision tree (top) and heatmap (bottom).

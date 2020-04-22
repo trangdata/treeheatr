@@ -17,7 +17,7 @@ the clustering within each leaf node.}
 \item{feat_types}{Named vector indicating the type of each features,
 e.g., c(sex = 'factor', age = 'numeric').}
 
-\item{clust_feats}{If TRUE, performs cluster on the features across all samples.}
+\item{clust_feats}{Logical. If TRUE, performs cluster on the features across all samples.}
 
 \item{trans_type}{Character string specifying transformation type,
 can be 'scale' or 'normalize'.}

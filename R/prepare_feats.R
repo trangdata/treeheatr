@@ -8,7 +8,7 @@
 #' @param disp_feats Character vector specifying features to be displayed.
 #' @param feat_types Named vector indicating the type of each features,
 #' e.g., c(sex = 'factor', age = 'numeric').
-#' @param clust_feats If TRUE, performs cluster on the features across all samples.
+#' @param clust_feats Logical. If TRUE, performs cluster on the features across all samples.
 #' @param trans_type Character string specifying transformation type,
 #' can be 'scale' or 'normalize'.
 #'
