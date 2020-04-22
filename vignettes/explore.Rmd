@@ -38,8 +38,9 @@ heat_tree(dat_raw, class_lab = 'Species') %>%
   grid::grid.draw()
 ```
 
-But we can adjust a few graphical parameters and add a custom layout for a subset of the nodes by specifying it in the `custom_layout` parameter.
-We can also relax the p value threshold to include more features that might be less important in classifying the samples.
+But we can adjust a few graphical parameters.
+We can also add a custom layout for a subset of the nodes by specifying it in the `custom_layout` parameter.
+And we can relax the p value threshold `p_thres` to include more features that might be less important in classifying the samples but still included in the decision tree, or set `show_all_feats = TRUE` to include all features, even the ones that were not used to build the tree.
 
 ```{r fig.height=3, fig.width=5}
 heat_tree(
@@ -48,8 +49,6 @@ heat_tree(
   panel_space = 0.01, class_space = 0.2, tree_space_bottom = 0.1, heat_rel_height = 0.4) %>% 
   grid::grid.draw()
 ```
-
-
 
 We can also customize our heattree by passing parameters through to different **ggparty** geoms.
 These list parameters are named `*_vars`.
@@ -92,14 +91,14 @@ cowplot::plot_grid(plotlist = p, ncol = 1)
 ```
 
 
-### Extreme examples
+### Smart node layout
 
-These visualizations may not be very interpretable but serves the purpose of showing the default node layout when the tree grows in size.
+These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size.
 The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches.
 This relative weight can be adjusted with the `lev_fac` parameter in `heat_tree()`.
 The default `lev_fac = 1.3` seems to provide aesthetically pleasing trees, independent of the tree size.
 
-```{r fig.height=6, fig.width=9}
+```{r fig.height=8, fig.width=9}
 # waveform has 5000 observations and 40 features
 # so this computation may take up to a minute or two.
 
@@ -107,20 +106,17 @@ heat_tree(waveform, class_lab = 'target', heat_rel_height = 0.35) %>%
   grid::grid.draw()
 ```
 
-```{r fig.height=6, fig.width=9}
-heat_tree(wine_quality_red, class_lab = 'target') %>% 
-  grid::grid.draw()
+In this next figure, on the right, default `lev_fac = 1.3 (default)` (right) contrasts `lev_fac = 1` (left), which made the parent node perfectly in the middle of child nodes (note a few branch crossing).
+
+```{r fig.height=7, fig.width=9}
+cowplot::plot_grid(
+  heat_tree(wine_quality_red, class_lab = 'target', lev_fac = 1),
+  heat_tree(wine_quality_red, class_lab = 'target'),
+  ncol = 1,
+  labels = c('lev_fac = 1', 'lev_fac = 1.3'))
 ```
 
-`lev_fac = 1` draws parent node perfectly in the middle of child nodes (note a few branch crossing).
-
-```{r fig.height=6, fig.width=9}
-heat_tree(wine_quality_red, class_lab = 'target', lev_fac = 1) %>% 
-  grid::grid.draw()
-```
-
-
-## Mixed data types and other features
+## Mixed data types
 
 **treeheatr** supports mixed data types.
 
@@ -128,19 +124,37 @@ For continuous variables, we can choose to either *scale* (subtract the mean and
 Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
 Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette]( https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
 
-Clustering
-
 Let's take a closer look at how it handles a dataset like Titanic with categorical variables (`Class`, `Sex`, `Embarked`) and continuous variables (others).
+We **highly recommend** that, when dealing with mixed data types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
+When `feat_types` is not specified, **treeheatr** automatically infered each column type from the original dataset.
 
-
-```{r fig.height=3.5, fig.width=7}
+```{r fig.height=4.5, fig.width=9}
 dat_raw <- titanic %>%
-  dplyr::select(Survived, Pclass, Sex, Age, SibSp, Parch, Fare, Embarked) 
+  dplyr::select(Survived, Sex, Pclass, Age, SibSp, Parch, Fare, Embarked) 
 
 heat_tree(
   dat_raw,
   class_lab = 'Survived',
-  label_map = c(`1` = 'Survived', `0` = 'Deceased')) %>% 
+  label_map = c(`1` = 'Survived', `0` = 'Deceased'),
+  feat_types = c(Pclass = 'factor',
+                 Sex = 'factor',
+                 Age = 'numeric',
+                 SibSp = 'numeric',
+                 Parch = 'numeric',
+                 Fare = 'numeric',
+                 Embarked = 'factor')) %>% 
   grid::grid.draw()
 ```
 
+
+## Clustering
+
+Unless you turn it off (`clust_feats = FALSE`, `clust_samps = FALSE`), **treeheatr** automatically performs clustering when organizing the heatmap.
+To order the features, clustering is run on the feature values across all samples (including the class label, unless `clust_class = FALSE`).
+To order the samples, clustering is run on samples within each terminal node of all features (not only the displayed features).
+**treeheatr** uses `cluster::daisy()` with the Gower metric to incorporate both continuous and nominal categorical feature types.
+Now, `cluster::daisy()` may throw this warning if your dataset contains binary features:
+
+> binary variable(s) 4 treated as interval scaled
+
+but in general this is safe to ignore because the goal of clustering is to improve our interpretability of the tree-based model and not to make precise inference about each cluster.
