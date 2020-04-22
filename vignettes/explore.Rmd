@@ -27,7 +27,9 @@ library(dplyr)
 library(cowplot)
 ```
 
-Let's start with the iris dataset!
+## Let's begin
+
+with the iris dataset!
 Running the `heat_tree()` function can be as simple as:
 
 ```{r fig.height=3, fig.width=5}
@@ -42,8 +44,7 @@ We can also relax the p value threshold to include more features that might be l
 ```{r fig.height=3, fig.width=5}
 heat_tree(
   dat_raw, class_lab = 'Species', 
-  custom_layout = data.frame(id = 1, x = 0.8, y = 1),
-  p_thres = 1,
+  custom_layout = data.frame(id = 1, x = 0.1, y = 1), show_all_feats = TRUE,
   panel_space = 0.01, class_space = 0.2, tree_space_bottom = 0.1, heat_rel_height = 0.4) %>% 
   grid::grid.draw()
 ```
@@ -77,12 +78,15 @@ heat_tree(
 ## Some more examples
 
 ```{r fig.height=4, fig.width=7}
-heat_tree(wine, class_lab = 'Type') %>% 
+heat_tree(wine, class_lab = 'Type', class_lab_disp = 'Cultivar') %>% 
   grid::grid.draw()
 ```
 
 ```{r warning=F, fig.height=7, fig.width=7}
-p <- lapply(list(flags, saheart, diabetes), heat_tree, class_lab = 'target')
+p <- lapply(list(flags, saheart, diabetes), heat_tree, class_lab = 'target', 
+            class_lab_disp = '',
+            heat_rel_height = 0.4, tree_space_bottom = 0.1, 
+            terminal_vars = list(label.padding = unit(0.1, "lines"), size = 2.5))
 
 cowplot::plot_grid(plotlist = p, ncol = 1)
 ```
