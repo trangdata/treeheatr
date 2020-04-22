@@ -91,7 +91,7 @@ cowplot::plot_grid(plotlist = p, ncol = 1)
 ```
 
 
-### Smart node layout
+## Smart node layout
 
 These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size.
 The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches.
