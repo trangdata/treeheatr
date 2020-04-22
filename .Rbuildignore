@@ -10,3 +10,4 @@
 ^pkgdown$
 ^README.Rmd$
 ^README_files$
+^/R/debug.R$
