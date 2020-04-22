@@ -141,9 +141,10 @@
 
 <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">p</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
-<div id="smart-node-layout" class="section level3">
-<h3 class="hasAnchor">
-<a href="#smart-node-layout" class="anchor"></a>Smart node layout</h3>
+</div>
+<div id="smart-node-layout" class="section level2">
+<h2 class="hasAnchor">
+<a href="#smart-node-layout" class="anchor"></a>Smart node layout</h2>
 <p>These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size. The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches. This relative weight can be adjusted with the <code>lev_fac</code> parameter in <code><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree()</a></code>. The default <code>lev_fac = 1.3</code> seems to provide aesthetically pleasing trees, independent of the tree size.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># waveform has 5000 observations and 40 features</span>
 <span class="co"># so this computation may take up to a minute or two.</span>
@@ -170,7 +171,6 @@
 <span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 6 treated as</span>
 <span class="co">#&gt; interval scaled</span></pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="864"></p>
-</div>
 </div>
 <div id="mixed-data-types" class="section level2">
 <h2 class="hasAnchor">
