@@ -1,22 +1,25 @@
-#' Diabetes
+#' Diabetes patient records.
 #'
 #' Fetched from PMLB.
 #'
 #' @format A data frame with 9 variables.
+#'
+#' http://archive.ics.uci.edu/ml/datasets/diabetes
+#'
 "diabetes"
 
-#' Flags.
+#' Details of 178 nations and their flags.
 #'
 #' Fetched from PMLB.
-#' Contains details of 178 nations and their flags with 43 variables.
+#' Contains 43 variables.
 #' Unsure what 'target' indicates atm.
 #'
 "flags"
 
-#' saheart.
+#' A retrospective sample of males in a heart-disease high-risk region of the Western Cape.
 #'
 #' Fetched from PMLB.
-#' A retrospective sample of males in a heart-disease high-risk region of the Western Cape, South Africa.
+#'
 #'
 #' https://rdrr.io/cran/ElemStatLearn/man/SAheart.html
 #' https://www.rdocumentation.org/packages/BeSS/versions/1.0.6/topics/SAheart
@@ -27,7 +30,7 @@
 #'
 "saheart"
 
-#' Titanic.
+#' Fate of passengers on the fatal maiden voyage of the ocean liner *Titanic*.
 #'
 #' Titanic training dataset from titanic::titanic_train.
 #'
@@ -35,9 +38,11 @@
 #'   \code{Pclass}, \code{Name}, \code{Sex}, \code{Age}, \code{SipSp}, \code{Parch},
 #'   \code{Ticket}, \code{Fare}, \code{Cabin} and \code{Embarked}.
 #'
+#' https://www.rdocumentation.org/packages/titanic/versions/0.1.0
+#'
 "titanic"
 
-#' Waveform
+#' Waveform database generator.
 #'
 #' Generator generating 3 classes of waves.
 #' Each class is generated from a combination of 2 of 3 "base" waves.
@@ -54,19 +59,24 @@
 "waveform"
 
 
-#' Wine recognition dataset.
+#' Results of a chemical analysis of wines grown in a specific area of Italy.
+#'
+#' Three types of wine are represented in the 178 samples,
+#' with the results of 13 chemical analyses recorded for each sample.
 #'
 #' Import with data(wine, package = 'rattle'). Dependent variable: Type.
+#' https://rdrr.io/cran/rattle.data/man/wine.html
+#' http://archive.ics.uci.edu/ml/datasets/wine
 #'
 #' @format A data frame with 14 variables.
 #'
 "wine"
 
 
-#' wine_quality_red.
+#' Red variant of the Portuguese "Vinho Verde" wine.
 #'
 #' Fetched from PMLB.
-#' Wine quality
+#' Physicochemical and quality of wine.
 #'
 #' @format A data frame with 12 variables: \code{fixed acidity}, \code{volatile acidity},
 #' \code{citric acid}, \code{residual sugar}, \code{chlorides}, \code{free sulfur dioxide},
@@ -75,6 +85,9 @@
 #'
 #' http://archive.ics.uci.edu/ml/datasets/Wine+Quality
 #'
+#' P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis.
+#' Modeling wine preferences by data mining from physicochemical properties.
+#' In Decision Support Systems, Elsevier, 47(4):547-553, 2009.
 #'
 #'
 "wine_quality_red"
