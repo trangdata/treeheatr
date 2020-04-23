@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Draws and aligns decision tree and heatmap. — heat_tree" />
 <meta property="og:description" content="Draws and aligns decision tree and heatmap." />
-<meta property="og:image" content="/reference/figures/card.png" />
+<meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@trang1618" />
@@ -134,8 +134,6 @@
     <pre class="usage"><span class='fu'>heat_tree</span>(
   <span class='no'>data</span>,
   <span class='no'>class_lab</span>,
-  <span class='kw'>class_cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#E69F00"</span>, <span class='st'>"#56B4E9"</span>, <span class='st'>"#009E73"</span>, <span class='st'>"#F0E442"</span>, <span class='st'>"#0072B2"</span>, <span class='st'>"#D55E00"</span>,
-    <span class='st'>"#CC79A7"</span>),
   <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
   <span class='kw'>lev_fac</span> <span class='kw'>=</span> <span class='fl'>1.3</span>,
@@ -145,6 +143,8 @@
   <span class='kw'>custom_layout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>p_thres</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>show_all_feats</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>class_cols</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#E69F00"</span>, <span class='st'>"#56B4E9"</span>, <span class='st'>"#009E73"</span>, <span class='st'>"#F0E442"</span>, <span class='st'>"#0072B2"</span>, <span class='st'>"#D55E00"</span>,
+    <span class='st'>"#CC79A7"</span>),
   <span class='kw'>tree_space_top</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0.035</span>,
   <span class='kw'>par_node_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.size</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/reexports.html'>unit</a></span>(<span class='fl'>0.15</span>, <span class='st'>"lines"</span>),
@@ -173,11 +173,6 @@
     <tr>
       <th>class_lab</th>
       <td><p>Name of the column in data that contains class/label information.</p></td>
-    </tr>
-    <tr>
-      <th>class_cols</th>
-      <td><p>Vector of RGBs for the class colors,
-defaults to a colorblind friendly palette.</p></td>
     </tr>
     <tr>
       <th>label_map</th>
@@ -223,6 +218,11 @@ will be displayed on the heatmap.</p></td>
     <tr>
       <th>show_all_feats</th>
       <td><p>Logical. If TRUE, show all features from the dataset, regarless p_thres.</p></td>
+    </tr>
+    <tr>
+      <th>class_cols</th>
+      <td><p>Vector of RGBs for the class colors,
+defaults to a colorblind friendly palette.</p></td>
     </tr>
     <tr>
       <th>tree_space_top</th>
