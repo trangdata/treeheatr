@@ -126,8 +126,8 @@ heat_tree <- function(
   scaled_dat <- dat %>%
     dplyr::select(- my_class) %>%
     dplyr::mutate(my_class = dat$my_class,
-                  node_id = predict(fit, type = 'node'),
-                  y_hat = predict(fit, type = 'response'),
+                  node_id = stats::predict(fit, type = 'node'),
+                  y_hat = stats::predict(fit, type = 'response'),
                   # y_hat = ifelse(is.numeric(y_pred), y_pred > 0.5, y_pred),
                   correct = (y_hat == my_class)) %>%
     lapply(unique(.$node_id), clust, dat = .,

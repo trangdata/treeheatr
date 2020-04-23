@@ -2,7 +2,6 @@
 #' If R does not recognize a categorical feature (input from user) as factor,
 #' converts to factor.
 #'
-#' @import dplyr
 #' @param dat Dataframe with samples from original dataset ordered according to
 #' the clustering within each leaf node.
 #' @param disp_feats Character vector specifying features to be displayed.
@@ -25,9 +24,9 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
 
   if (n_conts > 0){
     df_cont <- dat %>%
-      dplyr::select(- all_of(cate_feats)) %>%
+      dplyr::select(- cate_feats) %>%
       dplyr::mutate_at(cont_feats, ~ scale_norm(., trans_type = trans_type)) %>%
-      tidyr::pivot_longer(all_of(cont_feats), names_to = 'cont_feat') %>%
+      tidyr::pivot_longer(cont_feats, names_to = 'cont_feat') %>%
       dplyr::filter(cont_feat %in% disp_feats) %>%
       dplyr::mutate(cont_feat = as.factor(cont_feat))
   } else {
@@ -36,9 +35,9 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
 
   if (n_cates > 0){
     df_cate <- dat %>%
-      dplyr::select(- all_of(cont_feats)) %>%
+      dplyr::select(- cont_feats) %>%
       dplyr::mutate_at(cate_feats, as.factor) %>%
-      tidyr::pivot_longer(all_of(cate_feats), names_to = 'cate_feat') %>%
+      tidyr::pivot_longer(cate_feats, names_to = 'cate_feat') %>%
       dplyr::filter(cate_feat %in% disp_feats) %>%
       dplyr::mutate(cate_feat = as.factor(cate_feat))
   } else {

@@ -32,10 +32,10 @@ draw_tree <- function(
   tree_space_bottom = 0.035,
   par_node_vars = list(
     label.size = 0, # no border around labels, unlike terminal nodes
-    label.padding = unit(0.15, "lines"),
+    label.padding = ggplot2::unit(0.15, "lines"),
     line_list = list(ggplot2::aes(label = splitvar)),
     line_gpar = list(list(size = 9))),
-  terminal_vars = list(label.padding = unit(0.25, "lines"), size = 3),
+  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3),
   edge_vars = list(color = 'grey70', size = 0.5),
   edge_text_vars = list(color = 'grey30', size = 3)
 ){
@@ -50,7 +50,7 @@ draw_tree <- function(
                  col = 'white'),
             terminal_vars)) +
   ggplot2::scale_x_continuous(expand = c(0,0)) +
-  ggplot2::scale_y_continuous(expand = expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
+  ggplot2::scale_y_continuous(expand = ggplot2::expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
   ggplot2::scale_fill_manual(values = class_cols, drop = F) +
   ggplot2::coord_cartesian(xlim = c(0, 1)) +
   ggplot2::guides(fill = FALSE)

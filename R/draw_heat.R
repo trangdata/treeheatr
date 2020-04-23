@@ -107,7 +107,7 @@ draw_heat <- function(
   }
 
   dheat <- dheat +
-    scale_y_continuous(
+    ggplot2::scale_y_continuous(
       expand = c(0, 0),
       breaks = c(class_y, seq.int(n_feats)),
       labels = c(class_lab_disp, levels(tile_cate$cate_feat), levels(tile_cont$cont_feat)))
