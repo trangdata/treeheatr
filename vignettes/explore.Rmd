@@ -42,11 +42,11 @@ But we can adjust a few graphical parameters.
 We can also add a custom layout for a subset of the nodes by specifying it in the `custom_layout` parameter.
 And we can relax the p value threshold `p_thres` to include more features that might be less important in classifying the samples but still included in the decision tree, or set `show_all_feats = TRUE` to include all features, even the ones that were not used to build the tree.
 
-```{r fig.height=3, fig.width=5}
+```{r fig.height=3, fig.width=7}
 heat_tree(
   dat_raw, class_lab = 'Species', 
   custom_layout = data.frame(id = 1, x = 0.1, y = 1), show_all_feats = TRUE,
-  panel_space = 0.01, class_space = 0.2, tree_space_bottom = 0.1, heat_rel_height = 0.4) %>% 
+  panel_space = 0.05, class_space = 0.2, tree_space_bottom = 0.1, heat_rel_height = 0.4) %>% 
   grid::grid.draw()
 ```
 
@@ -106,9 +106,9 @@ heat_tree(waveform, class_lab = 'target', heat_rel_height = 0.35) %>%
   grid::grid.draw()
 ```
 
-In this next figure, on the right, default `lev_fac = 1.3 (default)` (right) contrasts `lev_fac = 1` (left), which made the parent node perfectly in the middle of child nodes (note a few branch crossing).
+In this next figure, on the top, `lev_fac = 1` makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts `lev_fac = 1.3` (default) on the bottom.
 
-```{r fig.height=7, fig.width=9}
+```{r fig.height=7, fig.width=9, warning=FALSE, message=FALSE}
 cowplot::plot_grid(
   heat_tree(wine_quality_red, class_lab = 'target', lev_fac = 1),
   heat_tree(wine_quality_red, class_lab = 'target'),
@@ -126,7 +126,7 @@ Details on the strengths and weaknesses of different types of data transformatio
 
 Let's take a closer look at how it handles a dataset like Titanic with categorical variables (`Class`, `Sex`, `Embarked`) and continuous variables (others).
 We **highly recommend** that, when dealing with mixed data types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
-When `feat_types` is not specified, **treeheatr** automatically infered each column type from the original dataset.
+When `feat_types` is not specified, **treeheatr** automatically inferred each column type from the original dataset.
 
 ```{r fig.height=4.5, fig.width=9}
 dat_raw <- titanic %>%
@@ -155,6 +155,6 @@ To order the samples, clustering is run on samples within each terminal node of 
 **treeheatr** uses `cluster::daisy()` with the Gower metric to incorporate both continuous and nominal categorical feature types.
 Now, `cluster::daisy()` may throw this warning if your dataset contains binary features:
 
-> binary variable(s) 4 treated as interval scaled
+> `binary variable(s) 4 treated as interval scaled`
 
 but in general this is safe to ignore because the goal of clustering is to improve our interpretability of the tree-based model and not to make precise inference about each cluster.
