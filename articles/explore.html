@@ -80,7 +80,7 @@
 </h1>
                         <h4 class="author">Trang Le</h4>
             
-            <h4 class="date">2020-04-22</h4>
+            <h4 class="date">2020-04-23</h4>
       
       
       <div class="hidden name"><code>explore.Rmd</code></div>
@@ -105,9 +105,9 @@
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="no">dat_raw</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
   <span class="kw">custom_layout</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fl">1</span>), <span class="kw">show_all_feats</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-  <span class="kw">panel_space</span> <span class="kw">=</span> <span class="fl">0.01</span>, <span class="kw">class_space</span> <span class="kw">=</span> <span class="fl">0.2</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>) <span class="kw">%&gt;%</span>
+  <span class="kw">panel_space</span> <span class="kw">=</span> <span class="fl">0.05</span>, <span class="kw">class_space</span> <span class="kw">=</span> <span class="fl">0.2</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-3-1.png" width="480"></p>
+<p><img src="explore_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>We can also customize our heattree by passing parameters through to different <strong>ggparty</strong> geoms. These list parameters are named <code>*_vars</code>. For example:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="no">dat_raw</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
@@ -152,24 +152,12 @@
 <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">waveform</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.35</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="864"></p>
-<p>In this next figure, on the right, default <code>lev_fac = 1.3 (default)</code> (right) contrasts <code>lev_fac = 1</code> (left), which made the parent node perfectly in the middle of child nodes (note a few branch crossing).</p>
+<p>In this next figure, on the top, <code>lev_fac = 1</code> makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts <code>lev_fac = 1.3</code> (default) on the bottom.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(
   <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">1</span>),
   <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>),
   <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'lev_fac = 1'</span>, <span class="st">'lev_fac = 1.3'</span>))
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 11 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 7 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 6 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 11 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 7 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 6 treated as</span>
-<span class="co">#&gt; interval scaled</span></pre></body></html></div>
+  <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'lev_fac = 1'</span>, <span class="st">'lev_fac = 1.3'</span>))</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="864"></p>
 </div>
 <div id="mixed-data-types" class="section level2">
@@ -177,7 +165,7 @@
 <a href="#mixed-data-types" class="anchor"></a>Mixed data types</h2>
 <p><strong>treeheatr</strong> supports mixed data types.</p>
 <p>For continuous variables, we can choose to either <em>scale</em> (subtract the mean and divide by the standard deviation) or <em>normalize</em> (subtract the min and divide by the max) each variable. Depending on what we want to show in the heatmap, one transformation method can be more effective than the other. Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in <a href="https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize">this vignette</a> of the <strong>heatmaply</strong> package.</p>
-<p>Let’s take a closer look at how it handles a dataset like Titanic with categorical variables (<code>Class</code>, <code>Sex</code>, <code>Embarked</code>) and continuous variables (others). We <strong>highly recommend</strong> that, when dealing with mixed data types, the user supply <code>feat_types</code> to indicate whether a feature should be considered ‘numeric’ (continuous) or ‘factor’ (categorical) as shown below. When <code>feat_types</code> is not specified, <strong>treeheatr</strong> automatically infered each column type from the original dataset.</p>
+<p>Let’s take a closer look at how it handles a dataset like Titanic with categorical variables (<code>Class</code>, <code>Sex</code>, <code>Embarked</code>) and continuous variables (others). We <strong>highly recommend</strong> that, when dealing with mixed data types, the user supply <code>feat_types</code> to indicate whether a feature should be considered ‘numeric’ (continuous) or ‘factor’ (categorical) as shown below. When <code>feat_types</code> is not specified, <strong>treeheatr</strong> automatically inferred each column type from the original dataset.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">dat_raw</span> <span class="kw">&lt;-</span> <span class="no">titanic</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">Survived</span>, <span class="no">Sex</span>, <span class="no">Pclass</span>, <span class="no">Age</span>, <span class="no">SibSp</span>, <span class="no">Parch</span>, <span class="no">Fare</span>, <span class="no">Embarked</span>)
 
@@ -209,7 +197,7 @@
 <a href="#clustering" class="anchor"></a>Clustering</h2>
 <p>Unless you turn it off (<code>clust_feats = FALSE</code>, <code>clust_samps = FALSE</code>), <strong>treeheatr</strong> automatically performs clustering when organizing the heatmap. To order the features, clustering is run on the feature values across all samples (including the class label, unless <code>clust_class = FALSE</code>). To order the samples, clustering is run on samples within each terminal node of all features (not only the displayed features). <strong>treeheatr</strong> uses <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html">cluster::daisy()</a></code> with the Gower metric to incorporate both continuous and nominal categorical feature types. Now, <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html">cluster::daisy()</a></code> may throw this warning if your dataset contains binary features:</p>
 <blockquote>
-<p>binary variable(s) 4 treated as interval scaled</p>
+<p><code>binary variable(s) 4 treated as interval scaled</code></p>
 </blockquote>
 <p>but in general this is safe to ignore because the goal of clustering is to improve our interpretability of the tree-based model and not to make precise inference about each cluster.</p>
 </div>
