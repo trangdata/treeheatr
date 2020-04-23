@@ -2,6 +2,13 @@ destination: docs
 template:
   params:
     bootswatch: flatly
+  opengraph:
+    image:
+      src: man/figures/card.png
+      alt: "treeheatr"
+    twitter:
+      creator: "@trang1618"
+      card: summary_large_image
 
 reference:
 - title: "Primary functions"
