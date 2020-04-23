@@ -5,7 +5,7 @@
 \title{Draws and aligns decision tree and heatmap.}
 \usage{
 heat_tree(
-  dat_raw,
+  data,
   class_lab,
   class_cols = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00",
     "#CC79A7"),
@@ -37,9 +37,9 @@ heat_tree(
 )
 }
 \arguments{
-\item{dat_raw}{Tidy dataset.}
+\item{data}{Tidy dataset.}
 
-\item{class_lab}{Name of the column in dat_raw that contains class/label information.}
+\item{class_lab}{Name of the column in data that contains class/label information.}
 
 \item{class_cols}{Vector of RGBs for the class colors,
 defaults to a colorblind friendly palette.}

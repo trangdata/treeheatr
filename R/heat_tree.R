@@ -1,7 +1,7 @@
 #' Draws and aligns decision tree and heatmap.
 #'
-#' @param dat_raw Tidy dataset.
-#' @param class_lab Name of the column in dat_raw that contains class/label information.
+#' @param data Tidy dataset.
+#' @param class_lab Name of the column in data that contains class/label information.
 #' @param class_cols Vector of RGBs for the class colors,
 #' defaults to a colorblind friendly palette.
 #' @param label_map Named vector of the meaning of the class values,
@@ -55,7 +55,7 @@
 #' @examples heat_tree(iris, class_lab = 'Species')
 #'
 heat_tree <- function(
-  dat_raw, class_lab,
+  data, class_lab,
   class_cols = c('#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00', '#CC79A7'),
   label_map = NULL,
   panel_space = 0.001,
@@ -94,7 +94,7 @@ heat_tree <- function(
   ################################################################
   ##### Prepare dataset:
 
-  dat <- dat_raw %>%
+  dat <- data %>%
     dplyr::rename('my_class' = sym(!!class_lab)) %>%
     dplyr::mutate(my_class = as.factor(my_class))
 
