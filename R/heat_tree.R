@@ -56,7 +56,6 @@
 #'
 heat_tree <- function(
   data, class_lab,
-  class_cols = c('#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00', '#CC79A7'),
   label_map = NULL,
   panel_space = 0.001,
   lev_fac = 1.3,
@@ -66,6 +65,7 @@ heat_tree <- function(
   custom_layout = NULL,
   p_thres = 0.05,
   show_all_feats = FALSE,
+  class_cols = c('#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00', '#CC79A7'),
 
   ### tree parameters:
   tree_space_top = 0.05,

@@ -7,8 +7,6 @@
 heat_tree(
   data,
   class_lab,
-  class_cols = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00",
-    "#CC79A7"),
   label_map = NULL,
   panel_space = 0.001,
   lev_fac = 1.3,
@@ -18,6 +16,8 @@ heat_tree(
   custom_layout = NULL,
   p_thres = 0.05,
   show_all_feats = FALSE,
+  class_cols = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00",
+    "#CC79A7"),
   tree_space_top = 0.05,
   tree_space_bottom = 0.035,
   par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
@@ -40,9 +40,6 @@ heat_tree(
 \item{data}{Tidy dataset.}
 
 \item{class_lab}{Name of the column in data that contains class/label information.}
-
-\item{class_cols}{Vector of RGBs for the class colors,
-defaults to a colorblind friendly palette.}
 
 \item{label_map}{Named vector of the meaning of the class values,
 e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
@@ -70,6 +67,9 @@ Feature with p-values computed from the decision tree below this value
 will be displayed on the heatmap.}
 
 \item{show_all_feats}{Logical. If TRUE, show all features from the dataset, regarless p_thres.}
+
+\item{class_cols}{Vector of RGBs for the class colors,
+defaults to a colorblind friendly palette.}
 
 \item{tree_space_top}{Numeric value to pass to expand for top margin of tree.}
 
