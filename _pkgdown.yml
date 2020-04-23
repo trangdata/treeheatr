@@ -4,7 +4,7 @@ template:
     bootswatch: flatly
   opengraph:
     image:
-      src: man/figures/card.png
+      src: https://trang1618.github.io/treeheatr/reference/figures/card.png
       alt: "treeheatr"
     twitter:
       creator: "@trang1618"
