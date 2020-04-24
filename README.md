@@ -2,7 +2,7 @@
 ================
 
 [![documentation](https://img.shields.io/badge/-Documentation-purple?style=for-the-badge&logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
-[![vignette](https://img.shields.io/badge/-Vignette-green?style=for-the-badge&logo=rstudio)](https://trang1618.github.io/treeheatr/articles/explore.html/)
+[![vignette](https://img.shields.io/badge/-Vignette-green?style=for-the-badge&logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html/)
 
 #### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
@@ -44,7 +44,7 @@ grid.draw(heat_tree(wine, class_lab = 'Type'))
 decision tree. The basic building blocks to a **treeheatr** plot are
 (yes, you guessed it\!) a decision tree and a heatmap.
 
-  - The decision tree is computed with `partkit::ctree()` and plotted
+  - The decision tree is computed with `partykit::ctree()` and plotted
     with the well-documented and flexible
     [**ggparty**](https://cran.r-project.org/web/packages/ggparty/index.html)
     package. The tree parameters can be passed to **ggparty** functions
