@@ -1,6 +1,9 @@
 **treeheatr**: an introduction
 ================
 
+[![documentation](https://img.shields.io/badge/-Documentation-purple?style=for-the-badge&logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
+[![vignette](https://img.shields.io/badge/-Vignette-green?style=for-the-badge&logo=rstudio)](https://trang1618.github.io/treeheatr/articles/explore.html/)
+
 #### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
 ## Install
