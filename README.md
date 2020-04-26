@@ -1,9 +1,9 @@
 **treeheatr**: an introduction
 ================
 
-[![documentation](https://img.shields.io/badge/-Documentation-purple?style=for-the-badge&logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
-[![vignette](https://img.shields.io/badge/-Vignette-green?style=for-the-badge&logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html/)
-[![github-action-status](https://img.shields.io/badge/-GitHub%20Actions-yellow?style=for-the-badge&logo=github)](https://github.com/trang1618/treeheatr/actions)
+[![vignette](https://img.shields.io/badge/-Vignette-green?style=flat-square&logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html/)
+[![documentation](https://img.shields.io/badge/-Documentation-purple?style=flat-square&logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
+[![github-action-status](https://img.shields.io/github/workflow/status/trang1618/treeheatr/R-CMD-check?style=flat-square&logo=github)](https://github.com/trang1618/treeheatr/actions)
 
 #### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
