@@ -5,7 +5,7 @@ output: rmarkdown::github_document
 
 [![documentation](https://img.shields.io/badge/-Documentation-purple?style=for-the-badge&logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
 [![vignette](https://img.shields.io/badge/-Vignette-green?style=for-the-badge&logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html/)
-
+[![github-action-status](https://img.shields.io/badge/-GitHub Actions-yellow?style=for-the-badge&logo=github)](https://github.com/trang1618/treeheatr/actions)
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(

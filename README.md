@@ -3,6 +3,7 @@
 
 [![documentation](https://img.shields.io/badge/-Documentation-purple?style=for-the-badge&logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
 [![vignette](https://img.shields.io/badge/-Vignette-green?style=for-the-badge&logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html/)
+[![github-action-status](https://img.shields.io/badge/-GitHub%20Actions-yellow?style=for-the-badge&logo=github)](https://github.com/trang1618/treeheatr/actions)
 
 #### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
@@ -11,6 +12,7 @@
 Please make sure your version of R \>= 3.5.0 before installation.
 
 ``` r
+# install.packages('devtools') # uncomment to install devtools
 devtools::install_github('trang1618/treeheatr')
 ```
 
