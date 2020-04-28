@@ -59,11 +59,10 @@ draw_heat <- function(
     class_pos == 'bottom' ~ (- class_space)) # if 'none', returns NA
 
   dheat <- ggplot2::ggplot() +
+    target_cols +
     ggplot2::facet_grid(cols = vars(node_id), scales = 'free_x', space = 'free') +
     ggplot2::geom_tile(data = dat,
       ggplot2::aes(x = Sample, y = class_y, fill = my_target)) +
-    target_cols +
-    # ggplot2::scale_fill_manual(values = target_cols) +
     ggplot2::scale_x_continuous(expand =  c(0,0)) +
     ggplot2::labs(x = NULL, y = NULL) +
     ggplot2::theme_minimal() +

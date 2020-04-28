@@ -53,11 +53,10 @@ draw_tree <- function(
                    label = term_node,
                    fill = term_node)),
             terminal_vars)) +
+  target_cols +
   ggplot2::scale_x_continuous(expand = c(0,0)) +
   ggplot2::scale_y_continuous(
     expand = ggplot2::expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
-  # ggplot2::scale_fill_manual(values = target_cols, drop = F) +
-  target_cols +
   ggplot2::coord_cartesian(xlim = c(0, 1)) +
   ggplot2::guides(fill = FALSE)
 }

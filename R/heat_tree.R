@@ -113,7 +113,6 @@ heat_tree <- function(
       error = function(e) dat$my_target)
 
     # if class color scales are not supplied, use viridis pallete:
-    # num_class <- length(unique(dat$my_target))
     if (is.null(target_cols)){
       target_cols <- ggplot2::scale_fill_viridis_d(option = 'B', begin = 0.3, end = 0.85)
     }
@@ -166,13 +165,6 @@ heat_tree <- function(
     dplyr::select(- c(x, y)) %>%
     dplyr::left_join(my_layout, by = 'id') %>%
     dplyr::filter(kids == 0)
-  # %>%
-    # dplyr::mutate(term_node = y_hat)
-                  # term_node = ifelse(is.numeric(term_node), round(term_node, 3), term_node))
-
-  # term_dat$term_node <- ifelse(task == 'classification',
-  #                              term_dat$y_hat, round(term_dat$y_hat, 3))
-  # term_dat$term_node <- term_dat$y_hat
 
   if (task == 'classification'){
     term_dat$term_node <- term_dat$y_hat
@@ -240,6 +232,4 @@ heat_tree <- function(
       t = 1, l = min(panel_id$l), r = max(panel_id$l))
 
   new_g
-  # grid::grid.newpage()
-  # grid::grid.draw(new_g)
 }
