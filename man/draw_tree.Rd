@@ -6,23 +6,25 @@
 \usage{
 draw_tree(
   fit,
-  class_cols,
+  target_cols,
   layout,
   term_dat,
   tree_space_top = 0.05,
   tree_space_bottom = 0.035,
   par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
     line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9))),
-  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3),
+  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3, col =
+    "white"),
   edge_vars = list(color = "grey70", size = 0.5),
-  edge_text_vars = list(color = "grey30", size = 3)
+  edge_text_vars = list(color = "grey30", size = 3, mapping = aes(label =
+    paste(breaks_label, "*NA")))
 )
 }
 \arguments{
 \item{fit}{ggparty object as output from partykit::ctree()}
 
-\item{class_cols}{Vector of RGBs for the class colors,
-defaults to a colorblind friendly palette.}
+\item{target_cols}{Function determine color scale for target,
+defaults to viridis option B.}
 
 \item{layout}{Dataframe of layout of all nodes, must include these columns:
 id, x, y and y_hat.}

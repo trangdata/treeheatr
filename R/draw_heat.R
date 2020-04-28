@@ -5,8 +5,8 @@
 #' the clustering within each leaf node.
 #' @param feat_names Character vector specifying the feature names in dat.
 #' @param disp_feats Character vector specifying features to be displayed.
-#' @param class_cols Vector of RGBs for the class colors,
-#' defaults to a colorblind friendly palette.
+#' @param target_cols Function determine color scale for target,
+#' defaults to viridis option B.
 #' @param panel_space Spacing between facets relative to viewport,
 #' recommended to range from 0.001 to 0.01.
 #' @param feat_types Named vector indicating the type of each features,
@@ -30,7 +30,7 @@
 #' @export
 #'
 draw_heat <- function(
-  dat, feat_names, disp_feats, class_cols, panel_space,
+  dat, feat_names, disp_feats, target_cols, panel_space,
   feat_types = NULL,
   trans_type = 'normalize',
   cont_cols = ggplot2::scale_fill_viridis_c(),
@@ -61,8 +61,9 @@ draw_heat <- function(
   dheat <- ggplot2::ggplot() +
     ggplot2::facet_grid(cols = vars(node_id), scales = 'free_x', space = 'free') +
     ggplot2::geom_tile(data = dat,
-      ggplot2::aes(x = Sample, y = class_y, fill = my_class)) +
-    ggplot2::scale_fill_manual(values = class_cols) +
+      ggplot2::aes(x = Sample, y = class_y, fill = my_target)) +
+    target_cols +
+    # ggplot2::scale_fill_manual(values = target_cols) +
     ggplot2::scale_x_continuous(expand =  c(0,0)) +
     ggplot2::labs(x = NULL, y = NULL) +
     ggplot2::theme_minimal() +
@@ -77,7 +78,6 @@ draw_heat <- function(
       panel.spacing = ggplot2::unit(panel_space, 'npc'),
       plot.margin = ggplot2::unit(c(0, 5.5, 5.5, 5.5), 'pt')
     )
-  dheat
 
   if (!is.null(tile_cate)){
     tile_cate <- tile_cate %>%

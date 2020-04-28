@@ -8,7 +8,7 @@ draw_heat(
   dat,
   feat_names,
   disp_feats,
-  class_cols,
+  target_cols,
   panel_space,
   feat_types = NULL,
   trans_type = "normalize",
@@ -28,8 +28,8 @@ the clustering within each leaf node.}
 
 \item{disp_feats}{Character vector specifying features to be displayed.}
 
-\item{class_cols}{Vector of RGBs for the class colors,
-defaults to a colorblind friendly palette.}
+\item{target_cols}{Function determine color scale for target,
+defaults to viridis option B.}
 
 \item{panel_space}{Spacing between facets relative to viewport,
 recommended to range from 0.001 to 0.01.}

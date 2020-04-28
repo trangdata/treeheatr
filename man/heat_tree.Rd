@@ -7,6 +7,7 @@
 heat_tree(
   data,
   class_lab,
+  task = "classification",
   label_map = NULL,
   panel_space = 0.001,
   lev_fac = 1.3,
@@ -16,16 +17,18 @@ heat_tree(
   custom_layout = NULL,
   p_thres = 0.05,
   show_all_feats = FALSE,
-  class_cols = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00",
-    "#CC79A7"),
+  target_cols = ggplot2::scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73",
+    "#F0E442", "#0072B2", "#D55E00", "#CC79A7")),
   tree_space_top = 0.05,
   tree_space_bottom = 0.035,
   par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
     line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9)),
     ids = "inner"),
-  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3),
+  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3, col =
+    "white"),
   edge_vars = list(color = "grey70", size = 0.5),
-  edge_text_vars = list(color = "grey30", size = 3),
+  edge_text_vars = list(color = "grey30", size = 3, mapping = aes(label =
+    paste(breaks_label, "*NA"))),
   feat_types = NULL,
   trans_type = "normalize",
   cont_cols = ggplot2::scale_fill_viridis_c(),
@@ -40,6 +43,9 @@ heat_tree(
 \item{data}{Tidy dataset.}
 
 \item{class_lab}{Name of the column in data that contains class/label information.}
+
+\item{task}{Character string indicating the type of problem,
+either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
 
 \item{label_map}{Named vector of the meaning of the class values,
 e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
@@ -56,7 +62,7 @@ according to their levels, commonly ranges from 1 to 1.5.
 \item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
 among samples within each leaf node.}
 
-\item{clust_class}{Logical. If TRUE, class/label would be included in hierarchical clustering
+\item{clust_class}{Logical. If TRUE, class/label is included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.}
 
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
@@ -66,10 +72,10 @@ for manually input custom layout.}
 Feature with p-values computed from the decision tree below this value
 will be displayed on the heatmap.}
 
-\item{show_all_feats}{Logical. If TRUE, show all features from the dataset, regarless p_thres.}
+\item{show_all_feats}{Logical. If TRUE, show all features regarless p_thres.}
 
-\item{class_cols}{Vector of RGBs for the class colors,
-defaults to a colorblind friendly palette.}
+\item{target_cols}{Function determine color scale for target,
+defaults to viridis option B.}
 
 \item{tree_space_top}{Numeric value to pass to expand for top margin of tree.}
 

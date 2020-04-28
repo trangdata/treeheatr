@@ -5,8 +5,8 @@
 #'
 #' @import ggparty
 #' @param fit ggparty object as output from partykit::ctree()
-#' @param class_cols Vector of RGBs for the class colors,
-#' defaults to a colorblind friendly palette.
+#' @param target_cols Function determine color scale for target,
+#' defaults to viridis option B.
 #' @param layout Dataframe of layout of all nodes, must include these columns:
 #' id, x, y and y_hat.
 #' @param term_dat Dataframe for terminal nodes, must include these columns:
@@ -27,7 +27,7 @@
 #'
 #' @examples
 draw_tree <- function(
-  fit, class_cols, layout, term_dat,
+  fit, target_cols, layout, term_dat,
   tree_space_top = 0.05,
   tree_space_bottom = 0.035,
   par_node_vars = list(
@@ -35,9 +35,12 @@ draw_tree <- function(
     label.padding = ggplot2::unit(0.15, "lines"),
     line_list = list(ggplot2::aes(label = splitvar)),
     line_gpar = list(list(size = 9))),
-  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3),
+  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"),
+                       size = 3,
+                       col = 'white'),
   edge_vars = list(color = 'grey70', size = 0.5),
-  edge_text_vars = list(color = 'grey30', size = 3)
+  edge_text_vars = list(color = 'grey30', size = 3,
+                        mapping = aes(label = paste(breaks_label, "*NA")))
 ){
 
   ggparty::ggparty(fit, terminal_space = 0, layout = layout) +
@@ -46,12 +49,15 @@ draw_tree <- function(
   do.call(ggparty::geom_node_label, par_node_vars) +
   do.call(ggparty::geom_node_label,
           c(list(data = term_dat,
-                 mapping = ggplot2::aes(label = y_hat, fill = y_hat),
-                 col = 'white'),
+                 mapping = ggplot2::aes(
+                   label = term_node,
+                   fill = term_node)),
             terminal_vars)) +
   ggplot2::scale_x_continuous(expand = c(0,0)) +
-  ggplot2::scale_y_continuous(expand = ggplot2::expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
-  ggplot2::scale_fill_manual(values = class_cols, drop = F) +
+  ggplot2::scale_y_continuous(
+    expand = ggplot2::expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
+  # ggplot2::scale_fill_manual(values = target_cols, drop = F) +
+  target_cols +
   ggplot2::coord_cartesian(xlim = c(0, 1)) +
   ggplot2::guides(fill = FALSE)
 }

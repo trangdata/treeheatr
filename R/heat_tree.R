@@ -2,8 +2,10 @@
 #'
 #' @param data Tidy dataset.
 #' @param class_lab Name of the column in data that contains class/label information.
-#' @param class_cols Vector of RGBs for the class colors,
-#' defaults to a colorblind friendly palette.
+#' @param task Character string indicating the type of problem,
+#' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
+#' @param target_cols Function determine color scale for target,
+#' defaults to viridis option B.
 #' @param label_map Named vector of the meaning of the class values,
 #' e.g., c(`0` = 'Edible', `1` = 'Poisonous').
 #' @param panel_space Spacing between facets relative to viewport,
@@ -14,14 +16,14 @@
 #' @param heat_rel_height Relative height of heatmap compared to whole figure (with tree).
 #' @param clust_samps Logical. If TRUE, hierarhical clustering would be performed
 #' among samples within each leaf node.
-#' @param clust_class Logical. If TRUE, class/label would be included in hierarchical clustering
+#' @param clust_class Logical. If TRUE, class/label is included in hierarchical clustering
 #' of samples within each leaf node and might yield a more interpretable heatmap.
 #' @param custom_layout Dataframe with 3 columns: id, x and y
 #' for manually input custom layout.
 #' @param p_thres Numeric value indicating the p-value threshold of feature importance.
 #' Feature with p-values computed from the decision tree below this value
 #' will be displayed on the heatmap.
-#' @param show_all_feats Logical. If TRUE, show all features from the dataset, regarless p_thres.
+#' @param show_all_feats Logical. If TRUE, show all features regarless p_thres.
 #' @param tree_space_top Numeric value to pass to expand for top margin of tree.
 #' @param tree_space_bottom Numeric value to pass to expand for bottom margin of tree.
 #' @param par_node_vars Named list containing arguments to be passed to the
@@ -56,6 +58,7 @@
 #'
 heat_tree <- function(
   data, class_lab,
+  task = 'classification',
   label_map = NULL,
   panel_space = 0.001,
   lev_fac = 1.3,
@@ -65,7 +68,8 @@ heat_tree <- function(
   custom_layout = NULL,
   p_thres = 0.05,
   show_all_feats = FALSE,
-  class_cols = c('#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00', '#CC79A7'),
+  target_cols = ggplot2::scale_fill_manual(
+    values = c('#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00', '#CC79A7')),
 
   ### tree parameters:
   tree_space_top = 0.05,
@@ -76,9 +80,14 @@ heat_tree <- function(
     line_list = list(ggplot2::aes(label = splitvar)),
     line_gpar = list(list(size = 9)),
     ids = 'inner'),
-  terminal_vars = list(label.padding = ggplot2::unit(0.25, 'lines'), size = 3),
+  terminal_vars = list(
+    label.padding = ggplot2::unit(0.25, "lines"),
+    size = 3,
+    col = 'white'),
   edge_vars = list(color = 'grey70', size = 0.5),
-  edge_text_vars = list(color = 'grey30', size = 3),
+  edge_text_vars = list(
+    color = 'grey30', size = 3,
+    mapping = aes(label = paste(breaks_label, "*NA"))),
 
   ### heatmap parameters:
   feat_types = NULL,
@@ -95,21 +104,25 @@ heat_tree <- function(
   ##### Prepare dataset:
 
   dat <- data %>%
-    dplyr::rename('my_class' = sym(!!class_lab)) %>%
-    dplyr::mutate(my_class = as.factor(my_class))
+    dplyr::rename('my_target' = sym(!!class_lab))
 
-  dat$my_class <- tryCatch(
-    recode(dat$my_class, !!!label_map),
-    error = function(e) dat$my_class)
+  if (task == 'classification'){
+    dat <- dplyr::mutate(dat, my_target = as.factor(my_target))
+    dat$my_target <- tryCatch(
+      recode(dat$my_target, !!!label_map),
+      error = function(e) dat$my_target)
+
+    # if class color scales are not supplied, use viridis pallete:
+    # num_class <- length(unique(dat$my_target))
+    if (is.null(target_cols)){
+      target_cols <- ggplot2::scale_fill_viridis_d(option = 'B', begin = 0.3, end = 0.85)
+    }
+  } else { # regression
+    target_cols <- ggplot2::scale_fill_viridis_c(option = 'B', begin = 0.3, end = 0.85)
+  }
 
   # separate feature types:
-  feat_names <- setdiff(colnames(dat), 'my_class')
-
-  # if class color scales are not supplied, use viridis pallete:
-  num_class <- length(unique(dat$my_class))
-  if (is.null(class_cols)){
-    class_cols <- scales::viridis_pal(option = 'B', begin = 0.3, end = 0.85)(num_class)
-  }
+  feat_names <- setdiff(colnames(dat), 'my_target')
 
 
   ################################################################
@@ -121,17 +134,17 @@ heat_tree <- function(
     warning('Character variables are considered categorical.')
   }
 
-  fit <- partykit::ctree(my_class ~ ., data = dat)
+  fit <- partykit::ctree(my_target ~ ., data = dat)
 
   scaled_dat <- dat %>%
-    dplyr::select(- my_class) %>%
-    dplyr::mutate(my_class = dat$my_class,
+    dplyr::select(- my_target) %>%
+    dplyr::mutate(my_target = dat$my_target,
                   node_id = stats::predict(fit, type = 'node'),
                   y_hat = stats::predict(fit, type = 'response'),
                   # y_hat = ifelse(is.numeric(y_pred), y_pred > 0.5, y_pred),
-                  correct = (y_hat == my_class)) %>%
+                  correct = (y_hat == my_target)) %>%
     lapply(unique(.$node_id), clust, dat = .,
-           clust_vec = if (clust_class) c(feat_names, 'my_class') else feat_names,
+           clust_vec = if (clust_class) c(feat_names, 'my_target') else feat_names,
            clust_samps = clust_samps) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(Sample = row_number())
@@ -153,8 +166,19 @@ heat_tree <- function(
     dplyr::select(- c(x, y)) %>%
     dplyr::left_join(my_layout, by = 'id') %>%
     dplyr::filter(kids == 0)
+  # %>%
+    # dplyr::mutate(term_node = y_hat)
+                  # term_node = ifelse(is.numeric(term_node), round(term_node, 3), term_node))
 
+  # term_dat$term_node <- ifelse(task == 'classification',
+  #                              term_dat$y_hat, round(term_dat$y_hat, 3))
+  # term_dat$term_node <- term_dat$y_hat
 
+  if (task == 'classification'){
+    term_dat$term_node <- term_dat$y_hat
+  } else { #regression
+    term_dat$term_node <- round(term_dat$y_hat, 3)
+  }
   ################################################################
   ##### Draw decision tree and heatmap:
 
@@ -178,7 +202,7 @@ heat_tree <- function(
     dat = scaled_dat,
     feat_names = feat_names,
     disp_feats = disp_feats,
-    class_cols = class_cols,
+    target_cols = target_cols,
     panel_space = panel_space,
     feat_types = feat_types,
     trans_type = trans_type,
@@ -191,7 +215,7 @@ heat_tree <- function(
 
   dtree <- draw_tree(
     fit = fit,
-    class_cols = class_cols,
+    target_cols = target_cols,
     layout = my_layout,
     term_dat = term_dat,
     tree_space_top = tree_space_top,
