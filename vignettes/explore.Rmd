@@ -34,7 +34,7 @@ Running the `heat_tree()` function can be as simple as:
 
 ```{r fig.height=3, fig.width=5}
 dat_raw <- iris
-heat_tree(dat_raw, class_lab = 'Species') %>% 
+heat_tree(dat_raw, target_lab = 'Species') %>% 
   grid::grid.draw()
 ```
 
@@ -44,9 +44,9 @@ And we can relax the p value threshold `p_thres` to include more features that m
 
 ```{r fig.height=3, fig.width=7}
 heat_tree(
-  dat_raw, class_lab = 'Species', 
+  dat_raw, target_lab = 'Species', 
   custom_layout = data.frame(id = 1, x = 0.1, y = 1), show_all_feats = TRUE,
-  panel_space = 0.05, class_space = 0.2, tree_space_bottom = 0.1, heat_rel_height = 0.4) %>% 
+  panel_space = 0.05, target_space = 0.2, tree_space_bottom = 0.1, heat_rel_height = 0.4) %>% 
   grid::grid.draw()
 ```
 
@@ -56,7 +56,7 @@ For example:
 
 ```{r fig.height=4, fig.width=7}
 heat_tree(
-  dat_raw, class_lab = 'Species',
+  dat_raw, target_lab = 'Species',
   par_node_vars = list(
     label.size = 0.2,
     label.padding = unit(0.1, "lines"),
@@ -77,13 +77,13 @@ heat_tree(
 ## Some more examples
 
 ```{r fig.height=4, fig.width=7}
-heat_tree(wine, class_lab = 'Type', class_lab_disp = 'Cultivar') %>% 
+heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar') %>% 
   grid::grid.draw()
 ```
 
 ```{r warning=F, fig.height=7, fig.width=7}
-p <- lapply(list(flags, saheart, diabetes), heat_tree, class_lab = 'target', 
-            class_lab_disp = '',
+p <- lapply(list(flags, saheart, diabetes), heat_tree, target_lab = 'target', 
+            target_lab_disp = '',
             heat_rel_height = 0.4, tree_space_bottom = 0.1, 
             terminal_vars = list(label.padding = unit(0.1, "lines"), 
                                  size = 3, colow = 'white'))
@@ -103,16 +103,16 @@ The default `lev_fac = 1.3` seems to provide aesthetically pleasing trees, indep
 # waveform has 5000 observations and 40 features
 # so this computation may take up to a minute or two.
 
-heat_tree(waveform, class_lab = 'target', heat_rel_height = 0.35) %>%
-  grid::grid.draw()
+# heat_tree(waveform, target_lab = 'target', heat_rel_height = 0.35) %>%
+#   grid::grid.draw()
 ```
 
 In this next figure, on the top, `lev_fac = 1` makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts `lev_fac = 1.3` (default) on the bottom.
 
 ```{r fig.height=7, fig.width=9, warning=FALSE, message=FALSE}
 cowplot::plot_grid(
-  heat_tree(wine_quality_red, class_lab = 'target', lev_fac = 1),
-  heat_tree(wine_quality_red, class_lab = 'target'),
+  heat_tree(wine_quality_red, target_lab = 'target', lev_fac = 1),
+  heat_tree(wine_quality_red, target_lab = 'target'),
   ncol = 1,
   labels = c('lev_fac = 1', 'lev_fac = 1.3'))
 ```
@@ -147,7 +147,7 @@ dat_raw <- titanic %>%
 
 heat_tree(
   dat_raw,
-  class_lab = 'Survived',
+  target_lab = 'Survived',
   label_map = c(`1` = 'Survived', `0` = 'Deceased'),
   feat_types = c(Pclass = 'factor',
                  Sex = 'factor',
@@ -170,7 +170,7 @@ Here are a few examples:
 
 ```{r fig.height=4, fig.width=7}
 heat_tree(data = galaxy,
-          class_lab = 'target',
+          target_lab = 'target',
           task = 'regression',
           terminal_vars = NULL,
           tree_space_bottom = 0) %>%
@@ -182,7 +182,7 @@ For illustration purposes, we're only showing the top 300 samples of the *pollen
 
 ```{r fig.height=4, fig.width=7}
 heat_tree(data = pollen[1:300, ],
-          class_lab = 'target',
+          target_lab = 'target',
           task = 'regression') %>%
   grid::grid.draw()
 ```

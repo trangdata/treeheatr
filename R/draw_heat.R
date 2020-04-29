@@ -19,12 +19,12 @@
 #' @param cate_cols Function determine color scale for nominal categorical variable,
 #' defaults to viridis option D.
 #' @param clust_feats Logical. If TRUE, performs cluster on the features.
-#' @param class_space Numeric value indicating spacing between
+#' @param target_space Numeric value indicating spacing between
 #' the class label and the rest of the features
-#' @param class_pos Character string specifying the position of the class label
+#' @param target_pos Character string specifying the position of the class label
 #' on heatmap, can be 'top', 'bottom' or 'none'.
-#' @param class_lab_disp Character string for displaying the label of class label
-#' if it differs from class_lab.
+#' @param target_lab_disp Character string for displaying the label of class label
+#' if it differs from target_lab.
 #'
 #' @return A ggplot2 grob object of the heatmap.
 #' @export
@@ -36,9 +36,9 @@ draw_heat <- function(
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = 'D', begin = 0.3, end = 0.9),
   clust_feats = TRUE,
-  class_space = 0.03,
-  class_pos = 'top',
-  class_lab_disp = NULL
+  target_space = 0.03,
+  target_pos = 'top',
+  target_lab_disp = NULL
 ){
 
   # if feature types are not supplied, infer from column type:
@@ -54,15 +54,15 @@ draw_heat <- function(
 
   # number of features displayed:
   n_feats <- length(disp_feats)
-  class_y <- dplyr::case_when(
-    class_pos == 'top' ~ (n_feats + 1 + class_space),
-    class_pos == 'bottom' ~ (- class_space)) # if 'none', returns NA
+  target_y <- dplyr::case_when(
+    target_pos == 'top' ~ (n_feats + 1 + target_space),
+    target_pos == 'bottom' ~ (- target_space)) # if 'none', returns NA
 
   dheat <- ggplot2::ggplot() +
     target_cols +
     ggplot2::facet_grid(cols = vars(node_id), scales = 'free_x', space = 'free') +
     ggplot2::geom_tile(data = dat,
-      ggplot2::aes(x = Sample, y = class_y, fill = my_target)) +
+      ggplot2::aes(x = Sample, y = target_y, fill = my_target)) +
     ggplot2::scale_x_continuous(expand =  c(0,0)) +
     ggplot2::labs(x = NULL, y = NULL) +
     ggplot2::theme_minimal() +
@@ -108,8 +108,8 @@ draw_heat <- function(
   dheat <- dheat +
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
-      breaks = c(class_y, seq.int(n_feats)),
-      labels = c(class_lab_disp, levels(tile_cate$cate_feat), levels(tile_cont$cont_feat)))
+      breaks = c(target_y, seq.int(n_feats)),
+      labels = c(target_lab_disp, levels(tile_cate$cate_feat), levels(tile_cont$cont_feat)))
 
   return(dheat)
 }

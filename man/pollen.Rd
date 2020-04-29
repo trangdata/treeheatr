@@ -12,5 +12,6 @@ pollen
 }
 \description{
 Fetched from PMLB.
+https://journals.ashs.org/hortsci/view/journals/hortsci/35/3/article-p486C.xml?
 }
 \keyword{datasets}

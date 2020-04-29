@@ -12,11 +12,12 @@ draw_tree(
   tree_space_top = 0.05,
   tree_space_bottom = 0.035,
   par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
-    line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9))),
+    line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9)),
+    ids = "inner"),
   terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3, col =
     "white"),
   edge_vars = list(color = "grey70", size = 0.5),
-  edge_text_vars = list(color = "grey30", size = 3, mapping = aes(label =
+  edge_text_vars = list(color = "grey30", size = 3, mapping = ggplot2::aes(label =
     paste(breaks_label, "*NA")))
 )
 }

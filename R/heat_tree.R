@@ -1,7 +1,7 @@
 #' Draws and aligns decision tree and heatmap.
 #'
 #' @param data Tidy dataset.
-#' @param class_lab Name of the column in data that contains class/label information.
+#' @param target_lab Name of the column in data that contains class/label information.
 #' @param task Character string indicating the type of problem,
 #' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
 #' @param target_cols Function determine color scale for target,
@@ -44,20 +44,20 @@
 #' @param cate_cols Function determine color scale for nominal categorical variable,
 #' defaults to viridis option D.
 #' @param clust_feats Logical. If TRUE, performs cluster on the features.
-#' @param class_space Numeric value indicating spacing between
+#' @param target_space Numeric value indicating spacing between
 #' the class label and the rest of the features
-#' @param class_pos Character string specifying the position of the class label
+#' @param target_pos Character string specifying the position of the class label
 #' on heatmap, can be 'top', 'bottom' or 'none'.
-#' @param class_lab_disp Character string for displaying the label of class label
-#' if it differs from class_lab.
+#' @param target_lab_disp Character string for displaying the label of class label
+#' if it differs from target_lab.
 #'
 #' @return A gtable/grob object of the decision tree (top) and heatmap (bottom).
 #' @export
 #'
-#' @examples heat_tree(iris, class_lab = 'Species')
+#' @examples heat_tree(iris, target_lab = 'Species')
 #'
 heat_tree <- function(
-  data, class_lab,
+  data, target_lab,
   task = 'classification',
   label_map = NULL,
   panel_space = 0.001,
@@ -87,7 +87,7 @@ heat_tree <- function(
   edge_vars = list(color = 'grey70', size = 0.5),
   edge_text_vars = list(
     color = 'grey30', size = 3,
-    mapping = aes(label = paste(breaks_label, "*NA"))),
+    mapping = ggplot2::aes(label = paste(breaks_label, "*NA"))),
 
   ### heatmap parameters:
   feat_types = NULL,
@@ -95,16 +95,16 @@ heat_tree <- function(
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = 'D', begin = 0.3, end = 0.9),
   clust_feats = TRUE,
-  class_space = 0.03,
-  class_pos = 'top',
-  class_lab_disp = class_lab
+  target_space = 0.03,
+  target_pos = 'top',
+  target_lab_disp = target_lab
 ){
 
   ################################################################
   ##### Prepare dataset:
 
   dat <- data %>%
-    dplyr::rename('my_target' = sym(!!class_lab))
+    dplyr::rename('my_target' = sym(!!target_lab))
 
   if (task == 'classification'){
     dat <- dplyr::mutate(dat, my_target = as.factor(my_target))
@@ -201,9 +201,9 @@ heat_tree <- function(
     cont_cols = cont_cols,
     cate_cols = cate_cols,
     clust_feats = clust_feats,
-    class_space = class_space,
-    class_pos = class_pos,
-    class_lab_disp = class_lab_disp)
+    target_space = target_space,
+    target_pos = target_pos,
+    target_lab_disp = target_lab_disp)
 
   dtree <- draw_tree(
     fit = fit,

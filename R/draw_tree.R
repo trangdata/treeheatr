@@ -42,7 +42,7 @@ draw_tree <- function(
     col = 'white'),
   edge_vars = list(color = 'grey70', size = 0.5),
   edge_text_vars = list(color = 'grey30', size = 3,
-                        mapping = aes(label = paste(breaks_label, "*NA")))
+                        mapping = ggplot2::aes(label = paste(breaks_label, "*NA")))
 ){
 
   ggparty::ggparty(fit, terminal_space = 0, layout = layout) +

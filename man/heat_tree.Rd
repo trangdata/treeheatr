@@ -6,7 +6,7 @@
 \usage{
 heat_tree(
   data,
-  class_lab,
+  target_lab,
   task = "classification",
   label_map = NULL,
   panel_space = 0.001,
@@ -27,22 +27,22 @@ heat_tree(
   terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3, col =
     "white"),
   edge_vars = list(color = "grey70", size = 0.5),
-  edge_text_vars = list(color = "grey30", size = 3, mapping = aes(label =
+  edge_text_vars = list(color = "grey30", size = 3, mapping = ggplot2::aes(label =
     paste(breaks_label, "*NA"))),
   feat_types = NULL,
   trans_type = "normalize",
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = "D", begin = 0.3, end = 0.9),
   clust_feats = TRUE,
-  class_space = 0.03,
-  class_pos = "top",
-  class_lab_disp = class_lab
+  target_space = 0.03,
+  target_pos = "top",
+  target_lab_disp = target_lab
 )
 }
 \arguments{
 \item{data}{Tidy dataset.}
 
-\item{class_lab}{Name of the column in data that contains class/label information.}
+\item{target_lab}{Name of the column in data that contains class/label information.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
@@ -108,14 +108,14 @@ defaults to viridis option D.}
 
 \item{clust_feats}{Logical. If TRUE, performs cluster on the features.}
 
-\item{class_space}{Numeric value indicating spacing between
+\item{target_space}{Numeric value indicating spacing between
 the class label and the rest of the features}
 
-\item{class_pos}{Character string specifying the position of the class label
+\item{target_pos}{Character string specifying the position of the class label
 on heatmap, can be 'top', 'bottom' or 'none'.}
 
-\item{class_lab_disp}{Character string for displaying the label of class label
-if it differs from class_lab.}
+\item{target_lab_disp}{Character string for displaying the label of class label
+if it differs from target_lab.}
 }
 \value{
 A gtable/grob object of the decision tree (top) and heatmap (bottom).
@@ -124,6 +124,6 @@ A gtable/grob object of the decision tree (top) and heatmap (bottom).
 Draws and aligns decision tree and heatmap.
 }
 \examples{
-heat_tree(iris, class_lab = 'Species')
+heat_tree(iris, target_lab = 'Species')
 
 }

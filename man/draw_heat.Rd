@@ -15,9 +15,9 @@ draw_heat(
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = "D", begin = 0.3, end = 0.9),
   clust_feats = TRUE,
-  class_space = 0.03,
-  class_pos = "top",
-  class_lab_disp = NULL
+  target_space = 0.03,
+  target_pos = "top",
+  target_lab_disp = NULL
 )
 }
 \arguments{
@@ -49,14 +49,14 @@ defaults to viridis option D.}
 
 \item{clust_feats}{Logical. If TRUE, performs cluster on the features.}
 
-\item{class_space}{Numeric value indicating spacing between
+\item{target_space}{Numeric value indicating spacing between
 the class label and the rest of the features}
 
-\item{class_pos}{Character string specifying the position of the class label
+\item{target_pos}{Character string specifying the position of the class label
 on heatmap, can be 'top', 'bottom' or 'none'.}
 
-\item{class_lab_disp}{Character string for displaying the label of class label
-if it differs from class_lab.}
+\item{target_lab_disp}{Character string for displaying the label of class label
+if it differs from target_lab.}
 }
 \value{
 A ggplot2 grob object of the heatmap.
