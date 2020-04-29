@@ -34,10 +34,12 @@ draw_tree <- function(
     label.size = 0, # no border around labels, unlike terminal nodes
     label.padding = ggplot2::unit(0.15, "lines"),
     line_list = list(ggplot2::aes(label = splitvar)),
-    line_gpar = list(list(size = 9))),
-  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"),
-                       size = 3,
-                       col = 'white'),
+    line_gpar = list(list(size = 9)),
+    ids = 'inner'),
+  terminal_vars = list(
+    label.padding = ggplot2::unit(0.25, "lines"),
+    size = 3,
+    col = 'white'),
   edge_vars = list(color = 'grey70', size = 0.5),
   edge_text_vars = list(color = 'grey30', size = 3,
                         mapping = aes(label = paste(breaks_label, "*NA")))
@@ -47,12 +49,10 @@ draw_tree <- function(
   do.call(ggparty::geom_edge, edge_vars) +
   do.call(ggparty::geom_edge_label, edge_text_vars) +
   do.call(ggparty::geom_node_label, par_node_vars) +
-  do.call(ggparty::geom_node_label,
-          c(list(data = term_dat,
-                 mapping = ggplot2::aes(
-                   label = term_node,
-                   fill = term_node)),
-            terminal_vars)) +
+  {if (!is.null(terminal_vars)) do.call(
+    ggparty::geom_node_label,
+    c(list(data = term_dat, mapping = ggplot2::aes(label = term_node, fill = term_node)),
+    terminal_vars))} +
   target_cols +
   ggplot2::scale_x_continuous(expand = c(0,0)) +
   ggplot2::scale_y_continuous(
