@@ -35,7 +35,7 @@ grid.draw(heat_tree(iris, class_lab = 'Species'))
 Classification of different cultivars of wine.
 
 ``` r
-grid.draw(heat_tree(wine, class_lab = 'Type'))
+grid.draw(heat_tree(wine, class_lab = 'Type', class_lab_disp = 'Cultivar'))
 ```
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
