@@ -103,19 +103,19 @@
 <a href="#lets-begin" class="anchor"></a>Let’s begin</h2>
 <p>with the iris dataset! Running the <code><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree()</a></code> function can be as simple as:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">dat_raw</span> <span class="kw">&lt;-</span> <span class="no">iris</span>
-<span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">dat_raw</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>) <span class="kw">%&gt;%</span>
+<span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-2-1.png" width="480"></p>
 <p>But we can adjust a few graphical parameters. We can also add a custom layout for a subset of the nodes by specifying it in the <code>custom_layout</code> parameter. And we can relax the p value threshold <code>p_thres</code> to include more features that might be less important in classifying the samples but still included in the decision tree, or set <code>show_all_feats = TRUE</code> to include all features, even the ones that were not used to build the tree.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
-  <span class="no">dat_raw</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
+  <span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
   <span class="kw">custom_layout</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fl">1</span>), <span class="kw">show_all_feats</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-  <span class="kw">panel_space</span> <span class="kw">=</span> <span class="fl">0.05</span>, <span class="kw">class_space</span> <span class="kw">=</span> <span class="fl">0.2</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>) <span class="kw">%&gt;%</span>
+  <span class="kw">panel_space</span> <span class="kw">=</span> <span class="fl">0.05</span>, <span class="kw">target_space</span> <span class="kw">=</span> <span class="fl">0.2</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>We can also customize our heattree by passing parameters through to different <strong>ggparty</strong> geoms. These list parameters are named <code>*_vars</code>. For example:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
-  <span class="no">dat_raw</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
+  <span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
   <span class="kw">par_node_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
     <span class="kw">label.size</span> <span class="kw">=</span> <span class="fl">0.2</span>,
     <span class="kw">label.padding</span> <span class="kw">=</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>),
@@ -136,11 +136,11 @@
 <div id="some-more-examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#some-more-examples" class="anchor"></a>Some more examples</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'Type'</span>, <span class="kw">class_lab_disp</span> <span class="kw">=</span> <span class="st">'Cultivar'</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Type'</span>, <span class="kw">target_lab_disp</span> <span class="kw">=</span> <span class="st">'Cultivar'</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">flags</span>, <span class="no">saheart</span>, <span class="no">diabetes</span>), <span class="no">heat_tree</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
-            <span class="kw">class_lab_disp</span> <span class="kw">=</span> <span class="st">''</span>,
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">flags</span>, <span class="no">saheart</span>, <span class="no">diabetes</span>), <span class="no">heat_tree</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
+            <span class="kw">target_lab_disp</span> <span class="kw">=</span> <span class="st">''</span>,
             <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>,
             <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">label.padding</span> <span class="kw">=</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>),
                                  <span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">colow</span> <span class="kw">=</span> <span class="st">'white'</span>))
@@ -152,16 +152,15 @@
 <h2 class="hasAnchor">
 <a href="#smart-node-layout" class="anchor"></a>Smart node layout</h2>
 <p>These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size. The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches. This relative weight can be adjusted with the <code>lev_fac</code> parameter in <code><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree()</a></code>. The default <code>lev_fac = 1.3</code> seems to provide aesthetically pleasing trees, independent of the tree size.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># waveform has 5000 observations and 40 features</span>
-<span class="co"># so this computation may take up to a minute or two.</span>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"># waveform has 5000 observations and 40 features
+# so this computation may take up to a minute or two.
 
-<span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">waveform</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.35</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="864"></p>
+# heat_tree(waveform, target_lab = 'target', heat_rel_height = 0.35) %&gt;%
+#   grid::grid.draw()</pre></body></html></div>
 <p>In this next figure, on the top, <code>lev_fac = 1</code> makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts <code>lev_fac = 1.3</code> (default) on the bottom.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(
-  <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">1</span>),
-  <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>),
+  <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">1</span>),
+  <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>),
   <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>,
   <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'lev_fac = 1'</span>, <span class="st">'lev_fac = 1.3'</span>))</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="864"></p>
@@ -184,7 +183,7 @@
 
 <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="no">dat_raw</span>,
-  <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'Survived'</span>,
+  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Survived'</span>,
   <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Survived'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Deceased'</span>),
   <span class="kw">feat_types</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">Pclass</span> <span class="kw">=</span> <span class="st">'factor'</span>,
                  <span class="kw">Sex</span> <span class="kw">=</span> <span class="st">'factor'</span>,
@@ -194,7 +193,7 @@
                  <span class="kw">Fare</span> <span class="kw">=</span> <span class="st">'numeric'</span>,
                  <span class="kw">Embarked</span> <span class="kw">=</span> <span class="st">'factor'</span>)) <span class="kw">%&gt;%</span>
   <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()
-<span class="co">#&gt; Warning in heat_tree(dat_raw, class_lab = "Survived", label_map = c(`1` =</span>
+<span class="co">#&gt; Warning in heat_tree(dat_raw, target_lab = "Survived", label_map = c(`1` =</span>
 <span class="co">#&gt; "Survived", : Character variables are considered categorical.</span>
 <span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 2 treated as</span>
 <span class="co">#&gt; interval scaled</span>
@@ -210,7 +209,7 @@
 <a href="#regression" class="anchor"></a>Regression</h2>
 <p>In general, compared to classification, regression task is more difficult to interpret with a decision tree. However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes. Also, removing the terminal node label may show the groups better. Here are a few examples:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">galaxy</span>,
-          <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
+          <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
           <span class="kw">task</span> <span class="kw">=</span> <span class="st">'regression'</span>,
           <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="kw">NULL</span>,
           <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0</span>) <span class="kw">%&gt;%</span>
@@ -223,7 +222,7 @@
 <p><img src="explore_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 <p>For illustration purposes, we’re only showing the top 300 samples of the <em>pollen</em> dataset below.</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">pollen</span>[<span class="fl">1</span>:<span class="fl">300</span>, ],
-          <span class="kw">class_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
+          <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
           <span class="kw">task</span> <span class="kw">=</span> <span class="st">'regression'</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>

@@ -133,7 +133,7 @@
 
     <pre class="usage"><span class='fu'>heat_tree</span>(
   <span class='no'>data</span>,
-  <span class='no'>class_lab</span>,
+  <span class='no'>target_lab</span>,
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='st'>"classification"</span>,
   <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
@@ -154,16 +154,16 @@
   <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/reexports.html'>unit</a></span>(<span class='fl'>0.25</span>, <span class='st'>"lines"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span>
     <span class='st'>"white"</span>),
   <span class='kw'>edge_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey70"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>),
-  <span class='kw'>edge_text_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey30"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span>
+  <span class='kw'>edge_text_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey30"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span>
     <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>breaks_label</span>, <span class='st'>"*NA"</span>))),
   <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='st'>"normalize"</span>,
   <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
   <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>option</span> <span class='kw'>=</span> <span class='st'>"D"</span>, <span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
   <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>class_space</span> <span class='kw'>=</span> <span class='fl'>0.03</span>,
-  <span class='kw'>class_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
-  <span class='kw'>class_lab_disp</span> <span class='kw'>=</span> <span class='no'>class_lab</span>
+  <span class='kw'>target_space</span> <span class='kw'>=</span> <span class='fl'>0.03</span>,
+  <span class='kw'>target_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
+  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='no'>target_lab</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -174,7 +174,7 @@
       <td><p>Tidy dataset.</p></td>
     </tr>
     <tr>
-      <th>class_lab</th>
+      <th>target_lab</th>
       <td><p>Name of the column in data that contains class/label information.</p></td>
     </tr>
     <tr>
@@ -286,19 +286,19 @@ defaults to viridis option D.</p></td>
       <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
     </tr>
     <tr>
-      <th>class_space</th>
+      <th>target_space</th>
       <td><p>Numeric value indicating spacing between
 the class label and the rest of the features</p></td>
     </tr>
     <tr>
-      <th>class_pos</th>
+      <th>target_pos</th>
       <td><p>Character string specifying the position of the class label
 on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
     </tr>
     <tr>
-      <th>class_lab_disp</th>
+      <th>target_lab_disp</th>
       <td><p>Character string for displaying the label of class label
-if it differs from class_lab.</p></td>
+if it differs from target_lab.</p></td>
     </tr>
     </table>
 
@@ -307,7 +307,7 @@ if it differs from class_lab.</p></td>
     <p>A gtable/grob object of the decision tree (top) and heatmap (bottom).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>heat_tree</span>(<span class='no'>iris</span>, <span class='kw'>class_lab</span> <span class='kw'>=</span> <span class='st'>'Species'</span>)</div><div class='output co'>#&gt; TableGrob (14 x 15) "layout": 28 grobs
+    <pre class="examples"><div class='input'><span class='fu'>heat_tree</span>(<span class='no'>iris</span>, <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'Species'</span>)</div><div class='output co'>#&gt; TableGrob (14 x 15) "layout": 28 grobs
 #&gt;     z         cells       name                                    grob
 #&gt; 1   0 ( 2-14, 1-15) background zeroGrob[plot.background..zeroGrob.121]
 #&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.36]
