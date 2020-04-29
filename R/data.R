@@ -30,6 +30,20 @@
 #'
 "saheart"
 
+#' Mushroom records.
+#'
+#' Fetched from PMLB.
+#'
+#'
+#' http://archive.ics.uci.edu/ml/datasets/Mushroom
+#' The Audubon Society Field Guide to North American Mushrooms (1981).
+#' G. H. Lincoff (Pres.), New York: Alfred A. Knopf
+#'
+#' @format A data frame with 23 variables.
+#'
+#'
+"mushroom"
+
 #' Fate of passengers on the fatal maiden voyage of the ocean liner *Titanic*.
 #'
 #' Titanic training dataset from titanic::titanic_train.
@@ -58,7 +72,6 @@
 #'
 "waveform"
 
-
 #' Results of a chemical analysis of wines grown in a specific area of Italy.
 #'
 #' Three types of wine are represented in the 178 samples,
@@ -71,7 +84,6 @@
 #' @format A data frame with 14 variables.
 #'
 "wine"
-
 
 #' Red variant of the Portuguese "Vinho Verde" wine.
 #'
@@ -91,4 +103,19 @@
 #'
 #'
 "wine_quality_red"
+
+#' Galaxy dataset for regression.
+#'
+#' Fetched from PMLB.
+#' Galaxy positions?
+#'
+#'
+"galaxy"
+
+#' Pollen dataset for regression.
+#'
+#' Fetched from PMLB.
+#' https://journals.ashs.org/hortsci/view/journals/hortsci/35/3/article-p486C.xml?
+#'
+"pollen"
 
