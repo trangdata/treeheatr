@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Draws the heatmap. — draw_heat • treeheatr</title>
+<title>Pollen dataset for regression. — pollen • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Draws the heatmap. — draw_heat" />
-<meta property="og:description" content="Draws the heatmap to be placed below the decision tree." />
+<meta property="og:title" content="Pollen dataset for regression. — pollen" />
+<meta property="og:description" content="Fetched from PMLB." />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -122,102 +122,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Draws the heatmap.</h1>
+    <h1>Pollen dataset for regression.</h1>
     
-    <div class="hidden name"><code>draw_heat.Rd</code></div>
+    <div class="hidden name"><code>pollen.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Draws the heatmap to be placed below the decision tree.</p>
+    <p>Fetched from PMLB.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>draw_heat</span>(
-  <span class='no'>dat</span>,
-  <span class='no'>feat_names</span>,
-  <span class='no'>disp_feats</span>,
-  <span class='no'>target_cols</span>,
-  <span class='no'>panel_space</span>,
-  <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='st'>"normalize"</span>,
-  <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
-  <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>option</span> <span class='kw'>=</span> <span class='st'>"D"</span>, <span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
-  <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>class_space</span> <span class='kw'>=</span> <span class='fl'>0.03</span>,
-  <span class='kw'>class_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
-  <span class='kw'>class_lab_disp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='no'>pollen</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>dat</th>
-      <td><p>Dataframe with samples from original dataset ordered according to
-the clustering within each leaf node.</p></td>
-    </tr>
-    <tr>
-      <th>feat_names</th>
-      <td><p>Character vector specifying the feature names in dat.</p></td>
-    </tr>
-    <tr>
-      <th>disp_feats</th>
-      <td><p>Character vector specifying features to be displayed.</p></td>
-    </tr>
-    <tr>
-      <th>target_cols</th>
-      <td><p>Function determine color scale for target,
-defaults to viridis option B.</p></td>
-    </tr>
-    <tr>
-      <th>panel_space</th>
-      <td><p>Spacing between facets relative to viewport,
-recommended to range from 0.001 to 0.01.</p></td>
-    </tr>
-    <tr>
-      <th>feat_types</th>
-      <td><p>Named vector indicating the type of each features,
-e.g., c(sex = 'factor', age = 'numeric').
-If feature types are not supplied, infer from column type.</p></td>
-    </tr>
-    <tr>
-      <th>trans_type</th>
-      <td><p>Character string specifying transformation type,
-can be 'scale' or 'normalize'.</p></td>
-    </tr>
-    <tr>
-      <th>cont_cols</th>
-      <td><p>Function determine color scale for continuous variable,
-defaults to viridis option D.</p></td>
-    </tr>
-    <tr>
-      <th>cate_cols</th>
-      <td><p>Function determine color scale for nominal categorical variable,
-defaults to viridis option D.</p></td>
-    </tr>
-    <tr>
-      <th>clust_feats</th>
-      <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
-    </tr>
-    <tr>
-      <th>class_space</th>
-      <td><p>Numeric value indicating spacing between
-the class label and the rest of the features</p></td>
-    </tr>
-    <tr>
-      <th>class_pos</th>
-      <td><p>Character string specifying the position of the class label
-on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
-    </tr>
-    <tr>
-      <th>class_lab_disp</th>
-      <td><p>Character string for displaying the label of class label
-if it differs from class_lab.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A ggplot2 grob object of the heatmap.</p>
+    <p>An object of class <code>data.frame</code> with 3848 rows and 5 columns.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
