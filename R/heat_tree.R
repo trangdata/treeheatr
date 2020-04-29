@@ -1,12 +1,12 @@
 #' Draws and aligns decision tree and heatmap.
 #'
 #' @param data Tidy dataset.
-#' @param target_lab Name of the column in data that contains class/label information.
+#' @param target_lab Name of the column in data that contains target/label information.
 #' @param task Character string indicating the type of problem,
 #' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
 #' @param target_cols Function determine color scale for target,
 #' defaults to viridis option B.
-#' @param label_map Named vector of the meaning of the class values,
+#' @param label_map Named vector of the meaning of the target values,
 #' e.g., c(`0` = 'Edible', `1` = 'Poisonous').
 #' @param panel_space Spacing between facets relative to viewport,
 #' recommended to range from 0.001 to 0.01.
@@ -16,7 +16,7 @@
 #' @param heat_rel_height Relative height of heatmap compared to whole figure (with tree).
 #' @param clust_samps Logical. If TRUE, hierarhical clustering would be performed
 #' among samples within each leaf node.
-#' @param clust_class Logical. If TRUE, class/label is included in hierarchical clustering
+#' @param clust_target Logical. If TRUE, target/label is included in hierarchical clustering
 #' of samples within each leaf node and might yield a more interpretable heatmap.
 #' @param custom_layout Dataframe with 3 columns: id, x and y
 #' for manually input custom layout.
@@ -45,10 +45,10 @@
 #' defaults to viridis option D.
 #' @param clust_feats Logical. If TRUE, performs cluster on the features.
 #' @param target_space Numeric value indicating spacing between
-#' the class label and the rest of the features
-#' @param target_pos Character string specifying the position of the class label
+#' the target label and the rest of the features
+#' @param target_pos Character string specifying the position of the target label
 #' on heatmap, can be 'top', 'bottom' or 'none'.
-#' @param target_lab_disp Character string for displaying the label of class label
+#' @param target_lab_disp Character string for displaying the label of target label
 #' if it differs from target_lab.
 #'
 #' @return A gtable/grob object of the decision tree (top) and heatmap (bottom).
@@ -64,7 +64,7 @@ heat_tree <- function(
   lev_fac = 1.3,
   heat_rel_height = 0.2,
   clust_samps = TRUE,
-  clust_class = TRUE,
+  clust_target = TRUE,
   custom_layout = NULL,
   p_thres = 0.05,
   show_all_feats = FALSE,
@@ -73,7 +73,7 @@ heat_tree <- function(
 
   ### tree parameters:
   tree_space_top = 0.05,
-  tree_space_bottom = 0.035,
+  tree_space_bottom = 0.05,
   par_node_vars = list(
     label.size = 0, # no border around labels, unlike terminal nodes
     label.padding = ggplot2::unit(0.15, 'lines'),
@@ -112,7 +112,7 @@ heat_tree <- function(
       recode(dat$my_target, !!!label_map),
       error = function(e) dat$my_target)
 
-    # if class color scales are not supplied, use viridis pallete:
+    # if target color scales are not supplied, use viridis pallete:
     if (is.null(target_cols)){
       target_cols <- ggplot2::scale_fill_viridis_d(option = 'B', begin = 0.3, end = 0.85)
     }
@@ -143,7 +143,7 @@ heat_tree <- function(
                   # y_hat = ifelse(is.numeric(y_pred), y_pred > 0.5, y_pred),
                   correct = (y_hat == my_target)) %>%
     lapply(unique(.$node_id), clust, dat = .,
-           clust_vec = if (clust_class) c(feat_names, 'my_target') else feat_names,
+           clust_vec = if (clust_target) c(feat_names, 'my_target') else feat_names,
            clust_samps = clust_samps) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(Sample = row_number())

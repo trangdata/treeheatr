@@ -13,14 +13,14 @@ heat_tree(
   lev_fac = 1.3,
   heat_rel_height = 0.2,
   clust_samps = TRUE,
-  clust_class = TRUE,
+  clust_target = TRUE,
   custom_layout = NULL,
   p_thres = 0.05,
   show_all_feats = FALSE,
   target_cols = ggplot2::scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73",
     "#F0E442", "#0072B2", "#D55E00", "#CC79A7")),
   tree_space_top = 0.05,
-  tree_space_bottom = 0.035,
+  tree_space_bottom = 0.05,
   par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
     line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9)),
     ids = "inner"),
@@ -42,12 +42,12 @@ heat_tree(
 \arguments{
 \item{data}{Tidy dataset.}
 
-\item{target_lab}{Name of the column in data that contains class/label information.}
+\item{target_lab}{Name of the column in data that contains target/label information.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
 
-\item{label_map}{Named vector of the meaning of the class values,
+\item{label_map}{Named vector of the meaning of the target values,
 e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
 
 \item{panel_space}{Spacing between facets relative to viewport,
@@ -62,7 +62,7 @@ according to their levels, commonly ranges from 1 to 1.5.
 \item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
 among samples within each leaf node.}
 
-\item{clust_class}{Logical. If TRUE, class/label is included in hierarchical clustering
+\item{clust_target}{Logical. If TRUE, target/label is included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.}
 
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
@@ -109,12 +109,12 @@ defaults to viridis option D.}
 \item{clust_feats}{Logical. If TRUE, performs cluster on the features.}
 
 \item{target_space}{Numeric value indicating spacing between
-the class label and the rest of the features}
+the target label and the rest of the features}
 
-\item{target_pos}{Character string specifying the position of the class label
+\item{target_pos}{Character string specifying the position of the target label
 on heatmap, can be 'top', 'bottom' or 'none'.}
 
-\item{target_lab_disp}{Character string for displaying the label of class label
+\item{target_lab_disp}{Character string for displaying the label of target label
 if it differs from target_lab.}
 }
 \value{

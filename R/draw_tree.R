@@ -29,7 +29,7 @@
 draw_tree <- function(
   fit, target_cols, layout, term_dat,
   tree_space_top = 0.05,
-  tree_space_bottom = 0.035,
+  tree_space_bottom = 0.05,
   par_node_vars = list(
     label.size = 0, # no border around labels, unlike terminal nodes
     label.padding = ggplot2::unit(0.15, "lines"),

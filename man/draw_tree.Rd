@@ -10,7 +10,7 @@ draw_tree(
   layout,
   term_dat,
   tree_space_top = 0.05,
-  tree_space_bottom = 0.035,
+  tree_space_bottom = 0.05,
   par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
     line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9)),
     ids = "inner"),
