@@ -25,7 +25,7 @@ Classification of different types of iris plants.
 ``` r
 library(treeheatr)
 
-grid.draw(heat_tree(iris, class_lab = 'Species'))
+grid.draw(heat_tree(iris, target_lab = 'Species'))
 ```
 
 ![](man/figures/unnamed-chunk-3-1.png)<!-- -->
@@ -35,7 +35,7 @@ grid.draw(heat_tree(iris, class_lab = 'Species'))
 Classification of different cultivars of wine.
 
 ``` r
-grid.draw(heat_tree(wine, class_lab = 'Type', class_lab_disp = 'Cultivar'))
+grid.draw(heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar'))
 ```
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
