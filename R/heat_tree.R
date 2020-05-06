@@ -90,7 +90,7 @@ heat_tree <- function(
 
   ### heatmap parameters:
   feat_types = NULL,
-  trans_type = 'normalize',
+  trans_type = c('normalize', 'scale'),
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = 'D', begin = 0.3, end = 0.9),
   clust_feats = TRUE,
@@ -102,6 +102,7 @@ heat_tree <- function(
   ################################################################
   ##### Prepare dataset:
   task <- match.arg(task)
+  trans_type <- match.arg(trans_type)
 
   dat <- data %>%
     dplyr::rename('my_target' = sym(!!target_lab))
@@ -155,13 +156,13 @@ heat_tree <- function(
   ################################################################
   ##### Prepare layout, terminal data, add node labels:
 
-  plot_data <- ggparty:::get_plot_data(fit)
-  my_layout <- position_nodes(plot_data, custom_layout, lev_fac, panel_space)
-
   node_labels <- scaled_dat %>%
     dplyr::distinct(Sample, .keep_all = T) %>%
     dplyr::count(node_id, y_hat) %>%
     dplyr::rename(id = node_id)
+
+  plot_data <- ggparty:::get_plot_data(fit)
+  my_layout <- position_nodes(plot_data, custom_layout, lev_fac, panel_space)
 
   term_dat <- plot_data %>%
     dplyr::left_join(node_labels, by = 'id') %>%
@@ -188,7 +189,6 @@ heat_tree <- function(
       unlist() %>%
       unique()
   }
-
 
   dheat <- draw_heat(
     dat = scaled_dat,

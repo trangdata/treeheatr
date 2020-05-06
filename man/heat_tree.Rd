@@ -29,7 +29,7 @@ heat_tree(
   edge_text_vars = list(color = "grey30", size = 3, mapping = ggplot2::aes(label =
     paste(breaks_label, "*NA"))),
   feat_types = NULL,
-  trans_type = "normalize",
+  trans_type = c("normalize", "scale"),
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = "D", begin = 0.3, end = 0.9),
   clust_feats = TRUE,
