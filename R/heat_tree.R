@@ -58,7 +58,7 @@
 #'
 heat_tree <- function(
   data, target_lab,
-  task = 'classification',
+  task = c('classification', 'regression'),
   label_map = NULL,
   panel_space = 0.001,
   lev_fac = 1.3,
@@ -102,6 +102,7 @@ heat_tree <- function(
 
   ################################################################
   ##### Prepare dataset:
+  task <- match.arg(task)
 
   dat <- data %>%
     dplyr::rename('my_target' = sym(!!target_lab))
@@ -164,13 +165,10 @@ heat_tree <- function(
     dplyr::left_join(node_labels, by = 'id') %>%
     dplyr::select(- c(x, y)) %>%
     dplyr::left_join(my_layout, by = 'id') %>%
-    dplyr::filter(kids == 0)
+    dplyr::filter(kids == 0) %>%
+    dplyr::mutate(
+      term_node = if (task == 'classification') y_hat else round(y_hat, 2))
 
-  if (task == 'classification'){
-    term_dat$term_node <- term_dat$y_hat
-  } else { #regression
-    term_dat$term_node <- round(term_dat$y_hat, 3)
-  }
   ################################################################
   ##### Draw decision tree and heatmap:
 
