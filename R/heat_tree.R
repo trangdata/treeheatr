@@ -68,8 +68,7 @@ heat_tree <- function(
   custom_layout = NULL,
   p_thres = 0.05,
   show_all_feats = FALSE,
-  target_cols = ggplot2::scale_fill_manual(
-    values = c('#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00', '#CC79A7')),
+  target_cols = NULL,
 
   ### tree parameters:
   tree_space_top = 0.05,
@@ -112,13 +111,16 @@ heat_tree <- function(
     dat$my_target <- tryCatch(
       recode(dat$my_target, !!!label_map),
       error = function(e) dat$my_target)
+  }
 
-    # if target color scales are not supplied, use viridis pallete:
-    if (is.null(target_cols)){
-      target_cols <- ggplot2::scale_fill_viridis_d(option = 'B', begin = 0.3, end = 0.85)
-    }
-  } else { # regression
-    target_cols <- ggplot2::scale_fill_viridis_c(option = 'B', begin = 0.3, end = 0.85)
+  if (is.null(target_cols)){
+    # if target color scales are not supplied, use viridis pallete
+    vir_opts <- list(option = 'B', begin = 0.3, end = 0.85)
+    target_cols <- switch(
+      task,
+      classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),
+      regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts)
+    )
   }
 
   # separate feature types:

@@ -7,7 +7,7 @@
 heat_tree(
   data,
   target_lab,
-  task = "classification",
+  task = c("classification", "regression"),
   label_map = NULL,
   panel_space = 0.001,
   lev_fac = 1.3,
@@ -17,8 +17,7 @@ heat_tree(
   custom_layout = NULL,
   p_thres = 0.05,
   show_all_feats = FALSE,
-  target_cols = ggplot2::scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73",
-    "#F0E442", "#0072B2", "#D55E00", "#CC79A7")),
+  target_cols = NULL,
   tree_space_top = 0.05,
   tree_space_bottom = 0.05,
   par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
