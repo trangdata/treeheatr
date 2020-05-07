@@ -37,8 +37,12 @@
 #' @param feat_types Named vector indicating the type of each features,
 #' e.g., c(sex = 'factor', age = 'numeric').
 #' If feature types are not supplied, infer from column type.
-#' @param trans_type Character string specifying transformation type,
-#' can be 'scale' or 'normalize'.
+#' @param trans_type Character string of 'normalize', 'scale' or 'none'.
+#' If 'scale', subtract the mean and divide by the standard deviation.
+#' If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+#' If 'none', no transformation is applied.
+#' More information on what transformation to choose can be acquired here:
+#' https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale
 #' @param cont_cols Function determine color scale for continuous variable,
 #' defaults to viridis option D.
 #' @param cate_cols Function determine color scale for nominal categorical variable,
@@ -90,7 +94,7 @@ heat_tree <- function(
 
   ### heatmap parameters:
   feat_types = NULL,
-  trans_type = c('normalize', 'scale'),
+  trans_type = c('normalize', 'scale', 'none'),
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = 'D', begin = 0.3, end = 0.9),
   clust_feats = TRUE,
@@ -104,6 +108,12 @@ heat_tree <- function(
   task <- match.arg(task)
   trans_type <- match.arg(trans_type)
 
+  vir_opts <- list(option = 'B', begin = 0.3, end = 0.85)
+  target_cols <- target_cols %||%
+    switch(task,
+           classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),
+           regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts))
+
   dat <- data %>%
     dplyr::rename('my_target' = sym(!!target_lab))
 
@@ -112,16 +122,6 @@ heat_tree <- function(
     dat$my_target <- tryCatch(
       recode(dat$my_target, !!!label_map),
       error = function(e) dat$my_target)
-  }
-
-  if (is.null(target_cols)){
-    # if target color scales are not supplied, use viridis pallete
-    vir_opts <- list(option = 'B', begin = 0.3, end = 0.85)
-    target_cols <- switch(
-      task,
-      classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),
-      regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts)
-    )
   }
 
   # separate feature types:
