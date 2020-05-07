@@ -42,7 +42,7 @@ draw_heat <- function(
 ){
 
   # if feature types are not supplied, infer from column type:
-  if (is.null(feat_types)){feat_types <- sapply(dat[, feat_names], class)}
+  feat_types <- feat_types %||% sapply(dat[, feat_names], class)
 
   # prepare feature orders:
   feat_list <- prepare_feats(dat, disp_feats, feat_types, clust_feats, trans_type)
