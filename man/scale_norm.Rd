@@ -4,19 +4,20 @@
 \alias{scale_norm}
 \title{Performs transformation of continuous variables for the heatmap color scales.}
 \usage{
-scale_norm(x, trans_type)
+scale_norm(x, trans_type = c("normalize", "scale", "none"))
 }
 \arguments{
 \item{x}{Numeric vector.}
 
-\item{trans_type}{Character string of 'scale' or 'normalize'.
+\item{trans_type}{Character string of 'normalize', 'scale' or 'none'.
 If 'scale', subtract the mean and divide by the standard deviation.
 If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+If 'none', no transformation is applied.
 More information on what transformation to choose can be acquired here:
 https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale}
 }
 \value{
-Numeric vector of transformed x.
+Numeric vector of the transformed `x`.
 }
 \description{
 Performs transformation of continuous variables for the heatmap color scales.
