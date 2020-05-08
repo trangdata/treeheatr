@@ -146,7 +146,7 @@ heat_tree <- function(
                   y_hat = stats::predict(fit, type = 'response'),
                   # y_hat = ifelse(is.numeric(y_pred), y_pred > 0.5, y_pred),
                   correct = (y_hat == my_target)) %>%
-    lapply(unique(.$node_id), clust, dat = .,
+    lapply(unique(.$node_id), clust_samp_func, dat = .,
            clust_vec = if (clust_target) c(feat_names, 'my_target') else feat_names,
            clust_samps = clust_samps) %>%
     dplyr::bind_rows() %>%
