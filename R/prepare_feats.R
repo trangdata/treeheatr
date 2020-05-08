@@ -8,8 +8,12 @@
 #' @param feat_types Named vector indicating the type of each features,
 #' e.g., c(sex = 'factor', age = 'numeric').
 #' @param clust_feats Logical. If TRUE, performs cluster on the features across all samples.
-#' @param trans_type Character string specifying transformation type,
-#' can be 'scale' or 'normalize'.
+#' @param trans_type Character string of 'normalize', 'scale' or 'none'.
+#' If 'scale', subtract the mean and divide by the standard deviation.
+#' If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+#' If 'none', no transformation is applied.
+#' More information on what transformation to choose can be acquired here:
+#' https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale
 #'
 #' @return a list of two dataframes (continuous and categorical)
 #' from the original dataset.
@@ -44,29 +48,24 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
     df_cate <- NULL
   }
 
-  if (clust_feats == TRUE) {
-    if (n_conts > 1){
-      clustered_conts <-
-        clust(
-          dat = dat,
-          clust_vec = cont_feats[cont_feats %in% disp_feats],
-          clust_samps = FALSE,
-          clust_feats = clust_feats
-        )
-      df_cont$cont_feat <- factor(df_cont$cont_feat, levels = clustered_conts)
-    }
+  if (n_conts > 1){
+    clustered_conts <-
+      clust_feat_func(
+        dat = dat,
+        clust_vec = cont_feats[cont_feats %in% disp_feats],
+        clust_feats = clust_feats
+      )
+    df_cont$cont_feat <- factor(df_cont$cont_feat, levels = clustered_conts)
+  }
 
-    if (n_cates > 1){
-      clustered_cates <-
-        clust(
-          dat = dat %>% dplyr::mutate_if(is.factor, as.numeric),
-          clust_vec = cate_feats[cate_feats %in% disp_feats],
-          clust_samps = FALSE,
-          clust_feats = clust_feats
-        )
-      df_cate$cate_feat <- factor(df_cate$cate_feat, levels = clustered_cates)
-
-    }
+  if (n_cates > 1){
+    clustered_cates <-
+      clust_feat_func(
+        dat = dat %>% dplyr::mutate_if(is.factor, as.numeric),
+        clust_vec = cate_feats[cate_feats %in% disp_feats],
+        clust_feats = clust_feats
+      )
+    df_cate$cate_feat <- factor(df_cate$cate_feat, levels = clustered_cates)
   }
 
   return(list(df_cont = df_cont, df_cate = df_cate))
