@@ -25,7 +25,7 @@
 #' @return A ggplot2 grob object of the decision tree.
 #' @export
 #'
-#' @examples
+#'
 draw_tree <- function(
   fit, target_cols, layout, term_dat,
   tree_space_top = 0.05,
@@ -41,22 +41,23 @@ draw_tree <- function(
     size = 3,
     col = 'white'),
   edge_vars = list(color = 'grey70', size = 0.5),
-  edge_text_vars = list(color = 'grey30', size = 3,
-                        mapping = ggplot2::aes(label = paste(breaks_label, "*NA")))
+  edge_text_vars = list(
+    color = 'grey30', size = 3,
+    mapping = ggplot2::aes(label = paste(breaks_label, "*NA")))
 ){
 
   ggparty::ggparty(fit, terminal_space = 0, layout = layout) +
-  do.call(ggparty::geom_edge, edge_vars) +
-  do.call(ggparty::geom_edge_label, edge_text_vars) +
-  do.call(ggparty::geom_node_label, par_node_vars) +
-  {if (!is.null(terminal_vars)) do.call(
-    ggparty::geom_node_label,
-    c(list(data = term_dat, mapping = ggplot2::aes(label = term_node, fill = term_node)),
-    terminal_vars))} +
-  target_cols +
-  ggplot2::scale_x_continuous(expand = c(0,0)) +
-  ggplot2::scale_y_continuous(
-    expand = ggplot2::expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
-  ggplot2::coord_cartesian(xlim = c(0, 1)) +
-  ggplot2::guides(fill = FALSE)
+    do.call(ggparty::geom_edge, edge_vars) +
+    do.call(ggparty::geom_edge_label, edge_text_vars) +
+    do.call(ggparty::geom_node_label, par_node_vars) +
+    {if (!is.null(terminal_vars)) do.call(
+      ggparty::geom_node_label,
+      c(list(data = term_dat, mapping = ggplot2::aes(label = term_node, fill = term_node)),
+        terminal_vars))} +
+    target_cols +
+    ggplot2::scale_x_continuous(expand = c(0,0)) +
+    ggplot2::scale_y_continuous(
+      expand = ggplot2::expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
+    ggplot2::coord_cartesian(xlim = c(0, 1)) +
+    ggplot2::guides(fill = FALSE)
 }
