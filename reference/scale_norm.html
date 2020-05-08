@@ -131,7 +131,7 @@
     <p>Performs transformation of continuous variables for the heatmap color scales.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>scale_norm</span>(<span class='no'>x</span>, <span class='no'>trans_type</span>)</pre>
+    <pre class="usage"><span class='fu'>scale_norm</span>(<span class='no'>x</span>, <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"normalize"</span>, <span class='st'>"scale"</span>, <span class='st'>"none"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,9 +142,10 @@
     </tr>
     <tr>
       <th>trans_type</th>
-      <td><p>Character string of 'scale' or 'normalize'.
+      <td><p>Character string of 'normalize', 'scale' or 'none'.
 If 'scale', subtract the mean and divide by the standard deviation.
 If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+If 'none', no transformation is applied.
 More information on what transformation to choose can be acquired here:
 https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale</p></td>
     </tr>
@@ -152,7 +153,7 @@ https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale</
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Numeric vector of transformed x.</p>
+    <p>Numeric vector of the transformed `x`.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

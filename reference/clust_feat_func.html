@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • treeheatr</title>
+<title>Performs clustering or features. — clust_feat_func • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Performs clustering or features. — clust_feat_func" />
+<meta property="og:description" content="Performs clustering or features." />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -63,7 +64,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -119,142 +120,45 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Performs clustering or features.</h1>
+    
+    <div class="hidden name"><code>clust_feat_func.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Performs clustering or features.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>clust_feat_func</span>(<span class='no'>dat</span>, <span class='no'>clust_vec</span>, <span class='no'>clust_feats</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-primary-functions" class="hasAnchor"><a href="#section-primary-functions" class="anchor"></a>Primary functions</h2>
-          <p class="section-desc"><p>Package primary functions</p></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="heat_tree.html">heat_tree()</a></code> </p>
-        </td>
-        <td><p>Draws and aligns decision tree and heatmap.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draw_tree.html">draw_tree()</a></code> </p>
-        </td>
-        <td><p>Draws the conditional decision tree.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draw_heat.html">draw_heat()</a></code> </p>
-        </td>
-        <td><p>Draws the heatmap.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-utility-functions" class="hasAnchor"><a href="#section-utility-functions" class="anchor"></a>Utility functions</h2>
-          <p class="section-desc"><p>Package primary functions</p></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="prepare_feats.html">prepare_feats()</a></code> </p>
-        </td>
-        <td><p>Prepares the feature dataframes for tiles.
-If R does not recognize a categorical feature (input from user) as factor,
-converts to factor.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="scale_norm.html">scale_norm()</a></code> </p>
-        </td>
-        <td><p>Performs transformation of continuous variables for the heatmap color scales.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="position_nodes.html">position_nodes()</a></code> </p>
-        </td>
-        <td><p>Creates smart node layout.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
-          <p class="section-desc"><p>Attached datasets available for use via lazy-loading</p></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="diabetes.html">diabetes</a></code> </p>
-        </td>
-        <td><p>Diabetes patient records.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="flags.html">flags</a></code> </p>
-        </td>
-        <td><p>Details of 178 nations and their flags.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="saheart.html">saheart</a></code> </p>
-        </td>
-        <td><p>A retrospective sample of males in a heart-disease high-risk region of the Western Cape.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="titanic.html">titanic</a></code> </p>
-        </td>
-        <td><p>Fate of passengers on the fatal maiden voyage of the ocean liner *Titanic*.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="waveform.html">waveform</a></code> </p>
-        </td>
-        <td><p>Waveform database generator.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="wine.html">wine</a></code> </p>
-        </td>
-        <td><p>Results of a chemical analysis of wines grown in a specific area of Italy.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="wine_quality_red.html">wine_quality_red</a></code> </p>
-        </td>
-        <td><p>Red variant of the Portuguese "Vinho Verde" wine.</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dat</th>
+      <td><p>Dataframe of the original dataset. Samples may be reordered.</p></td>
+    </tr>
+    <tr>
+      <th>clust_vec</th>
+      <td><p>Character vector of variable names to be applied clustering on.
+Can include class labels.</p></td>
+    </tr>
+    <tr>
+      <th>clust_feats</th>
+      <td><p>if TRUE clusters displayed features (passed through clust_vec)
+using the the Gower metric based on the values of all samples
+and returns the ordered features.
+When clust_samps = FALSE and clust_feats = FALSE, no clustering is performed.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Character vector of reordered features when clust_feats == TRUE.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

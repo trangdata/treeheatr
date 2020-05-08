@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Performs clustering of samples or features. — clust • treeheatr</title>
+<title>Performs clustering of samples. — clust_samp_func • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Performs clustering of samples or features. — clust" />
-<meta property="og:description" content="Performs clustering of samples or features." />
+<meta property="og:title" content="Performs clustering of samples. — clust_samp_func" />
+<meta property="og:description" content="Performs clustering of samples." />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -122,22 +122,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Performs clustering of samples or features.</h1>
+    <h1>Performs clustering of samples.</h1>
     
-    <div class="hidden name"><code>clust.Rd</code></div>
+    <div class="hidden name"><code>clust_samp_func.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Performs clustering of samples or features.</p>
+    <p>Performs clustering of samples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clust</span>(
-  <span class='kw'>leaf_node</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>dat</span>,
-  <span class='no'>clust_vec</span>,
-  <span class='kw'>clust_samps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>clust_samp_func</span>(<span class='kw'>leaf_node</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>dat</span>, <span class='no'>clust_vec</span>, <span class='no'>clust_samps</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,19 +155,11 @@ Can include class labels.</p></td>
 based on the values of the variables in clust_vec
 and returns the ordered dataframe for each leaf_node.</p></td>
     </tr>
-    <tr>
-      <th>clust_feats</th>
-      <td><p>if TRUE clusters displayed features (passed through clust_vec)
-using the the Gower metric based on the values of all samples
-and returns the ordered features.
-When clust_samps = FALSE and clust_feats = FALSE, no clustering is performed.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Dataframe of reordered original dataset when clust_samps == TRUE.
-Character vector of reordered features when clust_feats == TRUE.</p>
+    <p>Dataframe of reordered original dataset when clust_samps == TRUE.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
