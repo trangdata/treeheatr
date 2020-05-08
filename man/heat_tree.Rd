@@ -29,7 +29,7 @@ heat_tree(
   edge_text_vars = list(color = "grey30", size = 3, mapping = ggplot2::aes(label =
     paste(breaks_label, "*NA"))),
   feat_types = NULL,
-  trans_type = c("normalize", "scale"),
+  trans_type = c("normalize", "scale", "none"),
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = "D", begin = 0.3, end = 0.9),
   clust_feats = TRUE,
@@ -96,8 +96,12 @@ defaults to viridis option B.}
 e.g., c(sex = 'factor', age = 'numeric').
 If feature types are not supplied, infer from column type.}
 
-\item{trans_type}{Character string specifying transformation type,
-can be 'scale' or 'normalize'.}
+\item{trans_type}{Character string of 'normalize', 'scale' or 'none'.
+If 'scale', subtract the mean and divide by the standard deviation.
+If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+If 'none', no transformation is applied.
+More information on what transformation to choose can be acquired here:
+https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale}
 
 \item{cont_cols}{Function determine color scale for continuous variable,
 defaults to viridis option D.}

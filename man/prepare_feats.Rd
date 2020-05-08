@@ -19,8 +19,12 @@ e.g., c(sex = 'factor', age = 'numeric').}
 
 \item{clust_feats}{Logical. If TRUE, performs cluster on the features across all samples.}
 
-\item{trans_type}{Character string specifying transformation type,
-can be 'scale' or 'normalize'.}
+\item{trans_type}{Character string of 'normalize', 'scale' or 'none'.
+If 'scale', subtract the mean and divide by the standard deviation.
+If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+If 'none', no transformation is applied.
+More information on what transformation to choose can be acquired here:
+https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale}
 }
 \value{
 a list of two dataframes (continuous and categorical)
