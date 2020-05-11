@@ -127,15 +127,108 @@ heat_tree <- function(
   # separate feature types:
   feat_names <- setdiff(colnames(dat), 'my_target')
 
+  # convert character features to categorical:
+  dat <- dat %>%
+    dplyr::mutate_if(is.character, as.factor)
+  if (any(feat_types[names(which(sapply(dat, class) == 'character'))] != 'factor')){
+    warning('Character variables are considered categorical.')
+  }
 
   ################################################################
   ##### Compute conditional inference tree:
 
-  if ('character' %in% sapply(dat, class)){
-    dat <- dat %>%
-      dplyr::mutate_if(is.character, as.factor)
-    warning('Character variables are considered categorical.')
-  }
+  ctree_result <- compute_ctree(
+    dat = dat,
+    task = task,
+    clust_samps = clust_samps,
+    clust_target = clust_target,
+    show_all_feats = show_all_feats,
+    feat_names = feat_names,
+    panel_space = panel_space,
+    custom_layout = custom_layout,
+    lev_fac = lev_fac,
+    p_thres = p_thres)
+
+  ################################################################
+  ##### Draw decision tree and heatmap:
+
+  dheat <- draw_heat(
+    dat = ctree_result$scaled_dat,
+    feat_names = feat_names,
+    disp_feats = ctree_result$disp_feats,
+    target_cols = target_cols,
+    panel_space = panel_space,
+    feat_types = feat_types,
+    trans_type = trans_type,
+    cont_cols = cont_cols,
+    cate_cols = cate_cols,
+    clust_feats = clust_feats,
+    target_space = target_space,
+    target_pos = target_pos,
+    target_lab_disp = target_lab_disp)
+
+  dtree <- draw_tree(
+    fit = ctree_result$fit,
+    target_cols = target_cols,
+    layout = ctree_result$my_layout,
+    term_dat = ctree_result$term_dat,
+    tree_space_top = tree_space_top,
+    tree_space_bottom = tree_space_bottom,
+    par_node_vars = par_node_vars,
+    terminal_vars = terminal_vars,
+    edge_vars = edge_vars,
+    edge_text_vars = edge_text_vars
+  )
+
+  ################################################################
+  ##### Align decision tree and heatmap:
+
+  g <- ggplot2::ggplotGrob(dheat)
+  panel_id <- g$layout[grep('panel', g$layout$name),]
+  heat_height <- g$heights[panel_id[1, 't']]
+
+  new_g <- g %>%
+    gtable::gtable_add_rows(heat_height*(1/heat_rel_height - 1), 0) %>%
+    gtable::gtable_add_grob(
+      ggplot2::ggplotGrob(dtree),
+      t = 1, l = min(panel_id$l), r = max(panel_id$l))
+
+  new_g
+}
+
+
+
+# ------------------------------------------------------------------------------------
+#' Compute decision tree from data set
+#'
+#' @param dat Tidy dataset with dependent variable labelled 'my_target'.
+#' @param task Character string indicating the type of problem,
+#' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
+#' @param feat_names Character vector specifying the feature names in dat.
+#' @param show_all_feats Logical. If TRUE, show all features regarless p_thres.
+#' @param clust_samps Logical. If TRUE, hierarhical clustering would be performed
+#' among samples within each leaf node.
+#' @param clust_target Logical. If TRUE, target/label is included in hierarchical clustering
+#' of samples within each leaf node and might yield a more interpretable heatmap.
+#' @param panel_space Spacing between facets relative to viewport,
+#' recommended to range from 0.001 to 0.01.
+#' @param custom_layout Dataframe with 3 columns: id, x and y
+#' for manually input custom layout.
+#' @param lev_fac Relative weight of child node positions
+#' according to their levels, commonly ranges from 1 to 1.5.
+#' 1 for parent node perfectly in the middle of child nodes.
+#' @param p_thres Numeric value indicating the p-value threshold of feature importance.
+#' Feature with p-values computed from the decision tree below this value
+#' will be displayed on the heatmap.
+#' @return A list of results from `partykit::ctree`, smart layout data,
+#' terminal data add node labels.
+#' @export
+#'
+
+compute_ctree <- function(
+  dat, task, feat_names, show_all_feats,
+  clust_samps, clust_target,
+  panel_space, custom_layout, lev_fac, p_thres){
 
   fit <- partykit::ctree(my_target ~ ., data = dat)
 
@@ -172,9 +265,6 @@ heat_tree <- function(
     dplyr::mutate(
       term_node = if (task == 'classification') y_hat else round(y_hat, 2))
 
-  ################################################################
-  ##### Draw decision tree and heatmap:
-
   if (show_all_feats){
     disp_feats <- feat_names
   } else {
@@ -190,46 +280,10 @@ heat_tree <- function(
       unique()
   }
 
-  dheat <- draw_heat(
-    dat = scaled_dat,
-    feat_names = feat_names,
-    disp_feats = disp_feats,
-    target_cols = target_cols,
-    panel_space = panel_space,
-    feat_types = feat_types,
-    trans_type = trans_type,
-    cont_cols = cont_cols,
-    cate_cols = cate_cols,
-    clust_feats = clust_feats,
-    target_space = target_space,
-    target_pos = target_pos,
-    target_lab_disp = target_lab_disp)
-
-  dtree <- draw_tree(
-    fit = fit,
-    target_cols = target_cols,
-    layout = my_layout,
-    term_dat = term_dat,
-    tree_space_top = tree_space_top,
-    tree_space_bottom = tree_space_bottom,
-    par_node_vars = par_node_vars,
-    terminal_vars = terminal_vars,
-    edge_vars = edge_vars,
-    edge_text_vars = edge_text_vars
-  )
-
-  ################################################################
-  ##### Align decision tree and heatmap:
-
-  g <- ggplot2::ggplotGrob(dheat)
-  panel_id <- g$layout[grep('panel', g$layout$name),]
-  heat_height <- g$heights[panel_id[1, 't']]
-
-  new_g <- g %>%
-    gtable::gtable_add_rows(heat_height*(1/heat_rel_height - 1), 0) %>%
-    gtable::gtable_add_grob(
-      ggplot2::ggplotGrob(dtree),
-      t = 1, l = min(panel_id$l), r = max(panel_id$l))
-
-  new_g
+  list(fit = fit,
+       scaled_dat = scaled_dat,
+       my_layout = my_layout,
+       term_dat = term_dat,
+       disp_feats = disp_feats)
 }
+
