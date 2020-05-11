@@ -85,13 +85,15 @@ heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar') %>%
 ```
 
 ```{r warning=F, fig.height=7, fig.width=7}
-p <- lapply(list(flags, saheart, diabetes), 
-            heat_tree, 
-            target_lab = 'target', 
-            target_lab_disp = '',
-            heat_rel_height = 0.4, tree_space_bottom = 0.1, 
-            terminal_vars = list(label.padding = unit(0.1, "lines"), 
-                                 size = 3, colow = 'white'))
+p <- lapply(
+  list(flags, saheart, diabetes), 
+  heat_tree, 
+  target_lab = 'target', 
+  target_lab_disp = '',
+  heat_rel_height = 0.4, tree_space_bottom = 0.1, 
+  terminal_vars = list(label.padding = unit(0.1, "lines"), size = 3, color = 'white'),
+  target_cols = scale_fill_manual(
+    values = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")))
 
 cowplot::plot_grid(plotlist = p, ncol = 1)
 ```
@@ -108,8 +110,8 @@ The default `lev_fac = 1.3` seems to provide aesthetically pleasing trees, indep
 # waveform has 5000 observations and 40 features
 # so this computation may take up to a minute or two.
 
-# heat_tree(waveform, target_lab = 'target', heat_rel_height = 0.35) %>%
-#   grid::grid.draw()
+heat_tree(waveform, target_lab = 'target', heat_rel_height = 0.35) %>%
+  grid::grid.draw()
 ```
 
 In this next figure, on the top, `lev_fac = 1` makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts `lev_fac = 1.3` (default) on the bottom.
