@@ -103,6 +103,8 @@ heat_tree <- function(
   target_lab_disp = target_lab
 ){
 
+  stopifnot(target_lab %in% colnames(data))
+
   ################################################################
   ##### Prepare dataset:
   task <- match.arg(task)
@@ -154,8 +156,8 @@ heat_tree <- function(
 
   dheat <- draw_heat(
     dat = ctree_result$scaled_dat,
-    feat_names = feat_names,
     disp_feats = ctree_result$disp_feats,
+    feat_names = feat_names,
     target_cols = target_cols,
     panel_space = panel_space,
     feat_types = feat_types,
@@ -169,9 +171,9 @@ heat_tree <- function(
 
   dtree <- draw_tree(
     fit = ctree_result$fit,
-    target_cols = target_cols,
     layout = ctree_result$my_layout,
     term_dat = ctree_result$term_dat,
+    target_cols = target_cols,
     tree_space_top = tree_space_top,
     tree_space_bottom = tree_space_bottom,
     par_node_vars = par_node_vars,
@@ -205,23 +207,9 @@ heat_tree <- function(
 #' @param task Character string indicating the type of problem,
 #' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
 #' @param feat_names Character vector specifying the feature names in dat.
-#' @param show_all_feats Logical. If TRUE, show all features regarless p_thres.
-#' @param clust_samps Logical. If TRUE, hierarhical clustering would be performed
-#' among samples within each leaf node.
-#' @param clust_target Logical. If TRUE, target/label is included in hierarchical clustering
-#' of samples within each leaf node and might yield a more interpretable heatmap.
-#' @param panel_space Spacing between facets relative to viewport,
-#' recommended to range from 0.001 to 0.01.
-#' @param custom_layout Dataframe with 3 columns: id, x and y
-#' for manually input custom layout.
-#' @param lev_fac Relative weight of child node positions
-#' according to their levels, commonly ranges from 1 to 1.5.
-#' 1 for parent node perfectly in the middle of child nodes.
-#' @param p_thres Numeric value indicating the p-value threshold of feature importance.
-#' Feature with p-values computed from the decision tree below this value
-#' will be displayed on the heatmap.
+#' @inheritParams heat_tree
 #' @return A list of results from `partykit::ctree`, smart layout data,
-#' terminal data add node labels.
+#' terminal data, node labels, and features to be displayed.
 #' @export
 #'
 

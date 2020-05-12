@@ -49,7 +49,7 @@ will be displayed on the heatmap.}
 }
 \value{
 A list of results from `partykit::ctree`, smart layout data,
-terminal data add node labels.
+terminal data, node labels, and features to be displayed.
 }
 \description{
 Compute decision tree from data set

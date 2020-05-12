@@ -5,32 +5,13 @@
 #' the clustering within each leaf node.
 #' @param feat_names Character vector specifying the feature names in dat.
 #' @param disp_feats Character vector specifying features to be displayed.
-#' @param target_cols Function determine color scale for target,
-#' defaults to viridis option B.
-#' @param panel_space Spacing between facets relative to viewport,
-#' recommended to range from 0.001 to 0.01.
-#' @param feat_types Named vector indicating the type of each features,
-#' e.g., c(sex = 'factor', age = 'numeric').
-#' If feature types are not supplied, infer from column type.
-#' @param trans_type Character string specifying transformation type,
-#' can be 'scale' or 'normalize'.
-#' @param cont_cols Function determine color scale for continuous variable,
-#' defaults to viridis option D.
-#' @param cate_cols Function determine color scale for nominal categorical variable,
-#' defaults to viridis option D.
-#' @param clust_feats Logical. If TRUE, performs cluster on the features.
-#' @param target_space Numeric value indicating spacing between
-#' the target label and the rest of the features
-#' @param target_pos Character string specifying the position of the target label
-#' on heatmap, can be 'top', 'bottom' or 'none'.
-#' @param target_lab_disp Character string for displaying the label of target label
-#' if it differs from target_lab.
+#' @inheritParams heat_tree
 #'
 #' @return A ggplot2 grob object of the heatmap.
 #' @export
 #'
 draw_heat <- function(
-  dat, feat_names, disp_feats, target_cols, panel_space,
+  dat, disp_feats, feat_names, target_cols, panel_space,
   feat_types = NULL,
   trans_type = 'normalize',
   cont_cols = ggplot2::scale_fill_viridis_c(),

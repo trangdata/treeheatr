@@ -6,8 +6,8 @@
 \usage{
 draw_heat(
   dat,
-  feat_names,
   disp_feats,
+  feat_names,
   target_cols,
   panel_space,
   feat_types = NULL,
@@ -24,9 +24,9 @@ draw_heat(
 \item{dat}{Dataframe with samples from original dataset ordered according to
 the clustering within each leaf node.}
 
-\item{feat_names}{Character vector specifying the feature names in dat.}
-
 \item{disp_feats}{Character vector specifying features to be displayed.}
+
+\item{feat_names}{Character vector specifying the feature names in dat.}
 
 \item{target_cols}{Function determine color scale for target,
 defaults to viridis option B.}
@@ -38,8 +38,12 @@ recommended to range from 0.001 to 0.01.}
 e.g., c(sex = 'factor', age = 'numeric').
 If feature types are not supplied, infer from column type.}
 
-\item{trans_type}{Character string specifying transformation type,
-can be 'scale' or 'normalize'.}
+\item{trans_type}{Character string of 'normalize', 'scale' or 'none'.
+If 'scale', subtract the mean and divide by the standard deviation.
+If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+If 'none', no transformation is applied.
+More information on what transformation to choose can be acquired here:
+https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale}
 
 \item{cont_cols}{Function determine color scale for continuous variable,
 defaults to viridis option D.}
