@@ -30,6 +30,4 @@ Suggests:
     rmarkdown,
     cowplot,
     rlang
-Remotes:
-    martin-borkovec/ggparty@8dd2044
 VignetteBuilder: knitr
