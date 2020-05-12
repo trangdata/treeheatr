@@ -1,11 +1,11 @@
 Package: treeheatr
 Type: Package
-Title: Heatmap-integrated Decision Tree Visualizations
+Title: Heatmap-Integrated Decision Tree Visualizations
 Version: 0.1.0
 Authors@R: c(
-    person("Trang", "Le", email = "grixor@gmail.com", role = c('aut', 'cre')),
+    person("Trang", "Le", email = "grixor@gmail.com", role = c("aut", "cre")),
     person("Jason", "Moore", email = "jhmoore@upenn.edu", role = "aut"))
-Maintainer: Trang T. Le <grixor@gmail.com>
+Maintainer: Trang Le <grixor@gmail.com>
 Description: Integrates a heatmap for visualizing a decision tree.
     'treeheatr' utilizes the customizable 'ggparty' package for drawing decision tree.
 License: MIT + file LICENSE
@@ -30,4 +30,6 @@ Suggests:
     rmarkdown,
     cowplot,
     rlang
+Remotes:
+    martin-borkovec/ggparty@8dd2044
 VignetteBuilder: knitr
