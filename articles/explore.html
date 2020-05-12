@@ -109,9 +109,7 @@
 <p>But we can adjust a few graphical parameters. We can also add a custom layout for a subset of the nodes by specifying it in the <code>custom_layout</code> parameter. And we can relax the p value threshold <code>p_thres</code> to include more features that might be less important in classifying the samples but still included in the decision tree, or set <code>show_all_feats = TRUE</code> to include all features, even the ones that were not used to build the tree.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
-  <span class="kw">target_cols</span> <span class="kw">=</span> <span class="fu">scale_fill_manual</span>(
-    <span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>,
-               <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span>)),
+  <span class="kw">target_cols</span> <span class="kw">=</span> <span class="fu">scale_fill_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>)),
   <span class="kw">custom_layout</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fl">1</span>), <span class="kw">show_all_feats</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
   <span class="kw">panel_space</span> <span class="kw">=</span> <span class="fl">0.05</span>, <span class="kw">target_space</span> <span class="kw">=</span> <span class="fl">0.2</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/grid.draw.html">grid.draw</a></span>()</pre></body></html></div>
@@ -148,9 +146,7 @@
   <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
   <span class="kw">target_lab_disp</span> <span class="kw">=</span> <span class="st">''</span>,
   <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-  <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">label.padding</span> <span class="kw">=</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">'white'</span>),
-  <span class="kw">target_cols</span> <span class="kw">=</span> <span class="fu">scale_fill_manual</span>(
-    <span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span>)))
+  <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">label.padding</span> <span class="kw">=</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">'white'</span>))
 
 <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">p</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
@@ -210,10 +206,10 @@
 <span class="co">#&gt; interval scaled</span>
 <span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 5 treated as</span>
 <span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 4, 5 treated</span>
-<span class="co">#&gt; as interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 2 treated as</span>
-<span class="co">#&gt; interval scaled</span></pre></body></html></div>
+<span class="co">#&gt; Warning in min(x): no non-missing arguments to min; returning Inf</span>
+<span class="co">#&gt; Warning in max(x): no non-missing arguments to max; returning -Inf</span>
+<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 2, 5 treated</span>
+<span class="co">#&gt; as interval scaled</span></pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-9-1.png" width="864"></p>
 </div>
 <div id="regression" class="section level2">
