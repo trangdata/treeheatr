@@ -133,8 +133,8 @@
 
     <pre class="usage"><span class='fu'>draw_heat</span>(
   <span class='no'>dat</span>,
-  <span class='no'>feat_names</span>,
   <span class='no'>disp_feats</span>,
+  <span class='no'>feat_names</span>,
   <span class='no'>target_cols</span>,
   <span class='no'>panel_space</span>,
   <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -156,12 +156,12 @@
 the clustering within each leaf node.</p></td>
     </tr>
     <tr>
-      <th>feat_names</th>
-      <td><p>Character vector specifying the feature names in dat.</p></td>
-    </tr>
-    <tr>
       <th>disp_feats</th>
       <td><p>Character vector specifying features to be displayed.</p></td>
+    </tr>
+    <tr>
+      <th>feat_names</th>
+      <td><p>Character vector specifying the feature names in dat.</p></td>
     </tr>
     <tr>
       <th>target_cols</th>
@@ -181,8 +181,12 @@ If feature types are not supplied, infer from column type.</p></td>
     </tr>
     <tr>
       <th>trans_type</th>
-      <td><p>Character string specifying transformation type,
-can be 'scale' or 'normalize'.</p></td>
+      <td><p>Character string of 'normalize', 'scale' or 'none'.
+If 'scale', subtract the mean and divide by the standard deviation.
+If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+If 'none', no transformation is applied.
+More information on what transformation to choose can be acquired here:
+https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale</p></td>
     </tr>
     <tr>
       <th>cont_cols</th>
