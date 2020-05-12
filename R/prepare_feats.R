@@ -1,4 +1,5 @@
 #' Prepares the feature dataframes for tiles.
+#'
 #' If R does not recognize a categorical feature (input from user) as factor,
 #' converts to factor.
 #'
@@ -7,7 +8,7 @@
 #' @param disp_feats Character vector specifying features to be displayed.
 #' @inheritParams heat_tree
 #'
-#' @return a list of two dataframes (continuous and categorical)
+#' @return A list of two dataframes (continuous and categorical)
 #' from the original dataset.
 #' @export
 #'

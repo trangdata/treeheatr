@@ -23,7 +23,8 @@ reference:
     Package primary functions
 - contents:
   - prepare_feats
-  - clust
+  - clust_samp_func
+  - clust_feat_func
   - scale_norm
   - position_nodes
 - title: "Datasets"

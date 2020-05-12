@@ -1,4 +1,6 @@
-#' Performs transformation of continuous variables for the heatmap color scales.
+#' Performs transformation on continuous variables.
+#'
+#' Performs transformation on continuous variables for the heatmap color scales.
 #'
 #' @param x Numeric vector.
 #' @inheritParams heat_tree
