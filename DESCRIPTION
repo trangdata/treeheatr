@@ -8,6 +8,8 @@ Authors@R: c(
 Maintainer: Trang Le <grixor@gmail.com>
 Description: Creates interpretable decision tree visualizations 
     with the data represented as a heatmap at the tree's leaf nodes.
+    'treeheatr' utilizes the customizable 'ggparty' package for 
+    drawing decision tree.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
