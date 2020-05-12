@@ -6,9 +6,7 @@
 #' @param dat Dataframe of the original dataset. Samples may be reordered.
 #' @param clust_vec Character vector of variable names to be applied clustering on.
 #' Can include class labels.
-#' @param clust_samps if TRUE, clusters samples within each leaf_node using Gower metric
-#' based on the values of the variables in clust_vec
-#' and returns the ordered dataframe for each leaf_node.
+#' @inheritParams heat_tree
 #'
 #' @return Dataframe of reordered original dataset when clust_samps == TRUE.
 #' @export

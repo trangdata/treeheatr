@@ -1,12 +1,7 @@
 #' Performs transformation of continuous variables for the heatmap color scales.
 #'
 #' @param x Numeric vector.
-#' @param trans_type Character string of 'normalize', 'scale' or 'none'.
-#' If 'scale', subtract the mean and divide by the standard deviation.
-#' If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
-#' If 'none', no transformation is applied.
-#' More information on what transformation to choose can be acquired here:
-#' https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale
+#' @inheritParams heat_tree
 #'
 #' @return Numeric vector of the transformed `x`.
 #' @export

@@ -14,9 +14,8 @@ clust_samp_func(leaf_node = NULL, dat, clust_vec, clust_samps)
 \item{clust_vec}{Character vector of variable names to be applied clustering on.
 Can include class labels.}
 
-\item{clust_samps}{if TRUE, clusters samples within each leaf_node using Gower metric
-based on the values of the variables in clust_vec
-and returns the ordered dataframe for each leaf_node.}
+\item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
+among samples within each leaf node.}
 }
 \value{
 Dataframe of reordered original dataset when clust_samps == TRUE.

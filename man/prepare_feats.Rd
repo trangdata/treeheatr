@@ -15,9 +15,10 @@ the clustering within each leaf node.}
 \item{disp_feats}{Character vector specifying features to be displayed.}
 
 \item{feat_types}{Named vector indicating the type of each features,
-e.g., c(sex = 'factor', age = 'numeric').}
+e.g., c(sex = 'factor', age = 'numeric').
+If feature types are not supplied, infer from column type.}
 
-\item{clust_feats}{Logical. If TRUE, performs cluster on the features across all samples.}
+\item{clust_feats}{Logical. If TRUE, performs cluster on the features.}
 
 \item{trans_type}{Character string of 'normalize', 'scale' or 'none'.
 If 'scale', subtract the mean and divide by the standard deviation.
