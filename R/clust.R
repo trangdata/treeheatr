@@ -1,7 +1,6 @@
 #' Performs clustering of samples.
 #'
 #' @import dplyr
-#' @importFrom stats hclust
 #' @param leaf_node Integer value indicating terminal node id.
 #' @param dat Dataframe of the original dataset. Samples may be reordered.
 #' @param clust_vec Character vector of variable names to be applied clustering on.
@@ -18,7 +17,7 @@ clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps){
   if (clust_samps && length(clust_vec) > 1){
     new_samp_order <- df[, clust_vec] %>%
       cluster::daisy(metric = 'gower') %>%
-      hclust() %>%
+      stats::hclust() %>%
       `[[`('order')
 
     df[new_samp_order, ] # return ordered dataframe
@@ -33,7 +32,6 @@ clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps){
 #' Performs clustering or features.
 #'
 #' @import dplyr
-#' @importFrom stats hclust
 #' @param dat Dataframe of the original dataset. Samples may be reordered.
 #' @param clust_vec Character vector of variable names to be applied clustering on.
 #' Can include class labels.
@@ -53,7 +51,7 @@ clust_feat_func <- function(dat, clust_vec, clust_feats){
       as.matrix() %>%
       t() %>%
       cluster::daisy(metric = 'gower') %>%
-      hclust() %>%
+      stats::hclust() %>%
       `[[`('order')
 
     clust_vec[new_feat_order] # return ordered features, not dataframe
