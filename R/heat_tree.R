@@ -222,11 +222,13 @@ compute_ctree <- function(
 
   scaled_dat <- dat %>%
     dplyr::select(- my_target) %>%
-    dplyr::mutate(my_target = dat$my_target,
-                  node_id = stats::predict(fit, type = 'node'),
-                  y_hat = stats::predict(fit, type = 'response'),
-                  # y_hat = ifelse(is.numeric(y_pred), y_pred > 0.5, y_pred),
-                  correct = (y_hat == my_target)) %>%
+    dplyr::mutate(
+      my_target = dat$my_target,
+      node_id = stats::predict(fit, type = 'node'),
+      y_hat = stats::predict(fit, type = 'response'),
+      y_hat = if (is.factor(y_hat)) forcats::fct_explicit_na(y_hat) else y_hat,
+      # y_hat = ifelse(is.numeric(y_pred), y_pred > 0.5, y_pred),
+      correct = (y_hat == my_target)) %>%
     lapply(unique(.$node_id), clust_samp_func, dat = .,
            clust_vec = if (clust_target) c(feat_names, 'my_target') else feat_names,
            clust_samps = clust_samps) %>%
