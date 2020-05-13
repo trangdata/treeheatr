@@ -59,7 +59,7 @@ decision tree. The basic building blocks to a **treeheatr** plot are
     across all samples.
 
 Make sure to check out the
-[vignette](https://trang1618.github.io/treeheatr/articles/explore.html)
+[vignette](https://trang1618.github.io/treeheatr/articles/explore.html#)
 for detailed information on the usage of **treeheatr**.
 
 Please [open an
