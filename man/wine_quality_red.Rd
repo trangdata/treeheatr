@@ -5,10 +5,11 @@
 \alias{wine_quality_red}
 \title{Red variant of the Portuguese "Vinho Verde" wine.}
 \format{
-A data frame with 12 variables: \code{fixed acidity}, \code{volatile acidity},
-\code{citric acid}, \code{residual sugar}, \code{chlorides}, \code{free sulfur dioxide},
-\code{total sulfur dioxide}, \code{density}, \code{pH}, \code{sulphates},
-\code{alcohol}, \code{quality}.
+A data frame with 1599 observations and 12 variables:
+\code{fixed.acidity}, \code{volatile.acidity},
+\code{citric.acid}, \code{residual.sugar}, \code{chlorides}, \code{free.sulfur.dioxide},
+\code{total.sulfur.dioxide}, \code{density}, \code{pH}, \code{sulphates},
+\code{alcohol} and \code{target} (quality).
 
 http://archive.ics.uci.edu/ml/datasets/Wine+Quality
 

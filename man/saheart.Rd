@@ -5,7 +5,9 @@
 \alias{saheart}
 \title{A retrospective sample of males in a heart-disease high-risk region of the Western Cape.}
 \format{
-A data frame with nine variables.
+A data frame with 178 observations and 10 variables:
+\code{Sbp}, \code{Tobacco}, \code{Ldl}, \code{Adiposity}, \code{Famhist}, \code{Typea},
+\code{Obesity}, \code{Alcohol}, \code{Age} and \code{target}.
 }
 \usage{
 saheart
@@ -16,6 +18,5 @@ Fetched from PMLB.
 \details{
 https://rdrr.io/cran/ElemStatLearn/man/SAheart.html
 https://www.rdocumentation.org/packages/BeSS/versions/1.0.6/topics/SAheart
-need to check dimensions.
 }
 \keyword{datasets}

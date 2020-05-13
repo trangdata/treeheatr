@@ -2,9 +2,7 @@
 % Please edit documentation in R/prepare_feats.R
 \name{prepare_feats}
 \alias{prepare_feats}
-\title{Prepares the feature dataframes for tiles.
-If R does not recognize a categorical feature (input from user) as factor,
-converts to factor.}
+\title{Prepares the feature dataframes for tiles.}
 \usage{
 prepare_feats(dat, disp_feats, feat_types, clust_feats, trans_type)
 }
@@ -25,14 +23,13 @@ If 'scale', subtract the mean and divide by the standard deviation.
 If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
 If 'none', no transformation is applied.
 More information on what transformation to choose can be acquired here:
-https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale}
+https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize}
 }
 \value{
-a list of two dataframes (continuous and categorical)
+A list of two dataframes (continuous and categorical)
 from the original dataset.
 }
 \description{
-Prepares the feature dataframes for tiles.
 If R does not recognize a categorical feature (input from user) as factor,
 converts to factor.
 }

@@ -5,7 +5,7 @@
 \alias{diabetes}
 \title{Diabetes patient records.}
 \format{
-A data frame with 9 variables.
+A data frame with 768 observations and 9 variables.
 
 http://archive.ics.uci.edu/ml/datasets/diabetes
 }

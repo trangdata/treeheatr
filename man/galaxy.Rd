@@ -12,6 +12,12 @@ galaxy
 }
 \description{
 Fetched from PMLB.
-Galaxy positions?
+}
+\details{
+#' @format A data frame with 323 observations and 5 variables:
+\code{eastwest}, \code{northsouth}, \code{angle}, \code{radialposition}
+and \code{target} (velocity).
+
+https://www.openml.org/d/690
 }
 \keyword{datasets}

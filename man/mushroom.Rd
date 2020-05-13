@@ -3,9 +3,17 @@
 \docType{data}
 \name{mushroom}
 \alias{mushroom}
-\title{Mushroom records.}
+\title{Mushroom records drawn from
+The Audubon Society Field Guide to North American Mushrooms.}
 \format{
-A data frame with 23 variables.
+A data frame with 8124 observations and 23 variables:
+\code{cap.shape}, \code{cap.surface}, \code{cap.color}, \code{bruises.},
+\code{odor}, \code{gill.attachment}, \code{gill.spacing}, \code{gill.size},
+\code{gill.color}, \code{stalk.shape}, \code{stalk.root},
+\code{stalk.surface.above.ring}, \code{stalk.surface.below.ring},
+\code{stalk.color.above.ring}, \code{stalk.color.below.ring}, \code{veil.type},
+\code{veil.color}, \code{ring.number}, \code{ring.type}, \code{spore.print.color},
+\code{population}, \code{habitat} and \code{target}.
 }
 \usage{
 mushroom

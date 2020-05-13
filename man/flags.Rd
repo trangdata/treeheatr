@@ -5,14 +5,12 @@
 \alias{flags}
 \title{Details of 178 nations and their flags.}
 \format{
-An object of class \code{data.frame} with 178 rows and 44 columns.
+A data frame with 178 observations and 44 variables.
 }
 \usage{
 flags
 }
 \description{
 Fetched from PMLB.
-Contains 43 variables.
-Unsure what 'target' indicates atm.
 }
 \keyword{datasets}

@@ -101,7 +101,7 @@ If 'scale', subtract the mean and divide by the standard deviation.
 If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
 If 'none', no transformation is applied.
 More information on what transformation to choose can be acquired here:
-https://cran.rstudio.com/web/packages/heatmaply/vignettes/heatmaply.html#scale}
+https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize}
 
 \item{cont_cols}{Function determine color scale for continuous variable,
 defaults to viridis option D.}

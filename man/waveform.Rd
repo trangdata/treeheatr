@@ -5,7 +5,7 @@
 \alias{waveform}
 \title{Waveform database generator.}
 \format{
-A data frame with 41 variables attributes describing the waveform,
+A data frame with 5000 observations and 41 variables describing the waveform,
 all of which include noise. The latter 19 attributes are all noise attributes
 with mean 0 and variance 1.
 

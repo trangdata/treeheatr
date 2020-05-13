@@ -5,7 +5,11 @@
 \alias{wine}
 \title{Results of a chemical analysis of wines grown in a specific area of Italy.}
 \format{
-A data frame with 14 variables.
+A data frame with 178 observations and 14 variables:
+\code{Alcohol}, \code{Malic}, \code{Ash}, \code{Alcalinity},
+\code{Magnesium}, \code{Phenols}, \code{Flavanoids}, \code{Nonflavanoids},
+\code{Proanthocyanins}, \code{Color}, \code{Hue}, \code{Dilution}, \code{Proline}
+and \code{Type} (target).
 }
 \usage{
 wine
