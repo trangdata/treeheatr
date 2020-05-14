@@ -8,22 +8,21 @@
 #' defaults to viridis option B.
 #' @param label_map Named vector of the meaning of the target values,
 #' e.g., c(`0` = 'Edible', `1` = 'Poisonous').
-#' @param panel_space Spacing between facets relative to viewport,
-#' recommended to range from 0.001 to 0.01.
-#' @param lev_fac Relative weight of child node positions
-#' according to their levels, commonly ranges from 1 to 1.5.
-#' 1 for parent node perfectly in the middle of child nodes.
-#' @param heat_rel_height Relative height of heatmap compared to whole figure (with tree).
+#' @param custom_layout Dataframe with 3 columns: id, x and y
+#' for manually input custom layout.
 #' @param clust_samps Logical. If TRUE, hierarhical clustering would be performed
 #' among samples within each leaf node.
 #' @param clust_target Logical. If TRUE, target/label is included in hierarchical clustering
 #' of samples within each leaf node and might yield a more interpretable heatmap.
-#' @param custom_layout Dataframe with 3 columns: id, x and y
-#' for manually input custom layout.
+#' @param show_all_feats Logical. If TRUE, show all features regarless p_thres.
 #' @param p_thres Numeric value indicating the p-value threshold of feature importance.
 #' Feature with p-values computed from the decision tree below this value
 #' will be displayed on the heatmap.
-#' @param show_all_feats Logical. If TRUE, show all features regarless p_thres.
+#' @param lev_fac Relative weight of child node positions
+#' according to their levels, commonly ranges from 1 to 1.5.
+#' 1 for parent node perfectly in the middle of child nodes.
+#' @param heat_rel_height Relative height of heatmap compared to whole figure (with tree).
+#'
 #' @param tree_space_top Numeric value to pass to expand for top margin of tree.
 #' @param tree_space_bottom Numeric value to pass to expand for bottom margin of tree.
 #' @param par_node_vars Named list containing arguments to be passed to the
@@ -34,6 +33,7 @@
 #' `geom_edge()` call for tree edges.
 #' @param edge_text_vars Named list containing arguments to be passed to the
 #' `geom_edge_label()` call for tree edge annotations.
+#'
 #' @param feat_types Named vector indicating the type of each features,
 #' e.g., c(sex = 'factor', age = 'numeric').
 #' If feature types are not supplied, infer from column type.
@@ -50,16 +50,18 @@
 #' @param clust_feats Logical. If TRUE, performs cluster on the features.
 #' @param target_space Numeric value indicating spacing between
 #' the target label and the rest of the features
+#' @param panel_space Spacing between facets relative to viewport,
+#' recommended to range from 0.001 to 0.01.
 #' @param target_pos Character string specifying the position of the target label
 #' on heatmap, can be 'top', 'bottom' or 'none'.
 #' @param target_lab_disp Character string for displaying the label of target label
-#' if it differs from target_lab.
+#' if not supplied, differs from target_lab.
 #'
 #' @return A gtable/grob object of the decision tree (top) and heatmap (bottom).
 #' @export
 #'
 #' @examples
-#' heat_tree(iris, target_lab = 'Species')
+#' heat_tree(iris, 'Species')
 #'
 #' heat_tree(
 #'   data = galaxy[1:100, ],
@@ -71,16 +73,16 @@
 heat_tree <- function(
   data, target_lab,
   task = c('classification', 'regression'),
+  target_cols = NULL,
   label_map = NULL,
-  panel_space = 0.001,
-  lev_fac = 1.3,
-  heat_rel_height = 0.2,
+  custom_layout = NULL,
   clust_samps = TRUE,
   clust_target = TRUE,
-  custom_layout = NULL,
-  p_thres = 0.05,
   show_all_feats = FALSE,
-  target_cols = NULL,
+
+  p_thres = 0.05,
+  lev_fac = 1.3,
+  heat_rel_height = 0.2,
 
   ### tree parameters:
   tree_space_top = 0.05,
@@ -104,9 +106,10 @@ heat_tree <- function(
   feat_types = NULL,
   trans_type = c('normalize', 'scale', 'none'),
   cont_cols = ggplot2::scale_fill_viridis_c(),
-  cate_cols = ggplot2::scale_fill_viridis_d(option = 'D', begin = 0.3, end = 0.9),
+  cate_cols = ggplot2::scale_fill_viridis_d(),
   clust_feats = TRUE,
-  target_space = 0.03,
+  target_space = 0.05,
+  panel_space = 0.001,
   target_pos = 'top',
   target_lab_disp = target_lab
 ){
@@ -162,21 +165,6 @@ heat_tree <- function(
   ################################################################
   ##### Draw decision tree and heatmap:
 
-  dheat <- draw_heat(
-    dat = ctree_result$scaled_dat,
-    disp_feats = ctree_result$disp_feats,
-    feat_names = feat_names,
-    target_cols = target_cols,
-    panel_space = panel_space,
-    feat_types = feat_types,
-    trans_type = trans_type,
-    cont_cols = cont_cols,
-    cate_cols = cate_cols,
-    clust_feats = clust_feats,
-    target_space = target_space,
-    target_pos = target_pos,
-    target_lab_disp = target_lab_disp)
-
   dtree <- draw_tree(
     fit = ctree_result$fit,
     layout = ctree_result$my_layout,
@@ -189,6 +177,21 @@ heat_tree <- function(
     edge_vars = edge_vars,
     edge_text_vars = edge_text_vars
   )
+
+  dheat <- draw_heat(
+    dat = ctree_result$scaled_dat,
+    disp_feats = ctree_result$disp_feats,
+    feat_names = feat_names,
+    target_cols = target_cols,
+    feat_types = feat_types,
+    trans_type = trans_type,
+    cont_cols = cont_cols,
+    cate_cols = cate_cols,
+    clust_feats = clust_feats,
+    target_space = target_space,
+    panel_space = panel_space,
+    target_pos = target_pos,
+    target_lab_disp = target_lab_disp)
 
   ################################################################
   ##### Align decision tree and heatmap:
@@ -242,7 +245,6 @@ compute_ctree <- function(
            clust_samps = clust_samps) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(Sample = row_number())
-
 
 
   ################################################################

@@ -8,14 +8,14 @@ draw_heat(
   dat,
   disp_feats,
   feat_names,
-  target_cols,
-  panel_space,
+  target_cols = NULL,
   feat_types = NULL,
   trans_type = "normalize",
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = "D", begin = 0.3, end = 0.9),
   clust_feats = TRUE,
   target_space = 0.05,
+  panel_space = 0.001,
   target_pos = "top",
   target_lab_disp = NULL
 )
@@ -30,9 +30,6 @@ the clustering within each leaf node.}
 
 \item{target_cols}{Function determine color scale for target,
 defaults to viridis option B.}
-
-\item{panel_space}{Spacing between facets relative to viewport,
-recommended to range from 0.001 to 0.01.}
 
 \item{feat_types}{Named vector indicating the type of each features,
 e.g., c(sex = 'factor', age = 'numeric').
@@ -56,11 +53,14 @@ defaults to viridis option D.}
 \item{target_space}{Numeric value indicating spacing between
 the target label and the rest of the features}
 
+\item{panel_space}{Spacing between facets relative to viewport,
+recommended to range from 0.001 to 0.01.}
+
 \item{target_pos}{Character string specifying the position of the target label
 on heatmap, can be 'top', 'bottom' or 'none'.}
 
 \item{target_lab_disp}{Character string for displaying the label of target label
-if it differs from target_lab.}
+if not supplied, differs from target_lab.}
 }
 \value{
 A ggplot2 grob object of the heatmap.

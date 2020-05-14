@@ -11,13 +11,15 @@
 #' @export
 #'
 draw_heat <- function(
-  dat, disp_feats, feat_names, target_cols, panel_space,
+  dat, disp_feats, feat_names,
+  target_cols = NULL,
   feat_types = NULL,
   trans_type = 'normalize',
   cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(option = 'D', begin = 0.3, end = 0.9),
   clust_feats = TRUE,
   target_space = 0.05,
+  panel_space = 0.001,
   target_pos = 'top',
   target_lab_disp = NULL
 ){
@@ -74,15 +76,17 @@ draw_heat <- function(
 
   if (!is.null(tile_cont)){
     tile_cont <- tile_cont %>%
-      dplyr::mutate(y = cont_feat %>%
-                      `levels<-`(seq(n_cates + 1, n_conts + n_cates)) %>%
-                      as.character() %>%
-                      as.numeric())
+      dplyr::mutate(
+        y = cont_feat %>%
+          `levels<-`(seq(n_cates + 1, n_conts + n_cates)) %>%
+          as.character() %>%
+          as.numeric())
 
     dheat <- dheat +
       ggnewscale::new_scale_fill() +
-      ggplot2::geom_tile(data = tile_cont,
-                         ggplot2::aes(y = y, x = Sample, fill = value)) +
+      ggplot2::geom_tile(
+        data = tile_cont,
+        ggplot2::aes(y = y, x = Sample, fill = value)) +
       cont_cols
   }
 
