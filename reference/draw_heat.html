@@ -135,14 +135,14 @@
   <span class='no'>dat</span>,
   <span class='no'>disp_feats</span>,
   <span class='no'>feat_names</span>,
-  <span class='no'>target_cols</span>,
-  <span class='no'>panel_space</span>,
+  <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='st'>"normalize"</span>,
   <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
   <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>option</span> <span class='kw'>=</span> <span class='st'>"D"</span>, <span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
   <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>target_space</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
   <span class='kw'>target_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
   <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
@@ -167,11 +167,6 @@ the clustering within each leaf node.</p></td>
       <th>target_cols</th>
       <td><p>Function determine color scale for target,
 defaults to viridis option B.</p></td>
-    </tr>
-    <tr>
-      <th>panel_space</th>
-      <td><p>Spacing between facets relative to viewport,
-recommended to range from 0.001 to 0.01.</p></td>
     </tr>
     <tr>
       <th>feat_types</th>
@@ -208,6 +203,11 @@ defaults to viridis option D.</p></td>
 the target label and the rest of the features</p></td>
     </tr>
     <tr>
+      <th>panel_space</th>
+      <td><p>Spacing between facets relative to viewport,
+recommended to range from 0.001 to 0.01.</p></td>
+    </tr>
+    <tr>
       <th>target_pos</th>
       <td><p>Character string specifying the position of the target label
 on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
@@ -215,7 +215,7 @@ on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
     <tr>
       <th>target_lab_disp</th>
       <td><p>Character string for displaying the label of target label
-if it differs from target_lab.</p></td>
+if not supplied, differs from target_lab.</p></td>
     </tr>
     </table>
 
