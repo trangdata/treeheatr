@@ -58,7 +58,15 @@
 #' @return A gtable/grob object of the decision tree (top) and heatmap (bottom).
 #' @export
 #'
-#' @examples heat_tree(iris, target_lab = 'Species')
+#' @examples
+#' heat_tree(iris, target_lab = 'Species')
+#'
+#' heat_tree(
+#'   data = galaxy[1:100, ],
+#'   target_lab = 'target',
+#'   task = 'regression',
+#'   terminal_vars = NULL,
+#'   tree_space_bottom = 0)
 #'
 heat_tree <- function(
   data, target_lab,
@@ -220,20 +228,21 @@ compute_ctree <- function(
 
   fit <- partykit::ctree(my_target ~ ., data = dat)
 
+  node_pred <- stats::predict(fit, type = 'node')
+  y_pred <- stats::predict(fit, type = 'response', simplify = FALSE) %>%
+    .simplify_pred(id = node_pred, nam = as.character(node_pred))
+
   scaled_dat <- dat %>%
-    dplyr::select(- my_target) %>%
     dplyr::mutate(
-      my_target = dat$my_target,
-      node_id = stats::predict(fit, type = 'node'),
-      y_hat = stats::predict(fit, type = 'response'),
-      y_hat = if (is.factor(y_hat)) forcats::fct_explicit_na(y_hat) else y_hat,
-      # y_hat = ifelse(is.numeric(y_pred), y_pred > 0.5, y_pred),
+      node_id = node_pred,
+      y_hat = y_pred,
       correct = (y_hat == my_target)) %>%
     lapply(unique(.$node_id), clust_samp_func, dat = .,
            clust_vec = if (clust_target) c(feat_names, 'my_target') else feat_names,
            clust_samps = clust_samps) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(Sample = row_number())
+
 
 
   ################################################################
@@ -253,7 +262,7 @@ compute_ctree <- function(
     dplyr::left_join(my_layout, by = 'id') %>%
     dplyr::filter(kids == 0) %>%
     dplyr::mutate(
-      term_node = if (task == 'classification') y_hat else round(y_hat, 2))
+      term_node = if (task == 'classification') as.factor(y_hat) else round(y_hat, 2))
 
   if (show_all_feats){
     disp_feats <- feat_names

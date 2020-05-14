@@ -129,4 +129,11 @@ Draws and aligns decision tree and heatmap.
 \examples{
 heat_tree(iris, target_lab = 'Species')
 
+heat_tree(
+  data = galaxy[1:100, ],
+  target_lab = 'target',
+  task = 'regression',
+  terminal_vars = NULL,
+  tree_space_bottom = 0)
+
 }
