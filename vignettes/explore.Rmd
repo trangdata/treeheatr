@@ -138,7 +138,7 @@ but in general this is safe to ignore because the goal of clustering is to impro
 
 For continuous variables, we can choose to either *scale* (subtract the mean and divide by the standard deviation) or *normalize* (subtract the min and divide by the max) each variable.
 Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
-Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette](https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html) of the **heatmaply** package.
+Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette](https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
 
 Let's take a closer look at how it handles a dataset like Titanic with categorical variables (`Class`, `Sex`, `Embarked`) and continuous variables (others).
 We **highly recommend** that, when dealing with mixed data types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.

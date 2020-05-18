@@ -1,7 +1,7 @@
 **treeheatr**: an introduction
 ================
 
-[![vignette](https://img.shields.io/badge/-Vignette-green?style=flat-square&logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html/)
+[![vignette](https://img.shields.io/badge/-Vignette-green?style=flat-square&logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html)
 [![documentation](https://img.shields.io/badge/-Documentation-purple?style=flat-square&logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
 [![github-action-status](https://img.shields.io/github/workflow/status/trang1618/treeheatr/R-CMD-check?style=flat-square&logo=github)](https://github.com/trang1618/treeheatr/actions)
 
@@ -59,8 +59,8 @@ decision tree. The basic building blocks to a **treeheatr** plot are
     across all samples.
 
 Make sure to check out the
-[vignette](https://trang1618.github.io/treeheatr/articles) for detailed
-information on the usage of **treeheatr**.
+[vignette](https://trang1618.github.io/treeheatr/articles/explore.html)
+for detailed information on the usage of **treeheatr**.
 
 Please [open an
 issue](https://github.com/trang1618/treeheatr/issues/new) for questions
