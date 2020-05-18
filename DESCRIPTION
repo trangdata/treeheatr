@@ -1,7 +1,7 @@
 Package: treeheatr
 Type: Package
 Title: Heatmap-Integrated Decision Tree Visualizations
-Version: 2.0.0
+Version: 1.0.0
 Authors@R: c(
     person("Trang", "Le", email = "grixor@gmail.com", role = c("aut", "cre")),
     person("Jason", "Moore", email = "jhmoore@upenn.edu", role = "aut"))
