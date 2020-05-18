@@ -255,7 +255,7 @@ compute_ctree <- function(
     dplyr::count(node_id, y_hat) %>%
     dplyr::rename(id = node_id)
 
-  plot_data <- ggparty:::get_plot_data(fit)
+  plot_data <- ggparty(fit)$data
   my_layout <- position_nodes(plot_data, custom_layout, lev_fac, panel_space)
 
   term_dat <- plot_data %>%
