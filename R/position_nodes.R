@@ -5,19 +5,18 @@
 #'
 #' @import dplyr
 #' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
+#' @param node_size Numeric vector of raw terminal node size.
 #' @inheritParams heat_tree
 #'
 #' @return Dataframe with 3 columns: id, x and y of smart layout
 #' combined with custom_layout.
 #' @export
 #'
-position_nodes <- function(plot_data, custom_layout, lev_fac, panel_space){
+position_nodes <- function(plot_data, node_size, custom_layout, lev_fac, panel_space){
 
   terminal_data <- plot_data %>%
     dplyr::filter(kids == 0) %>%
     dplyr::select(id, x, y, parent, level, kids)
-
-  node_size <- plot_data[plot_data$kids == 0, 'nodesize']
 
   # Determine terminal node position based on terminal node size:
   new_x <- vector(mode = 'numeric')

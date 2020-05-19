@@ -2,6 +2,7 @@
 #'
 #' @param data Tidy dataset.
 #' @param target_lab Name of the column in data that contains target/label information.
+#' @param data_test Tidy test dataset. If NULL, heatmap displays (training) `data`.
 #' @param task Character string indicating the type of problem,
 #' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
 #' @param target_cols Function determine color scale for target,
@@ -72,6 +73,7 @@
 #'
 heat_tree <- function(
   data, target_lab,
+  data_test = NULL,
   task = c('classification', 'regression'),
   target_cols = NULL,
   label_map = NULL,
@@ -115,17 +117,16 @@ heat_tree <- function(
 ){
 
   stopifnot(target_lab %in% colnames(data))
-
-  ################################################################
-  ##### Prepare dataset:
   task <- match.arg(task)
   trans_type <- match.arg(trans_type)
-
   vir_opts <- list(option = 'B', begin = 0.3, end = 0.85)
   target_cols <- target_cols %||%
     switch(task,
            classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),
            regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts))
+
+  ################################################################
+  ##### Prepare dataset:
 
   dat <- data %>%
     dplyr::rename('my_target' = sym(!!target_lab))
@@ -147,11 +148,27 @@ heat_tree <- function(
     warning('Character variables are considered categorical.')
   }
 
+  if (!is.null(data_test)){
+    stopifnot(target_lab %in% colnames(data_test))
+    data_test <- data_test %>%
+      dplyr::rename('my_target' = sym(!!target_lab))
+
+    if (task == 'classification'){
+      data_test <- dplyr::mutate(data_test, my_target = as.factor(my_target))
+      data_test$my_target <- tryCatch(
+        recode(data_test$my_target, !!!label_map),
+        error = function(e) data_test$my_target)
+    }
+    data_test <- data_test %>%
+      dplyr::mutate_if(is.character, as.factor)
+  }
+
   ################################################################
   ##### Compute conditional inference tree:
 
   ctree_result <- compute_ctree(
     dat = dat,
+    data_test = data_test,
     task = task,
     clust_samps = clust_samps,
     clust_target = clust_target,
@@ -225,17 +242,19 @@ heat_tree <- function(
 #'
 
 compute_ctree <- function(
-  dat, task, feat_names, show_all_feats,
+  dat, data_test, task, feat_names, show_all_feats,
   clust_samps, clust_target,
   panel_space, custom_layout, lev_fac, p_thres){
 
   fit <- partykit::ctree(my_target ~ ., data = dat)
 
-  node_pred <- stats::predict(fit, type = 'node')
-  y_pred <- stats::predict(fit, type = 'response', simplify = FALSE) %>%
+  node_pred <- stats::predict(fit, newdata = data_test, type = 'node')
+  y_pred <- stats::predict(fit, newdata = data_test, type = 'response', simplify = FALSE) %>%
     .simplify_pred(id = node_pred, nam = as.character(node_pred))
 
-  scaled_dat <- dat %>%
+  dat_ana <- data_test %||% dat
+
+  scaled_dat <- dat_ana %>%
     dplyr::mutate(
       node_id = node_pred,
       y_hat = y_pred,
@@ -255,8 +274,9 @@ compute_ctree <- function(
     dplyr::count(node_id, y_hat) %>%
     dplyr::rename(id = node_id)
 
+  node_size <- node_labels$n
   plot_data <- ggparty(fit)$data
-  my_layout <- position_nodes(plot_data, custom_layout, lev_fac, panel_space)
+  my_layout <- position_nodes(plot_data, node_size, custom_layout, lev_fac, panel_space)
 
   term_dat <- plot_data %>%
     dplyr::left_join(node_labels, by = 'id') %>%
