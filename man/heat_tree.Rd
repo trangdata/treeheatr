@@ -7,6 +7,7 @@
 heat_tree(
   data,
   target_lab,
+  data_test = NULL,
   task = c("classification", "regression"),
   target_cols = NULL,
   label_map = NULL,
@@ -35,13 +36,16 @@ heat_tree(
   target_space = 0.05,
   panel_space = 0.001,
   target_pos = "top",
-  target_lab_disp = target_lab
+  target_lab_disp = target_lab,
+  ...
 )
 }
 \arguments{
 \item{data}{Tidy dataset.}
 
 \item{target_lab}{Name of the column in data that contains target/label information.}
+
+\item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}

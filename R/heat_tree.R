@@ -113,7 +113,8 @@ heat_tree <- function(
   target_space = 0.05,
   panel_space = 0.001,
   target_pos = 'top',
-  target_lab_disp = target_lab
+  target_lab_disp = target_lab,
+  ...
 ){
 
   stopifnot(target_lab %in% colnames(data))
@@ -166,7 +167,7 @@ heat_tree <- function(
   ################################################################
   ##### Compute conditional inference tree:
 
-  ctree_result <- compute_ctree(
+  ctree_result <- compute_tree(
     dat = dat,
     data_test = data_test,
     task = task,
@@ -241,7 +242,7 @@ heat_tree <- function(
 #' @export
 #'
 
-compute_ctree <- function(
+compute_tree <- function(
   dat, data_test, task, feat_names, show_all_feats,
   clust_samps, clust_target,
   panel_space, custom_layout, lev_fac, p_thres){

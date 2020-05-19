@@ -4,10 +4,12 @@
 \alias{position_nodes}
 \title{Creates smart node layout.}
 \usage{
-position_nodes(plot_data, custom_layout, lev_fac, panel_space)
+position_nodes(plot_data, node_size, custom_layout, lev_fac, panel_space)
 }
 \arguments{
 \item{plot_data}{Dataframe output of `ggparty:::get_plot_data()`.}
+
+\item{node_size}{Numeric vector of raw terminal node size.}
 
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
 for manually input custom layout.}

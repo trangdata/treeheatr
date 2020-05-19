@@ -2,7 +2,7 @@
 
 export(clust_feat_func)
 export(clust_samp_func)
-export(compute_ctree)
+export(compute_tree)
 export(draw_heat)
 export(draw_tree)
 export(heat_tree)
