@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute decision tree from data set — compute_ctree • treeheatr</title>
+<title>Compute decision tree from data set — compute_tree • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Compute decision tree from data set — compute_ctree" />
+<meta property="og:title" content="Compute decision tree from data set — compute_tree" />
 <meta property="og:description" content="Compute decision tree from data set" />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
@@ -124,15 +124,16 @@
     <div class="page-header">
     <h1>Compute decision tree from data set</h1>
     
-    <div class="hidden name"><code>compute_ctree.Rd</code></div>
+    <div class="hidden name"><code>compute_tree.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Compute decision tree from data set</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compute_ctree</span>(
+    <pre class="usage"><span class='fu'>compute_tree</span>(
   <span class='no'>dat</span>,
+  <span class='no'>data_test</span>,
   <span class='no'>task</span>,
   <span class='no'>feat_names</span>,
   <span class='no'>show_all_feats</span>,
@@ -150,6 +151,10 @@
     <tr>
       <th>dat</th>
       <td><p>Tidy dataset with dependent variable labelled 'my_target'.</p></td>
+    </tr>
+    <tr>
+      <th>data_test</th>
+      <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
     </tr>
     <tr>
       <th>task</th>
