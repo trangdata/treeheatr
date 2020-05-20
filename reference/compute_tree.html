@@ -134,7 +134,9 @@
     <pre class="usage"><span class='fu'>compute_tree</span>(
   <span class='no'>dat</span>,
   <span class='no'>data_test</span>,
+  <span class='no'>custom_tree</span>,
   <span class='no'>task</span>,
+  <span class='no'>my_metrics</span>,
   <span class='no'>feat_names</span>,
   <span class='no'>show_all_feats</span>,
   <span class='no'>clust_samps</span>,
@@ -142,7 +144,8 @@
   <span class='no'>panel_space</span>,
   <span class='no'>custom_layout</span>,
   <span class='no'>lev_fac</span>,
-  <span class='no'>p_thres</span>
+  <span class='no'>p_thres</span>,
+  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,9 +160,21 @@
       <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
     </tr>
     <tr>
+      <th>custom_tree</th>
+      <td><p>Custom tree with the partykit syntax.
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+If NULL, a conditional inference tree is computed.</p></td>
+    </tr>
+    <tr>
       <th>task</th>
       <td><p>Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).</p></td>
+    </tr>
+    <tr>
+      <th>my_metrics</th>
+      <td><p>A set of metric functions to evaluate decision tree,
+defaults to common metrics for classification/regression problems.
+Can be defined with `yardstick::metric_set`.</p></td>
     </tr>
     <tr>
       <th>feat_names</th>
@@ -200,6 +215,10 @@ according to their levels, commonly ranges from 1 to 1.5.
       <td><p>Numeric value indicating the p-value threshold of feature importance.
 Feature with p-values computed from the decision tree below this value
 will be displayed on the heatmap.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments passed to `partkit::ctree()`</p></td>
     </tr>
     </table>
 

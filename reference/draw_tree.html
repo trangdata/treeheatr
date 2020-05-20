@@ -143,7 +143,11 @@ utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.</p>
   <span class='no'>par_node_vars</span>,
   <span class='no'>terminal_vars</span>,
   <span class='no'>edge_vars</span>,
-  <span class='no'>edge_text_vars</span>
+  <span class='no'>edge_text_vars</span>,
+  <span class='no'>print_eval</span>,
+  <span class='no'>x_eval</span>,
+  <span class='no'>y_eval</span>,
+  <span class='no'>text_eval</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -195,6 +199,22 @@ defaults to viridis option B.</p></td>
       <th>edge_text_vars</th>
       <td><p>Named list containing arguments to be passed to the
 `geom_edge_label()` call for tree edge annotations.</p></td>
+    </tr>
+    <tr>
+      <th>print_eval</th>
+      <td><p>Logical. If TRUE, print evaluation of the tree performance.</p></td>
+    </tr>
+    <tr>
+      <th>x_eval</th>
+      <td><p>Numeric value indicating x position to print performance statistics.</p></td>
+    </tr>
+    <tr>
+      <th>y_eval</th>
+      <td><p>Numeric value indicating y position to print performance statistics.</p></td>
+    </tr>
+    <tr>
+      <th>text_eval</th>
+      <td><p>Character string of the decision tree evaluation.</p></td>
     </tr>
     </table>
 

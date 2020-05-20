@@ -135,6 +135,7 @@
   <span class='no'>data</span>,
   <span class='no'>target_lab</span>,
   <span class='kw'>data_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classification"</span>, <span class='st'>"regression"</span>),
   <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -155,6 +156,10 @@
   <span class='kw'>edge_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey70"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>),
   <span class='kw'>edge_text_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey30"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span>
     <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>breaks_label</span>, <span class='st'>"*NA"</span>))),
+  <span class='kw'>print_eval</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>x_eval</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>y_eval</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+  <span class='kw'>my_metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"normalize"</span>, <span class='st'>"scale"</span>, <span class='st'>"none"</span>),
   <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
@@ -181,6 +186,12 @@
     <tr>
       <th>data_test</th>
       <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
+    </tr>
+    <tr>
+      <th>custom_tree</th>
+      <td><p>Custom tree with the partykit syntax.
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+If NULL, a conditional inference tree is computed.</p></td>
     </tr>
     <tr>
       <th>task</th>
@@ -261,6 +272,24 @@ according to their levels, commonly ranges from 1 to 1.5.
 `geom_edge_label()` call for tree edge annotations.</p></td>
     </tr>
     <tr>
+      <th>print_eval</th>
+      <td><p>Logical. If TRUE, print evaluation of the tree performance.</p></td>
+    </tr>
+    <tr>
+      <th>x_eval</th>
+      <td><p>Numeric value indicating x position to print performance statistics.</p></td>
+    </tr>
+    <tr>
+      <th>y_eval</th>
+      <td><p>Numeric value indicating y position to print performance statistics.</p></td>
+    </tr>
+    <tr>
+      <th>my_metrics</th>
+      <td><p>A set of metric functions to evaluate decision tree,
+defaults to common metrics for classification/regression problems.
+Can be defined with `yardstick::metric_set`.</p></td>
+    </tr>
+    <tr>
       <th>feat_types</th>
       <td><p>Named vector indicating the type of each features,
 e.g., c(sex = 'factor', age = 'numeric').
@@ -306,8 +335,12 @@ on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
     </tr>
     <tr>
       <th>target_lab_disp</th>
-      <td><p>Character string for displaying the label of target label
-if not supplied, differs from target_lab.</p></td>
+      <td><p>Character string for displaying the label of target label.
+If NULL, use `target_lab`.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments passed to `partkit::ctree()`</p></td>
     </tr>
     </table>
 

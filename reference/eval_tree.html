@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Draws the heatmap. — draw_heat • treeheatr</title>
+<title>Print decision tree performance according to different metrics. — eval_tree • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Draws the heatmap. — draw_heat" />
-<meta property="og:description" content="Draws the heatmap to be placed below the decision tree." />
+<meta property="og:title" content="Print decision tree performance according to different metrics. — eval_tree" />
+<meta property="og:description" content="Print decision tree performance according to different metrics." />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -122,106 +122,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Draws the heatmap.</h1>
+    <h1>Print decision tree performance according to different metrics.</h1>
     
-    <div class="hidden name"><code>draw_heat.Rd</code></div>
+    <div class="hidden name"><code>eval_tree.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Draws the heatmap to be placed below the decision tree.</p>
+    <p>Print decision tree performance according to different metrics.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>draw_heat</span>(
-  <span class='no'>dat</span>,
-  <span class='no'>disp_feats</span>,
-  <span class='no'>feat_names</span>,
-  <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='st'>"normalize"</span>,
-  <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
-  <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>option</span> <span class='kw'>=</span> <span class='st'>"D"</span>, <span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
-  <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>target_space</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>target_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
-  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>eval_tree</span>(<span class='no'>dat</span>, <span class='no'>task</span>, <span class='no'>my_metrics</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dat</th>
-      <td><p>Dataframe with samples from original dataset ordered according to
-the clustering within each leaf node.</p></td>
+      <td><p>Dataframe with samples from original dataset.</p></td>
     </tr>
     <tr>
-      <th>disp_feats</th>
-      <td><p>Character vector specifying features to be displayed.</p></td>
+      <th>task</th>
+      <td><p>Character string indicating the type of problem,
+either 'classification' (categorical outcome) or 'regression' (continuous outcome).</p></td>
     </tr>
     <tr>
-      <th>feat_names</th>
-      <td><p>Character vector specifying the feature names in dat.</p></td>
-    </tr>
-    <tr>
-      <th>target_cols</th>
-      <td><p>Function determine color scale for target,
-defaults to viridis option B.</p></td>
-    </tr>
-    <tr>
-      <th>feat_types</th>
-      <td><p>Named vector indicating the type of each features,
-e.g., c(sex = 'factor', age = 'numeric').
-If feature types are not supplied, infer from column type.</p></td>
-    </tr>
-    <tr>
-      <th>trans_type</th>
-      <td><p>Character string of 'normalize', 'scale' or 'none'.
-If 'scale', subtract the mean and divide by the standard deviation.
-If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
-If 'none', no transformation is applied.
-More information on what transformation to choose can be acquired here:
-https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize</p></td>
-    </tr>
-    <tr>
-      <th>cont_cols</th>
-      <td><p>Function determine color scale for continuous variable,
-defaults to viridis option D.</p></td>
-    </tr>
-    <tr>
-      <th>cate_cols</th>
-      <td><p>Function determine color scale for nominal categorical variable,
-defaults to viridis option D.</p></td>
-    </tr>
-    <tr>
-      <th>clust_feats</th>
-      <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
-    </tr>
-    <tr>
-      <th>target_space</th>
-      <td><p>Numeric value indicating spacing between
-the target label and the rest of the features</p></td>
-    </tr>
-    <tr>
-      <th>panel_space</th>
-      <td><p>Spacing between facets relative to viewport,
-recommended to range from 0.001 to 0.01.</p></td>
-    </tr>
-    <tr>
-      <th>target_pos</th>
-      <td><p>Character string specifying the position of the target label
-on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
-    </tr>
-    <tr>
-      <th>target_lab_disp</th>
-      <td><p>Character string for displaying the label of target label.
-If NULL, use `target_lab`.</p></td>
+      <th>my_metrics</th>
+      <td><p>A set of metric functions to evaluate decision tree,
+defaults to common metrics for classification/regression problems.
+Can be defined with `yardstick::metric_set`.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A ggplot2 grob object of the heatmap.</p>
+    <p>Character string of the decision tree evaluation.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
