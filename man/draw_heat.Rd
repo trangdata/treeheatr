@@ -59,8 +59,8 @@ recommended to range from 0.001 to 0.01.}
 \item{target_pos}{Character string specifying the position of the target label
 on heatmap, can be 'top', 'bottom' or 'none'.}
 
-\item{target_lab_disp}{Character string for displaying the label of target label
-if not supplied, differs from target_lab.}
+\item{target_lab_disp}{Character string for displaying the label of target label.
+If NULL, use `target_lab`.}
 }
 \value{
 A ggplot2 grob object of the heatmap.

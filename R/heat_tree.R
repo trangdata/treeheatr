@@ -3,6 +3,9 @@
 #' @param data Tidy dataset.
 #' @param target_lab Name of the column in data that contains target/label information.
 #' @param data_test Tidy test dataset. If NULL, heatmap displays (training) `data`.
+#' @param custom_tree Custom tree with the partykit syntax.
+#' https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+#' If NULL, a conditional inference tree is computed.
 #' @param task Character string indicating the type of problem,
 #' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
 #' @param target_cols Function determine color scale for target,
@@ -55,8 +58,9 @@
 #' recommended to range from 0.001 to 0.01.
 #' @param target_pos Character string specifying the position of the target label
 #' on heatmap, can be 'top', 'bottom' or 'none'.
-#' @param target_lab_disp Character string for displaying the label of target label
-#' if not supplied, differs from target_lab.
+#' @param target_lab_disp Character string for displaying the label of target label.
+#' If NULL, use `target_lab`.
+#' @param \dots further arguments passed to `partkit::ctree()`
 #'
 #' @return A gtable/grob object of the decision tree (top) and heatmap (bottom).
 #' @export
@@ -74,6 +78,7 @@
 heat_tree <- function(
   data, target_lab,
   data_test = NULL,
+  custom_tree = NULL,
   task = c('classification', 'regression'),
   target_cols = NULL,
   label_map = NULL,
@@ -170,6 +175,7 @@ heat_tree <- function(
   ctree_result <- compute_tree(
     dat = dat,
     data_test = data_test,
+    custom_tree = custom_tree,
     task = task,
     clust_samps = clust_samps,
     clust_target = clust_target,
@@ -178,7 +184,8 @@ heat_tree <- function(
     panel_space = panel_space,
     custom_layout = custom_layout,
     lev_fac = lev_fac,
-    p_thres = p_thres)
+    p_thres = p_thres,
+    ...)
 
   ################################################################
   ##### Draw decision tree and heatmap:
@@ -243,11 +250,21 @@ heat_tree <- function(
 #'
 
 compute_tree <- function(
-  dat, data_test, task, feat_names, show_all_feats,
+  dat, data_test, custom_tree, task, feat_names, show_all_feats,
   clust_samps, clust_target,
-  panel_space, custom_layout, lev_fac, p_thres){
+  panel_space, custom_layout, lev_fac, p_thres, ...){
 
-  fit <- partykit::ctree(my_target ~ ., data = dat)
+  if (is.null(custom_tree)){
+    fit <- partykit::ctree(my_target ~ ., data = dat, ...)
+  } else {
+    fit <- party(custom_tree, data = dat,
+                fitted = data.frame(
+                  "(fitted)" = fitted_node(custom_tree, data = dat),
+                  "(response)" = dat$my_target,
+                  check.names = FALSE),
+                terms = terms(my_target ~ ., data = dat)) %>%
+      as.constparty()
+  }
 
   node_pred <- stats::predict(fit, newdata = data_test, type = 'node')
   y_pred <- stats::predict(fit, newdata = data_test, type = 'response', simplify = FALSE) %>%
@@ -287,7 +304,7 @@ compute_tree <- function(
     dplyr::mutate(
       term_node = if (task == 'classification') as.factor(y_hat) else round(y_hat, 2))
 
-  if (show_all_feats){
+  if (show_all_feats || (!is.null(custom_tree))){
     disp_feats <- feat_names
   } else {
     # important features to display in decision trees

@@ -8,6 +8,7 @@ heat_tree(
   data,
   target_lab,
   data_test = NULL,
+  custom_tree = NULL,
   task = c("classification", "regression"),
   target_cols = NULL,
   label_map = NULL,
@@ -46,6 +47,10 @@ heat_tree(
 \item{target_lab}{Name of the column in data that contains target/label information.}
 
 \item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
+
+\item{custom_tree}{Custom tree with the partykit syntax.
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+If NULL, a conditional inference tree is computed.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
@@ -121,8 +126,10 @@ recommended to range from 0.001 to 0.01.}
 \item{target_pos}{Character string specifying the position of the target label
 on heatmap, can be 'top', 'bottom' or 'none'.}
 
-\item{target_lab_disp}{Character string for displaying the label of target label
-if not supplied, differs from target_lab.}
+\item{target_lab_disp}{Character string for displaying the label of target label.
+If NULL, use `target_lab`.}
+
+\item{\dots}{further arguments passed to `partkit::ctree()`}
 }
 \value{
 A gtable/grob object of the decision tree (top) and heatmap (bottom).

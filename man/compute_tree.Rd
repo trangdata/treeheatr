@@ -7,6 +7,7 @@
 compute_tree(
   dat,
   data_test,
+  custom_tree,
   task,
   feat_names,
   show_all_feats,
@@ -15,13 +16,18 @@ compute_tree(
   panel_space,
   custom_layout,
   lev_fac,
-  p_thres
+  p_thres,
+  ...
 )
 }
 \arguments{
 \item{dat}{Tidy dataset with dependent variable labelled 'my_target'.}
 
 \item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
+
+\item{custom_tree}{Custom tree with the partykit syntax.
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+If NULL, a conditional inference tree is computed.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
@@ -49,6 +55,8 @@ according to their levels, commonly ranges from 1 to 1.5.
 \item{p_thres}{Numeric value indicating the p-value threshold of feature importance.
 Feature with p-values computed from the decision tree below this value
 will be displayed on the heatmap.}
+
+\item{...}{further arguments passed to `partkit::ctree()`}
 }
 \value{
 A list of results from `partykit::ctree`, smart layout data,
