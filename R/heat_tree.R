@@ -37,6 +37,12 @@
 #' `geom_edge()` call for tree edges.
 #' @param edge_text_vars Named list containing arguments to be passed to the
 #' `geom_edge_label()` call for tree edge annotations.
+#' @param print_eval Logical. If TRUE, print evaluation of the tree performance.
+#' @param x_eval Numeric value indicating x position to print performance statistics.
+#' @param y_eval Numeric value indicating y position to print performance statistics.
+#' @param my_metrics A set of metric functions to evaluate decision tree,
+#' defaults to common metrics for classification/regression problems.
+#' Can be defined with `yardstick::metric_set`.
 #'
 #' @param feat_types Named vector indicating the type of each features,
 #' e.g., c(sex = 'factor', age = 'numeric').
@@ -108,6 +114,10 @@ heat_tree <- function(
   edge_text_vars = list(
     color = 'grey30', size = 3,
     mapping = ggplot2::aes(label = paste(breaks_label, "*NA"))),
+  print_eval = FALSE,
+  x_eval = 0,
+  y_eval = 0.9,
+  my_metrics = NULL,
 
   ### heatmap parameters:
   feat_types = NULL,
@@ -177,6 +187,7 @@ heat_tree <- function(
     data_test = data_test,
     custom_tree = custom_tree,
     task = task,
+    my_metrics = my_metrics,
     clust_samps = clust_samps,
     clust_target = clust_target,
     show_all_feats = show_all_feats,
@@ -200,7 +211,11 @@ heat_tree <- function(
     par_node_vars = par_node_vars,
     terminal_vars = terminal_vars,
     edge_vars = edge_vars,
-    edge_text_vars = edge_text_vars
+    edge_text_vars = edge_text_vars,
+    print_eval = print_eval,
+    x_eval = x_eval,
+    y_eval = y_eval,
+    text_eval = ctree_result$text_eval
   )
 
   dheat <- draw_heat(
@@ -250,20 +265,20 @@ heat_tree <- function(
 #'
 
 compute_tree <- function(
-  dat, data_test, custom_tree, task, feat_names, show_all_feats,
-  clust_samps, clust_target,
+  dat, data_test, custom_tree, task, my_metrics,
+  feat_names, show_all_feats, clust_samps, clust_target,
   panel_space, custom_layout, lev_fac, p_thres, ...){
 
   if (is.null(custom_tree)){
     fit <- partykit::ctree(my_target ~ ., data = dat, ...)
   } else {
-    fit <- party(custom_tree, data = dat,
+    fit <- partykit::party(custom_tree, data = dat,
                 fitted = data.frame(
-                  "(fitted)" = fitted_node(custom_tree, data = dat),
+                  "(fitted)" = partykit::fitted_node(custom_tree, data = dat),
                   "(response)" = dat$my_target,
                   check.names = FALSE),
-                terms = terms(my_target ~ ., data = dat)) %>%
-      as.constparty()
+                terms = stats::terms(my_target ~ ., data = dat)) %>%
+      partykit::as.constparty()
   }
 
   node_pred <- stats::predict(fit, newdata = data_test, type = 'node')
@@ -273,16 +288,22 @@ compute_tree <- function(
   dat_ana <- data_test %||% dat
 
   scaled_dat <- dat_ana %>%
-    dplyr::mutate(
+    data.frame(
       node_id = node_pred,
-      y_hat = y_pred,
-      correct = (y_hat == my_target)) %>%
+      y_hat = y_pred) %>%
     lapply(unique(.$node_id), clust_samp_func, dat = .,
            clust_vec = if (clust_target) c(feat_names, 'my_target') else feat_names,
            clust_samps = clust_samps) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(Sample = row_number())
 
+  if (task == 'classification'){
+    y_prob <- stats::predict(fit, newdata = data_test, type = 'prob', simplify = FALSE) %>%
+      .simplify_pred(id = node_pred, nam = as.character(node_pred))
+    scaled_dat <- cbind(scaled_dat, y_prob)
+  }
+
+  text_eval <- eval_tree(scaled_dat, task, my_metrics)
 
   ################################################################
   ##### Prepare layout, terminal data, add node labels:
@@ -323,6 +344,7 @@ compute_tree <- function(
        scaled_dat = scaled_dat,
        my_layout = my_layout,
        term_dat = term_dat,
-       disp_feats = disp_feats)
+       disp_feats = disp_feats,
+       text_eval = text_eval)
 }
 

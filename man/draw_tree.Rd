@@ -14,7 +14,11 @@ draw_tree(
   par_node_vars,
   terminal_vars,
   edge_vars,
-  edge_text_vars
+  edge_text_vars,
+  print_eval,
+  x_eval,
+  y_eval,
+  text_eval
 )
 }
 \arguments{
@@ -44,6 +48,12 @@ defaults to viridis option B.}
 
 \item{edge_text_vars}{Named list containing arguments to be passed to the
 `geom_edge_label()` call for tree edge annotations.}
+
+\item{print_eval}{Logical. If TRUE, print evaluation of the tree performance.}
+
+\item{x_eval}{Numeric value indicating x position to print performance statistics.}
+
+\item{y_eval}{Numeric value indicating y position to print performance statistics.}
 }
 \value{
 A ggplot2 grob object of the decision tree.

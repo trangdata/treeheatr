@@ -29,6 +29,10 @@ heat_tree(
   edge_vars = list(color = "grey70", size = 0.5),
   edge_text_vars = list(color = "grey30", size = 3, mapping = ggplot2::aes(label =
     paste(breaks_label, "*NA"))),
+  print_eval = FALSE,
+  x_eval = 0,
+  y_eval = 0.9,
+  my_metrics = NULL,
   feat_types = NULL,
   trans_type = c("normalize", "scale", "none"),
   cont_cols = ggplot2::scale_fill_viridis_c(),
@@ -97,6 +101,16 @@ according to their levels, commonly ranges from 1 to 1.5.
 
 \item{edge_text_vars}{Named list containing arguments to be passed to the
 `geom_edge_label()` call for tree edge annotations.}
+
+\item{print_eval}{Logical. If TRUE, print evaluation of the tree performance.}
+
+\item{x_eval}{Numeric value indicating x position to print performance statistics.}
+
+\item{y_eval}{Numeric value indicating y position to print performance statistics.}
+
+\item{my_metrics}{A set of metric functions to evaluate decision tree,
+defaults to common metrics for classification/regression problems.
+Can be defined with `yardstick::metric_set`.}
 
 \item{feat_types}{Named vector indicating the type of each features,
 e.g., c(sex = 'factor', age = 'numeric').

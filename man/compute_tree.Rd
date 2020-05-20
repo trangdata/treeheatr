@@ -9,6 +9,7 @@ compute_tree(
   data_test,
   custom_tree,
   task,
+  my_metrics,
   feat_names,
   show_all_feats,
   clust_samps,
@@ -31,6 +32,10 @@ If NULL, a conditional inference tree is computed.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
+
+\item{my_metrics}{A set of metric functions to evaluate decision tree,
+defaults to common metrics for classification/regression problems.
+Can be defined with `yardstick::metric_set`.}
 
 \item{feat_names}{Character vector specifying the feature names in dat.}
 
