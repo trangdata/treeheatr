@@ -6,7 +6,6 @@
 #' @return Character string of the decision tree evaluation.
 #' @export
 #'
-#' @examples
 #'
 eval_tree <- function(dat, task, my_metrics){
   switch(
@@ -16,7 +15,6 @@ eval_tree <- function(dat, task, my_metrics){
   )
 }
 
-#' @importFrom rlang .data
 eval_class <- function(dat, my_metrics){
   # Classification metrics:
   my_metrics <- my_metrics %||%
@@ -34,16 +32,15 @@ eval_class <- function(dat, my_metrics){
     estimate = y_hat,
     !! if (length(my_levs) > 2) my_levs else my_levs[1]) %>%
     transmute(print_metric = paste(
-      toupper(.data$.metric),
-      format(.data$.estimate, digits = 3),
+      toupper(.metric),
+      format(.estimate, digits = 3),
       sep = ': ')) %>%
     pull() %>%
     paste(collapse = '\n')
 
 }
 
-#' @importFrom rlang .data
-#'
+
 eval_reg <- function(dat, my_metrics){
   # Regression metrics:
   my_metrics <- my_metrics %||%
@@ -55,8 +52,8 @@ eval_reg <- function(dat, my_metrics){
 
   text_eval <- my_metrics(dat, truth = my_target, estimate = y_hat) %>%
     transmute(print_metric = paste(
-      toupper(.data$.metric),
-      format(.data$.estimate, digits = 3),
+      toupper(.metric),
+      format(.estimate, digits = 3),
       sep = ': ')) %>%
     pull() %>%
     paste(collapse = '\n')

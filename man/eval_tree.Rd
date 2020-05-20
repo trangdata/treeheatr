@@ -22,6 +22,3 @@ Character string of the decision tree evaluation.
 \description{
 Print decision tree performance according to different metrics.
 }
-\examples{
-
-}

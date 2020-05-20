@@ -54,6 +54,8 @@ defaults to viridis option B.}
 \item{x_eval}{Numeric value indicating x position to print performance statistics.}
 
 \item{y_eval}{Numeric value indicating y position to print performance statistics.}
+
+\item{text_eval}{Character string of the decision tree evaluation.}
 }
 \value{
 A ggplot2 grob object of the decision tree.

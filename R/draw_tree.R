@@ -9,6 +9,8 @@
 #' id, x, y and y_hat.
 #' @param term_dat Dataframe for terminal nodes, must include these columns:
 #' id, x, y and y_hat.
+#' @param text_eval Character string of the decision tree evaluation.
+#'
 #' @inheritParams heat_tree
 #' @return A ggplot2 grob object of the decision tree.
 #' @export
