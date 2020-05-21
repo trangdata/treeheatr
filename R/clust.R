@@ -14,7 +14,7 @@
 clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps){
   df <- dat[dat$node_id == leaf_node, ]
 
-  if (clust_samps && length(clust_vec) > 1){
+  if (clust_samps && length(clust_vec) > 1 && nrow(df) > 1){
     new_samp_order <- df[, clust_vec] %>%
       cluster::daisy(metric = 'gower') %>%
       stats::hclust() %>%
