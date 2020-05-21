@@ -288,9 +288,7 @@ compute_tree <- function(
   dat_ana <- data_test %||% dat
 
   scaled_dat <- dat_ana %>%
-    data.frame(
-      node_id = node_pred,
-      y_hat = y_pred) %>%
+    cbind(node_id = node_pred, y_hat = y_pred) %>%
     lapply(unique(.$node_id), clust_samp_func, dat = .,
            clust_vec = if (clust_target) c(feat_names, 'my_target') else feat_names,
            clust_samps = clust_samps) %>%
@@ -307,18 +305,20 @@ compute_tree <- function(
 
   ################################################################
   ##### Prepare layout, terminal data, add node labels:
+  plot_data <- ggparty(fit)$data
 
   node_labels <- scaled_dat %>%
     dplyr::distinct(Sample, .keep_all = T) %>%
     dplyr::count(node_id, y_hat) %>%
     dplyr::rename(id = node_id)
 
-  node_size <- node_labels$n
-  plot_data <- ggparty(fit)$data
-  my_layout <- position_nodes(plot_data, node_size, custom_layout, lev_fac, panel_space)
+  # node_size <- node_labels$n
+
+  my_layout <- position_nodes(plot_data, node_labels, custom_layout, lev_fac, panel_space)
 
   term_dat <- plot_data %>%
     dplyr::left_join(node_labels, by = 'id') %>%
+    mutate_all(~ replace(., is.na(.), 0)) %>%
     dplyr::select(- c(x, y)) %>%
     dplyr::left_join(my_layout, by = 'id') %>%
     dplyr::filter(kids == 0) %>%
