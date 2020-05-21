@@ -4,12 +4,10 @@
 \alias{position_nodes}
 \title{Creates smart node layout.}
 \usage{
-position_nodes(plot_data, node_size, custom_layout, lev_fac, panel_space)
+position_nodes(plot_data, terminal_data, custom_layout, lev_fac, panel_space)
 }
 \arguments{
 \item{plot_data}{Dataframe output of `ggparty:::get_plot_data()`.}
-
-\item{node_size}{Numeric vector of raw terminal node size.}
 
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
 for manually input custom layout.}
@@ -20,6 +18,9 @@ according to their levels, commonly ranges from 1 to 1.5.
 
 \item{panel_space}{Spacing between facets relative to viewport,
 recommended to range from 0.001 to 0.01.}
+
+\item{node_labels}{Dataframe of terminal node information including id
+and raw terminal node size.}
 }
 \value{
 Dataframe with 3 columns: id, x and y of smart layout

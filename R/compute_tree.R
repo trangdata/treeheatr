@@ -1,0 +1,120 @@
+
+
+# ------------------------------------------------------------------------------------
+#' Compute decision tree from data set
+#'
+#' @param dat Tidy dataset with dependent variable labelled 'my_target'.
+#' @param task Character string indicating the type of problem,
+#' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
+#' @param feat_names Character vector specifying the feature names in dat.
+#' @inheritParams heat_tree
+#' @return A list of results from `partykit::ctree`, smart layout data,
+#' terminal data, node labels, and features to be displayed.
+#' @export
+#'
+
+compute_tree <- function(
+  dat, data_test, custom_tree, task, my_metrics,
+  feat_names, show_all_feats, clust_samps, clust_target,
+  panel_space, custom_layout, lev_fac, p_thres, ...){
+
+  if (is.null(custom_tree)){
+    fit <- partykit::ctree(my_target ~ ., data = dat, ...)
+  } else {
+    fit <- partykit::party(custom_tree, data = dat,
+                           fitted = data.frame(
+                             "(fitted)" = partykit::fitted_node(custom_tree, data = dat),
+                             "(response)" = dat$my_target,
+                             check.names = FALSE),
+                           terms = stats::terms(my_target ~ ., data = dat)) %>%
+      partykit::as.constparty()
+  }
+
+  scaled_dat <- prediction_df(fit, dat, data_test, task, feat_names, clust_samps, clust_target)
+
+  text_eval <- eval_tree(scaled_dat, task, my_metrics)
+
+  ################################################################
+  ##### Prepare layout, terminal data, add node labels:
+  plot_data <- ggparty(fit)$data
+
+  # node_size <- node_labels$n
+  terminal_data <- term_node_pos(plot_data, scaled_dat)
+  my_layout <- position_nodes(plot_data, terminal_data, custom_layout, lev_fac, panel_space)
+
+  term_dat <- terminal_data %>%
+    dplyr::select(- c(x, y)) %>%
+    dplyr::left_join(my_layout, by = 'id') %>%
+    dplyr::mutate(
+      term_node = if (task == 'classification') as.factor(y_hat) else round(y_hat, 2))
+
+  list(fit = fit,
+       scaled_dat = scaled_dat,
+       my_layout = my_layout,
+       term_dat = term_dat,
+       text_eval = text_eval)
+}
+
+# ------------------------------------------------------------------------------------
+#' Select the important features to be displayed.
+#'
+#' Select features with p-value (computed from decision tree) < `p_thres`
+#' or all features if `show_all_feats == TRUE`.
+#'
+#' @param fit constparty object of the decision tree.
+#' @inheritParams heat_tree
+#' @return A character vector of feature names.
+#' @export
+#'
+get_disp_feats <- function(fit, feat_names, show_all_feats, custom_tree, p_thres){
+  if (show_all_feats || (!is.null(custom_tree))){
+    disp_feats <- feat_names
+  } else {
+    # important features to display in decision trees
+    # (pass p value threshold):
+    disp_feats <- partykit::nodeapply(
+      fit, ids = partykit::nodeids(fit),
+      FUN = function(n) {
+        node_pvals <- partykit::info_node(n)$p.value
+        names(node_pvals[node_pvals < p_thres])
+      }) %>%
+      unlist() %>%
+      unique()
+  }
+}
+
+# ------------------------------------------------------------------------------------
+#' Apply the predicted tree
+#'
+#' Select features with p-value (computed from decision tree) < `p_thres`
+#' or all features if `show_all_feats == TRUE`.
+#'
+#' @param fit constparty object of the decision tree.
+#' @param dat
+#' @inheritParams heat_tree
+#' @return A data frame of predictions,  scaled.
+#' @export
+#'
+prediction_df <- function(fit, dat, data_test, task, feat_names, clust_samps, clust_target){
+  node_pred <- stats::predict(fit, newdata = data_test, type = 'node')
+  y_pred <- stats::predict(fit, newdata = data_test, type = 'response', simplify = FALSE) %>%
+    .simplify_pred(id = node_pred, nam = as.character(node_pred))
+
+  dat_ana <- data_test %||% dat
+
+  scaled_dat <- dat_ana %>%
+    cbind(node_id = node_pred, y_hat = y_pred) %>%
+    lapply(unique(.$node_id), clust_samp_func, dat = .,
+           clust_vec = if (clust_target) c(feat_names, 'my_target') else feat_names,
+           clust_samps = clust_samps) %>%
+    dplyr::bind_rows() %>%
+    dplyr::mutate(Sample = row_number())
+
+  if (task == 'classification'){
+    y_prob <- stats::predict(fit, newdata = data_test, type = 'prob', simplify = FALSE) %>%
+      .simplify_pred(id = node_pred, nam = as.character(node_pred))
+    scaled_dat <- cbind(scaled_dat, y_prob)
+  }
+
+  scaled_dat
+}

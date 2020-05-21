@@ -198,6 +198,9 @@ heat_tree <- function(
     p_thres = p_thres,
     ...)
 
+  disp_feats <- get_disp_feats(
+    fit = ctree_result$fit, feat_names, show_all_feats, custom_tree, p_thres)
+
   ################################################################
   ##### Draw decision tree and heatmap:
 
@@ -220,7 +223,7 @@ heat_tree <- function(
 
   dheat <- draw_heat(
     dat = ctree_result$scaled_dat,
-    disp_feats = ctree_result$disp_feats,
+    disp_feats = disp_feats,
     feat_names = feat_names,
     target_cols = target_cols,
     feat_types = feat_types,
@@ -247,104 +250,5 @@ heat_tree <- function(
       t = 1, l = min(panel_id$l), r = max(panel_id$l))
 
   new_g
-}
-
-
-
-# ------------------------------------------------------------------------------------
-#' Compute decision tree from data set
-#'
-#' @param dat Tidy dataset with dependent variable labelled 'my_target'.
-#' @param task Character string indicating the type of problem,
-#' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
-#' @param feat_names Character vector specifying the feature names in dat.
-#' @inheritParams heat_tree
-#' @return A list of results from `partykit::ctree`, smart layout data,
-#' terminal data, node labels, and features to be displayed.
-#' @export
-#'
-
-compute_tree <- function(
-  dat, data_test, custom_tree, task, my_metrics,
-  feat_names, show_all_feats, clust_samps, clust_target,
-  panel_space, custom_layout, lev_fac, p_thres, ...){
-
-  if (is.null(custom_tree)){
-    fit <- partykit::ctree(my_target ~ ., data = dat, ...)
-  } else {
-    fit <- partykit::party(custom_tree, data = dat,
-                fitted = data.frame(
-                  "(fitted)" = partykit::fitted_node(custom_tree, data = dat),
-                  "(response)" = dat$my_target,
-                  check.names = FALSE),
-                terms = stats::terms(my_target ~ ., data = dat)) %>%
-      partykit::as.constparty()
-  }
-
-  node_pred <- stats::predict(fit, newdata = data_test, type = 'node')
-  y_pred <- stats::predict(fit, newdata = data_test, type = 'response', simplify = FALSE) %>%
-    .simplify_pred(id = node_pred, nam = as.character(node_pred))
-
-  dat_ana <- data_test %||% dat
-
-  scaled_dat <- dat_ana %>%
-    cbind(node_id = node_pred, y_hat = y_pred) %>%
-    lapply(unique(.$node_id), clust_samp_func, dat = .,
-           clust_vec = if (clust_target) c(feat_names, 'my_target') else feat_names,
-           clust_samps = clust_samps) %>%
-    dplyr::bind_rows() %>%
-    dplyr::mutate(Sample = row_number())
-
-  if (task == 'classification'){
-    y_prob <- stats::predict(fit, newdata = data_test, type = 'prob', simplify = FALSE) %>%
-      .simplify_pred(id = node_pred, nam = as.character(node_pred))
-    scaled_dat <- cbind(scaled_dat, y_prob)
-  }
-
-  text_eval <- eval_tree(scaled_dat, task, my_metrics)
-
-  ################################################################
-  ##### Prepare layout, terminal data, add node labels:
-  plot_data <- ggparty(fit)$data
-
-  node_labels <- scaled_dat %>%
-    dplyr::distinct(Sample, .keep_all = T) %>%
-    dplyr::count(node_id, y_hat) %>%
-    dplyr::rename(id = node_id)
-
-  # node_size <- node_labels$n
-
-  my_layout <- position_nodes(plot_data, node_labels, custom_layout, lev_fac, panel_space)
-
-  term_dat <- plot_data %>%
-    dplyr::left_join(node_labels, by = 'id') %>%
-    mutate_all(~ replace(., is.na(.), 0)) %>%
-    dplyr::select(- c(x, y)) %>%
-    dplyr::left_join(my_layout, by = 'id') %>%
-    dplyr::filter(kids == 0) %>%
-    dplyr::mutate(
-      term_node = if (task == 'classification') as.factor(y_hat) else round(y_hat, 2))
-
-  if (show_all_feats || (!is.null(custom_tree))){
-    disp_feats <- feat_names
-  } else {
-    # important features to display in decision trees
-    # (pass p value threshold):
-    disp_feats <- partykit::nodeapply(
-      fit, ids = partykit::nodeids(fit),
-      FUN = function(n) {
-        node_pvals <- partykit::info_node(n)$p.value
-        names(node_pvals[node_pvals < p_thres])
-      }) %>%
-      unlist() %>%
-      unique()
-  }
-
-  list(fit = fit,
-       scaled_dat = scaled_dat,
-       my_layout = my_layout,
-       term_dat = term_dat,
-       disp_feats = disp_feats,
-       text_eval = text_eval)
 }
 

@@ -28,6 +28,9 @@ library(treeheatr)
 grid.draw(heat_tree(iris, target_lab = 'Species'))
 ```
 
+    ## Warning in `[<-.factor`(`*tmp*`, list, value = 0): invalid factor level, NA
+    ## generated
+
 ![](man/figures/unnamed-chunk-3-1.png)<!-- -->
 
 ### Wine recognition dataset
@@ -37,6 +40,9 @@ Classification of different cultivars of wine.
 ``` r
 grid.draw(heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar'))
 ```
+
+    ## Warning in `[<-.factor`(`*tmp*`, list, value = 0): invalid factor level, NA
+    ## generated
 
 ![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 

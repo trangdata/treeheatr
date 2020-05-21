@@ -13,16 +13,9 @@
 #' combined with custom_layout.
 #' @export
 #'
-position_nodes <- function(plot_data, node_labels, custom_layout, lev_fac, panel_space){
+position_nodes <- function(plot_data, terminal_data, custom_layout, lev_fac, panel_space){
 
-  terminal_data <- plot_data %>%
-    dplyr::filter(kids == 0) %>%
-    dplyr::select(id, x, y, parent, level, kids)
-
-  node_size <- terminal_data %>%
-    left_join(node_labels, by = 'id') %>%
-    mutate_all(~ replace(., is.na(.), 0)) %>%
-    pull(n)
+  node_size <- terminal_data$n
 
   # Determine terminal node position based on terminal node size:
   new_x <- vector(mode = 'numeric')
@@ -72,3 +65,19 @@ position_nodes <- function(plot_data, node_labels, custom_layout, lev_fac, panel
 
   return(my_layout)
 }
+
+
+
+term_node_pos <- function(plot_data, scaled_dat){
+  node_labels <- scaled_dat %>%
+    dplyr::distinct(Sample, .keep_all = T) %>%
+    dplyr::count(node_id, y_hat) %>%
+    dplyr::rename(id = node_id)
+
+  terminal_data <- plot_data %>%
+    dplyr::filter(kids == 0) %>%
+    left_join(node_labels, by = 'id') %>%
+    mutate_all(~ replace(., is.na(.), 0))
+}
+
+
