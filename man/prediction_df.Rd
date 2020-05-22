@@ -2,7 +2,7 @@
 % Please edit documentation in R/compute_tree.R
 \name{prediction_df}
 \alias{prediction_df}
-\title{Apply the predicted tree}
+\title{Apply the predicted tree on either new test data or training data.}
 \usage{
 prediction_df(fit, dat, data_test, task, feat_names, clust_samps, clust_target)
 }
@@ -21,7 +21,8 @@ among samples within each leaf node.}
 of samples within each leaf node and might yield a more interpretable heatmap.}
 }
 \value{
-A data frame of predictions,  scaled.
+A dataframe of prediction values with scaled columns
+and clustered samples.
 }
 \description{
 Select features with p-value (computed from decision tree) < `p_thres`
