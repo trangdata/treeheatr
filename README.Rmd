@@ -33,7 +33,7 @@ Classification of different types of iris plants.
 ```{r, fig.height=3.5, message=FALSE, warnings = FALSE}
 library(treeheatr)
 
-grid.draw(heat_tree(iris, target_lab = 'Species'))
+heat_tree(iris, target_lab = 'Species')
 ```
 
 ### Wine recognition dataset
@@ -41,7 +41,7 @@ grid.draw(heat_tree(iris, target_lab = 'Species'))
 Classification of different cultivars of wine.
 
 ```{r fig.height=3.5}
-grid.draw(heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar'))
+heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 ```
 
 

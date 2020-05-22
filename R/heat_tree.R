@@ -249,6 +249,8 @@ heat_tree <- function(
       ggplot2::ggplotGrob(dtree),
       t = 1, l = min(panel_id$l), r = max(panel_id$l))
 
-  new_g
+  grid::grid.newpage()
+  return(grid::grid.draw(new_g))
+
 }
 
