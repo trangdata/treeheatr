@@ -84,7 +84,7 @@ get_disp_feats <- function(fit, feat_names, show_all_feats, custom_tree, p_thres
 }
 
 # ------------------------------------------------------------------------------------
-#' Apply the predicted tree
+#' Apply the predicted tree on either new test data or training data.
 #'
 #' Select features with p-value (computed from decision tree) < `p_thres`
 #' or all features if `show_all_feats == TRUE`.
@@ -92,7 +92,8 @@ get_disp_feats <- function(fit, feat_names, show_all_feats, custom_tree, p_thres
 #' @param fit constparty object of the decision tree.
 #' @param dat
 #' @inheritParams heat_tree
-#' @return A data frame of predictions,  scaled.
+#' @return A dataframe of prediction values with scaled columns
+#' and clustered samples.
 #' @export
 #'
 prediction_df <- function(fit, dat, data_test, task, feat_names, clust_samps, clust_target){
@@ -118,3 +119,31 @@ prediction_df <- function(fit, dat, data_test, task, feat_names, clust_samps, cl
 
   scaled_dat
 }
+
+
+# ------------------------------------------------------------------------------------
+#' Determines terminal node position.
+#'
+#' Create node layout using a bottom-up approach (literally) and
+#' overwrites ggarpty-precomputed positions in plot_data.
+#'
+#' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
+#' @param scaled_dat Dataframe of prediction values with scaled columns
+#' and clustered samples.
+#'
+#' @return Dataframe with terminal node information.
+#' @export
+#'
+term_node_pos <- function(plot_data, scaled_dat){
+  node_labels <- scaled_dat %>%
+    dplyr::distinct(Sample, .keep_all = T) %>%
+    dplyr::count(node_id, y_hat) %>%
+    dplyr::rename(id = node_id)
+
+  terminal_data <- plot_data %>%
+    dplyr::filter(kids == 0) %>%
+    left_join(node_labels, by = 'id') %>%
+    mutate_at(vars(n), ~ replace(., is.na(.), 0))
+}
+
+

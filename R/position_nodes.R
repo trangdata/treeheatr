@@ -3,7 +3,6 @@
 #' Create node layout using a bottom-up approach (literally) and
 #' overwrites ggarpty-precomputed positions in plot_data.
 #'
-#' @import dplyr
 #' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
 #' @param node_labels Dataframe of terminal node information including id
 #' and raw terminal node size.
@@ -64,20 +63,6 @@ position_nodes <- function(plot_data, terminal_data, custom_layout, lev_fac, pan
     dplyr::bind_rows(custom_layout)
 
   return(my_layout)
-}
-
-
-
-term_node_pos <- function(plot_data, scaled_dat){
-  node_labels <- scaled_dat %>%
-    dplyr::distinct(Sample, .keep_all = T) %>%
-    dplyr::count(node_id, y_hat) %>%
-    dplyr::rename(id = node_id)
-
-  terminal_data <- plot_data %>%
-    dplyr::filter(kids == 0) %>%
-    left_join(node_labels, by = 'id') %>%
-    mutate_all(~ replace(., is.na(.), 0))
 }
 
 
