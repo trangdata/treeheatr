@@ -248,9 +248,9 @@ heat_tree <- function(
     gtable::gtable_add_grob(
       ggplot2::ggplotGrob(dtree),
       t = 1, l = min(panel_id$l), r = max(panel_id$l))
+  class(new_g) <- c("ggHeatTree", class(new_g))
 
-  grid::grid.newpage()
-  return(grid::grid.draw(new_g))
+  new_g
 
 }
 

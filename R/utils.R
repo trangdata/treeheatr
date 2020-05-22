@@ -31,3 +31,37 @@
   ret
 }
 
+coalesce_list <- function(input_list, default_list){
+  output_list <- vector('list', length(default_list))
+  for (i in names(default_list)){
+    output_list[[i]] <- input_list[[i]] %||% default_list[[i]]
+  }
+  output_list
+}
+
+#' Print a ggHeatTree object.
+#' Adopted from
+#' https://github.com/daattali/ggExtra/blob/master/R/ggMarginal.R#L207-L244.
+#'
+#' \code{ggHeatTree} objects are created from \code{heat_tree()}. This is the S3
+#' generic print method to print the result of the scatterplot with its marginal
+#' plots.
+#'
+#' @param x ggHeatTree (gtable grob) object.
+#' @param newpage Should a new page (i.e., an empty page) be drawn before the
+#' ggHeatTree is drawn?
+#' @param ... ignored
+#' @keywords internal
+
+print.ggHeatTree <- function(x, newpage = grDevices::dev.interactive(), ...) {
+  if (newpage) grid::grid.newpage()
+  # if (isTRUE(getOption("rstudio.notebook.executing"))) {
+  #   # x <- ggplot2::ggplot() +
+  #   #   ggplot2::geom_blank() +
+  #   #   ggplot2::annotation_custom(x) +
+  #   #   ggplot2::theme_void()
+  #   plot(x)
+  # } else {
+  grid::grid.draw(x)
+  # }
+}
