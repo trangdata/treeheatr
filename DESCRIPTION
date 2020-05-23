@@ -32,5 +32,6 @@ Suggests:
     grid,
     knitr,
     rmarkdown,
+    cowplot,
     yardstick
 VignetteBuilder: knitr
