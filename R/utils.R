@@ -52,6 +52,7 @@ coalesce_list <- function(input_list, default_list){
 #' ggHeatTree is drawn?
 #' @param ... ignored
 #' @keywords internal
+#' @export
 
 print.ggHeatTree <- function(x, newpage = grDevices::dev.interactive(), ...) {
   if (newpage) grid::grid.newpage()
