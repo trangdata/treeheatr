@@ -62,6 +62,7 @@ compute_tree <- function(
 #' or all features if `show_all_feats == TRUE`.
 #'
 #' @param fit constparty object of the decision tree.
+#' @param feat_names Character vector specifying the feature names in dat.
 #' @inheritParams heat_tree
 #' @return A character vector of feature names.
 #' @export
@@ -90,8 +91,7 @@ get_disp_feats <- function(fit, feat_names, show_all_feats, custom_tree, p_thres
 #' or all features if `show_all_feats == TRUE`.
 #'
 #' @param fit constparty object of the decision tree.
-#' @param dat
-#' @inheritParams heat_tree
+#' @inheritParams compute_tree
 #' @return A dataframe of prediction values with scaled columns
 #' and clustered samples.
 #' @export

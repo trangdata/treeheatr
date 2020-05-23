@@ -9,10 +9,14 @@ prediction_df(fit, dat, data_test, task, feat_names, clust_samps, clust_target)
 \arguments{
 \item{fit}{constparty object of the decision tree.}
 
+\item{dat}{Tidy dataset with dependent variable labelled 'my_target'.}
+
 \item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
+
+\item{feat_names}{Character vector specifying the feature names in dat.}
 
 \item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
 among samples within each leaf node.}

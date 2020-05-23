@@ -9,6 +9,8 @@ get_disp_feats(fit, feat_names, show_all_feats, custom_tree, p_thres)
 \arguments{
 \item{fit}{constparty object of the decision tree.}
 
+\item{feat_names}{Character vector specifying the feature names in dat.}
+
 \item{show_all_feats}{Logical. If TRUE, show all features regarless p_thres.}
 
 \item{custom_tree}{Custom tree with the partykit syntax.

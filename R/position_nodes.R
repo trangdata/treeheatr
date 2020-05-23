@@ -4,7 +4,7 @@
 #' overwrites ggarpty-precomputed positions in plot_data.
 #'
 #' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
-#' @param node_labels Dataframe of terminal node information including id
+#' @param terminal_data Dataframe of terminal node information including id
 #' and raw terminal node size.
 #' @inheritParams heat_tree
 #'
