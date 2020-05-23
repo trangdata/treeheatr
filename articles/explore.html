@@ -85,7 +85,7 @@
 </h1>
                         <h4 class="author">Trang Le</h4>
             
-            <h4 class="date">2020-05-22</h4>
+            <h4 class="date">2020-05-23</h4>
       
       
       <div class="hidden name"><code>explore.Rmd</code></div>
@@ -96,22 +96,79 @@
     
 <p><strong>treeheatr</strong> displays a more interpretable decision tree visualization by integrating a heatmap at its terminal nodes. Let’s explore the package <strong>treeheatr</strong> a little deeper and see what it can do!</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">treeheatr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">cowplot</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)</pre></body></html></div>
 <div id="lets-begin" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lets-begin" class="anchor"></a>Let’s begin</h2>
 <p>with the iris dataset! Running the <code><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree()</a></code> function can be as simple as:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">dat_raw</span> <span class="kw">&lt;-</span> <span class="no">iris</span>
-<span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-2-1.png" width="480"></p>
+<span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>)
+<span class="co">#&gt; TableGrob (14 x 15) "layout": 28 grobs</span>
+<span class="co">#&gt;     z         cells       name                                    grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-15) background zeroGrob[plot.background..zeroGrob.121]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.36]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.46]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.56]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.66]</span>
+<span class="co">#&gt; 6   3 ( 7- 7, 5- 5)   axis-t-1                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 7   3 ( 7- 7, 7- 7)   axis-t-2                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 8   3 ( 7- 7, 9- 9)   axis-t-3                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 9   3 ( 7- 7,11-11)   axis-t-4                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 10  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.67]</span>
+<span class="co">#&gt; 11  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.68]</span>
+<span class="co">#&gt; 12  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.69]</span>
+<span class="co">#&gt; 13  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.70]</span>
+<span class="co">#&gt; 14  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.74]</span>
+<span class="co">#&gt; 15  3 ( 9- 9,12-12)   axis-r-1                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 16  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.75]</span>
+<span class="co">#&gt; 17  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.76]</span>
+<span class="co">#&gt; 18  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.77]</span>
+<span class="co">#&gt; 19  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.78]</span>
+<span class="co">#&gt; 20  4 ( 6- 6, 5-11)     xlab-t                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 21  5 (11-11, 5-11)     xlab-b                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 22  6 ( 9- 9, 3- 3)     ylab-l                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 23  7 ( 9- 9,13-13)     ylab-r                          zeroGrob[NULL]</span>
+<span class="co">#&gt; 24  8 ( 5- 5, 5-11)   subtitle   zeroGrob[plot.subtitle..zeroGrob.118]</span>
+<span class="co">#&gt; 25  9 ( 4- 4, 5-11)      title      zeroGrob[plot.title..zeroGrob.117]</span>
+<span class="co">#&gt; 26 10 (12-12, 5-11)    caption    zeroGrob[plot.caption..zeroGrob.120]</span>
+<span class="co">#&gt; 27 11 ( 3- 3, 2- 2)        tag        zeroGrob[plot.tag..zeroGrob.119]</span>
+<span class="co">#&gt; 28 12 ( 1- 1, 5-11)     layout                          gtable[layout]</span></pre></body></html></div>
 <p>But we can adjust a few graphical parameters. We can also add a custom layout for a subset of the nodes by specifying it in the <code>custom_layout</code> parameter. And we can relax the p value threshold <code>p_thres</code> to include more features that might be less important in classifying the samples but still included in the decision tree, or set <code>show_all_feats = TRUE</code> to include all features, even the ones that were not used to build the tree.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
   <span class="kw">target_cols</span> <span class="kw">=</span> <span class="fu">scale_fill_manual</span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>)),
   <span class="kw">custom_layout</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="fl">1</span>), <span class="kw">show_all_feats</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-  <span class="kw">panel_space</span> <span class="kw">=</span> <span class="fl">0.05</span>, <span class="kw">target_space</span> <span class="kw">=</span> <span class="fl">0.2</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+  <span class="kw">panel_space</span> <span class="kw">=</span> <span class="fl">0.05</span>, <span class="kw">target_space</span> <span class="kw">=</span> <span class="fl">0.2</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>)
+<span class="co">#&gt; TableGrob (14 x 15) "layout": 28 grobs</span>
+<span class="co">#&gt;     z         cells       name                                     grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-15) background  zeroGrob[plot.background..zeroGrob.268]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.185]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.195]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.205]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.215]</span>
+<span class="co">#&gt; 6   3 ( 7- 7, 5- 5)   axis-t-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 7   3 ( 7- 7, 7- 7)   axis-t-2                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 8   3 ( 7- 7, 9- 9)   axis-t-3                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 9   3 ( 7- 7,11-11)   axis-t-4                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 10  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.216]</span>
+<span class="co">#&gt; 11  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.217]</span>
+<span class="co">#&gt; 12  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.218]</span>
+<span class="co">#&gt; 13  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.219]</span>
+<span class="co">#&gt; 14  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.222]</span>
+<span class="co">#&gt; 15  3 ( 9- 9,12-12)   axis-r-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 16  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.223]</span>
+<span class="co">#&gt; 17  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.224]</span>
+<span class="co">#&gt; 18  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.225]</span>
+<span class="co">#&gt; 19  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.226]</span>
+<span class="co">#&gt; 20  4 ( 6- 6, 5-11)     xlab-t                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 21  5 (11-11, 5-11)     xlab-b                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 22  6 ( 9- 9, 3- 3)     ylab-l                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 23  7 ( 9- 9,13-13)     ylab-r                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 24  8 ( 5- 5, 5-11)   subtitle    zeroGrob[plot.subtitle..zeroGrob.265]</span>
+<span class="co">#&gt; 25  9 ( 4- 4, 5-11)      title       zeroGrob[plot.title..zeroGrob.264]</span>
+<span class="co">#&gt; 26 10 (12-12, 5-11)    caption     zeroGrob[plot.caption..zeroGrob.267]</span>
+<span class="co">#&gt; 27 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.266]</span>
+<span class="co">#&gt; 28 12 ( 1- 1, 5-11)     layout                           gtable[layout]</span></pre></body></html></div>
 <p>We can also customize our heattree by passing parameters through to different <strong>ggparty</strong> geoms. These list parameters are named <code>*_vars</code>. For example:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Species'</span>,
@@ -128,42 +185,575 @@
       <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">6</span>)),
     <span class="kw">id</span> <span class="kw">=</span> <span class="st">'inner'</span>),
   <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">0</span>),
-  <span class="kw">edge_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">'grey'</span>))</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+  <span class="kw">edge_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">'grey'</span>))
+<span class="co">#&gt; TableGrob (14 x 15) "layout": 28 grobs</span>
+<span class="co">#&gt;     z         cells       name                                     grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-15) background  zeroGrob[plot.background..zeroGrob.415]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.332]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.342]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.352]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.362]</span>
+<span class="co">#&gt; 6   3 ( 7- 7, 5- 5)   axis-t-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 7   3 ( 7- 7, 7- 7)   axis-t-2                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 8   3 ( 7- 7, 9- 9)   axis-t-3                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 9   3 ( 7- 7,11-11)   axis-t-4                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 10  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.363]</span>
+<span class="co">#&gt; 11  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.364]</span>
+<span class="co">#&gt; 12  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.365]</span>
+<span class="co">#&gt; 13  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.366]</span>
+<span class="co">#&gt; 14  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.369]</span>
+<span class="co">#&gt; 15  3 ( 9- 9,12-12)   axis-r-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 16  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.370]</span>
+<span class="co">#&gt; 17  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.371]</span>
+<span class="co">#&gt; 18  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.372]</span>
+<span class="co">#&gt; 19  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.373]</span>
+<span class="co">#&gt; 20  4 ( 6- 6, 5-11)     xlab-t                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 21  5 (11-11, 5-11)     xlab-b                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 22  6 ( 9- 9, 3- 3)     ylab-l                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 23  7 ( 9- 9,13-13)     ylab-r                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 24  8 ( 5- 5, 5-11)   subtitle    zeroGrob[plot.subtitle..zeroGrob.412]</span>
+<span class="co">#&gt; 25  9 ( 4- 4, 5-11)      title       zeroGrob[plot.title..zeroGrob.411]</span>
+<span class="co">#&gt; 26 10 (12-12, 5-11)    caption     zeroGrob[plot.caption..zeroGrob.414]</span>
+<span class="co">#&gt; 27 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.413]</span>
+<span class="co">#&gt; 28 12 ( 1- 1, 5-11)     layout                           gtable[layout]</span></pre></body></html></div>
 </div>
 <div id="some-more-examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#some-more-examples" class="anchor"></a>Some more examples</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Type'</span>, <span class="kw">target_lab_disp</span> <span class="kw">=</span> <span class="st">'Cultivar'</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Type'</span>, <span class="kw">target_lab_disp</span> <span class="kw">=</span> <span class="st">'Cultivar'</span>)
+<span class="co">#&gt; TableGrob (14 x 19) "layout": 36 grobs</span>
+<span class="co">#&gt;     z         cells       name                                     grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-19) background  zeroGrob[plot.background..zeroGrob.596]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.487]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.497]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.507]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.517]</span>
+<span class="co">#&gt; 6   1 ( 9- 9,13-13)  panel-5-1                 gTree[panel-5.gTree.527]</span>
+<span class="co">#&gt; 7   1 ( 9- 9,15-15)  panel-6-1                 gTree[panel-6.gTree.537]</span>
+<span class="co">#&gt; 8   3 ( 7- 7, 5- 5)   axis-t-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 9   3 ( 7- 7, 7- 7)   axis-t-2                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 10  3 ( 7- 7, 9- 9)   axis-t-3                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 11  3 ( 7- 7,11-11)   axis-t-4                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 12  3 ( 7- 7,13-13)   axis-t-5                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 13  3 ( 7- 7,15-15)   axis-t-6                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 14  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.538]</span>
+<span class="co">#&gt; 15  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.539]</span>
+<span class="co">#&gt; 16  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.540]</span>
+<span class="co">#&gt; 17  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.541]</span>
+<span class="co">#&gt; 18  3 (10-10,13-13)   axis-b-5      absoluteGrob[GRID.absoluteGrob.542]</span>
+<span class="co">#&gt; 19  3 (10-10,15-15)   axis-b-6      absoluteGrob[GRID.absoluteGrob.543]</span>
+<span class="co">#&gt; 20  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.546]</span>
+<span class="co">#&gt; 21  3 ( 9- 9,16-16)   axis-r-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 22  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.547]</span>
+<span class="co">#&gt; 23  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.548]</span>
+<span class="co">#&gt; 24  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.549]</span>
+<span class="co">#&gt; 25  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.550]</span>
+<span class="co">#&gt; 26  2 ( 8- 8,13-13)  strip-t-5 zeroGrob[strip.text.x.top..zeroGrob.551]</span>
+<span class="co">#&gt; 27  2 ( 8- 8,15-15)  strip-t-6 zeroGrob[strip.text.x.top..zeroGrob.552]</span>
+<span class="co">#&gt; 28  4 ( 6- 6, 5-15)     xlab-t                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 29  5 (11-11, 5-15)     xlab-b                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 30  6 ( 9- 9, 3- 3)     ylab-l                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 31  7 ( 9- 9,17-17)     ylab-r                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 32  8 ( 5- 5, 5-15)   subtitle    zeroGrob[plot.subtitle..zeroGrob.593]</span>
+<span class="co">#&gt; 33  9 ( 4- 4, 5-15)      title       zeroGrob[plot.title..zeroGrob.592]</span>
+<span class="co">#&gt; 34 10 (12-12, 5-15)    caption     zeroGrob[plot.caption..zeroGrob.595]</span>
+<span class="co">#&gt; 35 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.594]</span>
+<span class="co">#&gt; 36 12 ( 1- 1, 5-15)     layout                           gtable[layout]</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">flags</span>, <span class="no">saheart</span>, <span class="no">diabetes</span>),
   <span class="no">heat_tree</span>,
   <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
   <span class="kw">target_lab_disp</span> <span class="kw">=</span> <span class="st">''</span>,
   <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.4</span>, <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0.1</span>,
-  <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">label.padding</span> <span class="kw">=</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">'white'</span>))</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="672"><img src="explore_files/figure-html/unnamed-chunk-6-2.png" width="672"><img src="explore_files/figure-html/unnamed-chunk-6-3.png" width="672"></p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r">
-<span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">p</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-6-4.png" width="672"></p>
+  <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">label.padding</span> <span class="kw">=</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">'white'</span>))
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt; TableGrob (14 x 15) "layout": 28 grobs</span>
+<span class="co">#&gt;     z         cells       name                                     grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-15) background  zeroGrob[plot.background..zeroGrob.763]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.668]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.678]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.688]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.698]</span>
+<span class="co">#&gt; 6   3 ( 7- 7, 5- 5)   axis-t-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 7   3 ( 7- 7, 7- 7)   axis-t-2                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 8   3 ( 7- 7, 9- 9)   axis-t-3                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 9   3 ( 7- 7,11-11)   axis-t-4                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 10  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.699]</span>
+<span class="co">#&gt; 11  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.700]</span>
+<span class="co">#&gt; 12  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.701]</span>
+<span class="co">#&gt; 13  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.702]</span>
+<span class="co">#&gt; 14  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.705]</span>
+<span class="co">#&gt; 15  3 ( 9- 9,12-12)   axis-r-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 16  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.706]</span>
+<span class="co">#&gt; 17  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.707]</span>
+<span class="co">#&gt; 18  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.708]</span>
+<span class="co">#&gt; 19  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.709]</span>
+<span class="co">#&gt; 20  4 ( 6- 6, 5-11)     xlab-t                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 21  5 (11-11, 5-11)     xlab-b                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 22  6 ( 9- 9, 3- 3)     ylab-l                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 23  7 ( 9- 9,13-13)     ylab-r                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 24  8 ( 5- 5, 5-11)   subtitle    zeroGrob[plot.subtitle..zeroGrob.760]</span>
+<span class="co">#&gt; 25  9 ( 4- 4, 5-11)      title       zeroGrob[plot.title..zeroGrob.759]</span>
+<span class="co">#&gt; 26 10 (12-12, 5-11)    caption     zeroGrob[plot.caption..zeroGrob.762]</span>
+<span class="co">#&gt; 27 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.761]</span>
+<span class="co">#&gt; 28 12 ( 1- 1, 5-11)     layout                           gtable[layout]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt; TableGrob (14 x 23) "layout": 44 grobs</span>
+<span class="co">#&gt;     z         cells       name                                     grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-23) background  zeroGrob[plot.background..zeroGrob.972]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.843]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.853]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.863]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.873]</span>
+<span class="co">#&gt; 6   1 ( 9- 9,13-13)  panel-5-1                 gTree[panel-5.gTree.883]</span>
+<span class="co">#&gt; 7   1 ( 9- 9,15-15)  panel-6-1                 gTree[panel-6.gTree.893]</span>
+<span class="co">#&gt; 8   1 ( 9- 9,17-17)  panel-7-1                 gTree[panel-7.gTree.903]</span>
+<span class="co">#&gt; 9   1 ( 9- 9,19-19)  panel-8-1                 gTree[panel-8.gTree.913]</span>
+<span class="co">#&gt; 10  3 ( 7- 7, 5- 5)   axis-t-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 11  3 ( 7- 7, 7- 7)   axis-t-2                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 12  3 ( 7- 7, 9- 9)   axis-t-3                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 13  3 ( 7- 7,11-11)   axis-t-4                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 14  3 ( 7- 7,13-13)   axis-t-5                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 15  3 ( 7- 7,15-15)   axis-t-6                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 16  3 ( 7- 7,17-17)   axis-t-7                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 17  3 ( 7- 7,19-19)   axis-t-8                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 18  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.914]</span>
+<span class="co">#&gt; 19  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.915]</span>
+<span class="co">#&gt; 20  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.916]</span>
+<span class="co">#&gt; 21  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.917]</span>
+<span class="co">#&gt; 22  3 (10-10,13-13)   axis-b-5      absoluteGrob[GRID.absoluteGrob.918]</span>
+<span class="co">#&gt; 23  3 (10-10,15-15)   axis-b-6      absoluteGrob[GRID.absoluteGrob.919]</span>
+<span class="co">#&gt; 24  3 (10-10,17-17)   axis-b-7      absoluteGrob[GRID.absoluteGrob.920]</span>
+<span class="co">#&gt; 25  3 (10-10,19-19)   axis-b-8      absoluteGrob[GRID.absoluteGrob.921]</span>
+<span class="co">#&gt; 26  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.924]</span>
+<span class="co">#&gt; 27  3 ( 9- 9,20-20)   axis-r-1                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 28  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.925]</span>
+<span class="co">#&gt; 29  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.926]</span>
+<span class="co">#&gt; 30  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.927]</span>
+<span class="co">#&gt; 31  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.928]</span>
+<span class="co">#&gt; 32  2 ( 8- 8,13-13)  strip-t-5 zeroGrob[strip.text.x.top..zeroGrob.929]</span>
+<span class="co">#&gt; 33  2 ( 8- 8,15-15)  strip-t-6 zeroGrob[strip.text.x.top..zeroGrob.930]</span>
+<span class="co">#&gt; 34  2 ( 8- 8,17-17)  strip-t-7 zeroGrob[strip.text.x.top..zeroGrob.931]</span>
+<span class="co">#&gt; 35  2 ( 8- 8,19-19)  strip-t-8 zeroGrob[strip.text.x.top..zeroGrob.932]</span>
+<span class="co">#&gt; 36  4 ( 6- 6, 5-19)     xlab-t                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 37  5 (11-11, 5-19)     xlab-b                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 38  6 ( 9- 9, 3- 3)     ylab-l                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 39  7 ( 9- 9,21-21)     ylab-r                           zeroGrob[NULL]</span>
+<span class="co">#&gt; 40  8 ( 5- 5, 5-19)   subtitle    zeroGrob[plot.subtitle..zeroGrob.969]</span>
+<span class="co">#&gt; 41  9 ( 4- 4, 5-19)      title       zeroGrob[plot.title..zeroGrob.968]</span>
+<span class="co">#&gt; 42 10 (12-12, 5-19)    caption     zeroGrob[plot.caption..zeroGrob.971]</span>
+<span class="co">#&gt; 43 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.970]</span>
+<span class="co">#&gt; 44 12 ( 1- 1, 5-19)     layout                           gtable[layout]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt; TableGrob (14 x 21) "layout": 40 grobs</span>
+<span class="co">#&gt;     z         cells       name                                      grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-21) background  zeroGrob[plot.background..zeroGrob.1180]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.1064]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.1074]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.1084]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.1094]</span>
+<span class="co">#&gt; 6   1 ( 9- 9,13-13)  panel-5-1                 gTree[panel-5.gTree.1104]</span>
+<span class="co">#&gt; 7   1 ( 9- 9,15-15)  panel-6-1                 gTree[panel-6.gTree.1114]</span>
+<span class="co">#&gt; 8   1 ( 9- 9,17-17)  panel-7-1                 gTree[panel-7.gTree.1124]</span>
+<span class="co">#&gt; 9   3 ( 7- 7, 5- 5)   axis-t-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 10  3 ( 7- 7, 7- 7)   axis-t-2                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 11  3 ( 7- 7, 9- 9)   axis-t-3                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 12  3 ( 7- 7,11-11)   axis-t-4                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 13  3 ( 7- 7,13-13)   axis-t-5                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 14  3 ( 7- 7,15-15)   axis-t-6                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 15  3 ( 7- 7,17-17)   axis-t-7                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 16  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.1125]</span>
+<span class="co">#&gt; 17  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.1126]</span>
+<span class="co">#&gt; 18  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.1127]</span>
+<span class="co">#&gt; 19  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.1128]</span>
+<span class="co">#&gt; 20  3 (10-10,13-13)   axis-b-5      absoluteGrob[GRID.absoluteGrob.1129]</span>
+<span class="co">#&gt; 21  3 (10-10,15-15)   axis-b-6      absoluteGrob[GRID.absoluteGrob.1130]</span>
+<span class="co">#&gt; 22  3 (10-10,17-17)   axis-b-7      absoluteGrob[GRID.absoluteGrob.1131]</span>
+<span class="co">#&gt; 23  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.1134]</span>
+<span class="co">#&gt; 24  3 ( 9- 9,18-18)   axis-r-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 25  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.1135]</span>
+<span class="co">#&gt; 26  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.1136]</span>
+<span class="co">#&gt; 27  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.1137]</span>
+<span class="co">#&gt; 28  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.1138]</span>
+<span class="co">#&gt; 29  2 ( 8- 8,13-13)  strip-t-5 zeroGrob[strip.text.x.top..zeroGrob.1139]</span>
+<span class="co">#&gt; 30  2 ( 8- 8,15-15)  strip-t-6 zeroGrob[strip.text.x.top..zeroGrob.1140]</span>
+<span class="co">#&gt; 31  2 ( 8- 8,17-17)  strip-t-7 zeroGrob[strip.text.x.top..zeroGrob.1141]</span>
+<span class="co">#&gt; 32  4 ( 6- 6, 5-17)     xlab-t                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 33  5 (11-11, 5-17)     xlab-b                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 34  6 ( 9- 9, 3- 3)     ylab-l                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 35  7 ( 9- 9,19-19)     ylab-r                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 36  8 ( 5- 5, 5-17)   subtitle    zeroGrob[plot.subtitle..zeroGrob.1177]</span>
+<span class="co">#&gt; 37  9 ( 4- 4, 5-17)      title       zeroGrob[plot.title..zeroGrob.1176]</span>
+<span class="co">#&gt; 38 10 (12-12, 5-17)    caption     zeroGrob[plot.caption..zeroGrob.1179]</span>
+<span class="co">#&gt; 39 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.1178]</span>
+<span class="co">#&gt; 40 12 ( 1- 1, 5-17)     layout                            gtable[layout]</span></pre></body></html></div>
 </div>
 <div id="smart-node-layout" class="section level2">
 <h2 class="hasAnchor">
 <a href="#smart-node-layout" class="anchor"></a>Smart node layout</h2>
 <p>These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size. The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches. This relative weight can be adjusted with the <code>lev_fac</code> parameter in <code><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree()</a></code>. The default <code>lev_fac = 1.3</code> seems to provide aesthetically pleasing trees, independent of the tree size.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># waveform has 5000 observations and 40 features</span>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># waveform has 5000 observations and 40 features</span>
 <span class="co"># so this computation may take up to a minute or two.</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">waveform</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.35</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="864"></p>
+<span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">waveform</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.35</span>)
+<span class="co">#&gt; TableGrob (14 x 175) "layout": 348 grobs</span>
+<span class="co">#&gt;      z             cells       name                                      grob</span>
+<span class="co">#&gt; 1    0 (  2- 14,  1-175) background  zeroGrob[plot.background..zeroGrob.2699]</span>
+<span class="co">#&gt; 2    1 (  9-  9,  5-  5)  panel-1-1                 gTree[panel-1.gTree.1576]</span>
+<span class="co">#&gt; 3    1 (  9-  9,  7-  7)  panel-2-1                 gTree[panel-2.gTree.1586]</span>
+<span class="co">#&gt; 4    1 (  9-  9,  9-  9)  panel-3-1                 gTree[panel-3.gTree.1596]</span>
+<span class="co">#&gt; 5    1 (  9-  9, 11- 11)  panel-4-1                 gTree[panel-4.gTree.1606]</span>
+<span class="co">#&gt; 6    1 (  9-  9, 13- 13)  panel-5-1                 gTree[panel-5.gTree.1616]</span>
+<span class="co">#&gt; 7    1 (  9-  9, 15- 15)  panel-6-1                 gTree[panel-6.gTree.1626]</span>
+<span class="co">#&gt; 8    1 (  9-  9, 17- 17)  panel-7-1                 gTree[panel-7.gTree.1636]</span>
+<span class="co">#&gt; 9    1 (  9-  9, 19- 19)  panel-8-1                 gTree[panel-8.gTree.1646]</span>
+<span class="co">#&gt; 10   1 (  9-  9, 21- 21)  panel-9-1                 gTree[panel-9.gTree.1656]</span>
+<span class="co">#&gt; 11   1 (  9-  9, 23- 23) panel-10-1                gTree[panel-10.gTree.1666]</span>
+<span class="co">#&gt; 12   1 (  9-  9, 25- 25) panel-11-1                gTree[panel-11.gTree.1676]</span>
+<span class="co">#&gt; 13   1 (  9-  9, 27- 27) panel-12-1                gTree[panel-12.gTree.1686]</span>
+<span class="co">#&gt; 14   1 (  9-  9, 29- 29) panel-13-1                gTree[panel-13.gTree.1696]</span>
+<span class="co">#&gt; 15   1 (  9-  9, 31- 31) panel-14-1                gTree[panel-14.gTree.1706]</span>
+<span class="co">#&gt; 16   1 (  9-  9, 33- 33) panel-15-1                gTree[panel-15.gTree.1716]</span>
+<span class="co">#&gt; 17   1 (  9-  9, 35- 35) panel-16-1                gTree[panel-16.gTree.1726]</span>
+<span class="co">#&gt; 18   1 (  9-  9, 37- 37) panel-17-1                gTree[panel-17.gTree.1736]</span>
+<span class="co">#&gt; 19   1 (  9-  9, 39- 39) panel-18-1                gTree[panel-18.gTree.1746]</span>
+<span class="co">#&gt; 20   1 (  9-  9, 41- 41) panel-19-1                gTree[panel-19.gTree.1756]</span>
+<span class="co">#&gt; 21   1 (  9-  9, 43- 43) panel-20-1                gTree[panel-20.gTree.1766]</span>
+<span class="co">#&gt; 22   1 (  9-  9, 45- 45) panel-21-1                gTree[panel-21.gTree.1776]</span>
+<span class="co">#&gt; 23   1 (  9-  9, 47- 47) panel-22-1                gTree[panel-22.gTree.1786]</span>
+<span class="co">#&gt; 24   1 (  9-  9, 49- 49) panel-23-1                gTree[panel-23.gTree.1796]</span>
+<span class="co">#&gt; 25   1 (  9-  9, 51- 51) panel-24-1                gTree[panel-24.gTree.1806]</span>
+<span class="co">#&gt; 26   1 (  9-  9, 53- 53) panel-25-1                gTree[panel-25.gTree.1816]</span>
+<span class="co">#&gt; 27   1 (  9-  9, 55- 55) panel-26-1                gTree[panel-26.gTree.1826]</span>
+<span class="co">#&gt; 28   1 (  9-  9, 57- 57) panel-27-1                gTree[panel-27.gTree.1836]</span>
+<span class="co">#&gt; 29   1 (  9-  9, 59- 59) panel-28-1                gTree[panel-28.gTree.1846]</span>
+<span class="co">#&gt; 30   1 (  9-  9, 61- 61) panel-29-1                gTree[panel-29.gTree.1856]</span>
+<span class="co">#&gt; 31   1 (  9-  9, 63- 63) panel-30-1                gTree[panel-30.gTree.1866]</span>
+<span class="co">#&gt; 32   1 (  9-  9, 65- 65) panel-31-1                gTree[panel-31.gTree.1876]</span>
+<span class="co">#&gt; 33   1 (  9-  9, 67- 67) panel-32-1                gTree[panel-32.gTree.1886]</span>
+<span class="co">#&gt; 34   1 (  9-  9, 69- 69) panel-33-1                gTree[panel-33.gTree.1896]</span>
+<span class="co">#&gt; 35   1 (  9-  9, 71- 71) panel-34-1                gTree[panel-34.gTree.1906]</span>
+<span class="co">#&gt; 36   1 (  9-  9, 73- 73) panel-35-1                gTree[panel-35.gTree.1916]</span>
+<span class="co">#&gt; 37   1 (  9-  9, 75- 75) panel-36-1                gTree[panel-36.gTree.1926]</span>
+<span class="co">#&gt; 38   1 (  9-  9, 77- 77) panel-37-1                gTree[panel-37.gTree.1936]</span>
+<span class="co">#&gt; 39   1 (  9-  9, 79- 79) panel-38-1                gTree[panel-38.gTree.1946]</span>
+<span class="co">#&gt; 40   1 (  9-  9, 81- 81) panel-39-1                gTree[panel-39.gTree.1956]</span>
+<span class="co">#&gt; 41   1 (  9-  9, 83- 83) panel-40-1                gTree[panel-40.gTree.1966]</span>
+<span class="co">#&gt; 42   1 (  9-  9, 85- 85) panel-41-1                gTree[panel-41.gTree.1976]</span>
+<span class="co">#&gt; 43   1 (  9-  9, 87- 87) panel-42-1                gTree[panel-42.gTree.1986]</span>
+<span class="co">#&gt; 44   1 (  9-  9, 89- 89) panel-43-1                gTree[panel-43.gTree.1996]</span>
+<span class="co">#&gt; 45   1 (  9-  9, 91- 91) panel-44-1                gTree[panel-44.gTree.2006]</span>
+<span class="co">#&gt; 46   1 (  9-  9, 93- 93) panel-45-1                gTree[panel-45.gTree.2016]</span>
+<span class="co">#&gt; 47   1 (  9-  9, 95- 95) panel-46-1                gTree[panel-46.gTree.2026]</span>
+<span class="co">#&gt; 48   1 (  9-  9, 97- 97) panel-47-1                gTree[panel-47.gTree.2036]</span>
+<span class="co">#&gt; 49   1 (  9-  9, 99- 99) panel-48-1                gTree[panel-48.gTree.2046]</span>
+<span class="co">#&gt; 50   1 (  9-  9,101-101) panel-49-1                gTree[panel-49.gTree.2056]</span>
+<span class="co">#&gt; 51   1 (  9-  9,103-103) panel-50-1                gTree[panel-50.gTree.2066]</span>
+<span class="co">#&gt; 52   1 (  9-  9,105-105) panel-51-1                gTree[panel-51.gTree.2076]</span>
+<span class="co">#&gt; 53   1 (  9-  9,107-107) panel-52-1                gTree[panel-52.gTree.2086]</span>
+<span class="co">#&gt; 54   1 (  9-  9,109-109) panel-53-1                gTree[panel-53.gTree.2096]</span>
+<span class="co">#&gt; 55   1 (  9-  9,111-111) panel-54-1                gTree[panel-54.gTree.2106]</span>
+<span class="co">#&gt; 56   1 (  9-  9,113-113) panel-55-1                gTree[panel-55.gTree.2116]</span>
+<span class="co">#&gt; 57   1 (  9-  9,115-115) panel-56-1                gTree[panel-56.gTree.2126]</span>
+<span class="co">#&gt; 58   1 (  9-  9,117-117) panel-57-1                gTree[panel-57.gTree.2136]</span>
+<span class="co">#&gt; 59   1 (  9-  9,119-119) panel-58-1                gTree[panel-58.gTree.2146]</span>
+<span class="co">#&gt; 60   1 (  9-  9,121-121) panel-59-1                gTree[panel-59.gTree.2156]</span>
+<span class="co">#&gt; 61   1 (  9-  9,123-123) panel-60-1                gTree[panel-60.gTree.2166]</span>
+<span class="co">#&gt; 62   1 (  9-  9,125-125) panel-61-1                gTree[panel-61.gTree.2176]</span>
+<span class="co">#&gt; 63   1 (  9-  9,127-127) panel-62-1                gTree[panel-62.gTree.2186]</span>
+<span class="co">#&gt; 64   1 (  9-  9,129-129) panel-63-1                gTree[panel-63.gTree.2196]</span>
+<span class="co">#&gt; 65   1 (  9-  9,131-131) panel-64-1                gTree[panel-64.gTree.2206]</span>
+<span class="co">#&gt; 66   1 (  9-  9,133-133) panel-65-1                gTree[panel-65.gTree.2216]</span>
+<span class="co">#&gt; 67   1 (  9-  9,135-135) panel-66-1                gTree[panel-66.gTree.2226]</span>
+<span class="co">#&gt; 68   1 (  9-  9,137-137) panel-67-1                gTree[panel-67.gTree.2236]</span>
+<span class="co">#&gt; 69   1 (  9-  9,139-139) panel-68-1                gTree[panel-68.gTree.2246]</span>
+<span class="co">#&gt; 70   1 (  9-  9,141-141) panel-69-1                gTree[panel-69.gTree.2256]</span>
+<span class="co">#&gt; 71   1 (  9-  9,143-143) panel-70-1                gTree[panel-70.gTree.2266]</span>
+<span class="co">#&gt; 72   1 (  9-  9,145-145) panel-71-1                gTree[panel-71.gTree.2276]</span>
+<span class="co">#&gt; 73   1 (  9-  9,147-147) panel-72-1                gTree[panel-72.gTree.2286]</span>
+<span class="co">#&gt; 74   1 (  9-  9,149-149) panel-73-1                gTree[panel-73.gTree.2296]</span>
+<span class="co">#&gt; 75   1 (  9-  9,151-151) panel-74-1                gTree[panel-74.gTree.2306]</span>
+<span class="co">#&gt; 76   1 (  9-  9,153-153) panel-75-1                gTree[panel-75.gTree.2316]</span>
+<span class="co">#&gt; 77   1 (  9-  9,155-155) panel-76-1                gTree[panel-76.gTree.2326]</span>
+<span class="co">#&gt; 78   1 (  9-  9,157-157) panel-77-1                gTree[panel-77.gTree.2336]</span>
+<span class="co">#&gt; 79   1 (  9-  9,159-159) panel-78-1                gTree[panel-78.gTree.2346]</span>
+<span class="co">#&gt; 80   1 (  9-  9,161-161) panel-79-1                gTree[panel-79.gTree.2356]</span>
+<span class="co">#&gt; 81   1 (  9-  9,163-163) panel-80-1                gTree[panel-80.gTree.2366]</span>
+<span class="co">#&gt; 82   1 (  9-  9,165-165) panel-81-1                gTree[panel-81.gTree.2376]</span>
+<span class="co">#&gt; 83   1 (  9-  9,167-167) panel-82-1                gTree[panel-82.gTree.2386]</span>
+<span class="co">#&gt; 84   1 (  9-  9,169-169) panel-83-1                gTree[panel-83.gTree.2396]</span>
+<span class="co">#&gt; 85   1 (  9-  9,171-171) panel-84-1                gTree[panel-84.gTree.2406]</span>
+<span class="co">#&gt; 86   3 (  7-  7,  5-  5)   axis-t-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 87   3 (  7-  7,  7-  7)   axis-t-2                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 88   3 (  7-  7,  9-  9)   axis-t-3                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 89   3 (  7-  7, 11- 11)   axis-t-4                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 90   3 (  7-  7, 13- 13)   axis-t-5                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 91   3 (  7-  7, 15- 15)   axis-t-6                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 92   3 (  7-  7, 17- 17)   axis-t-7                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 93   3 (  7-  7, 19- 19)   axis-t-8                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 94   3 (  7-  7, 21- 21)   axis-t-9                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 95   3 (  7-  7, 23- 23)  axis-t-10                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 96   3 (  7-  7, 25- 25)  axis-t-11                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 97   3 (  7-  7, 27- 27)  axis-t-12                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 98   3 (  7-  7, 29- 29)  axis-t-13                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 99   3 (  7-  7, 31- 31)  axis-t-14                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 100  3 (  7-  7, 33- 33)  axis-t-15                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 101  3 (  7-  7, 35- 35)  axis-t-16                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 102  3 (  7-  7, 37- 37)  axis-t-17                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 103  3 (  7-  7, 39- 39)  axis-t-18                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 104  3 (  7-  7, 41- 41)  axis-t-19                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 105  3 (  7-  7, 43- 43)  axis-t-20                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 106  3 (  7-  7, 45- 45)  axis-t-21                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 107  3 (  7-  7, 47- 47)  axis-t-22                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 108  3 (  7-  7, 49- 49)  axis-t-23                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 109  3 (  7-  7, 51- 51)  axis-t-24                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 110  3 (  7-  7, 53- 53)  axis-t-25                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 111  3 (  7-  7, 55- 55)  axis-t-26                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 112  3 (  7-  7, 57- 57)  axis-t-27                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 113  3 (  7-  7, 59- 59)  axis-t-28                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 114  3 (  7-  7, 61- 61)  axis-t-29                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 115  3 (  7-  7, 63- 63)  axis-t-30                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 116  3 (  7-  7, 65- 65)  axis-t-31                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 117  3 (  7-  7, 67- 67)  axis-t-32                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 118  3 (  7-  7, 69- 69)  axis-t-33                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 119  3 (  7-  7, 71- 71)  axis-t-34                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 120  3 (  7-  7, 73- 73)  axis-t-35                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 121  3 (  7-  7, 75- 75)  axis-t-36                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 122  3 (  7-  7, 77- 77)  axis-t-37                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 123  3 (  7-  7, 79- 79)  axis-t-38                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 124  3 (  7-  7, 81- 81)  axis-t-39                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 125  3 (  7-  7, 83- 83)  axis-t-40                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 126  3 (  7-  7, 85- 85)  axis-t-41                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 127  3 (  7-  7, 87- 87)  axis-t-42                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 128  3 (  7-  7, 89- 89)  axis-t-43                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 129  3 (  7-  7, 91- 91)  axis-t-44                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 130  3 (  7-  7, 93- 93)  axis-t-45                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 131  3 (  7-  7, 95- 95)  axis-t-46                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 132  3 (  7-  7, 97- 97)  axis-t-47                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 133  3 (  7-  7, 99- 99)  axis-t-48                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 134  3 (  7-  7,101-101)  axis-t-49                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 135  3 (  7-  7,103-103)  axis-t-50                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 136  3 (  7-  7,105-105)  axis-t-51                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 137  3 (  7-  7,107-107)  axis-t-52                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 138  3 (  7-  7,109-109)  axis-t-53                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 139  3 (  7-  7,111-111)  axis-t-54                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 140  3 (  7-  7,113-113)  axis-t-55                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 141  3 (  7-  7,115-115)  axis-t-56                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 142  3 (  7-  7,117-117)  axis-t-57                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 143  3 (  7-  7,119-119)  axis-t-58                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 144  3 (  7-  7,121-121)  axis-t-59                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 145  3 (  7-  7,123-123)  axis-t-60                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 146  3 (  7-  7,125-125)  axis-t-61                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 147  3 (  7-  7,127-127)  axis-t-62                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 148  3 (  7-  7,129-129)  axis-t-63                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 149  3 (  7-  7,131-131)  axis-t-64                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 150  3 (  7-  7,133-133)  axis-t-65                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 151  3 (  7-  7,135-135)  axis-t-66                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 152  3 (  7-  7,137-137)  axis-t-67                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 153  3 (  7-  7,139-139)  axis-t-68                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 154  3 (  7-  7,141-141)  axis-t-69                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 155  3 (  7-  7,143-143)  axis-t-70                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 156  3 (  7-  7,145-145)  axis-t-71                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 157  3 (  7-  7,147-147)  axis-t-72                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 158  3 (  7-  7,149-149)  axis-t-73                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 159  3 (  7-  7,151-151)  axis-t-74                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 160  3 (  7-  7,153-153)  axis-t-75                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 161  3 (  7-  7,155-155)  axis-t-76                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 162  3 (  7-  7,157-157)  axis-t-77                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 163  3 (  7-  7,159-159)  axis-t-78                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 164  3 (  7-  7,161-161)  axis-t-79                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 165  3 (  7-  7,163-163)  axis-t-80                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 166  3 (  7-  7,165-165)  axis-t-81                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 167  3 (  7-  7,167-167)  axis-t-82                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 168  3 (  7-  7,169-169)  axis-t-83                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 169  3 (  7-  7,171-171)  axis-t-84                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 170  3 ( 10- 10,  5-  5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.2407]</span>
+<span class="co">#&gt; 171  3 ( 10- 10,  7-  7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.2408]</span>
+<span class="co">#&gt; 172  3 ( 10- 10,  9-  9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.2409]</span>
+<span class="co">#&gt; 173  3 ( 10- 10, 11- 11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.2410]</span>
+<span class="co">#&gt; 174  3 ( 10- 10, 13- 13)   axis-b-5      absoluteGrob[GRID.absoluteGrob.2411]</span>
+<span class="co">#&gt; 175  3 ( 10- 10, 15- 15)   axis-b-6      absoluteGrob[GRID.absoluteGrob.2412]</span>
+<span class="co">#&gt; 176  3 ( 10- 10, 17- 17)   axis-b-7      absoluteGrob[GRID.absoluteGrob.2413]</span>
+<span class="co">#&gt; 177  3 ( 10- 10, 19- 19)   axis-b-8      absoluteGrob[GRID.absoluteGrob.2414]</span>
+<span class="co">#&gt; 178  3 ( 10- 10, 21- 21)   axis-b-9      absoluteGrob[GRID.absoluteGrob.2415]</span>
+<span class="co">#&gt; 179  3 ( 10- 10, 23- 23)  axis-b-10      absoluteGrob[GRID.absoluteGrob.2416]</span>
+<span class="co">#&gt; 180  3 ( 10- 10, 25- 25)  axis-b-11      absoluteGrob[GRID.absoluteGrob.2417]</span>
+<span class="co">#&gt; 181  3 ( 10- 10, 27- 27)  axis-b-12      absoluteGrob[GRID.absoluteGrob.2418]</span>
+<span class="co">#&gt; 182  3 ( 10- 10, 29- 29)  axis-b-13      absoluteGrob[GRID.absoluteGrob.2419]</span>
+<span class="co">#&gt; 183  3 ( 10- 10, 31- 31)  axis-b-14      absoluteGrob[GRID.absoluteGrob.2420]</span>
+<span class="co">#&gt; 184  3 ( 10- 10, 33- 33)  axis-b-15      absoluteGrob[GRID.absoluteGrob.2421]</span>
+<span class="co">#&gt; 185  3 ( 10- 10, 35- 35)  axis-b-16      absoluteGrob[GRID.absoluteGrob.2422]</span>
+<span class="co">#&gt; 186  3 ( 10- 10, 37- 37)  axis-b-17      absoluteGrob[GRID.absoluteGrob.2423]</span>
+<span class="co">#&gt; 187  3 ( 10- 10, 39- 39)  axis-b-18      absoluteGrob[GRID.absoluteGrob.2424]</span>
+<span class="co">#&gt; 188  3 ( 10- 10, 41- 41)  axis-b-19      absoluteGrob[GRID.absoluteGrob.2425]</span>
+<span class="co">#&gt; 189  3 ( 10- 10, 43- 43)  axis-b-20      absoluteGrob[GRID.absoluteGrob.2426]</span>
+<span class="co">#&gt; 190  3 ( 10- 10, 45- 45)  axis-b-21      absoluteGrob[GRID.absoluteGrob.2427]</span>
+<span class="co">#&gt; 191  3 ( 10- 10, 47- 47)  axis-b-22      absoluteGrob[GRID.absoluteGrob.2428]</span>
+<span class="co">#&gt; 192  3 ( 10- 10, 49- 49)  axis-b-23      absoluteGrob[GRID.absoluteGrob.2429]</span>
+<span class="co">#&gt; 193  3 ( 10- 10, 51- 51)  axis-b-24      absoluteGrob[GRID.absoluteGrob.2430]</span>
+<span class="co">#&gt; 194  3 ( 10- 10, 53- 53)  axis-b-25      absoluteGrob[GRID.absoluteGrob.2431]</span>
+<span class="co">#&gt; 195  3 ( 10- 10, 55- 55)  axis-b-26      absoluteGrob[GRID.absoluteGrob.2432]</span>
+<span class="co">#&gt; 196  3 ( 10- 10, 57- 57)  axis-b-27      absoluteGrob[GRID.absoluteGrob.2433]</span>
+<span class="co">#&gt; 197  3 ( 10- 10, 59- 59)  axis-b-28      absoluteGrob[GRID.absoluteGrob.2434]</span>
+<span class="co">#&gt; 198  3 ( 10- 10, 61- 61)  axis-b-29      absoluteGrob[GRID.absoluteGrob.2435]</span>
+<span class="co">#&gt; 199  3 ( 10- 10, 63- 63)  axis-b-30      absoluteGrob[GRID.absoluteGrob.2436]</span>
+<span class="co">#&gt; 200  3 ( 10- 10, 65- 65)  axis-b-31      absoluteGrob[GRID.absoluteGrob.2437]</span>
+<span class="co">#&gt; 201  3 ( 10- 10, 67- 67)  axis-b-32      absoluteGrob[GRID.absoluteGrob.2438]</span>
+<span class="co">#&gt; 202  3 ( 10- 10, 69- 69)  axis-b-33      absoluteGrob[GRID.absoluteGrob.2439]</span>
+<span class="co">#&gt; 203  3 ( 10- 10, 71- 71)  axis-b-34      absoluteGrob[GRID.absoluteGrob.2440]</span>
+<span class="co">#&gt; 204  3 ( 10- 10, 73- 73)  axis-b-35      absoluteGrob[GRID.absoluteGrob.2441]</span>
+<span class="co">#&gt; 205  3 ( 10- 10, 75- 75)  axis-b-36      absoluteGrob[GRID.absoluteGrob.2442]</span>
+<span class="co">#&gt; 206  3 ( 10- 10, 77- 77)  axis-b-37      absoluteGrob[GRID.absoluteGrob.2443]</span>
+<span class="co">#&gt; 207  3 ( 10- 10, 79- 79)  axis-b-38      absoluteGrob[GRID.absoluteGrob.2444]</span>
+<span class="co">#&gt; 208  3 ( 10- 10, 81- 81)  axis-b-39      absoluteGrob[GRID.absoluteGrob.2445]</span>
+<span class="co">#&gt; 209  3 ( 10- 10, 83- 83)  axis-b-40      absoluteGrob[GRID.absoluteGrob.2446]</span>
+<span class="co">#&gt; 210  3 ( 10- 10, 85- 85)  axis-b-41      absoluteGrob[GRID.absoluteGrob.2447]</span>
+<span class="co">#&gt; 211  3 ( 10- 10, 87- 87)  axis-b-42      absoluteGrob[GRID.absoluteGrob.2448]</span>
+<span class="co">#&gt; 212  3 ( 10- 10, 89- 89)  axis-b-43      absoluteGrob[GRID.absoluteGrob.2449]</span>
+<span class="co">#&gt; 213  3 ( 10- 10, 91- 91)  axis-b-44      absoluteGrob[GRID.absoluteGrob.2450]</span>
+<span class="co">#&gt; 214  3 ( 10- 10, 93- 93)  axis-b-45      absoluteGrob[GRID.absoluteGrob.2451]</span>
+<span class="co">#&gt; 215  3 ( 10- 10, 95- 95)  axis-b-46      absoluteGrob[GRID.absoluteGrob.2452]</span>
+<span class="co">#&gt; 216  3 ( 10- 10, 97- 97)  axis-b-47      absoluteGrob[GRID.absoluteGrob.2453]</span>
+<span class="co">#&gt; 217  3 ( 10- 10, 99- 99)  axis-b-48      absoluteGrob[GRID.absoluteGrob.2454]</span>
+<span class="co">#&gt; 218  3 ( 10- 10,101-101)  axis-b-49      absoluteGrob[GRID.absoluteGrob.2455]</span>
+<span class="co">#&gt; 219  3 ( 10- 10,103-103)  axis-b-50      absoluteGrob[GRID.absoluteGrob.2456]</span>
+<span class="co">#&gt; 220  3 ( 10- 10,105-105)  axis-b-51      absoluteGrob[GRID.absoluteGrob.2457]</span>
+<span class="co">#&gt; 221  3 ( 10- 10,107-107)  axis-b-52      absoluteGrob[GRID.absoluteGrob.2458]</span>
+<span class="co">#&gt; 222  3 ( 10- 10,109-109)  axis-b-53      absoluteGrob[GRID.absoluteGrob.2459]</span>
+<span class="co">#&gt; 223  3 ( 10- 10,111-111)  axis-b-54      absoluteGrob[GRID.absoluteGrob.2460]</span>
+<span class="co">#&gt; 224  3 ( 10- 10,113-113)  axis-b-55      absoluteGrob[GRID.absoluteGrob.2461]</span>
+<span class="co">#&gt; 225  3 ( 10- 10,115-115)  axis-b-56      absoluteGrob[GRID.absoluteGrob.2462]</span>
+<span class="co">#&gt; 226  3 ( 10- 10,117-117)  axis-b-57      absoluteGrob[GRID.absoluteGrob.2463]</span>
+<span class="co">#&gt; 227  3 ( 10- 10,119-119)  axis-b-58      absoluteGrob[GRID.absoluteGrob.2464]</span>
+<span class="co">#&gt; 228  3 ( 10- 10,121-121)  axis-b-59      absoluteGrob[GRID.absoluteGrob.2465]</span>
+<span class="co">#&gt; 229  3 ( 10- 10,123-123)  axis-b-60      absoluteGrob[GRID.absoluteGrob.2466]</span>
+<span class="co">#&gt; 230  3 ( 10- 10,125-125)  axis-b-61      absoluteGrob[GRID.absoluteGrob.2467]</span>
+<span class="co">#&gt; 231  3 ( 10- 10,127-127)  axis-b-62      absoluteGrob[GRID.absoluteGrob.2468]</span>
+<span class="co">#&gt; 232  3 ( 10- 10,129-129)  axis-b-63      absoluteGrob[GRID.absoluteGrob.2469]</span>
+<span class="co">#&gt; 233  3 ( 10- 10,131-131)  axis-b-64      absoluteGrob[GRID.absoluteGrob.2470]</span>
+<span class="co">#&gt; 234  3 ( 10- 10,133-133)  axis-b-65      absoluteGrob[GRID.absoluteGrob.2471]</span>
+<span class="co">#&gt; 235  3 ( 10- 10,135-135)  axis-b-66      absoluteGrob[GRID.absoluteGrob.2472]</span>
+<span class="co">#&gt; 236  3 ( 10- 10,137-137)  axis-b-67      absoluteGrob[GRID.absoluteGrob.2473]</span>
+<span class="co">#&gt; 237  3 ( 10- 10,139-139)  axis-b-68      absoluteGrob[GRID.absoluteGrob.2474]</span>
+<span class="co">#&gt; 238  3 ( 10- 10,141-141)  axis-b-69      absoluteGrob[GRID.absoluteGrob.2475]</span>
+<span class="co">#&gt; 239  3 ( 10- 10,143-143)  axis-b-70      absoluteGrob[GRID.absoluteGrob.2476]</span>
+<span class="co">#&gt; 240  3 ( 10- 10,145-145)  axis-b-71      absoluteGrob[GRID.absoluteGrob.2477]</span>
+<span class="co">#&gt; 241  3 ( 10- 10,147-147)  axis-b-72      absoluteGrob[GRID.absoluteGrob.2478]</span>
+<span class="co">#&gt; 242  3 ( 10- 10,149-149)  axis-b-73      absoluteGrob[GRID.absoluteGrob.2479]</span>
+<span class="co">#&gt; 243  3 ( 10- 10,151-151)  axis-b-74      absoluteGrob[GRID.absoluteGrob.2480]</span>
+<span class="co">#&gt; 244  3 ( 10- 10,153-153)  axis-b-75      absoluteGrob[GRID.absoluteGrob.2481]</span>
+<span class="co">#&gt; 245  3 ( 10- 10,155-155)  axis-b-76      absoluteGrob[GRID.absoluteGrob.2482]</span>
+<span class="co">#&gt; 246  3 ( 10- 10,157-157)  axis-b-77      absoluteGrob[GRID.absoluteGrob.2483]</span>
+<span class="co">#&gt; 247  3 ( 10- 10,159-159)  axis-b-78      absoluteGrob[GRID.absoluteGrob.2484]</span>
+<span class="co">#&gt; 248  3 ( 10- 10,161-161)  axis-b-79      absoluteGrob[GRID.absoluteGrob.2485]</span>
+<span class="co">#&gt; 249  3 ( 10- 10,163-163)  axis-b-80      absoluteGrob[GRID.absoluteGrob.2486]</span>
+<span class="co">#&gt; 250  3 ( 10- 10,165-165)  axis-b-81      absoluteGrob[GRID.absoluteGrob.2487]</span>
+<span class="co">#&gt; 251  3 ( 10- 10,167-167)  axis-b-82      absoluteGrob[GRID.absoluteGrob.2488]</span>
+<span class="co">#&gt; 252  3 ( 10- 10,169-169)  axis-b-83      absoluteGrob[GRID.absoluteGrob.2489]</span>
+<span class="co">#&gt; 253  3 ( 10- 10,171-171)  axis-b-84      absoluteGrob[GRID.absoluteGrob.2490]</span>
+<span class="co">#&gt; 254  3 (  9-  9,  4-  4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.2493]</span>
+<span class="co">#&gt; 255  3 (  9-  9,172-172)   axis-r-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 256  2 (  8-  8,  5-  5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.2494]</span>
+<span class="co">#&gt; 257  2 (  8-  8,  7-  7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.2495]</span>
+<span class="co">#&gt; 258  2 (  8-  8,  9-  9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.2496]</span>
+<span class="co">#&gt; 259  2 (  8-  8, 11- 11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.2497]</span>
+<span class="co">#&gt; 260  2 (  8-  8, 13- 13)  strip-t-5 zeroGrob[strip.text.x.top..zeroGrob.2498]</span>
+<span class="co">#&gt; 261  2 (  8-  8, 15- 15)  strip-t-6 zeroGrob[strip.text.x.top..zeroGrob.2499]</span>
+<span class="co">#&gt; 262  2 (  8-  8, 17- 17)  strip-t-7 zeroGrob[strip.text.x.top..zeroGrob.2500]</span>
+<span class="co">#&gt; 263  2 (  8-  8, 19- 19)  strip-t-8 zeroGrob[strip.text.x.top..zeroGrob.2501]</span>
+<span class="co">#&gt; 264  2 (  8-  8, 21- 21)  strip-t-9 zeroGrob[strip.text.x.top..zeroGrob.2502]</span>
+<span class="co">#&gt; 265  2 (  8-  8, 23- 23) strip-t-10 zeroGrob[strip.text.x.top..zeroGrob.2503]</span>
+<span class="co">#&gt; 266  2 (  8-  8, 25- 25) strip-t-11 zeroGrob[strip.text.x.top..zeroGrob.2504]</span>
+<span class="co">#&gt; 267  2 (  8-  8, 27- 27) strip-t-12 zeroGrob[strip.text.x.top..zeroGrob.2505]</span>
+<span class="co">#&gt; 268  2 (  8-  8, 29- 29) strip-t-13 zeroGrob[strip.text.x.top..zeroGrob.2506]</span>
+<span class="co">#&gt; 269  2 (  8-  8, 31- 31) strip-t-14 zeroGrob[strip.text.x.top..zeroGrob.2507]</span>
+<span class="co">#&gt; 270  2 (  8-  8, 33- 33) strip-t-15 zeroGrob[strip.text.x.top..zeroGrob.2508]</span>
+<span class="co">#&gt; 271  2 (  8-  8, 35- 35) strip-t-16 zeroGrob[strip.text.x.top..zeroGrob.2509]</span>
+<span class="co">#&gt; 272  2 (  8-  8, 37- 37) strip-t-17 zeroGrob[strip.text.x.top..zeroGrob.2510]</span>
+<span class="co">#&gt; 273  2 (  8-  8, 39- 39) strip-t-18 zeroGrob[strip.text.x.top..zeroGrob.2511]</span>
+<span class="co">#&gt; 274  2 (  8-  8, 41- 41) strip-t-19 zeroGrob[strip.text.x.top..zeroGrob.2512]</span>
+<span class="co">#&gt; 275  2 (  8-  8, 43- 43) strip-t-20 zeroGrob[strip.text.x.top..zeroGrob.2513]</span>
+<span class="co">#&gt; 276  2 (  8-  8, 45- 45) strip-t-21 zeroGrob[strip.text.x.top..zeroGrob.2514]</span>
+<span class="co">#&gt; 277  2 (  8-  8, 47- 47) strip-t-22 zeroGrob[strip.text.x.top..zeroGrob.2515]</span>
+<span class="co">#&gt; 278  2 (  8-  8, 49- 49) strip-t-23 zeroGrob[strip.text.x.top..zeroGrob.2516]</span>
+<span class="co">#&gt; 279  2 (  8-  8, 51- 51) strip-t-24 zeroGrob[strip.text.x.top..zeroGrob.2517]</span>
+<span class="co">#&gt; 280  2 (  8-  8, 53- 53) strip-t-25 zeroGrob[strip.text.x.top..zeroGrob.2518]</span>
+<span class="co">#&gt; 281  2 (  8-  8, 55- 55) strip-t-26 zeroGrob[strip.text.x.top..zeroGrob.2519]</span>
+<span class="co">#&gt; 282  2 (  8-  8, 57- 57) strip-t-27 zeroGrob[strip.text.x.top..zeroGrob.2520]</span>
+<span class="co">#&gt; 283  2 (  8-  8, 59- 59) strip-t-28 zeroGrob[strip.text.x.top..zeroGrob.2521]</span>
+<span class="co">#&gt; 284  2 (  8-  8, 61- 61) strip-t-29 zeroGrob[strip.text.x.top..zeroGrob.2522]</span>
+<span class="co">#&gt; 285  2 (  8-  8, 63- 63) strip-t-30 zeroGrob[strip.text.x.top..zeroGrob.2523]</span>
+<span class="co">#&gt; 286  2 (  8-  8, 65- 65) strip-t-31 zeroGrob[strip.text.x.top..zeroGrob.2524]</span>
+<span class="co">#&gt; 287  2 (  8-  8, 67- 67) strip-t-32 zeroGrob[strip.text.x.top..zeroGrob.2525]</span>
+<span class="co">#&gt; 288  2 (  8-  8, 69- 69) strip-t-33 zeroGrob[strip.text.x.top..zeroGrob.2526]</span>
+<span class="co">#&gt; 289  2 (  8-  8, 71- 71) strip-t-34 zeroGrob[strip.text.x.top..zeroGrob.2527]</span>
+<span class="co">#&gt; 290  2 (  8-  8, 73- 73) strip-t-35 zeroGrob[strip.text.x.top..zeroGrob.2528]</span>
+<span class="co">#&gt; 291  2 (  8-  8, 75- 75) strip-t-36 zeroGrob[strip.text.x.top..zeroGrob.2529]</span>
+<span class="co">#&gt; 292  2 (  8-  8, 77- 77) strip-t-37 zeroGrob[strip.text.x.top..zeroGrob.2530]</span>
+<span class="co">#&gt; 293  2 (  8-  8, 79- 79) strip-t-38 zeroGrob[strip.text.x.top..zeroGrob.2531]</span>
+<span class="co">#&gt; 294  2 (  8-  8, 81- 81) strip-t-39 zeroGrob[strip.text.x.top..zeroGrob.2532]</span>
+<span class="co">#&gt; 295  2 (  8-  8, 83- 83) strip-t-40 zeroGrob[strip.text.x.top..zeroGrob.2533]</span>
+<span class="co">#&gt; 296  2 (  8-  8, 85- 85) strip-t-41 zeroGrob[strip.text.x.top..zeroGrob.2534]</span>
+<span class="co">#&gt; 297  2 (  8-  8, 87- 87) strip-t-42 zeroGrob[strip.text.x.top..zeroGrob.2535]</span>
+<span class="co">#&gt; 298  2 (  8-  8, 89- 89) strip-t-43 zeroGrob[strip.text.x.top..zeroGrob.2536]</span>
+<span class="co">#&gt; 299  2 (  8-  8, 91- 91) strip-t-44 zeroGrob[strip.text.x.top..zeroGrob.2537]</span>
+<span class="co">#&gt; 300  2 (  8-  8, 93- 93) strip-t-45 zeroGrob[strip.text.x.top..zeroGrob.2538]</span>
+<span class="co">#&gt; 301  2 (  8-  8, 95- 95) strip-t-46 zeroGrob[strip.text.x.top..zeroGrob.2539]</span>
+<span class="co">#&gt; 302  2 (  8-  8, 97- 97) strip-t-47 zeroGrob[strip.text.x.top..zeroGrob.2540]</span>
+<span class="co">#&gt; 303  2 (  8-  8, 99- 99) strip-t-48 zeroGrob[strip.text.x.top..zeroGrob.2541]</span>
+<span class="co">#&gt; 304  2 (  8-  8,101-101) strip-t-49 zeroGrob[strip.text.x.top..zeroGrob.2542]</span>
+<span class="co">#&gt; 305  2 (  8-  8,103-103) strip-t-50 zeroGrob[strip.text.x.top..zeroGrob.2543]</span>
+<span class="co">#&gt; 306  2 (  8-  8,105-105) strip-t-51 zeroGrob[strip.text.x.top..zeroGrob.2544]</span>
+<span class="co">#&gt; 307  2 (  8-  8,107-107) strip-t-52 zeroGrob[strip.text.x.top..zeroGrob.2545]</span>
+<span class="co">#&gt; 308  2 (  8-  8,109-109) strip-t-53 zeroGrob[strip.text.x.top..zeroGrob.2546]</span>
+<span class="co">#&gt; 309  2 (  8-  8,111-111) strip-t-54 zeroGrob[strip.text.x.top..zeroGrob.2547]</span>
+<span class="co">#&gt; 310  2 (  8-  8,113-113) strip-t-55 zeroGrob[strip.text.x.top..zeroGrob.2548]</span>
+<span class="co">#&gt; 311  2 (  8-  8,115-115) strip-t-56 zeroGrob[strip.text.x.top..zeroGrob.2549]</span>
+<span class="co">#&gt; 312  2 (  8-  8,117-117) strip-t-57 zeroGrob[strip.text.x.top..zeroGrob.2550]</span>
+<span class="co">#&gt; 313  2 (  8-  8,119-119) strip-t-58 zeroGrob[strip.text.x.top..zeroGrob.2551]</span>
+<span class="co">#&gt; 314  2 (  8-  8,121-121) strip-t-59 zeroGrob[strip.text.x.top..zeroGrob.2552]</span>
+<span class="co">#&gt; 315  2 (  8-  8,123-123) strip-t-60 zeroGrob[strip.text.x.top..zeroGrob.2553]</span>
+<span class="co">#&gt; 316  2 (  8-  8,125-125) strip-t-61 zeroGrob[strip.text.x.top..zeroGrob.2554]</span>
+<span class="co">#&gt; 317  2 (  8-  8,127-127) strip-t-62 zeroGrob[strip.text.x.top..zeroGrob.2555]</span>
+<span class="co">#&gt; 318  2 (  8-  8,129-129) strip-t-63 zeroGrob[strip.text.x.top..zeroGrob.2556]</span>
+<span class="co">#&gt; 319  2 (  8-  8,131-131) strip-t-64 zeroGrob[strip.text.x.top..zeroGrob.2557]</span>
+<span class="co">#&gt; 320  2 (  8-  8,133-133) strip-t-65 zeroGrob[strip.text.x.top..zeroGrob.2558]</span>
+<span class="co">#&gt; 321  2 (  8-  8,135-135) strip-t-66 zeroGrob[strip.text.x.top..zeroGrob.2559]</span>
+<span class="co">#&gt; 322  2 (  8-  8,137-137) strip-t-67 zeroGrob[strip.text.x.top..zeroGrob.2560]</span>
+<span class="co">#&gt; 323  2 (  8-  8,139-139) strip-t-68 zeroGrob[strip.text.x.top..zeroGrob.2561]</span>
+<span class="co">#&gt; 324  2 (  8-  8,141-141) strip-t-69 zeroGrob[strip.text.x.top..zeroGrob.2562]</span>
+<span class="co">#&gt; 325  2 (  8-  8,143-143) strip-t-70 zeroGrob[strip.text.x.top..zeroGrob.2563]</span>
+<span class="co">#&gt; 326  2 (  8-  8,145-145) strip-t-71 zeroGrob[strip.text.x.top..zeroGrob.2564]</span>
+<span class="co">#&gt; 327  2 (  8-  8,147-147) strip-t-72 zeroGrob[strip.text.x.top..zeroGrob.2565]</span>
+<span class="co">#&gt; 328  2 (  8-  8,149-149) strip-t-73 zeroGrob[strip.text.x.top..zeroGrob.2566]</span>
+<span class="co">#&gt; 329  2 (  8-  8,151-151) strip-t-74 zeroGrob[strip.text.x.top..zeroGrob.2567]</span>
+<span class="co">#&gt; 330  2 (  8-  8,153-153) strip-t-75 zeroGrob[strip.text.x.top..zeroGrob.2568]</span>
+<span class="co">#&gt; 331  2 (  8-  8,155-155) strip-t-76 zeroGrob[strip.text.x.top..zeroGrob.2569]</span>
+<span class="co">#&gt; 332  2 (  8-  8,157-157) strip-t-77 zeroGrob[strip.text.x.top..zeroGrob.2570]</span>
+<span class="co">#&gt; 333  2 (  8-  8,159-159) strip-t-78 zeroGrob[strip.text.x.top..zeroGrob.2571]</span>
+<span class="co">#&gt; 334  2 (  8-  8,161-161) strip-t-79 zeroGrob[strip.text.x.top..zeroGrob.2572]</span>
+<span class="co">#&gt; 335  2 (  8-  8,163-163) strip-t-80 zeroGrob[strip.text.x.top..zeroGrob.2573]</span>
+<span class="co">#&gt; 336  2 (  8-  8,165-165) strip-t-81 zeroGrob[strip.text.x.top..zeroGrob.2574]</span>
+<span class="co">#&gt; 337  2 (  8-  8,167-167) strip-t-82 zeroGrob[strip.text.x.top..zeroGrob.2575]</span>
+<span class="co">#&gt; 338  2 (  8-  8,169-169) strip-t-83 zeroGrob[strip.text.x.top..zeroGrob.2576]</span>
+<span class="co">#&gt; 339  2 (  8-  8,171-171) strip-t-84 zeroGrob[strip.text.x.top..zeroGrob.2577]</span>
+<span class="co">#&gt; 340  4 (  6-  6,  5-171)     xlab-t                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 341  5 ( 11- 11,  5-171)     xlab-b                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 342  6 (  9-  9,  3-  3)     ylab-l                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 343  7 (  9-  9,173-173)     ylab-r                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 344  8 (  5-  5,  5-171)   subtitle    zeroGrob[plot.subtitle..zeroGrob.2696]</span>
+<span class="co">#&gt; 345  9 (  4-  4,  5-171)      title       zeroGrob[plot.title..zeroGrob.2695]</span>
+<span class="co">#&gt; 346 10 ( 12- 12,  5-171)    caption     zeroGrob[plot.caption..zeroGrob.2698]</span>
+<span class="co">#&gt; 347 11 (  3-  3,  2-  2)        tag         zeroGrob[plot.tag..zeroGrob.2697]</span>
+<span class="co">#&gt; 348 12 (  1-  1,  5-171)     layout                            gtable[layout]</span></pre></body></html></div>
 <p>In this next figure, on the top, <code>lev_fac = 1</code> makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts <code>lev_fac = 1.3</code> (default) on the bottom.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(
-  <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">1</span>),
-  <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>),
-  <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'lev_fac = 1'</span>, <span class="st">'lev_fac = 1.3'</span>))</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="864"><img src="explore_files/figure-html/unnamed-chunk-8-2.png" width="864"><img src="explore_files/figure-html/unnamed-chunk-8-3.png" width="864"></p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"># cowplot::plot_grid(
+#   heat_tree(wine_quality_red, target_lab = 'target', lev_fac = 1),
+#   heat_tree(wine_quality_red, target_lab = 'target'),
+#   ncol = 1,
+#   labels = c('lev_fac = 1', 'lev_fac = 1.3'))</pre></body></html></div>
 </div>
 <div id="clustering" class="section level2">
 <h2 class="hasAnchor">
@@ -178,7 +768,7 @@
 <p><strong>treeheatr</strong> supports mixed data types.</p>
 <p>For continuous variables, we can choose to either <em>scale</em> (subtract the mean and divide by the standard deviation) or <em>normalize</em> (subtract the min and divide by the max) each variable. Depending on what we want to show in the heatmap, one transformation method can be more effective than the other. Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in <a href="https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize">this vignette</a> of the <strong>heatmaply</strong> package.</p>
 <p>Let’s take a closer look at how it handles a dataset like Titanic with categorical variables (<code>Class</code>, <code>Sex</code>, <code>Embarked</code>) and continuous variables (others). We <strong>highly recommend</strong> that, when dealing with mixed data types, the user supply <code>feat_types</code> to indicate whether a feature should be considered ‘numeric’ (continuous) or ‘factor’ (categorical) as shown below. When <code>feat_types</code> is not specified, <strong>treeheatr</strong> automatically inferred each column type from the original dataset.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">dat_raw</span> <span class="kw">&lt;-</span> <span class="no">titanic</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">dat_raw</span> <span class="kw">&lt;-</span> <span class="no">titanic</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">Survived</span>, <span class="no">Sex</span>, <span class="no">Pclass</span>, <span class="no">Age</span>, <span class="no">SibSp</span>, <span class="no">Parch</span>, <span class="no">Fare</span>, <span class="no">Embarked</span>)
 
 <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
@@ -198,14 +788,69 @@
 <span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 2 treated as</span>
 <span class="co">#&gt; interval scaled</span>
 <span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 4 treated as</span>
-<span class="co">#&gt; interval scaled</span></pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-9-1.png" width="864"></p>
+<span class="co">#&gt; interval scaled</span>
+<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 5 treated as</span>
+<span class="co">#&gt; interval scaled</span>
+<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 2 treated as</span>
+<span class="co">#&gt; interval scaled</span>
+<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 4, 5 treated</span>
+<span class="co">#&gt; as interval scaled</span>
+<span class="co">#&gt; TableGrob (14 x 25) "layout": 48 grobs</span>
+<span class="co">#&gt;     z         cells       name                                      grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-25) background  zeroGrob[plot.background..zeroGrob.3321]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.3139]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.3149]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.3159]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.3169]</span>
+<span class="co">#&gt; 6   1 ( 9- 9,13-13)  panel-5-1                 gTree[panel-5.gTree.3179]</span>
+<span class="co">#&gt; 7   1 ( 9- 9,15-15)  panel-6-1                 gTree[panel-6.gTree.3189]</span>
+<span class="co">#&gt; 8   1 ( 9- 9,17-17)  panel-7-1                 gTree[panel-7.gTree.3199]</span>
+<span class="co">#&gt; 9   1 ( 9- 9,19-19)  panel-8-1                 gTree[panel-8.gTree.3209]</span>
+<span class="co">#&gt; 10  1 ( 9- 9,21-21)  panel-9-1                 gTree[panel-9.gTree.3219]</span>
+<span class="co">#&gt; 11  3 ( 7- 7, 5- 5)   axis-t-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 12  3 ( 7- 7, 7- 7)   axis-t-2                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 13  3 ( 7- 7, 9- 9)   axis-t-3                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 14  3 ( 7- 7,11-11)   axis-t-4                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 15  3 ( 7- 7,13-13)   axis-t-5                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 16  3 ( 7- 7,15-15)   axis-t-6                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 17  3 ( 7- 7,17-17)   axis-t-7                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 18  3 ( 7- 7,19-19)   axis-t-8                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 19  3 ( 7- 7,21-21)   axis-t-9                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 20  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.3220]</span>
+<span class="co">#&gt; 21  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.3221]</span>
+<span class="co">#&gt; 22  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.3222]</span>
+<span class="co">#&gt; 23  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.3223]</span>
+<span class="co">#&gt; 24  3 (10-10,13-13)   axis-b-5      absoluteGrob[GRID.absoluteGrob.3224]</span>
+<span class="co">#&gt; 25  3 (10-10,15-15)   axis-b-6      absoluteGrob[GRID.absoluteGrob.3225]</span>
+<span class="co">#&gt; 26  3 (10-10,17-17)   axis-b-7      absoluteGrob[GRID.absoluteGrob.3226]</span>
+<span class="co">#&gt; 27  3 (10-10,19-19)   axis-b-8      absoluteGrob[GRID.absoluteGrob.3227]</span>
+<span class="co">#&gt; 28  3 (10-10,21-21)   axis-b-9      absoluteGrob[GRID.absoluteGrob.3228]</span>
+<span class="co">#&gt; 29  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.3231]</span>
+<span class="co">#&gt; 30  3 ( 9- 9,22-22)   axis-r-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 31  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.3232]</span>
+<span class="co">#&gt; 32  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.3233]</span>
+<span class="co">#&gt; 33  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.3234]</span>
+<span class="co">#&gt; 34  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.3235]</span>
+<span class="co">#&gt; 35  2 ( 8- 8,13-13)  strip-t-5 zeroGrob[strip.text.x.top..zeroGrob.3236]</span>
+<span class="co">#&gt; 36  2 ( 8- 8,15-15)  strip-t-6 zeroGrob[strip.text.x.top..zeroGrob.3237]</span>
+<span class="co">#&gt; 37  2 ( 8- 8,17-17)  strip-t-7 zeroGrob[strip.text.x.top..zeroGrob.3238]</span>
+<span class="co">#&gt; 38  2 ( 8- 8,19-19)  strip-t-8 zeroGrob[strip.text.x.top..zeroGrob.3239]</span>
+<span class="co">#&gt; 39  2 ( 8- 8,21-21)  strip-t-9 zeroGrob[strip.text.x.top..zeroGrob.3240]</span>
+<span class="co">#&gt; 40  4 ( 6- 6, 5-21)     xlab-t                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 41  5 (11-11, 5-21)     xlab-b                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 42  6 ( 9- 9, 3- 3)     ylab-l                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 43  7 ( 9- 9,23-23)     ylab-r                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 44  8 ( 5- 5, 5-21)   subtitle    zeroGrob[plot.subtitle..zeroGrob.3318]</span>
+<span class="co">#&gt; 45  9 ( 4- 4, 5-21)      title       zeroGrob[plot.title..zeroGrob.3317]</span>
+<span class="co">#&gt; 46 10 (12-12, 5-21)    caption     zeroGrob[plot.caption..zeroGrob.3320]</span>
+<span class="co">#&gt; 47 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.3319]</span>
+<span class="co">#&gt; 48 12 ( 1- 1, 5-21)     layout                            gtable[layout]</span></pre></body></html></div>
 </div>
 <div id="regression" class="section level2">
 <h2 class="hasAnchor">
 <a href="#regression" class="anchor"></a>Regression</h2>
 <p>In general, compared to classification, regression task is more difficult to interpret with a decision tree. However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes. Also, removing the terminal node label may show the groups better. Here are a few examples:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">galaxy</span>,
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">galaxy</span>,
           <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
           <span class="kw">task</span> <span class="kw">=</span> <span class="st">'regression'</span>,
           <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="kw">NULL</span>,
@@ -214,13 +859,167 @@
 <span class="co">#&gt; interval scaled</span>
 
 <span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 3 treated as</span>
-<span class="co">#&gt; interval scaled</span></pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<span class="co">#&gt; interval scaled</span>
+<span class="co">#&gt; TableGrob (14 x 39) "layout": 76 grobs</span>
+<span class="co">#&gt;     z         cells       name                                      grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-39) background  zeroGrob[plot.background..zeroGrob.3679]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.3453]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.3463]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.3473]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.3483]</span>
+<span class="co">#&gt; 6   1 ( 9- 9,13-13)  panel-5-1                 gTree[panel-5.gTree.3493]</span>
+<span class="co">#&gt; 7   1 ( 9- 9,15-15)  panel-6-1                 gTree[panel-6.gTree.3503]</span>
+<span class="co">#&gt; 8   1 ( 9- 9,17-17)  panel-7-1                 gTree[panel-7.gTree.3513]</span>
+<span class="co">#&gt; 9   1 ( 9- 9,19-19)  panel-8-1                 gTree[panel-8.gTree.3523]</span>
+<span class="co">#&gt; 10  1 ( 9- 9,21-21)  panel-9-1                 gTree[panel-9.gTree.3533]</span>
+<span class="co">#&gt; 11  1 ( 9- 9,23-23) panel-10-1                gTree[panel-10.gTree.3543]</span>
+<span class="co">#&gt; 12  1 ( 9- 9,25-25) panel-11-1                gTree[panel-11.gTree.3553]</span>
+<span class="co">#&gt; 13  1 ( 9- 9,27-27) panel-12-1                gTree[panel-12.gTree.3563]</span>
+<span class="co">#&gt; 14  1 ( 9- 9,29-29) panel-13-1                gTree[panel-13.gTree.3573]</span>
+<span class="co">#&gt; 15  1 ( 9- 9,31-31) panel-14-1                gTree[panel-14.gTree.3583]</span>
+<span class="co">#&gt; 16  1 ( 9- 9,33-33) panel-15-1                gTree[panel-15.gTree.3593]</span>
+<span class="co">#&gt; 17  1 ( 9- 9,35-35) panel-16-1                gTree[panel-16.gTree.3603]</span>
+<span class="co">#&gt; 18  3 ( 7- 7, 5- 5)   axis-t-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 19  3 ( 7- 7, 7- 7)   axis-t-2                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 20  3 ( 7- 7, 9- 9)   axis-t-3                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 21  3 ( 7- 7,11-11)   axis-t-4                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 22  3 ( 7- 7,13-13)   axis-t-5                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 23  3 ( 7- 7,15-15)   axis-t-6                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 24  3 ( 7- 7,17-17)   axis-t-7                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 25  3 ( 7- 7,19-19)   axis-t-8                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 26  3 ( 7- 7,21-21)   axis-t-9                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 27  3 ( 7- 7,23-23)  axis-t-10                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 28  3 ( 7- 7,25-25)  axis-t-11                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 29  3 ( 7- 7,27-27)  axis-t-12                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 30  3 ( 7- 7,29-29)  axis-t-13                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 31  3 ( 7- 7,31-31)  axis-t-14                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 32  3 ( 7- 7,33-33)  axis-t-15                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 33  3 ( 7- 7,35-35)  axis-t-16                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 34  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.3604]</span>
+<span class="co">#&gt; 35  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.3605]</span>
+<span class="co">#&gt; 36  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.3606]</span>
+<span class="co">#&gt; 37  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.3607]</span>
+<span class="co">#&gt; 38  3 (10-10,13-13)   axis-b-5      absoluteGrob[GRID.absoluteGrob.3608]</span>
+<span class="co">#&gt; 39  3 (10-10,15-15)   axis-b-6      absoluteGrob[GRID.absoluteGrob.3609]</span>
+<span class="co">#&gt; 40  3 (10-10,17-17)   axis-b-7      absoluteGrob[GRID.absoluteGrob.3610]</span>
+<span class="co">#&gt; 41  3 (10-10,19-19)   axis-b-8      absoluteGrob[GRID.absoluteGrob.3611]</span>
+<span class="co">#&gt; 42  3 (10-10,21-21)   axis-b-9      absoluteGrob[GRID.absoluteGrob.3612]</span>
+<span class="co">#&gt; 43  3 (10-10,23-23)  axis-b-10      absoluteGrob[GRID.absoluteGrob.3613]</span>
+<span class="co">#&gt; 44  3 (10-10,25-25)  axis-b-11      absoluteGrob[GRID.absoluteGrob.3614]</span>
+<span class="co">#&gt; 45  3 (10-10,27-27)  axis-b-12      absoluteGrob[GRID.absoluteGrob.3615]</span>
+<span class="co">#&gt; 46  3 (10-10,29-29)  axis-b-13      absoluteGrob[GRID.absoluteGrob.3616]</span>
+<span class="co">#&gt; 47  3 (10-10,31-31)  axis-b-14      absoluteGrob[GRID.absoluteGrob.3617]</span>
+<span class="co">#&gt; 48  3 (10-10,33-33)  axis-b-15      absoluteGrob[GRID.absoluteGrob.3618]</span>
+<span class="co">#&gt; 49  3 (10-10,35-35)  axis-b-16      absoluteGrob[GRID.absoluteGrob.3619]</span>
+<span class="co">#&gt; 50  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.3622]</span>
+<span class="co">#&gt; 51  3 ( 9- 9,36-36)   axis-r-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 52  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.3623]</span>
+<span class="co">#&gt; 53  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.3624]</span>
+<span class="co">#&gt; 54  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.3625]</span>
+<span class="co">#&gt; 55  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.3626]</span>
+<span class="co">#&gt; 56  2 ( 8- 8,13-13)  strip-t-5 zeroGrob[strip.text.x.top..zeroGrob.3627]</span>
+<span class="co">#&gt; 57  2 ( 8- 8,15-15)  strip-t-6 zeroGrob[strip.text.x.top..zeroGrob.3628]</span>
+<span class="co">#&gt; 58  2 ( 8- 8,17-17)  strip-t-7 zeroGrob[strip.text.x.top..zeroGrob.3629]</span>
+<span class="co">#&gt; 59  2 ( 8- 8,19-19)  strip-t-8 zeroGrob[strip.text.x.top..zeroGrob.3630]</span>
+<span class="co">#&gt; 60  2 ( 8- 8,21-21)  strip-t-9 zeroGrob[strip.text.x.top..zeroGrob.3631]</span>
+<span class="co">#&gt; 61  2 ( 8- 8,23-23) strip-t-10 zeroGrob[strip.text.x.top..zeroGrob.3632]</span>
+<span class="co">#&gt; 62  2 ( 8- 8,25-25) strip-t-11 zeroGrob[strip.text.x.top..zeroGrob.3633]</span>
+<span class="co">#&gt; 63  2 ( 8- 8,27-27) strip-t-12 zeroGrob[strip.text.x.top..zeroGrob.3634]</span>
+<span class="co">#&gt; 64  2 ( 8- 8,29-29) strip-t-13 zeroGrob[strip.text.x.top..zeroGrob.3635]</span>
+<span class="co">#&gt; 65  2 ( 8- 8,31-31) strip-t-14 zeroGrob[strip.text.x.top..zeroGrob.3636]</span>
+<span class="co">#&gt; 66  2 ( 8- 8,33-33) strip-t-15 zeroGrob[strip.text.x.top..zeroGrob.3637]</span>
+<span class="co">#&gt; 67  2 ( 8- 8,35-35) strip-t-16 zeroGrob[strip.text.x.top..zeroGrob.3638]</span>
+<span class="co">#&gt; 68  4 ( 6- 6, 5-35)     xlab-t                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 69  5 (11-11, 5-35)     xlab-b                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 70  6 ( 9- 9, 3- 3)     ylab-l                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 71  7 ( 9- 9,37-37)     ylab-r                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 72  8 ( 5- 5, 5-35)   subtitle    zeroGrob[plot.subtitle..zeroGrob.3676]</span>
+<span class="co">#&gt; 73  9 ( 4- 4, 5-35)      title       zeroGrob[plot.title..zeroGrob.3675]</span>
+<span class="co">#&gt; 74 10 (12-12, 5-35)    caption     zeroGrob[plot.caption..zeroGrob.3678]</span>
+<span class="co">#&gt; 75 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.3677]</span>
+<span class="co">#&gt; 76 12 ( 1- 1, 5-35)     layout                            gtable[layout]</span></pre></body></html></div>
 <p>For illustration purposes, we’re only showing the top 300 samples of the <em>pollen</em> dataset below.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">pollen</span>[<span class="fl">1</span>:<span class="fl">300</span>, ],
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">pollen</span>[<span class="fl">1</span>:<span class="fl">300</span>, ],
           <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
-          <span class="kw">task</span> <span class="kw">=</span> <span class="st">'regression'</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
+          <span class="kw">task</span> <span class="kw">=</span> <span class="st">'regression'</span>)
+<span class="co">#&gt; TableGrob (14 x 39) "layout": 76 grobs</span>
+<span class="co">#&gt;     z         cells       name                                      grob</span>
+<span class="co">#&gt; 1   0 ( 2-14, 1-39) background  zeroGrob[plot.background..zeroGrob.4047]</span>
+<span class="co">#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.3821]</span>
+<span class="co">#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.3831]</span>
+<span class="co">#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.3841]</span>
+<span class="co">#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.3851]</span>
+<span class="co">#&gt; 6   1 ( 9- 9,13-13)  panel-5-1                 gTree[panel-5.gTree.3861]</span>
+<span class="co">#&gt; 7   1 ( 9- 9,15-15)  panel-6-1                 gTree[panel-6.gTree.3871]</span>
+<span class="co">#&gt; 8   1 ( 9- 9,17-17)  panel-7-1                 gTree[panel-7.gTree.3881]</span>
+<span class="co">#&gt; 9   1 ( 9- 9,19-19)  panel-8-1                 gTree[panel-8.gTree.3891]</span>
+<span class="co">#&gt; 10  1 ( 9- 9,21-21)  panel-9-1                 gTree[panel-9.gTree.3901]</span>
+<span class="co">#&gt; 11  1 ( 9- 9,23-23) panel-10-1                gTree[panel-10.gTree.3911]</span>
+<span class="co">#&gt; 12  1 ( 9- 9,25-25) panel-11-1                gTree[panel-11.gTree.3921]</span>
+<span class="co">#&gt; 13  1 ( 9- 9,27-27) panel-12-1                gTree[panel-12.gTree.3931]</span>
+<span class="co">#&gt; 14  1 ( 9- 9,29-29) panel-13-1                gTree[panel-13.gTree.3941]</span>
+<span class="co">#&gt; 15  1 ( 9- 9,31-31) panel-14-1                gTree[panel-14.gTree.3951]</span>
+<span class="co">#&gt; 16  1 ( 9- 9,33-33) panel-15-1                gTree[panel-15.gTree.3961]</span>
+<span class="co">#&gt; 17  1 ( 9- 9,35-35) panel-16-1                gTree[panel-16.gTree.3971]</span>
+<span class="co">#&gt; 18  3 ( 7- 7, 5- 5)   axis-t-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 19  3 ( 7- 7, 7- 7)   axis-t-2                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 20  3 ( 7- 7, 9- 9)   axis-t-3                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 21  3 ( 7- 7,11-11)   axis-t-4                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 22  3 ( 7- 7,13-13)   axis-t-5                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 23  3 ( 7- 7,15-15)   axis-t-6                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 24  3 ( 7- 7,17-17)   axis-t-7                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 25  3 ( 7- 7,19-19)   axis-t-8                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 26  3 ( 7- 7,21-21)   axis-t-9                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 27  3 ( 7- 7,23-23)  axis-t-10                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 28  3 ( 7- 7,25-25)  axis-t-11                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 29  3 ( 7- 7,27-27)  axis-t-12                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 30  3 ( 7- 7,29-29)  axis-t-13                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 31  3 ( 7- 7,31-31)  axis-t-14                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 32  3 ( 7- 7,33-33)  axis-t-15                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 33  3 ( 7- 7,35-35)  axis-t-16                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 34  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.3972]</span>
+<span class="co">#&gt; 35  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.3973]</span>
+<span class="co">#&gt; 36  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.3974]</span>
+<span class="co">#&gt; 37  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.3975]</span>
+<span class="co">#&gt; 38  3 (10-10,13-13)   axis-b-5      absoluteGrob[GRID.absoluteGrob.3976]</span>
+<span class="co">#&gt; 39  3 (10-10,15-15)   axis-b-6      absoluteGrob[GRID.absoluteGrob.3977]</span>
+<span class="co">#&gt; 40  3 (10-10,17-17)   axis-b-7      absoluteGrob[GRID.absoluteGrob.3978]</span>
+<span class="co">#&gt; 41  3 (10-10,19-19)   axis-b-8      absoluteGrob[GRID.absoluteGrob.3979]</span>
+<span class="co">#&gt; 42  3 (10-10,21-21)   axis-b-9      absoluteGrob[GRID.absoluteGrob.3980]</span>
+<span class="co">#&gt; 43  3 (10-10,23-23)  axis-b-10      absoluteGrob[GRID.absoluteGrob.3981]</span>
+<span class="co">#&gt; 44  3 (10-10,25-25)  axis-b-11      absoluteGrob[GRID.absoluteGrob.3982]</span>
+<span class="co">#&gt; 45  3 (10-10,27-27)  axis-b-12      absoluteGrob[GRID.absoluteGrob.3983]</span>
+<span class="co">#&gt; 46  3 (10-10,29-29)  axis-b-13      absoluteGrob[GRID.absoluteGrob.3984]</span>
+<span class="co">#&gt; 47  3 (10-10,31-31)  axis-b-14      absoluteGrob[GRID.absoluteGrob.3985]</span>
+<span class="co">#&gt; 48  3 (10-10,33-33)  axis-b-15      absoluteGrob[GRID.absoluteGrob.3986]</span>
+<span class="co">#&gt; 49  3 (10-10,35-35)  axis-b-16      absoluteGrob[GRID.absoluteGrob.3987]</span>
+<span class="co">#&gt; 50  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.3990]</span>
+<span class="co">#&gt; 51  3 ( 9- 9,36-36)   axis-r-1                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 52  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.3991]</span>
+<span class="co">#&gt; 53  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.3992]</span>
+<span class="co">#&gt; 54  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.3993]</span>
+<span class="co">#&gt; 55  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.3994]</span>
+<span class="co">#&gt; 56  2 ( 8- 8,13-13)  strip-t-5 zeroGrob[strip.text.x.top..zeroGrob.3995]</span>
+<span class="co">#&gt; 57  2 ( 8- 8,15-15)  strip-t-6 zeroGrob[strip.text.x.top..zeroGrob.3996]</span>
+<span class="co">#&gt; 58  2 ( 8- 8,17-17)  strip-t-7 zeroGrob[strip.text.x.top..zeroGrob.3997]</span>
+<span class="co">#&gt; 59  2 ( 8- 8,19-19)  strip-t-8 zeroGrob[strip.text.x.top..zeroGrob.3998]</span>
+<span class="co">#&gt; 60  2 ( 8- 8,21-21)  strip-t-9 zeroGrob[strip.text.x.top..zeroGrob.3999]</span>
+<span class="co">#&gt; 61  2 ( 8- 8,23-23) strip-t-10 zeroGrob[strip.text.x.top..zeroGrob.4000]</span>
+<span class="co">#&gt; 62  2 ( 8- 8,25-25) strip-t-11 zeroGrob[strip.text.x.top..zeroGrob.4001]</span>
+<span class="co">#&gt; 63  2 ( 8- 8,27-27) strip-t-12 zeroGrob[strip.text.x.top..zeroGrob.4002]</span>
+<span class="co">#&gt; 64  2 ( 8- 8,29-29) strip-t-13 zeroGrob[strip.text.x.top..zeroGrob.4003]</span>
+<span class="co">#&gt; 65  2 ( 8- 8,31-31) strip-t-14 zeroGrob[strip.text.x.top..zeroGrob.4004]</span>
+<span class="co">#&gt; 66  2 ( 8- 8,33-33) strip-t-15 zeroGrob[strip.text.x.top..zeroGrob.4005]</span>
+<span class="co">#&gt; 67  2 ( 8- 8,35-35) strip-t-16 zeroGrob[strip.text.x.top..zeroGrob.4006]</span>
+<span class="co">#&gt; 68  4 ( 6- 6, 5-35)     xlab-t                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 69  5 (11-11, 5-35)     xlab-b                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 70  6 ( 9- 9, 3- 3)     ylab-l                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 71  7 ( 9- 9,37-37)     ylab-r                            zeroGrob[NULL]</span>
+<span class="co">#&gt; 72  8 ( 5- 5, 5-35)   subtitle    zeroGrob[plot.subtitle..zeroGrob.4044]</span>
+<span class="co">#&gt; 73  9 ( 4- 4, 5-35)      title       zeroGrob[plot.title..zeroGrob.4043]</span>
+<span class="co">#&gt; 74 10 (12-12, 5-35)    caption     zeroGrob[plot.caption..zeroGrob.4046]</span>
+<span class="co">#&gt; 75 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.4045]</span>
+<span class="co">#&gt; 76 12 ( 1- 1, 5-35)     layout                            gtable[layout]</span></pre></body></html></div>
 </div>
   </div>
 

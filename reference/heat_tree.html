@@ -349,13 +349,83 @@ If NULL, use `target_lab`.</p></td>
     <p>A gtable/grob object of the decision tree (top) and heatmap (bottom).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>heat_tree</span>(<span class='no'>iris</span>, <span class='st'>'Species'</span>)</div><div class='img'><img src='heat_tree-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>heat_tree</span>(<span class='no'>iris</span>, <span class='st'>'Species'</span>)</div><div class='output co'>#&gt; TableGrob (14 x 15) "layout": 28 grobs
+#&gt;     z         cells       name                                    grob
+#&gt; 1   0 ( 2-14, 1-15) background zeroGrob[plot.background..zeroGrob.121]
+#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.36]
+#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.46]
+#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.56]
+#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.66]
+#&gt; 6   3 ( 7- 7, 5- 5)   axis-t-1                          zeroGrob[NULL]
+#&gt; 7   3 ( 7- 7, 7- 7)   axis-t-2                          zeroGrob[NULL]
+#&gt; 8   3 ( 7- 7, 9- 9)   axis-t-3                          zeroGrob[NULL]
+#&gt; 9   3 ( 7- 7,11-11)   axis-t-4                          zeroGrob[NULL]
+#&gt; 10  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.67]
+#&gt; 11  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.68]
+#&gt; 12  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.69]
+#&gt; 13  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.70]
+#&gt; 14  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.74]
+#&gt; 15  3 ( 9- 9,12-12)   axis-r-1                          zeroGrob[NULL]
+#&gt; 16  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.75]
+#&gt; 17  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.76]
+#&gt; 18  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.77]
+#&gt; 19  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.78]
+#&gt; 20  4 ( 6- 6, 5-11)     xlab-t                          zeroGrob[NULL]
+#&gt; 21  5 (11-11, 5-11)     xlab-b                          zeroGrob[NULL]
+#&gt; 22  6 ( 9- 9, 3- 3)     ylab-l                          zeroGrob[NULL]
+#&gt; 23  7 ( 9- 9,13-13)     ylab-r                          zeroGrob[NULL]
+#&gt; 24  8 ( 5- 5, 5-11)   subtitle   zeroGrob[plot.subtitle..zeroGrob.118]
+#&gt; 25  9 ( 4- 4, 5-11)      title      zeroGrob[plot.title..zeroGrob.117]
+#&gt; 26 10 (12-12, 5-11)    caption    zeroGrob[plot.caption..zeroGrob.120]
+#&gt; 27 11 ( 3- 3, 2- 2)        tag        zeroGrob[plot.tag..zeroGrob.119]
+#&gt; 28 12 ( 1- 1, 5-11)     layout                          gtable[layout]</div><div class='input'>
 <span class='fu'>heat_tree</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>galaxy</span>[<span class='fl'>1</span>:<span class='fl'>100</span>, ],
   <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'target'</span>,
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='st'>'regression'</span>,
   <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: binary variable(s) 3 treated as interval scaled</span></div><div class='img'><img src='heat_tree-2.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: binary variable(s) 3 treated as interval scaled</span></div><div class='output co'>#&gt; TableGrob (14 x 21) "layout": 40 grobs
+#&gt;     z         cells       name                                     grob
+#&gt; 1   0 ( 2-14, 1-21) background  zeroGrob[plot.background..zeroGrob.306]
+#&gt; 2   1 ( 9- 9, 5- 5)  panel-1-1                 gTree[panel-1.gTree.197]
+#&gt; 3   1 ( 9- 9, 7- 7)  panel-2-1                 gTree[panel-2.gTree.207]
+#&gt; 4   1 ( 9- 9, 9- 9)  panel-3-1                 gTree[panel-3.gTree.217]
+#&gt; 5   1 ( 9- 9,11-11)  panel-4-1                 gTree[panel-4.gTree.227]
+#&gt; 6   1 ( 9- 9,13-13)  panel-5-1                 gTree[panel-5.gTree.237]
+#&gt; 7   1 ( 9- 9,15-15)  panel-6-1                 gTree[panel-6.gTree.247]
+#&gt; 8   1 ( 9- 9,17-17)  panel-7-1                 gTree[panel-7.gTree.257]
+#&gt; 9   3 ( 7- 7, 5- 5)   axis-t-1                           zeroGrob[NULL]
+#&gt; 10  3 ( 7- 7, 7- 7)   axis-t-2                           zeroGrob[NULL]
+#&gt; 11  3 ( 7- 7, 9- 9)   axis-t-3                           zeroGrob[NULL]
+#&gt; 12  3 ( 7- 7,11-11)   axis-t-4                           zeroGrob[NULL]
+#&gt; 13  3 ( 7- 7,13-13)   axis-t-5                           zeroGrob[NULL]
+#&gt; 14  3 ( 7- 7,15-15)   axis-t-6                           zeroGrob[NULL]
+#&gt; 15  3 ( 7- 7,17-17)   axis-t-7                           zeroGrob[NULL]
+#&gt; 16  3 (10-10, 5- 5)   axis-b-1      absoluteGrob[GRID.absoluteGrob.258]
+#&gt; 17  3 (10-10, 7- 7)   axis-b-2      absoluteGrob[GRID.absoluteGrob.259]
+#&gt; 18  3 (10-10, 9- 9)   axis-b-3      absoluteGrob[GRID.absoluteGrob.260]
+#&gt; 19  3 (10-10,11-11)   axis-b-4      absoluteGrob[GRID.absoluteGrob.261]
+#&gt; 20  3 (10-10,13-13)   axis-b-5      absoluteGrob[GRID.absoluteGrob.262]
+#&gt; 21  3 (10-10,15-15)   axis-b-6      absoluteGrob[GRID.absoluteGrob.263]
+#&gt; 22  3 (10-10,17-17)   axis-b-7      absoluteGrob[GRID.absoluteGrob.264]
+#&gt; 23  3 ( 9- 9, 4- 4)   axis-l-1      absoluteGrob[GRID.absoluteGrob.267]
+#&gt; 24  3 ( 9- 9,18-18)   axis-r-1                           zeroGrob[NULL]
+#&gt; 25  2 ( 8- 8, 5- 5)  strip-t-1 zeroGrob[strip.text.x.top..zeroGrob.268]
+#&gt; 26  2 ( 8- 8, 7- 7)  strip-t-2 zeroGrob[strip.text.x.top..zeroGrob.269]
+#&gt; 27  2 ( 8- 8, 9- 9)  strip-t-3 zeroGrob[strip.text.x.top..zeroGrob.270]
+#&gt; 28  2 ( 8- 8,11-11)  strip-t-4 zeroGrob[strip.text.x.top..zeroGrob.271]
+#&gt; 29  2 ( 8- 8,13-13)  strip-t-5 zeroGrob[strip.text.x.top..zeroGrob.272]
+#&gt; 30  2 ( 8- 8,15-15)  strip-t-6 zeroGrob[strip.text.x.top..zeroGrob.273]
+#&gt; 31  2 ( 8- 8,17-17)  strip-t-7 zeroGrob[strip.text.x.top..zeroGrob.274]
+#&gt; 32  4 ( 6- 6, 5-17)     xlab-t                           zeroGrob[NULL]
+#&gt; 33  5 (11-11, 5-17)     xlab-b                           zeroGrob[NULL]
+#&gt; 34  6 ( 9- 9, 3- 3)     ylab-l                           zeroGrob[NULL]
+#&gt; 35  7 ( 9- 9,19-19)     ylab-r                           zeroGrob[NULL]
+#&gt; 36  8 ( 5- 5, 5-17)   subtitle    zeroGrob[plot.subtitle..zeroGrob.303]
+#&gt; 37  9 ( 4- 4, 5-17)      title       zeroGrob[plot.title..zeroGrob.302]
+#&gt; 38 10 (12-12, 5-17)    caption     zeroGrob[plot.caption..zeroGrob.305]
+#&gt; 39 11 ( 3- 3, 2- 2)        tag         zeroGrob[plot.tag..zeroGrob.304]
+#&gt; 40 12 ( 1- 1, 5-17)     layout                           gtable[layout]</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
