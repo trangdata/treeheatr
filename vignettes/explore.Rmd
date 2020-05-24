@@ -78,7 +78,7 @@ heat_tree(
 heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 ```
 
-```{r warning=F, fig.height=2.5, fig.width=7}
+```{r warning=F, fig.height=7, fig.width=7}
 lapply(
   list(flags, saheart, diabetes), 
   heat_tree, 
@@ -126,16 +126,16 @@ Now, `cluster::daisy()` may throw this warning if your dataset contains binary f
 
 but in general this is safe to ignore because the goal of clustering is to improve our interpretability of the tree-based model and not to make precise inference about each cluster.
 
-## Mixed data types
+## Mixed data/feature types
 
-**treeheatr** supports mixed data types.
+**treeheatr** supports mixed feature types.
 
-For continuous variables, we can choose to either *scale* (subtract the mean and divide by the standard deviation) or *normalize* (subtract the min and divide by the max) each variable.
+For continuous variables/features, we can choose to either *scale* (subtract the mean and divide by the standard deviation) or *normalize* (subtract the min and divide by the max) each feature
 Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
 Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette](https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
 
-Let's take a closer look at how it handles a dataset like Titanic with categorical variables (`Class`, `Sex`, `Embarked`) and continuous variables (others).
-We **highly recommend** that, when dealing with mixed data types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
+Let's take a closer look at how it handles a dataset like Titanic with categorical features (`Class`, `Sex`, `Embarked`) and continuous features (others).
+We **highly recommend** that, when dealing with mixed feature types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
 When `feat_types` is not specified, **treeheatr** automatically inferred each column type from the original dataset.
 
 ```{r fig.height=4.5, fig.width=9}
@@ -181,3 +181,97 @@ heat_tree(data = pollen[1:300, ],
           task = 'regression')
 ```
 
+
+## You're the Warren Beatty of your `heat_tree()`
+
+*Anyone got that [Food Wishes reference](https://youtu.be/fyMQ2203pQM?t=82)?*
+
+You can manually define your own tree for the `custom_tree` argument following the [partykit vignette](https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf).
+
+As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a [recent study](https://doi.org/10.1038/s42256-020-0180-7) with the conditional decision tree.
+
+
+First, a quick simplification of the column names:
+```{r}
+selected_train <- train_covid %>% 
+  select(
+    LDH = 'Lactate dehydrogenase',
+    hs_CRP = 'High sensitivity C-reactive protein',
+    Lymphocyte = '(%)lymphocyte',
+    outcome = Type2
+  ) %>% 
+  tidyr::drop_na() 
+
+selected_test <- test_covid %>%
+  select(
+    LDH = 'Lactate dehydrogenase',
+    hs_CRP = 'High sensitivity C-reactive protein',
+    Lymphocyte = '(%)lymphocyte',
+    'outcome'
+  )
+```
+
+We now apply the tree structure in [Figure 2](https://www.nature.com/articles/s42256-020-0180-7/figures/2) of the original study (only show the training set for now):
+
+```{r fig.height=4.5, fig.width=7}
+# first argument indicates the index of the feature used for splitting
+split_ldh <- partysplit(1L, breaks = 365) 
+split_crp <- partysplit(2L, breaks = 41.2)
+split_lymp <- partysplit(3L, breaks = 14.7)
+
+custom_tree <- partynode(1L, split = split_ldh , kids = list(
+  partynode(2L, split = split_crp, kids = list(
+    partynode(3L, info = 'Survival'),
+    partynode(4L, split = split_lymp, kids = list(
+      partynode(5L, info = 'Death'),
+      partynode(6L, info = 'Survival'))))),
+  partynode(7L, info = 'Death')))
+
+treeheatr::heat_tree(
+  selected_train,
+  target_lab = 'outcome',
+  label_map = c(`1` = 'Death', `0` = 'Survival'),
+  custom_tree = custom_tree) 
+```
+
+## Apply the learned tree on external/holdout/test/validation dataset
+
+You can print measures evaluating the conditional decision tree's performance by setting `print_eval = TRUE`.
+By defaults, we show 5 measures for classification tasks:
+
+- Accuracy
+- Balanced accuracy (BAL_ACCURACY)
+- Kappa coefficient (KAP)
+- Area under the receiver operating characteristics curve (ROC_AUC)
+- Area under the precision recall curve (PR_AUC)
+
+and 4 measures for regression tasks:
+
+- R-squared (RSQ)
+- Mean absolute error (MAE)
+- Root mean squared error (RMSE)
+- Concordance correlation coefficient (CCC).
+
+You can also choose to show performance based on any other set of appropriate metrics listed on the [yardstick reference page](https://yardstick.tidymodels.org/reference/index.html), for example, with
+
+```{r eval = FALSE}
+my_metrics = yardstick::metric_set(yardstick::f_meas)
+```
+
+as a `heat_tree` argument to show the _F_ score (a combination of precision and recall).
+
+**Warning**: We do not recommend `print_eval` on the training set because these measures may gives you an over-optimistic view of how the tree performs (this would show pure training accuracy, not cross-validated).
+
+Let's now apply the custom tree we (or really, Yan et al.) designed earlier and see how it performs on the test set:
+
+```{r fig.height=4.5, fig.width=7}
+treeheatr::heat_tree(
+  selected_train,
+  data_test = selected_test,
+  target_lab = 'outcome',
+  label_map = c(`1` = 'Death', `0` = 'Survival'),
+  print_eval = TRUE,
+  custom_tree = custom_tree,
+  lev_fac = 3
+)
+```
