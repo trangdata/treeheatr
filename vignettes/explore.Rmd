@@ -72,37 +72,12 @@ heat_tree(
   edge_vars = list(size = 1, color = 'grey'))
 ```
 
-## Some more examples
-
-```{r fig.height=4, fig.width=7}
-heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
-```
-
-```{r warning=F, fig.height=7, fig.width=7}
-lapply(
-  list(flags, saheart, diabetes),
-  heat_tree,
-  target_lab = 'target',
-  target_lab_disp = '',
-  heat_rel_height = 0.4, tree_space_bottom = 0.1,
-  terminal_vars = list(label.padding = unit(0.1, "lines"), size = 3, color = 'white')) %>%
-  cowplot::plot_grid(plotlist = ., ncol = 1)
-```
-
-
 ## Smart node layout
 
 These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size.
 The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches.
 This relative weight can be adjusted with the `lev_fac` parameter in `heat_tree()`.
 The default `lev_fac = 1.3` seems to provide aesthetically pleasing trees, independent of the tree size.
-
-```{r fig.height=8, fig.width=9}
-# waveform has 5000 observations and 40 features
-# so this computation may take up to a minute or two.
-
-heat_tree(waveform, target_lab = 'target', heat_rel_height = 0.35)
-```
 
 In this next figure, on the top, `lev_fac = 1` makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts `lev_fac = 1.3` (default) on the bottom.
 
@@ -130,7 +105,7 @@ but in general this is safe to ignore because the goal of clustering is to impro
 
 **treeheatr** supports mixed feature types.
 
-For continuous variables/features, we can choose to either *scale* (subtract the mean and divide by the standard deviation) or *normalize* (subtract the min and divide by the max) each feature
+For continuous variables/features, we can choose to either *percentize* (scale-rank), *normalize* (subtract the min and divide by the max) or *scale* (subtract the mean and divide by the standard deviation) each feature.
 Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
 Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette](https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
 
@@ -161,24 +136,15 @@ heat_tree(
 In general, compared to classification, regression task is more difficult to interpret with a decision tree.
 However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes.
 Also, removing the terminal node label may show the groups better.
-Here are a few examples:
+Here's an example:
 
 
-```{r fig.height=4, fig.width=7}
+```{r fig.height=4, fig.width=7, warning=F, message=F}
 heat_tree(data = galaxy,
           target_lab = 'target',
           task = 'regression',
           terminal_vars = NULL,
           tree_space_bottom = 0)
-```
-
-
-For illustration purposes, we're only showing the top 300 samples of the *pollen* dataset below.
-
-```{r fig.height=4, fig.width=7}
-heat_tree(data = pollen[1:300, ],
-          target_lab = 'target',
-          task = 'regression')
 ```
 
 

@@ -65,22 +65,6 @@
 #'
 "titanic"
 
-#' Waveform database generator.
-#'
-#' Generator generating 3 classes of waves.
-#' Each class is generated from a combination of 2 of 3 "base" waves.
-#'
-#' @format A data frame with 5000 observations and 41 variables describing the waveform,
-#' all of which include noise. The latter 19 attributes are all noise attributes
-#' with mean 0 and variance 1.
-#'
-#' https://datahub.io/machine-learning/waveform-5000
-#'
-#' Breiman,L., Friedman,J.H., Olshen,R.A., and Stone,C.J. (1984).
-#' Classification and Regression Trees. Wadsworth International, pp 49-55, 169.
-#'
-"waveform"
-
 #' Results of a chemical analysis of wines grown in a specific area of Italy.
 #'
 #' Three types of wine are represented in the 178 samples,

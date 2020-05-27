@@ -1,7 +1,6 @@
 library(pmlblite)
 
 wine_quality_red <- pmlblite::fetch_data('wine-quality-red')
-waveform <- pmlblite::fetch_data('waveform-40')
 mushroom <- pmlblite::fetch_data('mushroom')
 titanic <- titanic::titanic_train
 flags <- pmlblite::fetch_data('flags')
@@ -14,7 +13,7 @@ test_covid <- readr::read_tsv('https://raw.githubusercontent.com/trang1618/Pre_S
 
 data(wine, package = 'rattle')
 
-usethis::use_data(wine_quality_red, waveform, mushroom, titanic,
+usethis::use_data(wine_quality_red, mushroom, titanic,
                   flags, diabetes, saheart, wine, pollen, galaxy,
                   train_covid, test_covid,
                   overwrite = TRUE)
