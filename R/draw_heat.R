@@ -1,31 +1,47 @@
 #' Draws the heatmap.
 #'
 #' Draws the heatmap to be placed below the decision tree.
+#'
+#' @param fit party object, e.g., as output from partykit::ctree()
 #' @param dat Dataframe with samples from original dataset ordered according to
 #' the clustering within each leaf node.
-#' @param feat_names Character vector specifying the feature names in dat.
-#' @param disp_feats Character vector specifying features to be displayed.
+#' @param trans_type Character string of 'normalize', 'scale' or 'none'.
+#' If 'scale', subtract the mean and divide by the standard deviation.
+#' If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
+#' If 'none', no transformation is applied.
+#' More information on what transformation to choose can be acquired here:
+#' https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize
+#' @param clust_feats Logical. If TRUE, performs cluster on the features.
+#' @param show_all_feats Logical. If TRUE, show all features regarless p_thres.
+#' @param p_thres Numeric value indicating the p-value threshold of feature importance.
+#' Feature with p-values computed from the decision tree below this value
+#' will be displayed on the heatmap.
+#' @param cont_cols Function determine color scale for continuous variable,
+#' defaults to viridis option D.
+#' @param cate_cols Function determine color scale for nominal categorical variable,
+#' defaults to viridis option D.
+#' @param target_space Numeric value indicating spacing between
+#' the target label and the rest of the features
+#' @param target_pos Character string specifying the position of the target label
+#' on heatmap, can be 'top', 'bottom' or 'none'.
+#'
 #' @inheritParams heat_tree
 #'
 #' @return A ggplot2 grob object of the heatmap.
 #' @export
 #'
-draw_heat <- function(
-  dat, disp_feats, feat_names,
-  target_cols = NULL,
-  feat_types = NULL,
-  trans_type = 'normalize',
-  cont_cols = ggplot2::scale_fill_viridis_c(),
-  cate_cols = ggplot2::scale_fill_viridis_d(option = 'D', begin = 0.3, end = 0.9),
-  clust_feats = TRUE,
-  target_space = 0.05,
-  panel_space = 0.001,
-  target_pos = 'top',
-  target_lab_disp = NULL
-){
+draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_lab_disp = NULL,
+  trans_type = c('normalize', 'scale', 'none'), clust_feats = TRUE, show_all_feats = FALSE,
+  p_thres = 0.05, custom_tree = NULL, cont_cols = ggplot2::scale_fill_viridis_c(),
+  cate_cols = ggplot2::scale_fill_viridis_d(begin = 0.3, end = 0.9),
+  panel_space = 0.001, target_space = 0.05, target_pos = 'top'){
 
+  feat_names <- setdiff(colnames(fit$data), 'my_target')
+  trans_type <- match.arg(trans_type)
   # if feature types are not supplied, infer from column type:
   feat_types <- feat_types %||% sapply(dat[, feat_names], class)
+  disp_feats <- get_disp_feats(
+    fit, feat_names, show_all_feats, custom_tree, p_thres)
 
   # prepare feature orders:
   feat_list <- prepare_feats(dat, disp_feats, feat_types, clust_feats, trans_type)
@@ -98,3 +114,34 @@ draw_heat <- function(
 
   return(dheat)
 }
+
+
+# ------------------------------------------------------------------------------------
+#' Select the important features to be displayed.
+#'
+#' Select features with p-value (computed from decision tree) < `p_thres`
+#' or all features if `show_all_feats == TRUE`.
+#'
+#' @param fit constparty object of the decision tree.
+#' @param feat_names Character vector specifying the feature names in dat.
+#' @inheritParams draw_heat
+#' @return A character vector of feature names.
+#' @export
+#'
+get_disp_feats <- function(fit, feat_names, show_all_feats, custom_tree, p_thres){
+  if (show_all_feats || (!is.null(custom_tree))){
+    disp_feats <- feat_names
+  } else {
+    # important features to display in decision trees
+    # (pass p value threshold):
+    disp_feats <- partykit::nodeapply(
+      fit, ids = partykit::nodeids(fit),
+      FUN = function(n) {
+        node_pvals <- partykit::info_node(n)$p.value
+        names(node_pvals[node_pvals < p_thres])
+      }) %>%
+      unlist() %>%
+      unique()
+  }
+}
+

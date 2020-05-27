@@ -4,7 +4,7 @@
 \alias{eval_tree}
 \title{Print decision tree performance according to different metrics.}
 \usage{
-eval_tree(dat, task, my_metrics)
+eval_tree(dat, task, metrics)
 }
 \arguments{
 \item{dat}{Dataframe with samples from original dataset.}
@@ -12,7 +12,7 @@ eval_tree(dat, task, my_metrics)
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
 
-\item{my_metrics}{A set of metric functions to evaluate decision tree,
+\item{metrics}{A set of metric functions to evaluate decision tree,
 defaults to common metrics for classification/regression problems.
 Can be defined with `yardstick::metric_set`.}
 }

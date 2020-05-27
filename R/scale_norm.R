@@ -3,7 +3,7 @@
 #' Performs transformation on continuous variables for the heatmap color scales.
 #'
 #' @param x Numeric vector.
-#' @inheritParams heat_tree
+#' @inheritParams draw_heat
 #'
 #' @return Numeric vector of the transformed `x`.
 #' @export

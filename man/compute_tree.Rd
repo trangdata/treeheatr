@@ -7,18 +7,14 @@
 compute_tree(
   dat,
   data_test,
-  custom_tree,
   task,
-  my_metrics,
-  feat_names,
-  show_all_feats,
   clust_samps,
   clust_target,
-  panel_space,
+  print_eval,
+  custom_tree,
   custom_layout,
   lev_fac,
-  p_thres,
-  ...
+  panel_space
 )
 }
 \arguments{
@@ -26,20 +22,8 @@ compute_tree(
 
 \item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
 
-\item{custom_tree}{Custom tree with the partykit syntax.
-https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-If NULL, a conditional inference tree is computed.}
-
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
-
-\item{my_metrics}{A set of metric functions to evaluate decision tree,
-defaults to common metrics for classification/regression problems.
-Can be defined with `yardstick::metric_set`.}
-
-\item{feat_names}{Character vector specifying the feature names in dat.}
-
-\item{show_all_feats}{Logical. If TRUE, show all features regarless p_thres.}
 
 \item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
 among samples within each leaf node.}
@@ -47,8 +31,11 @@ among samples within each leaf node.}
 \item{clust_target}{Logical. If TRUE, target/label is included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.}
 
-\item{panel_space}{Spacing between facets relative to viewport,
-recommended to range from 0.001 to 0.01.}
+\item{print_eval}{Logical. If TRUE, print evaluation of the tree performance.}
+
+\item{custom_tree}{Custom tree with the partykit syntax.
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+If NULL, a conditional inference tree is computed.}
 
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
 for manually input custom layout.}
@@ -57,11 +44,8 @@ for manually input custom layout.}
 according to their levels, commonly ranges from 1 to 1.5.
 1 for parent node perfectly in the middle of child nodes.}
 
-\item{p_thres}{Numeric value indicating the p-value threshold of feature importance.
-Feature with p-values computed from the decision tree below this value
-will be displayed on the heatmap.}
-
-\item{...}{further arguments passed to `partkit::ctree()`}
+\item{panel_space}{Spacing between facets relative to viewport,
+recommended to range from 0.001 to 0.01.}
 }
 \value{
 A list of results from `partykit::ctree`, smart layout data,

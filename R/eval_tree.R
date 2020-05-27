@@ -1,23 +1,23 @@
 #' Print decision tree performance according to different metrics.
 #'
 #' @param dat Dataframe with samples from original dataset.
-#' @inheritParams heat_tree
+#' @inheritParams draw_tree
 #'
 #' @return Character string of the decision tree evaluation.
 #' @export
 #'
 #'
-eval_tree <- function(dat, task, my_metrics){
+eval_tree <- function(dat, task, metrics){
   switch(
     task,
-    classification = eval_class(dat, my_metrics),
-    regression = eval_reg(dat, my_metrics),
+    classification = eval_class(dat, metrics),
+    regression = eval_reg(dat, metrics),
   )
 }
 
-eval_class <- function(dat, my_metrics){
+eval_class <- function(dat, metrics){
   # Classification metrics:
-  my_metrics <- my_metrics %||%
+  metrics <- metrics %||%
     yardstick::metric_set(
       yardstick::accuracy,
       yardstick::bal_accuracy,
@@ -26,7 +26,7 @@ eval_class <- function(dat, my_metrics){
       yardstick::pr_auc)
 
   my_levs <- levels(dat$my_target)
-  text_eval <- my_metrics(
+  text_eval <- metrics(
     dat,
     truth = my_target,
     estimate = y_hat,
@@ -41,16 +41,16 @@ eval_class <- function(dat, my_metrics){
 }
 
 
-eval_reg <- function(dat, my_metrics){
+eval_reg <- function(dat, metrics){
   # Regression metrics:
-  my_metrics <- my_metrics %||%
+  metrics <- metrics %||%
     yardstick::metric_set(
       yardstick::rsq,
       yardstick::mae,
       yardstick::rmse,
       yardstick::ccc)
 
-  text_eval <- my_metrics(dat, truth = my_target, estimate = y_hat) %>%
+  text_eval <- metrics(dat, truth = my_target, estimate = y_hat) %>%
     transmute(print_metric = paste(
       toupper(.metric),
       format(.estimate, digits = 3),

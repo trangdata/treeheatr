@@ -6,7 +6,7 @@
 #' @param dat Dataframe with samples from original dataset ordered according to
 #' the clustering within each leaf node.
 #' @param disp_feats Character vector specifying features to be displayed.
-#' @inheritParams heat_tree
+#' @inheritParams draw_heat
 #'
 #' @return A list of two dataframes (continuous and categorical)
 #' from the original dataset.

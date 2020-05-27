@@ -80,12 +80,12 @@ heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 
 ```{r warning=F, fig.height=7, fig.width=7}
 lapply(
-  list(flags, saheart, diabetes), 
-  heat_tree, 
-  target_lab = 'target', 
+  list(flags, saheart, diabetes),
+  heat_tree,
+  target_lab = 'target',
   target_lab_disp = '',
-  heat_rel_height = 0.4, tree_space_bottom = 0.1, 
-  terminal_vars = list(label.padding = unit(0.1, "lines"), size = 3, color = 'white')) %>% 
+  heat_rel_height = 0.4, tree_space_bottom = 0.1,
+  terminal_vars = list(label.padding = unit(0.1, "lines"), size = 3, color = 'white')) %>%
   cowplot::plot_grid(plotlist = ., ncol = 1)
 ```
 
@@ -255,7 +255,7 @@ and 4 measures for regression tasks:
 You can also choose to show performance based on any other set of appropriate metrics listed on the [yardstick reference page](https://yardstick.tidymodels.org/reference/index.html), for example, with
 
 ```{r eval = FALSE}
-my_metrics = yardstick::metric_set(yardstick::f_meas)
+metrics = yardstick::metric_set(yardstick::f_meas)
 ```
 
 as a `heat_tree` argument to show the _F_ score (a combination of precision and recall).

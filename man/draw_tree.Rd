@@ -6,28 +6,40 @@
 \usage{
 draw_tree(
   fit,
-  layout,
+  dat,
+  task,
   term_dat,
+  layout,
   target_cols,
-  tree_space_top,
-  tree_space_bottom,
-  par_node_vars,
-  terminal_vars,
-  edge_vars,
-  edge_text_vars,
-  print_eval,
-  x_eval,
-  y_eval,
-  text_eval
+  tree_space_top = 0.05,
+  tree_space_bottom = 0.05,
+  print_eval = FALSE,
+  metrics = NULL,
+  x_eval = 0,
+  y_eval = 0.9,
+  par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
+    line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9)),
+    ids = "inner"),
+  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3, col =
+    "white"),
+  edge_vars = list(color = "grey70", size = 0.5),
+  edge_text_vars = list(color = "grey30", size = 3, mapping = ggplot2::aes(label =
+    paste(breaks_label, "*NA")))
 )
 }
 \arguments{
-\item{fit}{ggparty object as output from partykit::ctree()}
+\item{fit}{party object, e.g., as output from partykit::ctree()}
 
-\item{layout}{Dataframe of layout of all nodes, must include these columns:
-id, x, y and y_hat.}
+\item{dat}{Dataframe with samples from original dataset ordered according to
+the clustering within each leaf node.}
+
+\item{task}{Character string indicating the type of problem,
+either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
 
 \item{term_dat}{Dataframe for terminal nodes, must include these columns:
+id, x, y and y_hat.}
+
+\item{layout}{Dataframe of layout of all nodes, must include these columns:
 id, x, y and y_hat.}
 
 \item{target_cols}{Function determine color scale for target,
@@ -36,6 +48,16 @@ defaults to viridis option B.}
 \item{tree_space_top}{Numeric value to pass to expand for top margin of tree.}
 
 \item{tree_space_bottom}{Numeric value to pass to expand for bottom margin of tree.}
+
+\item{print_eval}{Logical. If TRUE, print evaluation of the tree performance.}
+
+\item{metrics}{A set of metric functions to evaluate decision tree,
+defaults to common metrics for classification/regression problems.
+Can be defined with `yardstick::metric_set`.}
+
+\item{x_eval}{Numeric value indicating x position to print performance statistics.}
+
+\item{y_eval}{Numeric value indicating y position to print performance statistics.}
 
 \item{par_node_vars}{Named list containing arguments to be passed to the
 `geom_node_label()` call for non-terminal nodes.}
@@ -48,14 +70,6 @@ defaults to viridis option B.}
 
 \item{edge_text_vars}{Named list containing arguments to be passed to the
 `geom_edge_label()` call for tree edge annotations.}
-
-\item{print_eval}{Logical. If TRUE, print evaluation of the tree performance.}
-
-\item{x_eval}{Numeric value indicating x position to print performance statistics.}
-
-\item{y_eval}{Numeric value indicating y position to print performance statistics.}
-
-\item{text_eval}{Character string of the decision tree evaluation.}
 }
 \value{
 A ggplot2 grob object of the decision tree.

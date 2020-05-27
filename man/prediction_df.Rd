@@ -4,7 +4,7 @@
 \alias{prediction_df}
 \title{Apply the predicted tree on either new test data or training data.}
 \usage{
-prediction_df(fit, dat, data_test, task, feat_names, clust_samps, clust_target)
+prediction_df(fit, dat, data_test, task, clust_samps, clust_target)
 }
 \arguments{
 \item{fit}{constparty object of the decision tree.}
@@ -15,8 +15,6 @@ prediction_df(fit, dat, data_test, task, feat_names, clust_samps, clust_target)
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
-
-\item{feat_names}{Character vector specifying the feature names in dat.}
 
 \item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
 among samples within each leaf node.}

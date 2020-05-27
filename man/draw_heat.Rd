@@ -5,35 +5,38 @@
 \title{Draws the heatmap.}
 \usage{
 draw_heat(
+  fit,
   dat,
-  disp_feats,
-  feat_names,
-  target_cols = NULL,
   feat_types = NULL,
-  trans_type = "normalize",
-  cont_cols = ggplot2::scale_fill_viridis_c(),
-  cate_cols = ggplot2::scale_fill_viridis_d(option = "D", begin = 0.3, end = 0.9),
+  target_cols = NULL,
+  target_lab_disp = NULL,
+  trans_type = c("normalize", "scale", "none"),
   clust_feats = TRUE,
-  target_space = 0.05,
+  show_all_feats = FALSE,
+  p_thres = 0.05,
+  custom_tree = NULL,
+  cont_cols = ggplot2::scale_fill_viridis_c(),
+  cate_cols = ggplot2::scale_fill_viridis_d(begin = 0.3, end = 0.9),
   panel_space = 0.001,
-  target_pos = "top",
-  target_lab_disp = NULL
+  target_space = 0.05,
+  target_pos = "top"
 )
 }
 \arguments{
+\item{fit}{party object, e.g., as output from partykit::ctree()}
+
 \item{dat}{Dataframe with samples from original dataset ordered according to
 the clustering within each leaf node.}
-
-\item{disp_feats}{Character vector specifying features to be displayed.}
-
-\item{feat_names}{Character vector specifying the feature names in dat.}
-
-\item{target_cols}{Function determine color scale for target,
-defaults to viridis option B.}
 
 \item{feat_types}{Named vector indicating the type of each features,
 e.g., c(sex = 'factor', age = 'numeric').
 If feature types are not supplied, infer from column type.}
+
+\item{target_cols}{Function determine color scale for target,
+defaults to viridis option B.}
+
+\item{target_lab_disp}{Character string for displaying the label of target label.
+If NULL, use `target_lab`.}
 
 \item{trans_type}{Character string of 'normalize', 'scale' or 'none'.
 If 'scale', subtract the mean and divide by the standard deviation.
@@ -42,25 +45,32 @@ If 'none', no transformation is applied.
 More information on what transformation to choose can be acquired here:
 https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize}
 
+\item{clust_feats}{Logical. If TRUE, performs cluster on the features.}
+
+\item{show_all_feats}{Logical. If TRUE, show all features regarless p_thres.}
+
+\item{p_thres}{Numeric value indicating the p-value threshold of feature importance.
+Feature with p-values computed from the decision tree below this value
+will be displayed on the heatmap.}
+
+\item{custom_tree}{Custom tree with the partykit syntax.
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+If NULL, a conditional inference tree is computed.}
+
 \item{cont_cols}{Function determine color scale for continuous variable,
 defaults to viridis option D.}
 
 \item{cate_cols}{Function determine color scale for nominal categorical variable,
 defaults to viridis option D.}
 
-\item{clust_feats}{Logical. If TRUE, performs cluster on the features.}
+\item{panel_space}{Spacing between facets relative to viewport,
+recommended to range from 0.001 to 0.01.}
 
 \item{target_space}{Numeric value indicating spacing between
 the target label and the rest of the features}
 
-\item{panel_space}{Spacing between facets relative to viewport,
-recommended to range from 0.001 to 0.01.}
-
 \item{target_pos}{Character string specifying the position of the target label
 on heatmap, can be 'top', 'bottom' or 'none'.}
-
-\item{target_lab_disp}{Character string for displaying the label of target label.
-If NULL, use `target_lab`.}
 }
 \value{
 A ggplot2 grob object of the heatmap.

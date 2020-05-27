@@ -33,5 +33,6 @@ Suggests:
     knitr,
     rmarkdown,
     cowplot,
-    yardstick
+    yardstick,
+    testthat
 VignetteBuilder: knitr
