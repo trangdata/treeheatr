@@ -4,18 +4,17 @@
 #'
 #' @param x Numeric vector.
 #' @inheritParams draw_heat
-#' @importFrom heatmaply percentize
 #' @return Numeric vector of the transformed `x`.
 #' @export
-#' @example scale_norm(1:5)
-#' scale_norm(1:5, 'percentize')
+#' @examples scale_norm(1:5)
+#' scale_norm(1:5, 'normalize')
 #'
 scale_norm <- function(x, trans_type = c('percentize', 'normalize', 'scale', 'none')){
   trans_type <- match.arg(trans_type)
 
   switch(
     trans_type,
-    percentize = percentize(x),
+    percentize = heatmaply::percentize(x),
     scale = as.numeric(scale(x)),
     normalize = my_norm(x),
     none = x
