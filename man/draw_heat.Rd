@@ -10,7 +10,7 @@ draw_heat(
   feat_types = NULL,
   target_cols = NULL,
   target_lab_disp = NULL,
-  trans_type = c("normalize", "scale", "none"),
+  trans_type = c("percentize", "normalize", "scale", "none"),
   clust_feats = TRUE,
   show_all_feats = FALSE,
   p_thres = 0.05,

@@ -4,7 +4,7 @@
 \alias{scale_norm}
 \title{Performs transformation on continuous variables.}
 \usage{
-scale_norm(x, trans_type = c("normalize", "scale", "none"))
+scale_norm(x, trans_type = c("percentize", "normalize", "scale", "none"))
 }
 \arguments{
 \item{x}{Numeric vector.}

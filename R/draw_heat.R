@@ -31,8 +31,9 @@
 #' @export
 #'
 draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_lab_disp = NULL,
-  trans_type = c('normalize', 'scale', 'none'), clust_feats = TRUE, show_all_feats = FALSE,
-  p_thres = 0.05, custom_tree = NULL, cont_cols = ggplot2::scale_fill_viridis_c(),
+  trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
+  show_all_feats = FALSE, p_thres = 0.05, custom_tree = NULL,
+  cont_cols = ggplot2::scale_fill_viridis_c(),
   cate_cols = ggplot2::scale_fill_viridis_d(begin = 0.3, end = 0.9),
   panel_space = 0.001, target_space = 0.05, target_pos = 'top'){
 
