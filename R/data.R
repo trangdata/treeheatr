@@ -163,7 +163,7 @@
 #'
 #' @format A data frame with 110 observations and 7 XGBoost-selected variables:
 #' \code{PATIENT_ID}, \code{Lactate dehydrogenase},
-#' \code{High sensitivity C-reactive protein}, \code{(%)lymphocyte},
+#' \code{High sensitivity C-reactive protein}, \code{(\%)lymphocyte},
 #' \code{Admission time}, \code{Discharge time} and \code{outcome}.
 #'
 #' An interpretable mortality prediction model for COVID-19 patients.
