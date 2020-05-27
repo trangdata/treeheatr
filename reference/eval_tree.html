@@ -131,7 +131,7 @@
     <p>Print decision tree performance according to different metrics.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>eval_tree</span>(<span class='no'>dat</span>, <span class='no'>task</span>, <span class='no'>my_metrics</span>)</pre>
+    <pre class="usage"><span class='fu'>eval_tree</span>(<span class='no'>dat</span>, <span class='no'>task</span>, <span class='no'>metrics</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,7 +146,7 @@
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).</p></td>
     </tr>
     <tr>
-      <th>my_metrics</th>
+      <th>metrics</th>
       <td><p>A set of metric functions to evaluate decision tree,
 defaults to common metrics for classification/regression problems.
 Can be defined with `yardstick::metric_set`.</p></td>

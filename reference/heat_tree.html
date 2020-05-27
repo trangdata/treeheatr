@@ -133,42 +133,20 @@
 
     <pre class="usage"><span class='fu'>heat_tree</span>(
   <span class='no'>data</span>,
-  <span class='no'>target_lab</span>,
   <span class='kw'>data_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>target_lab</span>,
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classification"</span>, <span class='st'>"regression"</span>),
-  <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>custom_layout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='no'>target_lab</span>,
   <span class='kw'>clust_samps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>clust_target</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>show_all_feats</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>p_thres</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>lev_fac</span> <span class='kw'>=</span> <span class='fl'>1.3</span>,
+  <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_layout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>heat_rel_height</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
-  <span class='kw'>tree_space_top</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>par_node_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.size</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/reexports.html'>unit</a></span>(<span class='fl'>0.15</span>, <span class='st'>"lines"</span>),
-    <span class='kw'>line_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>splitvar</span>)), <span class='kw'>line_gpar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>9</span>)),
-    <span class='kw'>ids</span> <span class='kw'>=</span> <span class='st'>"inner"</span>),
-  <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/reexports.html'>unit</a></span>(<span class='fl'>0.25</span>, <span class='st'>"lines"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span>
-    <span class='st'>"white"</span>),
-  <span class='kw'>edge_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey70"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>),
-  <span class='kw'>edge_text_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey30"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>breaks_label</span>, <span class='st'>"*NA"</span>))),
-  <span class='kw'>print_eval</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>x_eval</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>y_eval</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
-  <span class='kw'>my_metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"normalize"</span>, <span class='st'>"scale"</span>, <span class='st'>"none"</span>),
-  <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
-  <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(),
-  <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>target_space</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>lev_fac</span> <span class='kw'>=</span> <span class='fl'>1.3</span>,
   <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>target_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
-  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='no'>target_lab</span>,
   <span class='no'>...</span>
 )</pre>
 
@@ -180,18 +158,12 @@
       <td><p>Tidy dataset.</p></td>
     </tr>
     <tr>
-      <th>target_lab</th>
-      <td><p>Name of the column in data that contains target/label information.</p></td>
-    </tr>
-    <tr>
       <th>data_test</th>
       <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
     </tr>
     <tr>
-      <th>custom_tree</th>
-      <td><p>Custom tree with the partykit syntax.
-https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-If NULL, a conditional inference tree is computed.</p></td>
+      <th>target_lab</th>
+      <td><p>Name of the column in data that contains target/label information.</p></td>
     </tr>
     <tr>
       <th>task</th>
@@ -199,9 +171,10 @@ If NULL, a conditional inference tree is computed.</p></td>
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).</p></td>
     </tr>
     <tr>
-      <th>target_cols</th>
-      <td><p>Function determine color scale for target,
-defaults to viridis option B.</p></td>
+      <th>feat_types</th>
+      <td><p>Named vector indicating the type of each features,
+e.g., c(sex = 'factor', age = 'numeric').
+If feature types are not supplied, infer from column type.</p></td>
     </tr>
     <tr>
       <th>label_map</th>
@@ -209,9 +182,14 @@ defaults to viridis option B.</p></td>
 e.g., c(`0` = 'Edible', `1` = 'Poisonous').</p></td>
     </tr>
     <tr>
-      <th>custom_layout</th>
-      <td><p>Dataframe with 3 columns: id, x and y
-for manually input custom layout.</p></td>
+      <th>target_cols</th>
+      <td><p>Function determine color scale for target,
+defaults to viridis option B.</p></td>
+    </tr>
+    <tr>
+      <th>target_lab_disp</th>
+      <td><p>Character string for displaying the label of target label.
+If NULL, use `target_lab`.</p></td>
     </tr>
     <tr>
       <th>clust_samps</th>
@@ -224,14 +202,19 @@ among samples within each leaf node.</p></td>
 of samples within each leaf node and might yield a more interpretable heatmap.</p></td>
     </tr>
     <tr>
-      <th>show_all_feats</th>
-      <td><p>Logical. If TRUE, show all features regarless p_thres.</p></td>
+      <th>custom_tree</th>
+      <td><p>Custom tree with the partykit syntax.
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+If NULL, a conditional inference tree is computed.</p></td>
     </tr>
     <tr>
-      <th>p_thres</th>
-      <td><p>Numeric value indicating the p-value threshold of feature importance.
-Feature with p-values computed from the decision tree below this value
-will be displayed on the heatmap.</p></td>
+      <th>custom_layout</th>
+      <td><p>Dataframe with 3 columns: id, x and y
+for manually input custom layout.</p></td>
+    </tr>
+    <tr>
+      <th>heat_rel_height</th>
+      <td><p>Relative height of heatmap compared to whole figure (with tree).</p></td>
     </tr>
     <tr>
       <th>lev_fac</th>
@@ -240,107 +223,13 @@ according to their levels, commonly ranges from 1 to 1.5.
 1 for parent node perfectly in the middle of child nodes.</p></td>
     </tr>
     <tr>
-      <th>heat_rel_height</th>
-      <td><p>Relative height of heatmap compared to whole figure (with tree).</p></td>
-    </tr>
-    <tr>
-      <th>tree_space_top</th>
-      <td><p>Numeric value to pass to expand for top margin of tree.</p></td>
-    </tr>
-    <tr>
-      <th>tree_space_bottom</th>
-      <td><p>Numeric value to pass to expand for bottom margin of tree.</p></td>
-    </tr>
-    <tr>
-      <th>par_node_vars</th>
-      <td><p>Named list containing arguments to be passed to the
-`geom_node_label()` call for non-terminal nodes.</p></td>
-    </tr>
-    <tr>
-      <th>terminal_vars</th>
-      <td><p>Named list containing arguments to be passed to the
-`geom_node_label()` call for terminal nodes.</p></td>
-    </tr>
-    <tr>
-      <th>edge_vars</th>
-      <td><p>Named list containing arguments to be passed to the
-`geom_edge()` call for tree edges.</p></td>
-    </tr>
-    <tr>
-      <th>edge_text_vars</th>
-      <td><p>Named list containing arguments to be passed to the
-`geom_edge_label()` call for tree edge annotations.</p></td>
-    </tr>
-    <tr>
-      <th>print_eval</th>
-      <td><p>Logical. If TRUE, print evaluation of the tree performance.</p></td>
-    </tr>
-    <tr>
-      <th>x_eval</th>
-      <td><p>Numeric value indicating x position to print performance statistics.</p></td>
-    </tr>
-    <tr>
-      <th>y_eval</th>
-      <td><p>Numeric value indicating y position to print performance statistics.</p></td>
-    </tr>
-    <tr>
-      <th>my_metrics</th>
-      <td><p>A set of metric functions to evaluate decision tree,
-defaults to common metrics for classification/regression problems.
-Can be defined with `yardstick::metric_set`.</p></td>
-    </tr>
-    <tr>
-      <th>feat_types</th>
-      <td><p>Named vector indicating the type of each features,
-e.g., c(sex = 'factor', age = 'numeric').
-If feature types are not supplied, infer from column type.</p></td>
-    </tr>
-    <tr>
-      <th>trans_type</th>
-      <td><p>Character string of 'normalize', 'scale' or 'none'.
-If 'scale', subtract the mean and divide by the standard deviation.
-If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
-If 'none', no transformation is applied.
-More information on what transformation to choose can be acquired here:
-https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize</p></td>
-    </tr>
-    <tr>
-      <th>cont_cols</th>
-      <td><p>Function determine color scale for continuous variable,
-defaults to viridis option D.</p></td>
-    </tr>
-    <tr>
-      <th>cate_cols</th>
-      <td><p>Function determine color scale for nominal categorical variable,
-defaults to viridis option D.</p></td>
-    </tr>
-    <tr>
-      <th>clust_feats</th>
-      <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
-    </tr>
-    <tr>
-      <th>target_space</th>
-      <td><p>Numeric value indicating spacing between
-the target label and the rest of the features</p></td>
-    </tr>
-    <tr>
       <th>panel_space</th>
       <td><p>Spacing between facets relative to viewport,
 recommended to range from 0.001 to 0.01.</p></td>
     </tr>
     <tr>
-      <th>target_pos</th>
-      <td><p>Character string specifying the position of the target label
-on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
-    </tr>
-    <tr>
-      <th>target_lab_disp</th>
-      <td><p>Character string for displaying the label of target label.
-If NULL, use `target_lab`.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>further arguments passed to `partkit::ctree()`</p></td>
+      <td><p>Further arguments passed to `draw_tree()` and/or `draw_heat()`.</p></td>
     </tr>
     </table>
 
@@ -349,7 +238,9 @@ If NULL, use `target_lab`.</p></td>
     <p>A gtable/grob object of the decision tree (top) and heatmap (bottom).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>heat_tree</span>(<span class='no'>iris</span>, <span class='st'>'Species'</span>)</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>heat_tree</span>(<span class='no'>iris</span>, <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'Species'</span>)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'seriation':</span>
+#&gt; <span class='message'>  method         from </span>
+#&gt; <span class='message'>  reorder.hclust gclus</span></div><div class='input'>
 <span class='fu'>heat_tree</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>galaxy</span>[<span class='fl'>1</span>:<span class='fl'>100</span>, ],
   <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'target'</span>,

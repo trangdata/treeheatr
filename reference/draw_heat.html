@@ -132,36 +132,40 @@
     </div>
 
     <pre class="usage"><span class='fu'>draw_heat</span>(
+  <span class='no'>fit</span>,
   <span class='no'>dat</span>,
-  <span class='no'>disp_feats</span>,
-  <span class='no'>feat_names</span>,
-  <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='st'>"normalize"</span>,
-  <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
-  <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>option</span> <span class='kw'>=</span> <span class='st'>"D"</span>, <span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
+  <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"percentize"</span>, <span class='st'>"normalize"</span>, <span class='st'>"scale"</span>, <span class='st'>"none"</span>),
   <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>target_space</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>show_all_feats</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>p_thres</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
+  <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
   <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>target_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>,
-  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>target_space</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>target_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>fit</th>
+      <td><p>party object, e.g., as output from partykit::ctree()</p></td>
+    </tr>
+    <tr>
       <th>dat</th>
       <td><p>Dataframe with samples from original dataset ordered according to
 the clustering within each leaf node.</p></td>
     </tr>
     <tr>
-      <th>disp_feats</th>
-      <td><p>Character vector specifying features to be displayed.</p></td>
-    </tr>
-    <tr>
-      <th>feat_names</th>
-      <td><p>Character vector specifying the feature names in dat.</p></td>
+      <th>feat_types</th>
+      <td><p>Named vector indicating the type of each features,
+e.g., c(sex = 'factor', age = 'numeric').
+If feature types are not supplied, infer from column type.</p></td>
     </tr>
     <tr>
       <th>target_cols</th>
@@ -169,10 +173,9 @@ the clustering within each leaf node.</p></td>
 defaults to viridis option B.</p></td>
     </tr>
     <tr>
-      <th>feat_types</th>
-      <td><p>Named vector indicating the type of each features,
-e.g., c(sex = 'factor', age = 'numeric').
-If feature types are not supplied, infer from column type.</p></td>
+      <th>target_lab_disp</th>
+      <td><p>Character string for displaying the label of target label.
+If NULL, use `target_lab`.</p></td>
     </tr>
     <tr>
       <th>trans_type</th>
@@ -182,6 +185,26 @@ If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
 If 'none', no transformation is applied.
 More information on what transformation to choose can be acquired here:
 https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize</p></td>
+    </tr>
+    <tr>
+      <th>clust_feats</th>
+      <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
+    </tr>
+    <tr>
+      <th>show_all_feats</th>
+      <td><p>Logical. If TRUE, show all features regarless p_thres.</p></td>
+    </tr>
+    <tr>
+      <th>p_thres</th>
+      <td><p>Numeric value indicating the p-value threshold of feature importance.
+Feature with p-values computed from the decision tree below this value
+will be displayed on the heatmap.</p></td>
+    </tr>
+    <tr>
+      <th>custom_tree</th>
+      <td><p>Custom tree with the partykit syntax.
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+If NULL, a conditional inference tree is computed.</p></td>
     </tr>
     <tr>
       <th>cont_cols</th>
@@ -194,8 +217,9 @@ defaults to viridis option D.</p></td>
 defaults to viridis option D.</p></td>
     </tr>
     <tr>
-      <th>clust_feats</th>
-      <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
+      <th>panel_space</th>
+      <td><p>Spacing between facets relative to viewport,
+recommended to range from 0.001 to 0.01.</p></td>
     </tr>
     <tr>
       <th>target_space</th>
@@ -203,19 +227,9 @@ defaults to viridis option D.</p></td>
 the target label and the rest of the features</p></td>
     </tr>
     <tr>
-      <th>panel_space</th>
-      <td><p>Spacing between facets relative to viewport,
-recommended to range from 0.001 to 0.01.</p></td>
-    </tr>
-    <tr>
       <th>target_pos</th>
       <td><p>Character string specifying the position of the target label
 on heatmap, can be 'top', 'bottom' or 'none'.</p></td>
-    </tr>
-    <tr>
-      <th>target_lab_disp</th>
-      <td><p>Character string for displaying the label of target label.
-If NULL, use `target_lab`.</p></td>
     </tr>
     </table>
 
