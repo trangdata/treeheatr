@@ -1,13 +1,14 @@
 #' Print decision tree performance according to different metrics.
 #'
-#' @param dat Dataframe with samples from original dataset.
+#' @param dat Dataframe with truths and estimates of samples from original dataset.
 #' @inheritParams draw_tree
 #'
 #' @return Character string of the decision tree evaluation.
 #' @export
 #'
 #'
-eval_tree <- function(dat, task, metrics){
+eval_tree <- function(dat, task = c('classification', 'regression'), metrics = NULL){
+  task <- match.arg(task)
   switch(
     task,
     classification = eval_class(dat, metrics),
@@ -15,7 +16,10 @@ eval_tree <- function(dat, task, metrics){
   )
 }
 
-eval_class <- function(dat, metrics){
+eval_class <- function(dat, metrics = NULL){
+  if (!('my_target' %in% colnames(dat) && 'y_hat' %in% colnames(dat)))
+    stop('Prediction dataframes must have columns `my_target` and `y_hat`')
+
   # Classification metrics:
   metrics <- metrics %||%
     yardstick::metric_set(
@@ -37,11 +41,12 @@ eval_class <- function(dat, metrics){
       sep = ': ')) %>%
     pull() %>%
     paste(collapse = '\n')
-
 }
 
+eval_reg <- function(dat, metrics = NULL){
+  if (!('my_target' %in% colnames(dat) && 'y_hat' %in% colnames(dat)))
+    stop('Prediction dataframes must have columns `my_target` and `y_hat`')
 
-eval_reg <- function(dat, metrics){
   # Regression metrics:
   metrics <- metrics %||%
     yardstick::metric_set(
