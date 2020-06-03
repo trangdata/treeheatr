@@ -17,8 +17,8 @@ clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps){
   if (clust_samps && length(clust_vec) > 1 && nrow(df) > 1){
     new_samp_order <- df[, clust_vec] %>%
       cluster::daisy(metric = 'gower') %>%
-      stats::hclust() %>%
-      `[[`('order')
+      seriation::seriate() %>%
+      seriation::get_order()
 
     df[new_samp_order, ] # return ordered dataframe
   } else {
@@ -51,8 +51,8 @@ clust_feat_func <- function(dat, clust_vec, clust_feats){
       as.matrix() %>%
       t() %>%
       cluster::daisy(metric = 'gower') %>%
-      stats::hclust() %>%
-      `[[`('order')
+      seriation::seriate() %>%
+      seriation::get_order()
 
     clust_vec[new_feat_order] # return ordered features, not dataframe
   } else {

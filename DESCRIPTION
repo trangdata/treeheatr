@@ -26,7 +26,6 @@ Imports:
     partykit,
     tidyr
 Suggests:
-    stats,
     cluster,
     forcats,
     grid,
@@ -35,5 +34,6 @@ Suggests:
     cowplot,
     yardstick,
     heatmaply,
+    seriation,
     testthat
 VignetteBuilder: knitr
