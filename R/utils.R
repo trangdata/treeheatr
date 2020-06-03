@@ -31,13 +31,6 @@
   ret
 }
 
-coalesce_list <- function(input_list, default_list){
-  output_list <- vector('list', length(default_list))
-  for (i in names(default_list)){
-    output_list[[i]] <- input_list[[i]] %||% default_list[[i]]
-  }
-  output_list
-}
 
 #' Print a ggHeatTree object.
 #' Adopted from
