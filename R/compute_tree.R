@@ -14,7 +14,7 @@ compute_tree <- function(dat, data_test, task, clust_samps, clust_target,
 
   if (is.null(custom_tree)){
     fit <- partykit::ctree(my_target ~ ., data = dat)
-  } else {
+  } else if (class(custom_tree)[1] == 'partynode'){
     fit <- partykit::party(
       custom_tree, data = dat,
       fitted = data.frame(
@@ -23,6 +23,10 @@ compute_tree <- function(dat, data_test, task, clust_samps, clust_target,
         check.names = FALSE),
       terms = stats::terms(my_target ~ ., data = dat)) %>%
       partykit::as.constparty()
+  } else if (class(custom_tree)[1] == 'party'){
+    fit <- partykit::as.constparty(custom_tree)
+  } else {
+    stop('`custom_tree` must be of class `party` or `party_node`.')
   }
 
   scaled_dat <- prediction_df(fit, dat, data_test, task, clust_samps, clust_target)
