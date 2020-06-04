@@ -26,6 +26,7 @@ Imports:
     partykit,
     tidyr
 Suggests:
+    stats,
     cluster,
     forcats,
     grid,
