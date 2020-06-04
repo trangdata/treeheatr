@@ -34,7 +34,6 @@ Suggests:
     rmarkdown,
     cowplot,
     yardstick,
-    heatmaply,
     seriation,
     testthat
 VignetteBuilder: knitr
