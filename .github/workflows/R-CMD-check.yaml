@@ -16,7 +16,7 @@ jobs:
       - name: Install Pandoc
         uses: r-lib/actions/setup-pandoc@master
       - name: Check
-        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
+        run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", timeout = 900)
         shell: Rscript {0}
       - name: Build webpage
         run: pkgdown::build_site()
