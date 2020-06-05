@@ -19,7 +19,7 @@ Depends:
     ggparty
 Imports:
     scales,
-    dplyr,
+    dplyr 0.8.5,
     ggnewscale,
     ggplot2,
     gtable,
