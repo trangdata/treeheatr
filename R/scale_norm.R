@@ -14,7 +14,7 @@ scale_norm <- function(x, trans_type = c('percentize', 'normalize', 'scale', 'no
 
   switch(
     trans_type,
-    percentize = percentize(x),
+    percentize = ecdf(x)(x),
     scale = as.numeric(scale(x)),
     normalize = my_norm(x),
     none = x
