@@ -36,6 +36,7 @@ position_nodes <- function(plot_data, terminal_data, custom_layout, lev_fac, pan
   while (!is.na(traverse$parent[1])){ # when not at Node 1
     # Find pairs of node with the same parents:
     last_lev <- traverse %>%
+      select(- n) %>%
       dplyr::add_count(parent) %>%
       dplyr::filter(n == 2)
     these_parents <- unique(last_lev$parent)
