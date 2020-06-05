@@ -97,7 +97,7 @@
 <p><strong>treeheatr</strong> displays a more interpretable decision tree visualization by integrating a heatmap at its terminal nodes. Let’s explore the package <strong>treeheatr</strong> a little deeper and see what it can do!</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">treeheatr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="co"># library(cowplot)</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">cowplot</span>)</pre></body></html></div>
 <div id="lets-begin" class="section level2">
 <h2 class="hasAnchor">
 <a href="#lets-begin" class="anchor"></a>Let’s begin</h2>
@@ -139,11 +139,12 @@
 <a href="#smart-node-layout" class="anchor"></a>Smart node layout</h2>
 <p>These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size. The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches. This relative weight can be adjusted with the <code>lev_fac</code> parameter in <code><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree()</a></code>. The default <code>lev_fac = 1.3</code> seems to provide aesthetically pleasing trees, independent of the tree size.</p>
 <p>In this next figure, on the top, <code>lev_fac = 1</code> makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts <code>lev_fac = 1.3</code> (default) on the bottom.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"># cowplot::plot_grid(
-#   heat_tree(wine_quality_red, target_lab = 'target', lev_fac = 1),
-#   heat_tree(wine_quality_red, target_lab = 'target'),
-#   ncol = 1,
-#   labels = c('lev_fac = 1', 'lev_fac = 1.3'))</pre></body></html></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(
+  <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">1</span>),
+  <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>),
+  <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>,
+  <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'lev_fac = 1'</span>, <span class="st">'lev_fac = 1.3'</span>))</pre></body></html></div>
+<p><img src="explore_files/figure-html/unnamed-chunk-5-1.png" width="864"></p>
 </div>
 <div id="clustering" class="section level2">
 <h2 class="hasAnchor">
@@ -181,10 +182,8 @@
 <span class="co">#&gt; interval scaled</span>
 <span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 6 treated as</span>
 <span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 3, 6 treated</span>
-<span class="co">#&gt; as interval scaled</span>
-<span class="co">#&gt; Warning in min(x): no non-missing arguments to min; returning Inf</span>
-<span class="co">#&gt; Warning in max(x): no non-missing arguments to max; returning -Inf</span></pre></body></html></div>
+<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 3 treated as</span>
+<span class="co">#&gt; interval scaled</span></pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="864"></p>
 </div>
 <div id="regression" class="section level2">
@@ -206,41 +205,42 @@
 <p>You can manually define your own tree for the <code>custom_tree</code> argument following the <a href="https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf">partykit vignette</a>.</p>
 <p>As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a <a href="https://doi.org/10.1038/s42256-020-0180-7">recent study</a> with the conditional decision tree.</p>
 <p>First, a quick simplification of the column names:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"># selected_train &lt;- train_covid %&gt;% 
-#   select(
-#     LDH = 'Lactate dehydrogenase',
-#     hs_CRP = 'High sensitivity C-reactive protein',
-#     Lymphocyte = '(%)lymphocyte',
-#     outcome = Type2
-#   ) %&gt;% 
-#   tidyr::drop_na() 
-# 
-# selected_test &lt;- test_covid %&gt;%
-#   select(
-#     LDH = 'Lactate dehydrogenase',
-#     hs_CRP = 'High sensitivity C-reactive protein',
-#     Lymphocyte = '(%)lymphocyte',
-#     'outcome'
-#   )</pre></body></html></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">selected_train</span> <span class="kw">&lt;-</span> <span class="no">train_covid</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(
+    <span class="kw">LDH</span> <span class="kw">=</span> <span class="st">'Lactate dehydrogenase'</span>,
+    <span class="kw">hs_CRP</span> <span class="kw">=</span> <span class="st">'High sensitivity C-reactive protein'</span>,
+    <span class="kw">Lymphocyte</span> <span class="kw">=</span> <span class="st">'(%)lymphocyte'</span>,
+    <span class="kw">outcome</span> <span class="kw">=</span> <span class="no">Type2</span>
+  ) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span>()
+
+<span class="no">selected_test</span> <span class="kw">&lt;-</span> <span class="no">test_covid</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(
+    <span class="kw">LDH</span> <span class="kw">=</span> <span class="st">'Lactate dehydrogenase'</span>,
+    <span class="kw">hs_CRP</span> <span class="kw">=</span> <span class="st">'High sensitivity C-reactive protein'</span>,
+    <span class="kw">Lymphocyte</span> <span class="kw">=</span> <span class="st">'(%)lymphocyte'</span>,
+    <span class="st">'outcome'</span>
+  )</pre></body></html></div>
 <p>We now apply the tree structure in <a href="https://www.nature.com/articles/s42256-020-0180-7/figures/2">Figure 2</a> of the original study (only show the training set for now):</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"># # first argument indicates the index of the feature used for splitting
-# split_ldh &lt;- partysplit(1L, breaks = 365)
-# split_crp &lt;- partysplit(2L, breaks = 41.2)
-# split_lymp &lt;- partysplit(3L, breaks = 14.7)
-# 
-# custom_tree &lt;- partynode(1L, split = split_ldh , kids = list(
-#   partynode(2L, split = split_crp, kids = list(
-#     partynode(3L, info = 'Survival'),
-#     partynode(4L, split = split_lymp, kids = list(
-#       partynode(5L, info = 'Death'),
-#       partynode(6L, info = 'Survival'))))),
-#   partynode(7L, info = 'Death')))
-# 
-# treeheatr::heat_tree(
-#   selected_train,
-#   target_lab = 'outcome',
-#   label_map = c(`1` = 'Death', `0` = 'Survival'),
-#   custom_tree = custom_tree)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># first argument indicates the index of the feature used for splitting</span>
+<span class="no">split_ldh</span> <span class="kw">&lt;-</span> <span class="fu">partysplit</span>(<span class="fl">1L</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">365</span>)
+<span class="no">split_crp</span> <span class="kw">&lt;-</span> <span class="fu">partysplit</span>(<span class="fl">2L</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">41.2</span>)
+<span class="no">split_lymp</span> <span class="kw">&lt;-</span> <span class="fu">partysplit</span>(<span class="fl">3L</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">14.7</span>)
+
+<span class="no">custom_tree</span> <span class="kw">&lt;-</span> <span class="fu">partynode</span>(<span class="fl">1L</span>, <span class="kw">split</span> <span class="kw">=</span> <span class="no">split_ldh</span> , <span class="kw">kids</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+  <span class="fu">partynode</span>(<span class="fl">2L</span>, <span class="kw">split</span> <span class="kw">=</span> <span class="no">split_crp</span>, <span class="kw">kids</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+    <span class="fu">partynode</span>(<span class="fl">3L</span>, <span class="kw">info</span> <span class="kw">=</span> <span class="st">'Survival'</span>),
+    <span class="fu">partynode</span>(<span class="fl">4L</span>, <span class="kw">split</span> <span class="kw">=</span> <span class="no">split_lymp</span>, <span class="kw">kids</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+      <span class="fu">partynode</span>(<span class="fl">5L</span>, <span class="kw">info</span> <span class="kw">=</span> <span class="st">'Death'</span>),
+      <span class="fu">partynode</span>(<span class="fl">6L</span>, <span class="kw">info</span> <span class="kw">=</span> <span class="st">'Survival'</span>))))),
+  <span class="fu">partynode</span>(<span class="fl">7L</span>, <span class="kw">info</span> <span class="kw">=</span> <span class="st">'Death'</span>)))
+
+<span class="kw pkg">treeheatr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
+  <span class="no">selected_train</span>,
+  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
+  <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Death'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survival'</span>),
+  <span class="kw">custom_tree</span> <span class="kw">=</span> <span class="no">custom_tree</span>)</pre></body></html></div>
+<p><img src="explore_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
 <div id="apply-the-learned-tree-on-externalholdouttestvalidation-dataset" class="section level2">
 <h2 class="hasAnchor">
@@ -265,15 +265,16 @@
 <p>as a <code>heat_tree</code> argument to show the <em>F</em> score (a combination of precision and recall).</p>
 <p><strong>Warning</strong>: We do not recommend <code>print_eval</code> on the training set because these measures may gives you an over-optimistic view of how the tree performs (this would show pure training accuracy, not cross-validated).</p>
 <p>Let’s now apply the custom tree we (or really, Yan et al.) designed earlier and see how it performs on the test set:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"># treeheatr::heat_tree(
-#   selected_train,
-#   data_test = selected_test,
-#   target_lab = 'outcome',
-#   label_map = c(`1` = 'Death', `0` = 'Survival'),
-#   print_eval = TRUE,
-#   custom_tree = custom_tree,
-#   lev_fac = 3
-# )</pre></body></html></div>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="kw pkg">treeheatr</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
+  <span class="no">selected_train</span>,
+  <span class="kw">data_test</span> <span class="kw">=</span> <span class="no">selected_test</span>,
+  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
+  <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Death'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survival'</span>),
+  <span class="kw">print_eval</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+  <span class="kw">custom_tree</span> <span class="kw">=</span> <span class="no">custom_tree</span>,
+  <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">3</span>
+)</pre></body></html></div>
+<p><img src="explore_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
   </div>
 
