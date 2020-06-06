@@ -53,7 +53,7 @@ heat_tree <- function(
   stopifnot(target_lab %in% colnames(data))
   task <- match.arg(task)
   mf <- match.call()
-  tree_vars <- c('tree_space_top', 'tree_space_bottom', 'par_node_vars', 'terminal_vars',
+  tree_vars <- c('title', 'tree_space_top', 'tree_space_bottom', 'par_node_vars', 'terminal_vars',
                  'edge_vars', 'edge_text_vars', 'print_eval', 'metrics', 'x_eval', 'y_eval')
   heat_vars <- c('feat_types', 'trans_type', 'cont_cols', 'cate_cols', 'clust_feats',
                  'target_space', 'panel_space', 'target_pos', 'show_all_feats', 'p_thres')

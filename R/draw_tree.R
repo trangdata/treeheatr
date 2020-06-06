@@ -34,7 +34,7 @@
 #'
 #'
 draw_tree <- function(
-  fit, dat, task, term_dat, layout, target_cols, tree_space_top = 0.05,
+  fit, dat, task, term_dat, layout, target_cols, title = NULL, tree_space_top = 0.05,
   tree_space_bottom = 0.05, print_eval = FALSE, metrics = NULL, x_eval = 0, y_eval = 0.9,
   par_node_vars = list(
     label.size = 0, # no border around labels, unlike terminal nodes
@@ -66,6 +66,7 @@ draw_tree <- function(
     ggplot2::scale_x_continuous(expand = c(0,0)) +
     ggplot2::scale_y_continuous(
       expand = ggplot2::expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
+    ggplot2::labs(title = title) +
     ggplot2::coord_cartesian(xlim = c(0, 1)) +
     ggplot2::guides(fill = FALSE) +
     {if (print_eval) ggplot2::annotate(
