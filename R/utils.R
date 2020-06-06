@@ -43,19 +43,28 @@
 #' @param x ggHeatTree (gtable grob) object.
 #' @param newpage Should a new page (i.e., an empty page) be drawn before the
 #' ggHeatTree is drawn?
+#' @param vp viewpoint
 #' @param ... ignored
 #' @keywords internal
 #' @export
 
-print.ggHeatTree <- function(x, newpage = grDevices::dev.interactive(), ...) {
-  if (newpage) grid::grid.newpage()
-  # if (isTRUE(getOption("rstudio.notebook.executing"))) {
-  #   # x <- ggplot2::ggplot() +
-  #   #   ggplot2::geom_blank() +
-  #   #   ggplot2::annotation_custom(x) +
-  #   #   ggplot2::theme_void()
-  #   plot(x)
-  # } else {
-  grid::grid.draw(x)
-  # }
+print.ggHeatTree <- function (x, newpage = is.null(vp), vp = NULL, ...)
+{
+  set_last_plot(x)
+  if (newpage)
+    grid.newpage()
+  grDevices::recordGraphics(requireNamespace("ggplot2", quietly = TRUE),
+                            list(), getNamespace("ggplot2"))
+  if (is.null(vp)) {
+    grid.draw(x)
+  }
+  else {
+    if (is.character(vp))
+      seekViewport(vp)
+    else pushViewport(vp)
+    grid.draw(x)
+    upViewport()
+  }
+  invisible(x)
 }
+
