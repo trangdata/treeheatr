@@ -32,7 +32,6 @@ Suggests:
     grid,
     knitr,
     rmarkdown,
-    cowplot,
     yardstick,
     seriation,
     testthat
