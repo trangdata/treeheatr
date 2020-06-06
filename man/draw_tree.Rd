@@ -11,6 +11,7 @@ draw_tree(
   term_dat,
   layout,
   target_cols,
+  title = NULL,
   tree_space_top = 0.05,
   tree_space_bottom = 0.05,
   print_eval = FALSE,

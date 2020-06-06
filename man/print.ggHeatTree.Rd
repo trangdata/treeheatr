@@ -6,7 +6,7 @@
 Adopted from
 https://github.com/daattali/ggExtra/blob/master/R/ggMarginal.R#L207-L244.}
 \usage{
-\method{print}{ggHeatTree}(x, newpage = grDevices::dev.interactive(), ...)
+\method{print}{ggHeatTree}(x, newpage = is.null(vp), vp = NULL, ...)
 }
 \arguments{
 \item{x}{ggHeatTree (gtable grob) object.}
