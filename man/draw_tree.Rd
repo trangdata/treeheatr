@@ -46,6 +46,8 @@ id, x, y and y_hat.}
 \item{target_cols}{Function determine color scale for target,
 defaults to viridis option B.}
 
+\item{title}{Character string for plot title.}
+
 \item{tree_space_top}{Numeric value to pass to expand for top margin of tree.}
 
 \item{tree_space_bottom}{Numeric value to pass to expand for bottom margin of tree.}

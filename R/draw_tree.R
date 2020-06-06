@@ -11,6 +11,7 @@
 #' id, x, y and y_hat.
 #' @param layout Dataframe of layout of all nodes, must include these columns:
 #' id, x, y and y_hat.
+#' @param title Character string for plot title.
 #' @param tree_space_top Numeric value to pass to expand for top margin of tree.
 #' @param tree_space_bottom Numeric value to pass to expand for bottom margin of tree.
 #' @param print_eval Logical. If TRUE, print evaluation of the tree performance.

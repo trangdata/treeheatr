@@ -14,6 +14,8 @@ https://github.com/daattali/ggExtra/blob/master/R/ggMarginal.R#L207-L244.}
 \item{newpage}{Should a new page (i.e., an empty page) be drawn before the
 ggHeatTree is drawn?}
 
+\item{vp}{viewpoint}
+
 \item{...}{ignored}
 }
 \description{
