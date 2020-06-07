@@ -131,14 +131,14 @@
     <p>Print decision tree performance according to different metrics.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>eval_tree</span>(<span class='no'>dat</span>, <span class='no'>task</span>, <span class='no'>metrics</span>)</pre>
+    <pre class="usage"><span class='fu'>eval_tree</span>(<span class='no'>dat</span>, <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classification"</span>, <span class='st'>"regression"</span>), <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dat</th>
-      <td><p>Dataframe with samples from original dataset.</p></td>
+      <td><p>Dataframe with truths and estimates of samples from original dataset.</p></td>
     </tr>
     <tr>
       <th>task</th>
