@@ -1,10 +1,11 @@
 #' Diabetes patient records.
 #'
-#' Fetched from PMLB.
+#' https://www.kaggle.com/uciml/pima-indians-diabetes-database
 #'
-#' @format A data frame with 768 observations and 9 variables.
+#' @format A data frame with 768 observations and 9 variables:
+#' \code{Pregnancies}, \code{Glucose}, \code{BloodPressure}, \code{SkinThickness}, \code{Insulin},
+#' \code{BMI}, \code{DiabetesPedigreeFunction}, \code{Age} and \code{Outcome}.
 #'
-#' http://archive.ics.uci.edu/ml/datasets/diabetes
 #'
 "diabetes"
 

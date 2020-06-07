@@ -4,7 +4,7 @@ wine_quality_red <- pmlblite::fetch_data('wine-quality-red')
 mushroom <- pmlblite::fetch_data('mushroom')
 titanic <- titanic::titanic_train
 flags <- pmlblite::fetch_data('flags')
-diabetes <- pmlblite::fetch_data('diabetes')
+diabetes <- readr::read_csv('data-raw/diabetes.csv')
 saheart <- pmlblite::fetch_data('saheart')
 pollen <- pmlblite::fetch_data('529_pollen')
 galaxy <- pmlblite::fetch_data('690_visualizing_galaxy')
