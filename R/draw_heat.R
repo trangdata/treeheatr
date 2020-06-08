@@ -16,10 +16,18 @@
 #' @param p_thres Numeric value indicating the p-value threshold of feature importance.
 #' Feature with p-values computed from the decision tree below this value
 #' will be displayed on the heatmap.
-#' @param cont_cols Function determine color scale for continuous variable,
-#' defaults to viridis option D.
-#' @param cate_cols Function determine color scale for nominal categorical variable,
-#' defaults to viridis option D.
+#' @param cont_legend Function determining the options for legend of continuous variables,
+#' defaults to FALSE. If TRUE, use guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL).
+#' Any other [`guides()`](https://ggplot2.tidyverse.org/reference/guides.html) functions
+#' would also work.
+#' @param cate_legend Function determining the options for legend of categorical variables,
+#' defaults to FALSE. If TRUE, use guide_legend(title = NULL).
+#' Any other [`guides()`](https://ggplot2.tidyverse.org/reference/guides.html) functions
+#' would also work.
+#' @param cont_cols Function determining color scale for continuous variable,
+#' defaults to scale_fill_viridis_c(guide = cont_legend)
+#' @param cate_cols Function determining color scale for nominal categorical variable,
+#' defaults to scale_fill_viridis_d(begin = 0.3, end = 0.9).
 #' @param target_space Numeric value indicating spacing between
 #' the target label and the rest of the features
 #' @param target_pos Character string specifying the position of the target label
@@ -33,9 +41,21 @@
 draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_lab_disp = NULL,
   trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
   show_all_feats = FALSE, p_thres = 0.05, custom_tree = NULL,
-  cont_cols = ggplot2::scale_fill_viridis_c(),
-  cate_cols = ggplot2::scale_fill_viridis_d(begin = 0.3, end = 0.9),
+  cont_legend = FALSE, cate_legend = FALSE,
+  cont_cols = ggplot2::scale_fill_viridis_c,
+  cate_cols = ggplot2::scale_fill_viridis_d,
   panel_space = 0.001, target_space = 0.05, target_pos = 'top'){
+
+  if (is.logical(cont_legend) && cont_legend)
+    cont_legend <- ggplot2::guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL)
+  if (is.logical(cate_legend) && !cate_legend){
+    cate_legend <- 'none'
+  } else if (is.logical(cate_legend) && cate_legend){
+    cate_legend <- guide_legend(title = NULL)
+  }
+
+  cont_cols <- do.call(cont_cols, list(guide = cont_legend))
+  cate_cols <- do.call(cate_cols, list(begin = 0.3, end = 0.9, guide = cate_legend))
 
   feat_names <- setdiff(colnames(fit$data), 'my_target')
   trans_type <- match.arg(trans_type)
@@ -71,7 +91,6 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
       axis.ticks = ggplot2::element_blank(),
       panel.grid.major = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
-      legend.position = 'None',
       strip.background = ggplot2::element_blank(),
       strip.text.x = ggplot2::element_blank(),
       panel.spacing = ggplot2::unit(panel_space, 'npc'),
@@ -101,9 +120,9 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
 
     dheat <- dheat +
       ggnewscale::new_scale_fill() +
-      ggplot2::geom_tile(
-        data = tile_cont,
-        ggplot2::aes(y = y, x = Sample, fill = value)) +
+      ggplot2::geom_tile(data = tile_cont,
+                         ggplot2::aes(y = y, x = Sample, fill = value)) +
+      ggplot2::theme(legend.position = 'bottom') +
       cont_cols
   }
 

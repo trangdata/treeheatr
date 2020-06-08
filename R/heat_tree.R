@@ -10,8 +10,8 @@
 #' If feature types are not supplied, infer from column type.
 #' @param label_map Named vector of the meaning of the target values,
 #' e.g., c(`0` = 'Edible', `1` = 'Poisonous').
-#' @param target_cols Function determine color scale for target,
-#' defaults to viridis option B.
+#' @param target_cols Character vectors representing the hex values of different
+#' level colors for targets, defaults to viridis option B.
 #' @param target_lab_disp Character string for displaying the label of target label.
 #' If NULL, use `target_lab`.
 #' @param clust_samps Logical. If TRUE, hierarhical clustering would be performed
@@ -53,19 +53,24 @@ heat_tree <- function(
   stopifnot(target_lab %in% colnames(data))
   task <- match.arg(task)
   mf <- match.call()
-  tree_vars <- c('title', 'tree_space_top', 'tree_space_bottom', 'par_node_vars', 'terminal_vars',
-                 'edge_vars', 'edge_text_vars', 'print_eval', 'metrics', 'x_eval', 'y_eval')
-  heat_vars <- c('feat_types', 'trans_type', 'cont_cols', 'cate_cols', 'clust_feats',
-                 'target_space', 'panel_space', 'target_pos', 'show_all_feats', 'p_thres')
+  tree_vars <-
+    c('title', 'tree_space_top', 'tree_space_bottom', 'par_node_vars', 'terminal_vars',
+      'edge_vars', 'edge_text_vars', 'print_eval', 'metrics', 'x_eval', 'y_eval')
+  heat_vars <-
+    c('feat_types', 'trans_type', 'cont_cols', 'cate_cols', 'clust_feats', 'cont_legend',
+      'cate_legend', 'target_space', 'panel_space', 'target_pos', 'show_all_feats', 'p_thres')
   m_tree <- match(tree_vars, names(mf), 0L)
   m_heat <- match(heat_vars, names(mf), 0L)
 
-  vir_opts <- list(option = 'B', begin = 0.3, end = 0.85)
-  target_cols <- target_cols %||%
+  vir_opts <- list(option = 'B', begin = 0.3, end = 0.85, guide = FALSE)
+
+  target_cols <- if (!is.null(target_cols)){
+    target_cols <- do.call(ggplot2::scale_fill_manual, list(values = target_cols, guide = FALSE))
+  } else {
     switch(task,
            classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),
            regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts))
-
+    }
 
   ################################################################
   ##### Prepare dataset:
