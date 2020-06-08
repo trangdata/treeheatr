@@ -147,13 +147,11 @@ utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.</p>
   <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>x_eval</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>y_eval</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
-  <span class='kw'>par_node_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.size</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/reexports.html'>unit</a></span>(<span class='fl'>0.15</span>, <span class='st'>"lines"</span>),
-    <span class='kw'>line_list</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>splitvar</span>)), <span class='kw'>line_gpar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>9</span>)),
-    <span class='kw'>ids</span> <span class='kw'>=</span> <span class='st'>"inner"</span>),
-  <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/reexports.html'>unit</a></span>(<span class='fl'>0.25</span>, <span class='st'>"lines"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span>
-    <span class='st'>"white"</span>),
+  <span class='kw'>par_node_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.size</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>0.15</span>, <span class='st'>"lines"</span>), <span class='kw'>line_list</span> <span class='kw'>=</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>splitvar</span>)), <span class='kw'>line_gpar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>9</span>)), <span class='kw'>ids</span> <span class='kw'>=</span> <span class='st'>"inner"</span>),
+  <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>0.25</span>, <span class='st'>"lines"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>),
   <span class='kw'>edge_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey70"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>),
-  <span class='kw'>edge_text_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey30"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span>
+  <span class='kw'>edge_text_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey30"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span>
     <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>breaks_label</span>, <span class='st'>"*NA"</span>)))
 )</pre>
 
@@ -186,8 +184,8 @@ id, x, y and y_hat.</p></td>
     </tr>
     <tr>
       <th>target_cols</th>
-      <td><p>Function determine color scale for target,
-defaults to viridis option B.</p></td>
+      <td><p>Character vectors representing the hex values of different
+level colors for targets, defaults to viridis option B.</p></td>
     </tr>
     <tr>
       <th>title</th>

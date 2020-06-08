@@ -142,8 +142,10 @@
   <span class='kw'>show_all_feats</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>p_thres</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>(),
-  <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_d</a></span>(<span class='kw'>begin</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>0.9</span>),
+  <span class='kw'>cont_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cate_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='no'>scale_fill_viridis_c</span>,
+  <span class='kw'>cate_cols</span> <span class='kw'>=</span> <span class='no'>scale_fill_viridis_d</span>,
   <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
   <span class='kw'>target_space</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>target_pos</span> <span class='kw'>=</span> <span class='st'>"top"</span>
@@ -169,8 +171,8 @@ If feature types are not supplied, infer from column type.</p></td>
     </tr>
     <tr>
       <th>target_cols</th>
-      <td><p>Function determine color scale for target,
-defaults to viridis option B.</p></td>
+      <td><p>Character vectors representing the hex values of different
+level colors for targets, defaults to viridis option B.</p></td>
     </tr>
     <tr>
       <th>target_lab_disp</th>
@@ -207,14 +209,28 @@ https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
 If NULL, a conditional inference tree is computed.</p></td>
     </tr>
     <tr>
+      <th>cont_legend</th>
+      <td><p>Function determining the options for legend of continuous variables,
+defaults to FALSE. If TRUE, use guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL).
+Any other [`guides()`](https://ggplot2.tidyverse.org/reference/guides.html) functions
+would also work.</p></td>
+    </tr>
+    <tr>
+      <th>cate_legend</th>
+      <td><p>Function determining the options for legend of categorical variables,
+defaults to FALSE. If TRUE, use guide_legend(title = NULL).
+Any other [`guides()`](https://ggplot2.tidyverse.org/reference/guides.html) functions
+would also work.</p></td>
+    </tr>
+    <tr>
       <th>cont_cols</th>
-      <td><p>Function determine color scale for continuous variable,
-defaults to viridis option D.</p></td>
+      <td><p>Function determining color scale for continuous variable,
+defaults to scale_fill_viridis_c(guide = cont_legend)</p></td>
     </tr>
     <tr>
       <th>cate_cols</th>
-      <td><p>Function determine color scale for nominal categorical variable,
-defaults to viridis option D.</p></td>
+      <td><p>Function determining color scale for nominal categorical variable,
+defaults to scale_fill_viridis_d(begin = 0.3, end = 0.9).</p></td>
     </tr>
     <tr>
       <th>panel_space</th>
