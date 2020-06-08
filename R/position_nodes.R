@@ -26,19 +26,19 @@ position_nodes <- function(plot_data, terminal_data, custom_layout, lev_fac, pan
   }
 
   # Traversing upward to the parents of terminal nodes:
-  traverse <- terminal_data %>% dplyr::mutate(x = new_x, y = 0)
+  traverse <- terminal_data %>% mutate(x = new_x, y = 0)
 
   adj_plot_data <- plot_data %>%
-    dplyr::select(id, x, y, parent, level, kids) %>%
-    dplyr::filter(!id %in%terminal_data$id) %>%
-    dplyr::bind_rows(traverse)
+    select(id, x, y, parent, level, kids) %>%
+    filter(!id %in%terminal_data$id) %>%
+    bind_rows(traverse)
 
   while (!is.na(traverse$parent[1])){ # when not at Node 1
     # Find pairs of node with the same parents:
     last_lev <- traverse %>%
       select(- n) %>%
-      dplyr::add_count(parent) %>%
-      dplyr::filter(n == 2)
+      add_count(parent) %>%
+      filter(n == 2)
     these_parents <- unique(last_lev$parent)
 
     for (p in these_parents){ # for each pair
@@ -53,15 +53,15 @@ position_nodes <- function(plot_data, terminal_data, custom_layout, lev_fac, pan
 
       # remove the kids, add the parent
       traverse <- traverse %>%
-        dplyr::filter(!(id %in% kids_df$id)) %>%
-        dplyr::bind_rows(adj_plot_data[par_id, ])
+        filter(!(id %in% kids_df$id)) %>%
+        bind_rows(adj_plot_data[par_id, ])
     }
   }
 
   my_layout <- adj_plot_data %>%
-    dplyr::filter(!(id %in% custom_layout$id)) %>%
-    dplyr::select(id, x, y) %>%
-    dplyr::bind_rows(custom_layout)
+    filter(!(id %in% custom_layout$id)) %>%
+    select(id, x, y) %>%
+    bind_rows(custom_layout)
 
   return(my_layout)
 }

@@ -46,11 +46,13 @@
 #' @param vp viewpoint
 #' @param ... ignored
 #' @keywords internal
+#' @import grid
+#'
 #' @export
 
 print.ggHeatTree <- function (x, newpage = is.null(vp), vp = NULL, ...)
 {
-  set_last_plot(x)
+  ggplot2::set_last_plot(x)
   if (newpage)
     grid.newpage()
   grDevices::recordGraphics(requireNamespace("ggplot2", quietly = TRUE),

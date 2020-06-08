@@ -30,10 +30,10 @@ devtools::install_github('trang1618/treeheatr')
 
 Classification of different types of iris plants.
 
-```{r, fig.height=3.5, message=FALSE, warnings = FALSE}
+```{r, fig.height=3.5, message=FALSE, warning=FALSE}
 library(treeheatr)
 
-heat_tree(iris, target_lab = 'Species')
+heat_tree(penguins, target_lab = 'species')
 ```
 
 ### Wine recognition dataset

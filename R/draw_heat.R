@@ -36,18 +36,20 @@
 #' @inheritParams heat_tree
 #'
 #' @return A ggplot2 grob object of the heatmap.
+#'
+#' @import ggplot2
 #' @export
 #'
 draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_lab_disp = NULL,
   trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
   show_all_feats = FALSE, p_thres = 0.05, custom_tree = NULL,
   cont_legend = FALSE, cate_legend = FALSE,
-  cont_cols = ggplot2::scale_fill_viridis_c,
-  cate_cols = ggplot2::scale_fill_viridis_d,
+  cont_cols = scale_fill_viridis_c,
+  cate_cols = scale_fill_viridis_d,
   panel_space = 0.001, target_space = 0.05, target_pos = 'top'){
 
   if (is.logical(cont_legend) && cont_legend)
-    cont_legend <- ggplot2::guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL)
+    cont_legend <- guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL)
   if (is.logical(cate_legend) && !cate_legend){
     cate_legend <- 'none'
   } else if (is.logical(cate_legend) && cate_legend){
@@ -78,21 +80,21 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
     target_pos == 'top' ~ (n_feats + 1 + target_space),
     target_pos == 'bottom' ~ (- target_space)) # if 'none', returns NA
 
-  dheat <- ggplot2::ggplot() +
+  dheat <- ggplot() +
     target_cols +
-    ggplot2::facet_grid(cols = vars(node_id), scales = 'free_x', space = 'free') +
-    ggplot2::geom_tile(data = dat,
-      ggplot2::aes(x = Sample, y = target_y, fill = my_target)) +
-    ggplot2::scale_x_continuous(expand =  c(0,0)) +
-    ggplot2::labs(x = NULL, y = NULL) +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank(),
-      panel.grid.major = ggplot2::element_blank(),
-      panel.grid.minor = ggplot2::element_blank(),
-      strip.background = ggplot2::element_blank(),
-      strip.text.x = ggplot2::element_blank(),
+    facet_grid(cols = vars(node_id), scales = 'free_x', space = 'free') +
+    geom_tile(data = dat,
+      aes(x = Sample, y = target_y, fill = my_target)) +
+    scale_x_continuous(expand =  c(0,0)) +
+    labs(x = NULL, y = NULL) +
+    theme_minimal() +
+    theme(
+      axis.text.x = element_blank(),
+      axis.ticks = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      strip.background = element_blank(),
+      strip.text.x = element_blank(),
       panel.spacing = ggplot2::unit(panel_space, 'npc'),
       plot.margin = ggplot2::unit(c(0, 5.5, 5.5, 5.5), 'pt')
     )
@@ -104,8 +106,8 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
     for (i in levels(tile_cate$cate_feat)){
       dheat <- dheat +
         ggnewscale::new_scale_fill() +
-        ggplot2::geom_tile(data = tile_cate %>% filter(cate_feat == i),
-                           ggplot2::aes(y = y, x = Sample, fill = value)) +
+        geom_tile(data = tile_cate %>% filter(cate_feat == i),
+                           aes(y = y, x = Sample, fill = value)) +
         cate_cols
     }
   }
@@ -120,14 +122,14 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
 
     dheat <- dheat +
       ggnewscale::new_scale_fill() +
-      ggplot2::geom_tile(data = tile_cont,
-                         ggplot2::aes(y = y, x = Sample, fill = value)) +
-      ggplot2::theme(legend.position = 'bottom') +
+      geom_tile(data = tile_cont,
+                         aes(y = y, x = Sample, fill = value)) +
+      theme(legend.position = 'bottom') +
       cont_cols
   }
 
   dheat <- dheat +
-    ggplot2::scale_y_continuous(
+    scale_y_continuous(
       expand = c(0, 0),
       breaks = c(target_y, seq.int(n_feats)),
       labels = c(target_lab_disp, levels(tile_cate$cate_feat), levels(tile_cont$cont_feat)))

@@ -33,16 +33,16 @@ compute_tree <- function(dat, data_test, task, clust_samps, clust_target,
 
   ################################################################
   ##### Prepare layout, terminal data, add node labels:
-  plot_data <- ggparty(fit)$data
+  plot_data <- ggparty::ggparty(fit)$data
 
   # node_size <- node_labels$n
   terminal_data <- term_node_pos(plot_data, scaled_dat)
   my_layout <- position_nodes(plot_data, terminal_data, custom_layout, lev_fac, panel_space)
 
   term_dat <- terminal_data %>%
-    dplyr::select(- c(x, y)) %>%
-    dplyr::left_join(my_layout, by = 'id') %>%
-    dplyr::mutate(
+    select(- c(x, y)) %>%
+    left_join(my_layout, by = 'id') %>%
+    mutate(
       term_node = if (task == 'classification') as.factor(y_hat) else round(y_hat, 2))
 
   list(fit = fit,
@@ -77,8 +77,8 @@ prediction_df <- function(fit, dat, data_test, task, clust_samps, clust_target){
       unique(.$node_id), clust_samp_func, dat = .,
       clust_vec = if (clust_target) colnames(dat_ana) else setdiff(colnames(dat_ana), 'my_target'),
       clust_samps = clust_samps) %>%
-    dplyr::bind_rows() %>%
-    dplyr::mutate(Sample = row_number())
+    bind_rows() %>%
+    mutate(Sample = row_number())
 
   if (task == 'classification'){
     y_prob <- stats::predict(fit, newdata = data_test, type = 'prob', simplify = FALSE) %>%
@@ -105,12 +105,12 @@ prediction_df <- function(fit, dat, data_test, task, clust_samps, clust_target){
 #'
 term_node_pos <- function(plot_data, scaled_dat){
   node_labels <- scaled_dat %>%
-    dplyr::distinct(Sample, .keep_all = T) %>%
-    dplyr::count(node_id, y_hat) %>%
-    dplyr::rename(id = node_id)
+    distinct(Sample, .keep_all = T) %>%
+    count(node_id, y_hat) %>%
+    rename(id = node_id)
 
   terminal_data <- plot_data %>%
-    dplyr::filter(kids == 0) %>%
+    filter(kids == 0) %>%
     left_join(node_labels, by = 'id') %>%
     mutate_at(vars(n), ~ replace(., is.na(.), 0))
 }

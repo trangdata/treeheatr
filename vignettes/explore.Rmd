@@ -1,7 +1,7 @@
 ---
-title: "Explore **treeheatr**"
-author: "Trang Le"
-date: "`r Sys.Date()`"
+title: 'Explore **treeheatr**'
+author: 'Trang Le'
+date: '`r Sys.Date()`'
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Explore treeheatr}
@@ -16,13 +16,12 @@ Let's explore the package **treeheatr** a little deeper and see what it can do!
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = '#>'
 )
 ```
 
 ```{r setup, message=FALSE}
 library(treeheatr)
-library(dplyr)
 ```
 
 ## Let's begin
@@ -31,8 +30,8 @@ with the iris dataset!
 Running the `heat_tree()` function can be as simple as:
 
 ```{r fig.height=3, fig.width=5}
-dat_raw <- iris
-heat_tree(dat_raw, target_lab = 'Species')
+dat_raw <- na.omit(penguins)
+heat_tree(dat_raw, target_lab = 'species')
 ```
 
 But we can adjust a few graphical parameters.
@@ -41,9 +40,11 @@ And we can relax the p value threshold `p_thres` to include more features that m
 
 ```{r fig.height=3, fig.width=7}
 heat_tree(
-  dat_raw, target_lab = 'Species',
-  target_cols = scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73")),
-  custom_layout = data.frame(id = 1, x = 0.1, y = 1), show_all_feats = TRUE,
+  dat_raw, target_lab = 'species',
+  # target_cols = c('#E69F00', '#56B4E9', '#009E73'),
+  target_cols = c('darkorange','purple','cyan4'),
+  custom_layout = data.frame(id = 1, x = 0.1, y = 1), 
+  show_all_feats = TRUE,
   panel_space = 0.05, target_space = 0.2, tree_space_bottom = 0.1, heat_rel_height = 0.4)
 ```
 
@@ -52,21 +53,23 @@ These list parameters are named `*_vars`.
 For example:
 
 ```{r fig.height=4, fig.width=7}
+library(ggplot2)
 heat_tree(
-  dat_raw, target_lab = 'Species',
+  dat_raw, target_lab = 'species',
   par_node_vars = list(
     label.size = 0.2,
-    label.padding = unit(0.1, "lines"),
+    label.padding = unit(0.1, 'lines'),
     line_list = list(
-      aes(label = paste("Node", id)),
+      aes(label = paste('Node', id)),
       aes(label = splitvar),
-      aes(label = paste("p =", formatC(p.value, format = "e", digits = 2)))),
+      aes(label = paste('p =', formatC(p.value, format = 'e', digits = 2)))),
     line_gpar = list(
       list(size = 8),
       list(size = 8),
       list(size = 6)),
     id = 'inner'),
   terminal_vars = list(size = 0),
+  cont_legend = TRUE, cate_legend = TRUE,
   edge_vars = list(size = 1, color = 'grey'))
 ```
 
@@ -110,8 +113,7 @@ We **highly recommend** that, when dealing with mixed feature types, the user su
 When `feat_types` is not specified, **treeheatr** automatically inferred each column type from the original dataset.
 
 ```{r fig.height=4.5, fig.width=9}
-dat_raw <- titanic %>%
-  dplyr::select(Survived, Sex, Pclass, Age, SibSp, Parch, Fare, Embarked)
+dat_raw <- titanic[, c('Survived', 'Sex', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked')]
 
 heat_tree(
   dat_raw,
@@ -155,6 +157,9 @@ As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020
 
 First, a quick simplification of the column names:
 ```{r}
+library(dplyr)
+library(partykit)
+
 selected_train <- train_covid %>%
   select(
     LDH = 'Lactate dehydrogenase',
@@ -162,7 +167,7 @@ selected_train <- train_covid %>%
     Lymphocyte = '(%)lymphocyte',
     outcome = Type2
   ) %>%
-  tidyr::drop_na()
+  na.omit()
 
 selected_test <- test_covid %>%
   select(
@@ -177,6 +182,7 @@ We now apply the tree structure in [Figure 2](https://www.nature.com/articles/s4
 
 ```{r fig.height=4.5, fig.width=7}
 # first argument indicates the index of the feature used for splitting
+
 split_ldh <- partysplit(1L, breaks = 365)
 split_crp <- partysplit(2L, breaks = 41.2)
 split_lymp <- partysplit(3L, breaks = 14.7)
@@ -189,7 +195,7 @@ custom_tree <- partynode(1L, split = split_ldh , kids = list(
       partynode(6L, info = 'Survival'))))),
   partynode(7L, info = 'Death')))
 
-treeheatr::heat_tree(
+heat_tree(
   selected_train,
   target_lab = 'outcome',
   label_map = c(`1` = 'Death', `0` = 'Survival'),
@@ -227,7 +233,7 @@ as a `heat_tree` argument to show the _F_ score (a combination of precision and 
 Let's now apply the custom tree we (or really, Yan et al.) designed earlier and see how it performs on the test set:
 
 ```{r fig.height=4.5, fig.width=7}
-treeheatr::heat_tree(
+heat_tree(
   selected_train,
   data_test = selected_test,
   target_lab = 'outcome',

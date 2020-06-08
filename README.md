@@ -25,7 +25,7 @@ Classification of different types of iris plants.
 ``` r
 library(treeheatr)
 
-heat_tree(iris, target_lab = 'Species')
+heat_tree(penguins, target_lab = 'species')
 ```
 
 ![](man/figures/unnamed-chunk-3-1.png)<!-- -->

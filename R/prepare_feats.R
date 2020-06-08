@@ -21,22 +21,22 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
 
   if (n_conts > 0){
     df_cont <- dat %>%
-      dplyr::select(- cate_feats) %>%
-      dplyr::mutate_at(cont_feats, ~ scale_norm(., trans_type = trans_type)) %>%
+      select(- cate_feats) %>%
+      mutate_at(cont_feats, ~ scale_norm(., trans_type = trans_type)) %>%
       tidyr::pivot_longer(cont_feats, names_to = 'cont_feat') %>%
-      dplyr::filter(cont_feat %in% disp_feats) %>%
-      dplyr::mutate(cont_feat = as.factor(cont_feat))
+      filter(cont_feat %in% disp_feats) %>%
+      mutate(cont_feat = as.factor(cont_feat))
   } else {
     df_cont <- NULL
   }
 
   if (n_cates > 0){
     df_cate <- dat %>%
-      dplyr::select(- cont_feats) %>%
-      dplyr::mutate_at(cate_feats, as.factor) %>%
+      select(- cont_feats) %>%
+      mutate_at(cate_feats, as.factor) %>%
       tidyr::pivot_longer(cate_feats, names_to = 'cate_feat') %>%
-      dplyr::filter(cate_feat %in% disp_feats) %>%
-      dplyr::mutate(cate_feat = as.factor(cate_feat))
+      filter(cate_feat %in% disp_feats) %>%
+      mutate(cate_feat = as.factor(cate_feat))
   } else {
     df_cate <- NULL
   }
@@ -54,7 +54,7 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
   if (n_cates > 1){
     clustered_cates <-
       clust_feat_func(
-        dat = dat %>% dplyr::mutate_if(is.factor, as.numeric),
+        dat = dat %>% mutate_if(is.factor, as.numeric),
         clust_vec = cate_feats[cate_feats %in% disp_feats],
         clust_feats = clust_feats
       )
