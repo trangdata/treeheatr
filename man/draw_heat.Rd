@@ -15,8 +15,10 @@ draw_heat(
   show_all_feats = FALSE,
   p_thres = 0.05,
   custom_tree = NULL,
-  cont_cols = ggplot2::scale_fill_viridis_c(),
-  cate_cols = ggplot2::scale_fill_viridis_d(begin = 0.3, end = 0.9),
+  cont_legend = FALSE,
+  cate_legend = FALSE,
+  cont_cols = scale_fill_viridis_c,
+  cate_cols = scale_fill_viridis_d,
   panel_space = 0.001,
   target_space = 0.05,
   target_pos = "top"
@@ -32,8 +34,8 @@ the clustering within each leaf node.}
 e.g., c(sex = 'factor', age = 'numeric').
 If feature types are not supplied, infer from column type.}
 
-\item{target_cols}{Function determine color scale for target,
-defaults to viridis option B.}
+\item{target_cols}{Character vectors representing the hex values of different
+level colors for targets, defaults to viridis option B.}
 
 \item{target_lab_disp}{Character string for displaying the label of target label.
 If NULL, use `target_lab`.}
@@ -57,11 +59,21 @@ will be displayed on the heatmap.}
 https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
 If NULL, a conditional inference tree is computed.}
 
-\item{cont_cols}{Function determine color scale for continuous variable,
-defaults to viridis option D.}
+\item{cont_legend}{Function determining the options for legend of continuous variables,
+defaults to FALSE. If TRUE, use guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL).
+Any other [`guides()`](https://ggplot2.tidyverse.org/reference/guides.html) functions
+would also work.}
 
-\item{cate_cols}{Function determine color scale for nominal categorical variable,
-defaults to viridis option D.}
+\item{cate_legend}{Function determining the options for legend of categorical variables,
+defaults to FALSE. If TRUE, use guide_legend(title = NULL).
+Any other [`guides()`](https://ggplot2.tidyverse.org/reference/guides.html) functions
+would also work.}
+
+\item{cont_cols}{Function determining color scale for continuous variable,
+defaults to scale_fill_viridis_c(guide = cont_legend)}
+
+\item{cate_cols}{Function determining color scale for nominal categorical variable,
+defaults to scale_fill_viridis_d(begin = 0.3, end = 0.9).}
 
 \item{panel_space}{Spacing between facets relative to viewport,
 recommended to range from 0.001 to 0.01.}

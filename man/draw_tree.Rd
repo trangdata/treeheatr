@@ -18,13 +18,11 @@ draw_tree(
   metrics = NULL,
   x_eval = 0,
   y_eval = 0.9,
-  par_node_vars = list(label.size = 0, label.padding = ggplot2::unit(0.15, "lines"),
-    line_list = list(ggplot2::aes(label = splitvar)), line_gpar = list(list(size = 9)),
-    ids = "inner"),
-  terminal_vars = list(label.padding = ggplot2::unit(0.25, "lines"), size = 3, col =
-    "white"),
+  par_node_vars = list(label.size = 0, label.padding = unit(0.15, "lines"), line_list =
+    list(aes(label = splitvar)), line_gpar = list(list(size = 9)), ids = "inner"),
+  terminal_vars = list(label.padding = unit(0.25, "lines"), size = 3, col = "white"),
   edge_vars = list(color = "grey70", size = 0.5),
-  edge_text_vars = list(color = "grey30", size = 3, mapping = ggplot2::aes(label =
+  edge_text_vars = list(color = "grey30", size = 3, mapping = aes(label =
     paste(breaks_label, "*NA")))
 )
 }
@@ -43,8 +41,8 @@ id, x, y and y_hat.}
 \item{layout}{Dataframe of layout of all nodes, must include these columns:
 id, x, y and y_hat.}
 
-\item{target_cols}{Function determine color scale for target,
-defaults to viridis option B.}
+\item{target_cols}{Character vectors representing the hex values of different
+level colors for targets, defaults to viridis option B.}
 
 \item{title}{Character string for plot title.}
 

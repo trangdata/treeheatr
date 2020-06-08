@@ -40,8 +40,8 @@ If feature types are not supplied, infer from column type.}
 \item{label_map}{Named vector of the meaning of the target values,
 e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
 
-\item{target_cols}{Function determine color scale for target,
-defaults to viridis option B.}
+\item{target_cols}{Character vectors representing the hex values of different
+level colors for targets, defaults to viridis option B.}
 
 \item{target_lab_disp}{Character string for displaying the label of target label.
 If NULL, use `target_lab`.}
