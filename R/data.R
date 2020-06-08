@@ -128,6 +128,25 @@
 #'
 "pollen"
 
+#' Data of three different species of penguins.
+#'
+#' Collected and made available by Dr. Kristen Gorman and the Palmer Station,
+#' Antarctica LTER, a member of the Long Term Ecological Research Network.
+#'
+#' Fetched from https://github.com/allisonhorst/penguins.
+#'
+#' @format A data frame with 344 observations and 7 variables:
+#' \code{species}, \code{island}, \code{culmen_length_mm}, \code{culmen_depth_mm},
+#' \code{flipper_length_mm}, \code{body_mass_g} and \code{sex}.
+#'
+#' Gorman KB, Williams TD, Fraser WR (2014).
+#' Ecological Sexual Dimorphism and Environmental Variability within a
+#' Community of Antarctic Penguins (Genus Pygoscelis).
+#' PLoS ONE 9(3): e90081. doi:10.1371/journal.pone.0090081
+#'
+"penguins"
+
+
 #' Training dataset.
 #' Medical information of Wuhan patients collected between
 #' 2020-01-10 and 2020-02-18.
