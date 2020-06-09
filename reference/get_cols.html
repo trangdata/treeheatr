@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Determines terminal node position. — term_node_pos • treeheatr</title>
+<title>Get color functions from character vectors — get_cols • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Determines terminal node position. — term_node_pos" />
-<meta property="og:description" content="Create node layout using a bottom-up approach (literally) and
-overwrites ggarpty-precomputed positions in plot_data." />
+<meta property="og:title" content="Get color functions from character vectors — get_cols" />
+<meta property="og:description" content="Get color functions from character vectors" />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -123,35 +122,31 @@ overwrites ggarpty-precomputed positions in plot_data." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Determines terminal node position.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/trang1618/treeheatr/blob/master/R/compute_tree.R'><code>R/compute_tree.R</code></a></small>
-    <div class="hidden name"><code>term_node_pos.Rd</code></div>
+    <h1>Get color functions from character vectors</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trang1618/treeheatr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>get_cols.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create node layout using a bottom-up approach (literally) and
-overwrites ggarpty-precomputed positions in plot_data.</p>
+    <p>Get color functions from character vectors</p>
     </div>
 
-    <pre class="usage"><span class='fu'>term_node_pos</span>(<span class='no'>plot_data</span>, <span class='no'>dat</span>)</pre>
+    <pre class="usage"><span class='fu'>get_cols</span>(<span class='no'>my_cols</span>, <span class='no'>task</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>plot_data</th>
-      <td><p>Dataframe output of `ggparty:::get_plot_data()`.</p></td>
+      <th>my_cols</th>
+      <td><p>Character vectors of different hex values</p></td>
     </tr>
     <tr>
-      <th>dat</th>
-      <td><p>Dataframe of prediction values with scaled columns
-and clustered samples.</p></td>
+      <th>task</th>
+      <td><p>Character string indicating the type of problem,
+either 'classification' (categorical outcome) or 'regression' (continuous outcome).</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Dataframe with terminal node information.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

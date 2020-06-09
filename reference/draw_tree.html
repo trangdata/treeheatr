@@ -134,12 +134,11 @@ utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.</p>
     </div>
 
     <pre class="usage"><span class='fu'>draw_tree</span>(
-  <span class='no'>fit</span>,
   <span class='no'>dat</span>,
-  <span class='no'>task</span>,
+  <span class='no'>fit</span>,
   <span class='no'>term_dat</span>,
   <span class='no'>layout</span>,
-  <span class='no'>target_cols</span>,
+  <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>tree_space_top</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
@@ -147,6 +146,7 @@ utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.</p>
   <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>x_eval</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>y_eval</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+  <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classification"</span>, <span class='st'>"regression"</span>),
   <span class='kw'>par_node_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.size</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>0.15</span>, <span class='st'>"lines"</span>), <span class='kw'>line_list</span> <span class='kw'>=</span>
     <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>splitvar</span>)), <span class='kw'>line_gpar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>9</span>)), <span class='kw'>ids</span> <span class='kw'>=</span> <span class='st'>"inner"</span>),
   <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>label.padding</span> <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fl'>0.25</span>, <span class='st'>"lines"</span>), <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>),
@@ -159,18 +159,13 @@ utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fit</th>
-      <td><p>party object, e.g., as output from partykit::ctree()</p></td>
-    </tr>
-    <tr>
       <th>dat</th>
       <td><p>Dataframe with samples from original dataset ordered according to
 the clustering within each leaf node.</p></td>
     </tr>
     <tr>
-      <th>task</th>
-      <td><p>Character string indicating the type of problem,
-either 'classification' (categorical outcome) or 'regression' (continuous outcome).</p></td>
+      <th>fit</th>
+      <td><p>party object, e.g., as output from partykit::ctree()</p></td>
     </tr>
     <tr>
       <th>term_dat</th>
@@ -218,6 +213,11 @@ Can be defined with `yardstick::metric_set`.</p></td>
       <td><p>Numeric value indicating y position to print performance statistics.</p></td>
     </tr>
     <tr>
+      <th>task</th>
+      <td><p>Character string indicating the type of problem,
+either 'classification' (categorical outcome) or 'regression' (continuous outcome).</p></td>
+    </tr>
+    <tr>
       <th>par_node_vars</th>
       <td><p>Named list containing arguments to be passed to the
 `geom_node_label()` call for non-terminal nodes.</p></td>
@@ -243,6 +243,10 @@ Can be defined with `yardstick::metric_set`.</p></td>
 
     <p>A ggplot2 grob object of the decision tree.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>compute_tree</span>(<span class='no'>penguins</span>, <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'species'</span>)
+<span class='fu'>draw_tree</span>(<span class='no'>x</span>$<span class='no'>dat</span>, <span class='no'>x</span>$<span class='no'>fit</span>, <span class='no'>x</span>$<span class='no'>term_dat</span>, <span class='no'>x</span>$<span class='no'>layout</span>)</div><div class='img'><img src='draw_tree-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
