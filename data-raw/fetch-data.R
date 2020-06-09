@@ -8,9 +8,13 @@ diabetes <- readr::read_csv('data-raw/diabetes.csv')
 saheart <- pmlblite::fetch_data('saheart')
 pollen <- pmlblite::fetch_data('529_pollen')
 galaxy <- pmlblite::fetch_data('690_visualizing_galaxy')
-penguins <- readr::read_csv('https://github.com/allisonhorst/penguins/raw/master/data/penguins_size.csv')
-train_covid <- readr::read_tsv('https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_train.tsv')
-test_covid <- readr::read_tsv('https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_test.tsv')
+penguins <- readr::read_csv(
+  'https://github.com/allisonhorst/penguins/raw/master/data/penguins_size.csv',
+  col_types = 'ffnnnnf')
+train_covid <- readr::read_tsv(
+  'https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_train.tsv')
+test_covid <- readr::read_tsv(
+  'https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_test.tsv')
 
 data(wine, package = 'rattle')
 
