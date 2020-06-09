@@ -5,12 +5,11 @@
 \title{Draws the conditional decision tree.}
 \usage{
 draw_tree(
-  fit,
   dat,
-  task,
+  fit,
   term_dat,
   layout,
-  target_cols,
+  target_cols = NULL,
   title = NULL,
   tree_space_top = 0.05,
   tree_space_bottom = 0.05,
@@ -18,6 +17,7 @@ draw_tree(
   metrics = NULL,
   x_eval = 0,
   y_eval = 0.9,
+  task = c("classification", "regression"),
   par_node_vars = list(label.size = 0, label.padding = unit(0.15, "lines"), line_list =
     list(aes(label = splitvar)), line_gpar = list(list(size = 9)), ids = "inner"),
   terminal_vars = list(label.padding = unit(0.25, "lines"), size = 3, col = "white"),
@@ -27,13 +27,10 @@ draw_tree(
 )
 }
 \arguments{
-\item{fit}{party object, e.g., as output from partykit::ctree()}
-
 \item{dat}{Dataframe with samples from original dataset ordered according to
 the clustering within each leaf node.}
 
-\item{task}{Character string indicating the type of problem,
-either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
+\item{fit}{party object, e.g., as output from partykit::ctree()}
 
 \item{term_dat}{Dataframe for terminal nodes, must include these columns:
 id, x, y and y_hat.}
@@ -60,6 +57,9 @@ Can be defined with `yardstick::metric_set`.}
 
 \item{y_eval}{Numeric value indicating y position to print performance statistics.}
 
+\item{task}{Character string indicating the type of problem,
+either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
+
 \item{par_node_vars}{Named list containing arguments to be passed to the
 `geom_node_label()` call for non-terminal nodes.}
 
@@ -78,4 +78,9 @@ A ggplot2 grob object of the decision tree.
 \description{
 Draws the conditional decision tree output from partykit::ctree(),
 utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.
+}
+\examples{
+x <- compute_tree(penguins, target_lab = 'species')
+draw_tree(x$dat, x$fit, x$term_dat, x$layout)
+
 }

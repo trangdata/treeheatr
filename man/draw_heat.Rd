@@ -5,11 +5,11 @@
 \title{Draws the heatmap.}
 \usage{
 draw_heat(
-  fit,
   dat,
+  fit,
   feat_types = NULL,
   target_cols = NULL,
-  target_lab_disp = NULL,
+  target_lab_disp = "",
   trans_type = c("percentize", "normalize", "scale", "none"),
   clust_feats = TRUE,
   show_all_feats = FALSE,
@@ -17,18 +17,18 @@ draw_heat(
   custom_tree = NULL,
   cont_legend = FALSE,
   cate_legend = FALSE,
-  cont_cols = scale_fill_viridis_c,
-  cate_cols = scale_fill_viridis_d,
+  cont_cols = ggplot2::scale_fill_viridis_c,
+  cate_cols = ggplot2::scale_fill_viridis_d,
   panel_space = 0.001,
   target_space = 0.05,
   target_pos = "top"
 )
 }
 \arguments{
-\item{fit}{party object, e.g., as output from partykit::ctree()}
-
 \item{dat}{Dataframe with samples from original dataset ordered according to
 the clustering within each leaf node.}
+
+\item{fit}{party object, e.g., as output from partykit::ctree()}
 
 \item{feat_types}{Named vector indicating the type of each features,
 e.g., c(sex = 'factor', age = 'numeric').
@@ -89,4 +89,10 @@ A ggplot2 grob object of the heatmap.
 }
 \description{
 Draws the heatmap to be placed below the decision tree.
+}
+\examples{
+x <- compute_tree(penguins, target_lab = 'species')
+draw_heat(x$dat, x$fit)
+
+
 }

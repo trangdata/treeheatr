@@ -4,12 +4,12 @@
 \alias{term_node_pos}
 \title{Determines terminal node position.}
 \usage{
-term_node_pos(plot_data, scaled_dat)
+term_node_pos(plot_data, dat)
 }
 \arguments{
 \item{plot_data}{Dataframe output of `ggparty:::get_plot_data()`.}
 
-\item{scaled_dat}{Dataframe of prediction values with scaled columns
+\item{dat}{Dataframe of prediction values with scaled columns
 and clustered samples.}
 }
 \value{

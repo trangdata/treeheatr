@@ -77,7 +77,7 @@ A gtable/grob object of the decision tree (top) and heatmap (bottom).
 Draws and aligns decision tree and heatmap.
 }
 \examples{
-heat_tree(iris, target_lab = 'Species')
+heat_tree(penguins, target_lab = 'species')
 
 heat_tree(
   data = galaxy[1:100, ],

@@ -5,33 +5,42 @@
 \title{Compute decision tree from data set}
 \usage{
 compute_tree(
-  dat,
-  data_test,
-  task,
-  clust_samps,
-  clust_target,
-  print_eval,
-  custom_tree,
-  custom_layout,
-  lev_fac,
-  panel_space
+  data,
+  data_test = NULL,
+  target_lab,
+  task = c("classification", "regression"),
+  feat_types = NULL,
+  label_map = NULL,
+  clust_samps = TRUE,
+  clust_target = TRUE,
+  custom_tree = NULL,
+  custom_layout = NULL,
+  lev_fac = 1.3,
+  panel_space = 0.001
 )
 }
 \arguments{
-\item{dat}{Tidy dataset with dependent variable labelled 'my_target'.}
+\item{data}{Tidy dataset.}
 
 \item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
 
+\item{target_lab}{Name of the column in data that contains target/label information.}
+
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
+
+\item{feat_types}{Named vector indicating the type of each features,
+e.g., c(sex = 'factor', age = 'numeric').
+If feature types are not supplied, infer from column type.}
+
+\item{label_map}{Named vector of the meaning of the target values,
+e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
 
 \item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
 among samples within each leaf node.}
 
 \item{clust_target}{Logical. If TRUE, target/label is included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.}
-
-\item{print_eval}{Logical. If TRUE, print evaluation of the tree performance.}
 
 \item{custom_tree}{Custom tree with the partykit syntax.
 https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
@@ -48,9 +57,16 @@ according to their levels, commonly ranges from 1 to 1.5.
 recommended to range from 0.001 to 0.01.}
 }
 \value{
-A list of results from `partykit::ctree`, smart layout data,
-terminal data, node labels, and features to be displayed.
+A list of results from `partykit::ctree` or provided custom tree, including
+fit, estimates, smart layout and terminal data.
 }
 \description{
 Compute decision tree from data set
+}
+\examples{
+x <- compute_tree(penguins, target_lab = 'species')
+x$fit
+x$layout
+dplyr::select(x$term_dat, - contains('nodedata'))
+
 }
