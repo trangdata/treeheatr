@@ -39,4 +39,5 @@ Suggests:
 URL:
     https://trang1618.github.io/treeheatr/index.html,
     https://trang1618.github.io/treeheatr-manuscript/
+BugReports: https://github.com/trang1618/treeheatr/issues
 VignetteBuilder: knitr
