@@ -4,9 +4,9 @@
 #' utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.
 #'
 #' @import ggplot2
-#' @param fit party object, e.g., as output from partykit::ctree()
 #' @param dat Dataframe with samples from original dataset ordered according to
 #' the clustering within each leaf node.
+#' @param fit party object, e.g., as output from partykit::ctree()
 #' @param term_dat Dataframe for terminal nodes, must include these columns:
 #' id, x, y and y_hat.
 #' @param layout Dataframe of layout of all nodes, must include these columns:
@@ -32,11 +32,14 @@
 #' @inheritParams heat_tree
 #' @return A ggplot2 grob object of the decision tree.
 #' @export
-#'
+#' @examples
+#' x <- compute_tree(penguins, target_lab = 'species')
+#' draw_tree(x$dat, x$fit, x$term_dat, x$layout)
 #'
 draw_tree <- function(
-  fit, dat, task, term_dat, layout, target_cols, title = NULL, tree_space_top = 0.05,
+  dat, fit, term_dat, layout, target_cols = NULL, title = NULL, tree_space_top = 0.05,
   tree_space_bottom = 0.05, print_eval = FALSE, metrics = NULL, x_eval = 0, y_eval = 0.9,
+  task = c('classification', 'regression'),
   par_node_vars = list(
     label.size = 0, # no border around labels, unlike terminal nodes
     label.padding = unit(0.15, 'lines'),
@@ -53,7 +56,7 @@ draw_tree <- function(
     mapping = aes(label = paste(breaks_label, "*NA")))
   ){
 
-  text_eval <- if (print_eval) eval_tree(dat, task, metrics) else ''
+  text_eval <- if (print_eval) eval_tree(dat, match.arg(task), metrics) else ''
 
   ggparty::ggparty(fit, terminal_space = 0, layout = layout) +
     do.call(ggparty::geom_edge, edge_vars) +

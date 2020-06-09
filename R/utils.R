@@ -32,6 +32,22 @@
 }
 
 
+#' Get color functions from character vectors
+#' @param my_cols Character vectors of different hex values
+#' @inheritParams heat_tree
+#'
+get_cols <- function(my_cols, task) {
+  vir_opts <- list(option = 'A', begin = 0.3, end = 0.9, guide = FALSE)
+  my_cols <- if (!is.null(my_cols)){
+    my_cols <- do.call(ggplot2::scale_fill_manual, list(values = my_cols, guide = FALSE))
+  } else {
+    switch(task,
+           classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),
+           regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts))
+  }
+  my_cols
+}
+
 #' Print a ggHeatTree object.
 #' Adopted from
 #' https://github.com/daattali/ggExtra/blob/master/R/ggMarginal.R#L207-L244.

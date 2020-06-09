@@ -1,16 +1,26 @@
 # ------------------------------------------------------------------------------------
 #' Compute decision tree from data set
 #'
-#' @param dat Tidy dataset with dependent variable labelled 'my_target'.
-#' @param print_eval Logical. If TRUE, print evaluation of the tree performance.
 #' @inheritParams heat_tree
-#' @return A list of results from `partykit::ctree`, smart layout data,
-#' terminal data, node labels, and features to be displayed.
+#' @return A list of results from `partykit::ctree` or provided custom tree, including
+#' fit, estimates, smart layout and terminal data.
 #' @export
+#' @examples
+#' x <- compute_tree(penguins, target_lab = 'species')
+#' x$fit
+#' x$layout
+#' dplyr::select(x$term_dat, - contains('nodedata'))
 #'
 
-compute_tree <- function(dat, data_test, task, clust_samps, clust_target,
-  print_eval, custom_tree, custom_layout, lev_fac, panel_space){
+compute_tree <- function(
+  data, data_test = NULL, target_lab, task = c('classification', 'regression'),
+  feat_types = NULL, label_map = NULL, clust_samps = TRUE, clust_target = TRUE,
+  custom_tree = NULL, custom_layout = NULL, lev_fac = 1.3, panel_space = 0.001){
+
+  task <- match.arg(task)
+  preped_data <- prep_data(data, data_test, target_lab, task, feat_types, label_map)
+  dat <- preped_data$dat
+  data_test <- preped_data$data_test
 
   if (is.null(custom_tree)){
     fit <- partykit::ctree(my_target ~ ., data = dat)
@@ -29,25 +39,25 @@ compute_tree <- function(dat, data_test, task, clust_samps, clust_target,
     stop('`custom_tree` must be of class `party` or `party_node`.')
   }
 
-  scaled_dat <- prediction_df(fit, dat, data_test, task, clust_samps, clust_target)
+  dat <- prediction_df(dat, fit, data_test, task, clust_samps, clust_target)
 
   ################################################################
   ##### Prepare layout, terminal data, add node labels:
   plot_data <- ggparty::ggparty(fit)$data
 
   # node_size <- node_labels$n
-  terminal_data <- term_node_pos(plot_data, scaled_dat)
-  my_layout <- position_nodes(plot_data, terminal_data, custom_layout, lev_fac, panel_space)
+  terminal_data <- term_node_pos(plot_data, dat)
+  layout <- position_nodes(plot_data, terminal_data, custom_layout, lev_fac, panel_space)
 
   term_dat <- terminal_data %>%
     select(- c(x, y)) %>%
-    left_join(my_layout, by = 'id') %>%
+    left_join(layout, by = 'id') %>%
     mutate(
       term_node = if (task == 'classification') as.factor(y_hat) else round(y_hat, 2))
 
   list(fit = fit,
-       dat = scaled_dat,
-       layout = my_layout,
+       dat = dat,
+       layout = layout,
        term_dat = term_dat)
 }
 
@@ -58,20 +68,21 @@ compute_tree <- function(dat, data_test, task, clust_samps, clust_target,
 #' Select features with p-value (computed from decision tree) < `p_thres`
 #' or all features if `show_all_feats == TRUE`.
 #'
+#' @param dat Tidy dataset with dependent variable labelled 'my_target'.
 #' @param fit constparty object of the decision tree.
 #' @inheritParams compute_tree
 #' @return A dataframe of prediction values with scaled columns
 #' and clustered samples.
 #' @export
 #'
-prediction_df <- function(fit, dat, data_test, task, clust_samps, clust_target){
+prediction_df <- function(dat, fit, data_test, task, clust_samps, clust_target){
   node_pred <- stats::predict(fit, newdata = data_test, type = 'node')
   y_pred <- stats::predict(fit, newdata = data_test, type = 'response', simplify = FALSE) %>%
     .simplify_pred(id = node_pred, nam = as.character(node_pred))
 
   dat_ana <- data_test %||% dat
 
-  scaled_dat <- dat_ana %>%
+  dat <- dat_ana %>%
     cbind(node_id = node_pred, y_hat = y_pred) %>%
     lapply(
       unique(.$node_id), clust_samp_func, dat = .,
@@ -83,10 +94,10 @@ prediction_df <- function(fit, dat, data_test, task, clust_samps, clust_target){
   if (task == 'classification'){
     y_prob <- stats::predict(fit, newdata = data_test, type = 'prob', simplify = FALSE) %>%
       .simplify_pred(id = node_pred, nam = as.character(node_pred))
-    scaled_dat <- cbind(scaled_dat, y_prob)
+    dat <- cbind(dat, y_prob)
   }
 
-  scaled_dat
+  dat
 }
 
 
@@ -97,14 +108,13 @@ prediction_df <- function(fit, dat, data_test, task, clust_samps, clust_target){
 #' overwrites ggarpty-precomputed positions in plot_data.
 #'
 #' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
-#' @param scaled_dat Dataframe of prediction values with scaled columns
+#' @param dat Dataframe of prediction values with scaled columns
 #' and clustered samples.
 #'
 #' @return Dataframe with terminal node information.
-#' @export
 #'
-term_node_pos <- function(plot_data, scaled_dat){
-  node_labels <- scaled_dat %>%
+term_node_pos <- function(plot_data, dat){
+  node_labels <- dat %>%
     distinct(Sample, .keep_all = T) %>%
     count(node_id, y_hat) %>%
     rename(id = node_id)
@@ -115,4 +125,50 @@ term_node_pos <- function(plot_data, scaled_dat){
     mutate_at(vars(n), ~ replace(., is.na(.), 0))
 }
 
+
+
+# ------------------------------------------------------------------------------------
+#' Prepare dataset
+#' @inheritParams compute_tree
+#' @import dplyr
+#'
+#' @return List of dataframes (traing + test) with proper feature types and target name.
+#'
+prep_data <- function(
+  data, data_test = NULL, target_lab, task, feat_types = NULL, label_map = NULL){
+
+  dat <- data %>%
+    dplyr::rename(my_target = sym(!!target_lab))
+
+  if (task == 'classification'){
+    dat <- dplyr::mutate(dat, my_target = as.factor(my_target))
+    dat$my_target <- tryCatch(
+      recode(dat$my_target, !!!label_map),
+      error = function(e) dat$my_target)
+  }
+
+  # convert character features to categorical:
+  dat <- dplyr::mutate_if(dat, is.character, as.factor)
+
+  if (any(feat_types[names(which(sapply(dat, class) == 'character'))] != 'factor')){
+    warning('Character variables are considered categorical.')
+  }
+
+  if (!is.null(data_test)){
+    stopifnot(target_lab %in% colnames(data_test))
+    data_test <- data_test %>%
+      dplyr::rename('my_target' = sym(!!target_lab))
+
+    if (task == 'classification'){
+      data_test <- mutate(data_test, my_target = as.factor(my_target))
+      data_test$my_target <- tryCatch(
+        recode(data_test$my_target, !!!label_map),
+        error = function(e) data_test$my_target)
+    }
+    data_test <- data_test %>%
+      dplyr::mutate_if(is.character, as.factor)
+  }
+
+  list(dat = dat, data_test = data_test)
+}
 

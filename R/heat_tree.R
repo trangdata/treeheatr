@@ -35,7 +35,7 @@
 #' @export
 #'
 #' @examples
-#' heat_tree(iris, target_lab = 'Species')
+#' heat_tree(penguins, target_lab = 'species')
 #'
 #' heat_tree(
 #'   data = galaxy[1:100, ],
@@ -51,100 +51,50 @@ heat_tree <- function(
   heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001, ...){
 
   stopifnot(target_lab %in% colnames(data))
-  task <- match.arg(task)
+  target_cols <- get_cols(target_cols, match.arg(task))
   mf <- match.call()
+  ctree_vars <-
+    c('data', 'data_test', 'target_lab', 'task', 'feat_types', 'label_map', 'clust_samps',
+      'clust_target', 'custom_tree', 'custom_layout', 'lev_fac', 'panel_space')
   tree_vars <-
-    c('title', 'tree_space_top', 'tree_space_bottom', 'par_node_vars', 'terminal_vars',
+    c('title', 'task', 'tree_space_top', 'tree_space_bottom', 'par_node_vars', 'terminal_vars',
       'edge_vars', 'edge_text_vars', 'print_eval', 'metrics', 'x_eval', 'y_eval')
   heat_vars <-
     c('feat_types', 'trans_type', 'cont_cols', 'cate_cols', 'clust_feats', 'cont_legend',
-      'cate_legend', 'target_space', 'panel_space', 'target_pos', 'show_all_feats', 'p_thres')
+      'cate_legend', 'target_space', 'panel_space', 'target_pos', 'show_all_feats', 'p_thres',
+      'custom_tree')
+
+  m_ctree <- match(ctree_vars, names(mf), 0L)
   m_tree <- match(tree_vars, names(mf), 0L)
   m_heat <- match(heat_vars, names(mf), 0L)
-
-  vir_opts <- list(option = 'B', begin = 0.3, end = 0.85, guide = FALSE)
-
-  target_cols <- if (!is.null(target_cols)){
-    target_cols <- do.call(ggplot2::scale_fill_manual, list(values = target_cols, guide = FALSE))
-  } else {
-    switch(task,
-           classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),
-           regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts))
-    }
-
-  ################################################################
-  ##### Prepare dataset:
-
-  dat <- data %>%
-    dplyr::rename('my_target' = sym(!!target_lab))
-
-  if (task == 'classification'){
-    dat <- dplyr::mutate(dat, my_target = as.factor(my_target))
-    dat$my_target <- tryCatch(
-      recode(dat$my_target, !!!label_map),
-      error = function(e) dat$my_target)
-  }
-
-  # convert character features to categorical:
-  dat <- dat %>%
-    dplyr::mutate_if(is.character, as.factor)
-  if (any(feat_types[names(which(sapply(dat, class) == 'character'))] != 'factor')){
-    warning('Character variables are considered categorical.')
-  }
-
-  if (!is.null(data_test)){
-    stopifnot(target_lab %in% colnames(data_test))
-    data_test <- data_test %>%
-      dplyr::rename('my_target' = sym(!!target_lab))
-
-    if (task == 'classification'){
-      data_test <- dplyr::mutate(data_test, my_target = as.factor(my_target))
-      data_test$my_target <- tryCatch(
-        recode(data_test$my_target, !!!label_map),
-        error = function(e) data_test$my_target)
-    }
-    data_test <- data_test %>%
-      dplyr::mutate_if(is.character, as.factor)
-  }
 
 
   ################################################################
   ##### Compute conditional inference tree:
 
-  ctree_result <- compute_tree(
-    dat = dat,
-    data_test = data_test,
-    task = task,
-    custom_tree = custom_tree,
-    custom_layout = custom_layout,
-    clust_samps = clust_samps,
-    clust_target = clust_target,
-    lev_fac = lev_fac,
-    panel_space = panel_space
-    )
-
+  ctree_result <- mf[c(1L, m_ctree)]
+  ctree_result[[1L]] <- quote(compute_tree)
+  ctree_result <- eval(ctree_result, parent.frame())
 
   ################################################################
   ##### Draw decision tree and heatmap:
 
   dtree <- mf[c(1L, m_tree)]
   dtree$target_cols <- target_cols
-  dtree$task <- task
   for (argg in c('fit', 'dat', 'layout', 'term_dat')){
     dtree[[argg]] <- ctree_result[[argg]]
   }
   dtree[[1L]] <- quote(draw_tree)
   dtree <- eval(dtree, parent.frame())
 
+
   dheat <- mf[c(1L, m_heat)]
   dheat$fit <- ctree_result$fit
   dheat$dat <- ctree_result$dat
+  dheat$target_lab_disp <- target_lab_disp # b/c/ default in draw_heat() is NULL
   dheat$target_cols <- target_cols
-  dheat$target_lab_disp <- target_lab_disp
-  dheat$custom_tree <- custom_tree
   dheat[[1L]] <- quote(draw_heat)
   dheat <- eval(dheat, parent.frame())
-
 
   ################################################################
   ##### Align decision tree and heatmap:

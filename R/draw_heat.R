@@ -2,9 +2,9 @@
 #'
 #' Draws the heatmap to be placed below the decision tree.
 #'
-#' @param fit party object, e.g., as output from partykit::ctree()
 #' @param dat Dataframe with samples from original dataset ordered according to
 #' the clustering within each leaf node.
+#' @param fit party object, e.g., as output from partykit::ctree()
 #' @param trans_type Character string of 'normalize', 'scale' or 'none'.
 #' If 'scale', subtract the mean and divide by the standard deviation.
 #' If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
@@ -32,21 +32,26 @@
 #' the target label and the rest of the features
 #' @param target_pos Character string specifying the position of the target label
 #' on heatmap, can be 'top', 'bottom' or 'none'.
-#'
 #' @inheritParams heat_tree
 #'
 #' @return A ggplot2 grob object of the heatmap.
 #'
 #' @import ggplot2
 #' @export
+#' @examples
+#' x <- compute_tree(penguins, target_lab = 'species')
+#' draw_heat(x$dat, x$fit)
 #'
-draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_lab_disp = NULL,
+#'
+draw_heat <- function(
+  dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = '',
   trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
-  show_all_feats = FALSE, p_thres = 0.05, custom_tree = NULL,
-  cont_legend = FALSE, cate_legend = FALSE,
-  cont_cols = scale_fill_viridis_c,
-  cate_cols = scale_fill_viridis_d,
-  panel_space = 0.001, target_space = 0.05, target_pos = 'top'){
+  show_all_feats = FALSE, p_thres = 0.05, custom_tree = NULL, cont_legend = FALSE,
+  cate_legend = FALSE, cont_cols = ggplot2::scale_fill_viridis_c,
+  cate_cols = ggplot2::scale_fill_viridis_d, panel_space = 0.001, target_space = 0.05,
+  target_pos = 'top'){
+
+  trans_type <- match.arg(trans_type)
 
   if (is.logical(cont_legend) && cont_legend)
     cont_legend <- guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL)
@@ -56,11 +61,11 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
     cate_legend <- guide_legend(title = NULL)
   }
 
-  cont_cols <- do.call(cont_cols, list(guide = cont_legend))
+  cont_cols <- do.call(cont_cols, list(begin = 0.1, guide = cont_legend))
   cate_cols <- do.call(cate_cols, list(begin = 0.3, end = 0.9, guide = cate_legend))
 
   feat_names <- setdiff(colnames(fit$data), 'my_target')
-  trans_type <- match.arg(trans_type)
+
   # if feature types are not supplied, infer from column type:
   feat_types <- feat_types %||% sapply(dat[, feat_names], class)
   disp_feats <- get_disp_feats(
@@ -70,7 +75,6 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
   feat_list <- prepare_feats(dat, disp_feats, feat_types, clust_feats, trans_type)
   tile_cont <- feat_list[['df_cont']]
   tile_cate <- feat_list[['df_cate']]
-
   n_conts <- length(unique(tile_cont$cont_feat))
   n_cates <- length(unique(tile_cate$cate_feat))
 
@@ -101,7 +105,7 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
 
   if (!is.null(tile_cate)){
     tile_cate <- tile_cate %>%
-      dplyr::mutate(y = cate_feat %>% `levels<-`(seq.int(n_cates)) %>% as.numeric())
+      mutate(y = cate_feat %>% `levels<-`(seq.int(n_cates)) %>% as.numeric())
 
     for (i in levels(tile_cate$cate_feat)){
       dheat <- dheat +
@@ -114,7 +118,7 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
 
   if (!is.null(tile_cont)){
     tile_cont <- tile_cont %>%
-      dplyr::mutate(
+      mutate(
         y = cont_feat %>%
           `levels<-`(seq(n_cates + 1, n_conts + n_cates)) %>%
           as.character() %>%
@@ -122,8 +126,7 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
 
     dheat <- dheat +
       ggnewscale::new_scale_fill() +
-      geom_tile(data = tile_cont,
-                         aes(y = y, x = Sample, fill = value)) +
+      geom_tile(data = tile_cont, aes(y = y, x = Sample, fill = value)) +
       theme(legend.position = 'bottom') +
       cont_cols
   }
@@ -148,7 +151,6 @@ draw_heat <- function(fit, dat, feat_types = NULL, target_cols = NULL, target_la
 #' @param feat_names Character vector specifying the feature names in dat.
 #' @inheritParams draw_heat
 #' @return A character vector of feature names.
-#' @export
 #'
 get_disp_feats <- function(fit, feat_names, show_all_feats, custom_tree, p_thres){
   if (show_all_feats || (!is.null(custom_tree))){
