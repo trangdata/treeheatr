@@ -3,8 +3,8 @@ Type: Package
 Title: Heatmap-Integrated Decision Tree Visualizations
 Version: 1.0.0
 Authors@R: c(
-    person("Trang", "Le", email = "grixor@gmail.com", role = c("aut", "cre")),
-    person("Jason", "Moore", email = "jhmoore@upenn.edu", role = "aut"),
+    person("Trang", "Le", email = "grixor@gmail.com", role = c("aut", "cre"), comment = "https://trang.page/"),
+    person("Jason", "Moore", email = "jhmoore@upenn.edu", role = "aut", comment = "http://www.epistasisblog.org/"),
     person("University of Pennsylvania", role = "cph"))
 Maintainer: Trang Le <grixor@gmail.com>
 Description: Creates interpretable decision tree visualizations 
@@ -36,4 +36,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat
+URL:
+    https://trang1618.github.io/treeheatr/index.html,
+    https://trang1618.github.io/treeheatr-manuscript/
 VignetteBuilder: knitr
