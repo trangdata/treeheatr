@@ -53,16 +53,15 @@ These list parameters are named `*_vars`.
 For example:
 
 ```{r fig.height=4, fig.width=7}
-library(ggplot2)
 heat_tree(
   dat_raw, target_lab = 'species',
   par_node_vars = list(
     label.size = 0.2,
-    label.padding = unit(0.1, 'lines'),
+    label.padding = ggplot2::unit(0.1, 'lines'),
     line_list = list(
-      aes(label = paste('Node', id)),
-      aes(label = splitvar),
-      aes(label = paste('p =', formatC(p.value, format = 'e', digits = 2)))),
+      ggplot2::aes(label = paste('Node', id)),
+      ggplot2::aes(label = splitvar),
+      ggplot2::aes(label = paste('p =', formatC(p.value, format = 'e', digits = 2)))),
     line_gpar = list(
       list(size = 8),
       list(size = 8),
@@ -102,13 +101,13 @@ but in general this is safe to ignore because the goal of clustering is to impro
 
 ## Mixed data/feature types
 
-**treeheatr** supports mixed feature types.
+As shown above in the *penguins* example, **treeheatr** supports mixed feature types.
 
 For continuous variables/features, we can choose to either *percentize* (scale-rank), *normalize* (subtract the min and divide by the max) or *scale* (subtract the mean and divide by the standard deviation) each feature.
 Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
 Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette](https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
 
-We **highly recommend** that, when dealing with mixed feature types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
+We highly recommend that, when dealing with mixed feature types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
 When `feat_types` is not specified, **treeheatr** automatically inferred each column type from the original dataset.
 
 ## Regression
@@ -138,7 +137,7 @@ As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020
 
 
 First, a quick simplification of the column names:
-```{r}
+```{r warning=FALSE, message=FALSE}
 library(dplyr)
 library(partykit)
 
