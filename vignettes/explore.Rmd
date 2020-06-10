@@ -108,26 +108,8 @@ For continuous variables/features, we can choose to either *percentize* (scale-r
 Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
 Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette](https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
 
-Let's take a closer look at how it handles a dataset like Titanic with categorical features (`Class`, `Sex`, `Embarked`) and continuous features (others).
 We **highly recommend** that, when dealing with mixed feature types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
 When `feat_types` is not specified, **treeheatr** automatically inferred each column type from the original dataset.
-
-```{r fig.height=4.5, fig.width=9}
-dat_raw <- titanic[, c('Survived', 'Sex', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked')]
-
-heat_tree(
-  dat_raw,
-  target_lab = 'Survived',
-  label_map = c(`1` = 'Survived', `0` = 'Deceased'),
-  feat_types = c(Pclass = 'factor',
-                 Sex = 'factor',
-                 Age = 'numeric',
-                 SibSp = 'numeric',
-                 Parch = 'numeric',
-                 Fare = 'numeric',
-                 Embarked = 'factor'))
-```
-
 
 ## Regression
 
