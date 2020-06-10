@@ -6,7 +6,7 @@
 #'
 #' @return Character string of the decision tree evaluation.
 #' @export
-#' @example eval_tree(compute_tree(penguins, target_lab = 'species')$dat)
+#' @examples eval_tree(compute_tree(penguins, target_lab = 'species')$dat)
 #'
 eval_tree <- function(dat, task = c('classification', 'regression'), metrics = NULL){
   task <- match.arg(task)

@@ -23,3 +23,7 @@ Character string of the decision tree evaluation.
 \description{
 Print decision tree performance according to different metrics.
 }
+\examples{
+eval_tree(compute_tree(penguins, target_lab = 'species')$dat)
+
+}
