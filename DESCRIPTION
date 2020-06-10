@@ -21,7 +21,6 @@ Imports:
     ggparty,
     ggplot2,
     partykit,
-    scales,
     dplyr,
     ggnewscale,
     gtable,
