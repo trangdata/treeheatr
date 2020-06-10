@@ -1,11 +1,12 @@
 #' Print decision tree performance according to different metrics.
 #'
-#' @param dat Dataframe with truths and estimates of samples from original dataset.
+#' @param dat Dataframe with truths (column `my_target`) and estimates (column `y_hat`)
+#' of samples from original dataset.
 #' @inheritParams draw_tree
 #'
 #' @return Character string of the decision tree evaluation.
 #' @export
-#'
+#' @example eval_tree(compute_tree(penguins, target_lab = 'species')$dat)
 #'
 eval_tree <- function(dat, task = c('classification', 'regression'), metrics = NULL){
   task <- match.arg(task)
@@ -41,6 +42,7 @@ eval_class <- function(dat, metrics = NULL){
       sep = ': ')) %>%
     pull() %>%
     paste(collapse = '\n')
+  text_eval
 }
 
 eval_reg <- function(dat, metrics = NULL){
@@ -62,4 +64,5 @@ eval_reg <- function(dat, metrics = NULL){
       sep = ': ')) %>%
     pull() %>%
     paste(collapse = '\n')
+  text_eval
 }

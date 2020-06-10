@@ -7,7 +7,8 @@
 eval_tree(dat, task = c("classification", "regression"), metrics = NULL)
 }
 \arguments{
-\item{dat}{Dataframe with truths and estimates of samples from original dataset.}
+\item{dat}{Dataframe with truths (column `my_target`) and estimates (column `y_hat`)
+of samples from original dataset.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}

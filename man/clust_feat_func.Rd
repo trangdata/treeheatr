@@ -4,7 +4,7 @@
 \alias{clust_feat_func}
 \title{Performs clustering or features.}
 \usage{
-clust_feat_func(dat, clust_vec, clust_feats)
+clust_feat_func(dat, clust_vec, clust_feats = TRUE)
 }
 \arguments{
 \item{dat}{Dataframe of the original dataset. Samples may be reordered.}

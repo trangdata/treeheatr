@@ -4,7 +4,7 @@
 \alias{clust_samp_func}
 \title{Performs clustering of samples.}
 \usage{
-clust_samp_func(leaf_node = NULL, dat, clust_vec, clust_samps)
+clust_samp_func(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE)
 }
 \arguments{
 \item{leaf_node}{Integer value indicating terminal node id.}

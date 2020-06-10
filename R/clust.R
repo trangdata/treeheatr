@@ -8,10 +8,8 @@
 #' @inheritParams heat_tree
 #'
 #' @return Dataframe of reordered original dataset when clust_samps == TRUE.
-#' @export
 #'
-#'
-clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps){
+clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE){
   df <- dat[dat$node_id == leaf_node, ]
 
   if (clust_samps && length(clust_vec) > 1 && nrow(df) > 1){
@@ -41,10 +39,8 @@ clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps){
 #' When clust_samps = FALSE and clust_feats = FALSE, no clustering is performed.
 #'
 #' @return Character vector of reordered features when clust_feats == TRUE.
-#' @export
 #'
-#'
-clust_feat_func <- function(dat, clust_vec, clust_feats){
+clust_feat_func <- function(dat, clust_vec, clust_feats = TRUE){
 
   if (clust_feats){
     new_feat_order <- dat[, clust_vec] %>%
