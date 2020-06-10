@@ -16,26 +16,28 @@ reference:
     Package primary functions
 - contents:
   - heat_tree
+  - compute_tree
   - draw_tree
   - draw_heat
 - title: "Utility functions"
   desc: >
     Package primary functions
 - contents:
-  - prepare_feats
+  - prediction_df
   - clust_samp_func
   - clust_feat_func
   - scale_norm
+  - term_node_pos
   - position_nodes
+  - prepare_feats
+  - eval_tree
 - title: "Datasets"
   desc: >
     Attached datasets available for use via lazy-loading
 - contents:
+  - penguins
   - diabetes
-  - flags
-  - saheart
   - titanic
-  - waveform
   - wine
   - wine_quality_red
 
