@@ -29,7 +29,7 @@ library(treeheatr)
 with the iris dataset!
 Running the `heat_tree()` function can be as simple as:
 
-```{r fig.height=3, fig.width=5}
+```{r fig.height=3, fig.width=7}
 dat_raw <- na.omit(penguins)
 heat_tree(dat_raw, target_lab = 'species')
 ```

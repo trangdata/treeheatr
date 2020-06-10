@@ -146,7 +146,6 @@
 #'
 "penguins"
 
-
 #' Training dataset.
 #' Medical information of Wuhan patients collected between
 #' 2020-01-10 and 2020-02-18.
