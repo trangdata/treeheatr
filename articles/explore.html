@@ -157,43 +157,18 @@
 <a href="#mixed-datafeature-types" class="anchor"></a>Mixed data/feature types</h2>
 <p><strong>treeheatr</strong> supports mixed feature types.</p>
 <p>For continuous variables/features, we can choose to either <em>percentize</em> (scale-rank), <em>normalize</em> (subtract the min and divide by the max) or <em>scale</em> (subtract the mean and divide by the standard deviation) each feature. Depending on what we want to show in the heatmap, one transformation method can be more effective than the other. Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in <a href="https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize">this vignette</a> of the <strong>heatmaply</strong> package.</p>
-<p>Let’s take a closer look at how it handles a dataset like Titanic with categorical features (<code>Class</code>, <code>Sex</code>, <code>Embarked</code>) and continuous features (others). We <strong>highly recommend</strong> that, when dealing with mixed feature types, the user supply <code>feat_types</code> to indicate whether a feature should be considered ‘numeric’ (continuous) or ‘factor’ (categorical) as shown below. When <code>feat_types</code> is not specified, <strong>treeheatr</strong> automatically inferred each column type from the original dataset.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">dat_raw</span> <span class="kw">&lt;-</span> <span class="no">titanic</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'Survived'</span>, <span class="st">'Sex'</span>, <span class="st">'Pclass'</span>, <span class="st">'Age'</span>, <span class="st">'SibSp'</span>, <span class="st">'Parch'</span>, <span class="st">'Fare'</span>, <span class="st">'Embarked'</span>)]
-
-<span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
-  <span class="no">dat_raw</span>,
-  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Survived'</span>,
-  <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Survived'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Deceased'</span>),
-  <span class="kw">feat_types</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">Pclass</span> <span class="kw">=</span> <span class="st">'factor'</span>,
-                 <span class="kw">Sex</span> <span class="kw">=</span> <span class="st">'factor'</span>,
-                 <span class="kw">Age</span> <span class="kw">=</span> <span class="st">'numeric'</span>,
-                 <span class="kw">SibSp</span> <span class="kw">=</span> <span class="st">'numeric'</span>,
-                 <span class="kw">Parch</span> <span class="kw">=</span> <span class="st">'numeric'</span>,
-                 <span class="kw">Fare</span> <span class="kw">=</span> <span class="st">'numeric'</span>,
-                 <span class="kw">Embarked</span> <span class="kw">=</span> <span class="st">'factor'</span>))
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 3 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 3 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 5 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 6 treated as</span>
-<span class="co">#&gt; interval scaled</span>
-<span class="co">#&gt; Warning in cluster::daisy(., metric = "gower"): binary variable(s) 3 treated as</span>
-<span class="co">#&gt; interval scaled</span></pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="864"></p>
+<p>We <strong>highly recommend</strong> that, when dealing with mixed feature types, the user supply <code>feat_types</code> to indicate whether a feature should be considered ‘numeric’ (continuous) or ‘factor’ (categorical) as shown below. When <code>feat_types</code> is not specified, <strong>treeheatr</strong> automatically inferred each column type from the original dataset.</p>
 </div>
 <div id="regression" class="section level2">
 <h2 class="hasAnchor">
 <a href="#regression" class="anchor"></a>Regression</h2>
 <p>In general, compared to classification, regression task is more difficult to interpret with a decision tree. However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes. Also, removing the terminal node label may show the groups better. Here’s an example:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">galaxy</span>,
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">galaxy</span>,
           <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
           <span class="kw">task</span> <span class="kw">=</span> <span class="st">'regression'</span>,
           <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="kw">NULL</span>,
           <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 </div>
 <div id="youre-the-warren-beatty-of-your-heat_tree" class="section level2">
 <h2 class="hasAnchor">
@@ -203,7 +178,7 @@
 <p>You can manually define your own tree for the <code>custom_tree</code> argument following the <a href="https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf">partykit vignette</a>.</p>
 <p>As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a <a href="https://doi.org/10.1038/s42256-020-0180-7">recent study</a> with the conditional decision tree.</p>
 <p>First, a quick simplification of the column names:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -234,7 +209,7 @@
     <span class="st">'outcome'</span>
   )</pre></body></html></div>
 <p>We now apply the tree structure in <a href="https://www.nature.com/articles/s42256-020-0180-7/figures/2">Figure 2</a> of the original study (only show the training set for now):</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># first argument indicates the index of the feature used for splitting</span>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># first argument indicates the index of the feature used for splitting</span>
 
 <span class="no">split_ldh</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html">partysplit</a></span>(<span class="fl">1L</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">365</span>)
 <span class="no">split_crp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html">partysplit</a></span>(<span class="fl">2L</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">41.2</span>)
@@ -253,7 +228,7 @@
   <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
   <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Death'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survival'</span>),
   <span class="kw">custom_tree</span> <span class="kw">=</span> <span class="no">custom_tree</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 </div>
 <div id="apply-the-learned-tree-on-externalholdouttestvalidation-dataset" class="section level2">
 <h2 class="hasAnchor">
@@ -274,11 +249,11 @@
 <li>Concordance correlation coefficient (CCC).</li>
 </ul>
 <p>You can also choose to show performance based on any other set of appropriate metrics listed on the <a href="https://yardstick.tidymodels.org/reference/index.html">yardstick reference page</a>, for example, with</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">metrics</span> <span class="kw">=</span> <span class="kw pkg">yardstick</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/yardstick/man/metric_set.html">metric_set</a></span>(<span class="kw pkg">yardstick</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/yardstick/man/f_meas.html">f_meas</a></span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">metrics</span> <span class="kw">=</span> <span class="kw pkg">yardstick</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/yardstick/man/metric_set.html">metric_set</a></span>(<span class="kw pkg">yardstick</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/yardstick/man/f_meas.html">f_meas</a></span>)</pre></body></html></div>
 <p>as a <code>heat_tree</code> argument to show the <em>F</em> score (a combination of precision and recall).</p>
 <p><strong>Warning</strong>: We do not recommend <code>print_eval</code> on the training set because these measures may gives you an over-optimistic view of how the tree performs (this would show pure training accuracy, not cross-validated).</p>
 <p>Let’s now apply the custom tree we (or really, Yan et al.) designed earlier and see how it performs on the test set:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="no">selected_train</span>,
   <span class="kw">data_test</span> <span class="kw">=</span> <span class="no">selected_test</span>,
   <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
@@ -287,7 +262,7 @@
   <span class="kw">custom_tree</span> <span class="kw">=</span> <span class="no">custom_tree</span>,
   <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">3</span>
 )</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
+<p><img src="explore_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
   </div>
 
