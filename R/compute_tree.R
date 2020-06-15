@@ -67,7 +67,7 @@ compute_tree <- function(
 #' @inheritParams compute_tree
 #' @import dplyr
 #'
-#' @return List of dataframes (traing + test) with proper feature types and target name.
+#' @return List of dataframes (training + test) with proper feature types and target name.
 #'
 prep_data <- function(
   data, data_test = NULL, target_lab, task, feat_types = NULL, label_map = NULL){
@@ -114,7 +114,7 @@ prep_data <- function(
 #' Select features with p-value (computed from decision tree) < `p_thres`
 #' or all features if `show_all_feats == TRUE`.
 #'
-#' @param dat Tidy dataset with dependent variable labelled 'my_target'.
+#' @param dat Tidy dataset with dependent variable labeled 'my_target'.
 #' @param fit constparty object of the decision tree.
 #' @inheritParams compute_tree
 #' @return A dataframe of prediction values with scaled columns
@@ -150,7 +150,7 @@ prediction_df <- function(dat, fit, data_test, task, clust_samps, clust_target){
 #' Determines terminal node position.
 #'
 #' Create node layout using a bottom-up approach (literally) and
-#' overwrites ggarpty-precomputed positions in plot_data.
+#' overwrites ggparty-precomputed positions in plot_data.
 #'
 #' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
 #' @param dat Dataframe of prediction values with scaled columns
@@ -175,7 +175,7 @@ term_node_pos <- function(plot_data, dat){
 #' Creates smart node layout.
 #'
 #' Create node layout using a bottom-up approach (literally) and
-#' overwrites ggarpty-precomputed positions in plot_data.
+#' overwrites ggparty-precomputed positions in plot_data.
 #'
 #' @param plot_data Dataframe output of `ggparty:::get_plot_data()`.
 #' @param terminal_data Dataframe of terminal node information including id

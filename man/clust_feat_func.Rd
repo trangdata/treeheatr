@@ -12,13 +12,13 @@ clust_feat_func(dat, clust_vec, clust_feats = TRUE)
 \item{clust_vec}{Character vector of variable names to be applied clustering on.
 Can include class labels.}
 
-\item{clust_feats}{if TRUE clusters displayed features (passed through clust_vec)
+\item{clust_feats}{if TRUE clusters displayed features (passed through `clust_vec`)
 using the the Gower metric based on the values of all samples
 and returns the ordered features.
-When clust_samps = FALSE and clust_feats = FALSE, no clustering is performed.}
+When `clust_samps = FALSE` and `clust_feats = FALSE`, no clustering is performed.}
 }
 \value{
-Character vector of reordered features when clust_feats == TRUE.
+Character vector of reordered features when `clust_feats == TRUE`.
 }
 \description{
 Performs clustering or features.

@@ -31,7 +31,7 @@ If feature types are not supplied, infer from column type.}
 e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
 }
 \value{
-List of dataframes (traing + test) with proper feature types and target name.
+List of dataframes (training + test) with proper feature types and target name.
 }
 \description{
 Prepare dataset

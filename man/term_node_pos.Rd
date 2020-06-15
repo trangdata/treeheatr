@@ -17,5 +17,5 @@ Dataframe with terminal node information.
 }
 \description{
 Create node layout using a bottom-up approach (literally) and
-overwrites ggarpty-precomputed positions in plot_data.
+overwrites ggparty-precomputed positions in plot_data.
 }

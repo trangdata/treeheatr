@@ -11,7 +11,7 @@ get_disp_feats(fit, feat_names, show_all_feats, custom_tree, p_thres)
 
 \item{feat_names}{Character vector specifying the feature names in dat.}
 
-\item{show_all_feats}{Logical. If TRUE, show all features regarless p_thres.}
+\item{show_all_feats}{Logical. If TRUE, show all features regardless of `p_thres`.}
 
 \item{custom_tree}{Custom tree with the partykit syntax.
 https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf

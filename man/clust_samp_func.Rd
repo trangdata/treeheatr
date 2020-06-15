@@ -14,7 +14,7 @@ clust_samp_func(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE)
 \item{clust_vec}{Character vector of variable names to be applied clustering on.
 Can include class labels.}
 
-\item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
+\item{clust_samps}{Logical. If TRUE, hierarchical clustering would be performed
 among samples within each leaf node.}
 }
 \value{

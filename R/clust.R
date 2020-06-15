@@ -33,12 +33,12 @@ clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE
 #' @param dat Dataframe of the original dataset. Samples may be reordered.
 #' @param clust_vec Character vector of variable names to be applied clustering on.
 #' Can include class labels.
-#' @param clust_feats if TRUE clusters displayed features (passed through clust_vec)
+#' @param clust_feats if TRUE clusters displayed features (passed through `clust_vec`)
 #' using the the Gower metric based on the values of all samples
 #' and returns the ordered features.
-#' When clust_samps = FALSE and clust_feats = FALSE, no clustering is performed.
+#' When `clust_samps = FALSE` and `clust_feats = FALSE`, no clustering is performed.
 #'
-#' @return Character vector of reordered features when clust_feats == TRUE.
+#' @return Character vector of reordered features when `clust_feats == TRUE`.
 #'
 clust_feat_func <- function(dat, clust_vec, clust_feats = TRUE){
 

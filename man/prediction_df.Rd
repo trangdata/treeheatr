@@ -7,7 +7,7 @@
 prediction_df(dat, fit, data_test, task, clust_samps, clust_target)
 }
 \arguments{
-\item{dat}{Tidy dataset with dependent variable labelled 'my_target'.}
+\item{dat}{Tidy dataset with dependent variable labeled 'my_target'.}
 
 \item{fit}{constparty object of the decision tree.}
 
@@ -16,7 +16,7 @@ prediction_df(dat, fit, data_test, task, clust_samps, clust_target)
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
 
-\item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
+\item{clust_samps}{Logical. If TRUE, hierarchical clustering would be performed
 among samples within each leaf node.}
 
 \item{clust_target}{Logical. If TRUE, target/label is included in hierarchical clustering

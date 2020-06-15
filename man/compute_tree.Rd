@@ -36,7 +36,7 @@ If feature types are not supplied, infer from column type.}
 \item{label_map}{Named vector of the meaning of the target values,
 e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
 
-\item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
+\item{clust_samps}{Logical. If TRUE, hierarchical clustering would be performed
 among samples within each leaf node.}
 
 \item{clust_target}{Logical. If TRUE, target/label is included in hierarchical clustering

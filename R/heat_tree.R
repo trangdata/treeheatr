@@ -14,7 +14,7 @@
 #' level colors for targets, defaults to viridis option B.
 #' @param target_lab_disp Character string for displaying the label of target label.
 #' If NULL, use `target_lab`.
-#' @param clust_samps Logical. If TRUE, hierarhical clustering would be performed
+#' @param clust_samps Logical. If TRUE, hierarchical clustering would be performed
 #' among samples within each leaf node.
 #' @param clust_target Logical. If TRUE, target/label is included in hierarchical clustering
 #' of samples within each leaf node and might yield a more interpretable heatmap.

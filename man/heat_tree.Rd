@@ -46,7 +46,7 @@ level colors for targets, defaults to viridis option B.}
 \item{target_lab_disp}{Character string for displaying the label of target label.
 If NULL, use `target_lab`.}
 
-\item{clust_samps}{Logical. If TRUE, hierarhical clustering would be performed
+\item{clust_samps}{Logical. If TRUE, hierarchical clustering would be performed
 among samples within each leaf node.}
 
 \item{clust_target}{Logical. If TRUE, target/label is included in hierarchical clustering
