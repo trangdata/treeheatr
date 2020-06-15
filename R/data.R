@@ -1,5 +1,6 @@
 #' Diabetes patient records.
 #'
+#' http://archive.ics.uci.edu/ml/datasets/diabetes
 #' https://www.kaggle.com/uciml/pima-indians-diabetes-database
 #'
 #' @format A data frame with 768 observations and 9 variables:
