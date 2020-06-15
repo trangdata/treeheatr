@@ -131,7 +131,7 @@ heat_tree(data = galaxy,
 
 *Anyone got that [Food Wishes reference](https://youtu.be/fyMQ2203pQM?t=82)?*
 
-You can manually define your own tree for the `custom_tree` argument following the [partykit vignette](https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf).
+You can manually define your own tree for the `custom_tree` argument following the [partykit vignette](https://cran.r-project.org/package=partykit/vignettes/partykit.pdf).
 
 As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a [recent study](https://doi.org/10.1038/s42256-020-0180-7) with the conditional decision tree.
 
