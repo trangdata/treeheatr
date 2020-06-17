@@ -4,9 +4,9 @@ wine_quality_red <- pmlblite::fetch_data('wine-quality-red')
 # mushroom <- pmlblite::fetch_data('mushroom')
 # titanic <- titanic::titanic_train
 # flags <- pmlblite::fetch_data('flags')
-# diabetes <- readr::read_csv('data-raw/diabetes.csv')
 # saheart <- pmlblite::fetch_data('saheart')
 # pollen <- pmlblite::fetch_data('529_pollen')
+diabetes <- readr::read_csv('data-raw/diabetes.csv')
 galaxy <- pmlblite::fetch_data('690_visualizing_galaxy')
 penguins <- readr::read_csv(
   'https://github.com/allisonhorst/penguins/raw/master/data/penguins_size.csv',
@@ -21,8 +21,8 @@ test_covid <- readr::read_tsv(
 
 data(wine, package = 'rattle')
 
-usethis::use_data(wine_quality_red,
-                  # flags, diabetes, saheart, pollen, titanic,
+usethis::use_data(wine_quality_red, diabetes,
+                  # flags, saheart, pollen, titanic,
                   galaxy, wine, penguins, train_covid, test_covid,
                   overwrite = TRUE)
 

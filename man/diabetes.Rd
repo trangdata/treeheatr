@@ -13,6 +13,7 @@ A data frame with 768 observations and 9 variables:
 diabetes
 }
 \description{
+http://archive.ics.uci.edu/ml/datasets/diabetes
 https://www.kaggle.com/uciml/pima-indians-diabetes-database
 }
 \keyword{datasets}
