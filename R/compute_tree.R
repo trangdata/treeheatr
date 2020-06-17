@@ -33,7 +33,7 @@ compute_tree <- function(
         check.names = FALSE),
       terms = stats::terms(my_target ~ ., data = dat)) %>%
       partykit::as.constparty()
-  } else if (class(custom_tree)[1] == 'party'){
+  } else if ('party' %in% class(custom_tree)){
     fit <- partykit::as.constparty(custom_tree)
   } else {
     stop('`custom_tree` must be of class `party` or `party_node`.')
