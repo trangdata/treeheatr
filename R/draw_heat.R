@@ -127,7 +127,9 @@ draw_heat <- function(
     dheat <- dheat +
       ggnewscale::new_scale_fill() +
       geom_tile(data = tile_cont, aes(y = y, x = Sample, fill = value)) +
-      theme(legend.position = 'bottom') +
+      theme(legend.position = 'bottom',
+            legend.margin = margin(0, 0, 0, 0),
+            legend.box.margin = margin(-5, 0, 0, 0)) +
       cont_cols
   }
 
