@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">treeheatr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -56,6 +56,9 @@
 </li>
 <li>
   <a href="articles/explore.html">Vignette</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -96,27 +99,30 @@
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
 <p>Please make sure your version of R &gt;= 3.5.0 before installation.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages('devtools') # uncomment to install devtools</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">'trang1618/treeheatr'</span>)</pre></div>
+<p>You can install the released version of <strong>treeheatr</strong> from CRAN with:</p>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'treeheatr'</span>)</pre></div>
+<p>Or the development version from GitHub with remotes:</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages('remotes') # uncomment to install devtools</span>
+<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">'trang1618/treeheatr'</span>)</pre></div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
-<div id="iris-dataset" class="section level3">
+<div id="penguin-dataset" class="section level3">
 <h3 class="hasAnchor">
-<a href="#iris-dataset" class="anchor"></a>Iris dataset</h3>
-<p>Classification of different types of iris plants.</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">treeheatr</span>)
+<a href="#penguin-dataset" class="anchor"></a>Penguin dataset</h3>
+<p>Classification of different types of penguin species.</p>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">treeheatr</span>)
 
 <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">penguins</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'species'</span>)</pre></div>
-<p><img src="reference/figures/unnamed-chunk-3-1.png"><!-- --></p>
+<p><img src="reference/figures/unnamed-chunk-4-1.png"><!-- --></p>
 </div>
 <div id="wine-recognition-dataset" class="section level3">
 <h3 class="hasAnchor">
 <a href="#wine-recognition-dataset" class="anchor"></a>Wine recognition dataset</h3>
 <p>Classification of different cultivars of wine.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Type'</span>, <span class="kw">target_lab_disp</span> <span class="kw">=</span> <span class="st">'Cultivar'</span>)</pre></div>
-<p><img src="reference/figures/unnamed-chunk-4-1.png"><!-- --></p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Type'</span>, <span class="kw">target_lab_disp</span> <span class="kw">=</span> <span class="st">'Cultivar'</span>)</pre></div>
+<p><img src="reference/figures/unnamed-chunk-5-1.png"><!-- --></p>
 </div>
 </div>
 <div id="how-to-use" class="section level2">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Select the important features to be displayed. — get_disp_feats • treeheatr</title>
+<title>Changelog • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,7 @@
 
 
 
-<meta property="og:title" content="Select the important features to be displayed. — get_disp_feats" />
-<meta property="og:description" content="Select features with p-value (computed from decision tree) &amp;lt; `p_thres`
-or all features if `show_all_feats == TRUE`." />
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -65,7 +63,7 @@ or all features if `show_all_feats == TRUE`." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -126,57 +124,35 @@ or all features if `show_all_feats == TRUE`." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Select the important features to be displayed.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/trang1618/treeheatr/blob/master/R/draw_heat.R'><code>R/draw_heat.R</code></a></small>
-    <div class="hidden name"><code>get_disp_feats.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/trang1618/treeheatr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Select features with p-value (computed from decision tree) &lt; `p_thres`
-or all features if `show_all_feats == TRUE`.</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>get_disp_feats</span>(<span class='no'>fit</span>, <span class='no'>feat_names</span>, <span class='no'>show_all_feats</span>, <span class='no'>custom_tree</span>, <span class='no'>p_thres</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>fit</th>
-      <td><p>constparty object of the decision tree.</p></td>
-    </tr>
-    <tr>
-      <th>feat_names</th>
-      <td><p>Character vector specifying the feature names in dat.</p></td>
-    </tr>
-    <tr>
-      <th>show_all_feats</th>
-      <td><p>Logical. If TRUE, show all features regardless of `p_thres`.</p></td>
-    </tr>
-    <tr>
-      <th>custom_tree</th>
-      <td><p>Custom tree with the partykit syntax.
-https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-If NULL, a conditional inference tree is computed.</p></td>
-    </tr>
-    <tr>
-      <th>p_thres</th>
-      <td><p>Numeric value indicating the p-value threshold of feature importance.
-Feature with p-values computed from the decision tree below this value
-will be displayed on the heatmap.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A character vector of feature names.</p>
-
+    <div id="treeheatr-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#treeheatr-development-version" class="anchor"></a>treeheatr (development version)<small> Unreleased </small>
+</h1>
+</div>
+    <div id="treeheatr-010-2020-06-17" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#treeheatr-010-2020-06-17" class="anchor"></a>treeheatr 0.1.0 (2020-06-17)<small> 2020-06-17 </small>
+</h1>
+<div id="announcements" class="section level3">
+<h3 class="hasAnchor">
+<a href="#announcements" class="anchor"></a>ANNOUNCEMENTS</h3>
+<ul>
+<li>treeheatr 0.1.0 - first CRAN release!</li>
+</ul>
+</div>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
