@@ -40,6 +40,9 @@ reference:
   - titanic
   - wine
   - wine_quality_red
+  - galaxy
+  - train_covid
+  - test_covid
 
 navbar:
   structure:
