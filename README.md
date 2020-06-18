@@ -11,16 +11,24 @@
 
 Please make sure your version of R \>= 3.5.0 before installation.
 
+You can install the released version of **treeheatr** from CRAN with:
+
 ``` r
-# install.packages('devtools') # uncomment to install devtools
-devtools::install_github('trang1618/treeheatr')
+install.packages('treeheatr')
+```
+
+Or the development version from GitHub with remotes:
+
+``` r
+# install.packages('remotes') # uncomment to install devtools
+remotes::install_github('trang1618/treeheatr')
 ```
 
 ## Examples
 
-### Iris dataset
+### Penguin dataset
 
-Classification of different types of iris plants.
+Classification of different types of penguin species.
 
 ``` r
 library(treeheatr)
@@ -28,7 +36,7 @@ library(treeheatr)
 heat_tree(penguins, target_lab = 'species')
 ```
 
-![](man/figures/unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/unnamed-chunk-4-1.png)<!-- -->
 
 ### Wine recognition dataset
 
@@ -38,7 +46,7 @@ Classification of different cultivars of wine.
 heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 ```
 
-![](man/figures/unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
 ## How to Use
 
