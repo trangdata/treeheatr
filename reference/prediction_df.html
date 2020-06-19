@@ -136,14 +136,14 @@ or all features if `show_all_feats == TRUE`." />
 or all features if `show_all_feats == TRUE`.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prediction_df</span>(<span class='no'>dat</span>, <span class='no'>fit</span>, <span class='no'>data_test</span>, <span class='no'>task</span>, <span class='no'>clust_samps</span>, <span class='no'>clust_target</span>)</pre>
+    <pre class="usage"><span class='fu'>prediction_df</span>(<span class='no'>dat</span>, <span class='no'>fit</span>, <span class='no'>data_test</span>, <span class='no'>target_lab</span>, <span class='no'>task</span>, <span class='no'>clust_samps</span>, <span class='no'>clust_target</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dat</th>
-      <td><p>Tidy dataset with dependent variable labeled 'my_target'.</p></td>
+      <td><p>Tidy dataset.</p></td>
     </tr>
     <tr>
       <th>fit</th>
@@ -152,6 +152,10 @@ or all features if `show_all_feats == TRUE`.</p>
     <tr>
       <th>data_test</th>
       <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
+    </tr>
+    <tr>
+      <th>target_lab</th>
+      <td><p>Name of the column in data that contains target/label information.</p></td>
     </tr>
     <tr>
       <th>task</th>
