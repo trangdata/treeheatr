@@ -4,11 +4,18 @@
 \alias{eval_tree}
 \title{Print decision tree performance according to different metrics.}
 \usage{
-eval_tree(dat, task = c("classification", "regression"), metrics = NULL)
+eval_tree(
+  dat,
+  target_lab = colnames(dat)[1],
+  task = c("classification", "regression"),
+  metrics = NULL
+)
 }
 \arguments{
-\item{dat}{Dataframe with truths (column `my_target`) and estimates (column `y_hat`)
+\item{dat}{Dataframe with truths (column `target_lab`) and estimates (column `y_hat`)
 of samples from original dataset.}
+
+\item{target_lab}{Name of the column in data that contains target/label information.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}

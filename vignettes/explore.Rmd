@@ -41,9 +41,9 @@ And we can relax the p value threshold `p_thres` to include more features that m
 ```{r fig.height=3, fig.width=7}
 heat_tree(
   dat_raw, target_lab = 'species',
-  # target_cols = c('#E69F00', '#56B4E9', '#009E73'),
-  target_cols = c('darkorange','purple','cyan4'),
-  custom_layout = data.frame(id = 1, x = 0.1, y = 1), 
+  target_cols = c('#E69F00', '#56B4E9', '#009E73'),
+  # moving node 3 a bit to the left:
+  custom_layout = data.frame(id = 3, x = 0.1, y = 0.5), 
   show_all_feats = TRUE,
   panel_space = 0.05, target_space = 0.2, tree_space_bottom = 0.1, heat_rel_height = 0.4)
 ```

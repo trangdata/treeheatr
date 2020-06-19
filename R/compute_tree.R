@@ -22,16 +22,17 @@ compute_tree <- function(
   dat <- preped_data$dat
   data_test <- preped_data$data_test
 
+  my_formula <- stats::as.formula(paste(target_lab, '~ .'))
   if (is.null(custom_tree)){
-    fit <- partykit::ctree(my_target ~ ., data = dat)
+    fit <- partykit::ctree(my_formula, data = dat)
   } else if (class(custom_tree)[1] == 'partynode'){
     fit <- partykit::party(
       custom_tree, data = dat,
       fitted = data.frame(
         "(fitted)" = partykit::fitted_node(custom_tree, data = dat),
-        "(response)" = dat$my_target,
+        "(response)" = dat[, target_lab],
         check.names = FALSE),
-      terms = stats::terms(my_target ~ ., data = dat)) %>%
+      terms = stats::terms(my_formula, data = dat)) %>%
       partykit::as.constparty()
   } else if ('party' %in% class(custom_tree)){
     fit <- partykit::as.constparty(custom_tree)
@@ -39,7 +40,7 @@ compute_tree <- function(
     stop('`custom_tree` must be of class `party` or `party_node`.')
   }
 
-  dat <- prediction_df(dat, fit, data_test, task, clust_samps, clust_target)
+  dat <- prediction_df(dat, fit, data_test, target_lab, task, clust_samps, clust_target)
 
   ################################################################
   ##### Prepare layout, terminal data, add node labels:
@@ -72,39 +73,33 @@ compute_tree <- function(
 prep_data <- function(
   data, data_test = NULL, target_lab, task, feat_types = NULL, label_map = NULL){
 
-  dat <- data %>%
-    dplyr::rename(my_target = sym(!!target_lab))
+  data <- as.data.frame(data)
 
   if (task == 'classification'){
-    dat <- dplyr::mutate(dat, my_target = as.factor(my_target))
-    dat$my_target <- tryCatch(
-      recode(dat$my_target, !!!label_map),
-      error = function(e) dat$my_target)
+    data[, target_lab] <- as.factor(data[, target_lab]) %>%
+      if (!is.null(label_map)) recode(., !!!label_map) else .
   }
 
   # convert character features to categorical:
-  dat <- dplyr::mutate_if(dat, is.character, as.factor)
+  data <- dplyr::mutate_if(data, is.character, as.factor)
 
-  if (any(feat_types[names(which(sapply(dat, class) == 'character'))] != 'factor')){
+  if (any(feat_types[names(which(sapply(data, class) == 'character'))] != 'factor')){
     warning('Character variables are considered categorical.')
   }
 
   if (!is.null(data_test)){
     stopifnot(target_lab %in% colnames(data_test))
-    data_test <- data_test %>%
-      dplyr::rename('my_target' = sym(!!target_lab))
+    data_test <- as.data.frame(data_test)
 
     if (task == 'classification'){
-      data_test <- mutate(data_test, my_target = as.factor(my_target))
-      data_test$my_target <- tryCatch(
-        recode(data_test$my_target, !!!label_map),
-        error = function(e) data_test$my_target)
+      data_test[, target_lab] <- as.factor(data_test[, target_lab]) %>%
+        if (!is.null(label_map)) recode(., !!!label_map) else .
     }
     data_test <- data_test %>%
       dplyr::mutate_if(is.character, as.factor)
   }
 
-  list(dat = dat, data_test = data_test)
+  list(dat = data, data_test = data_test)
 }
 
 
@@ -114,13 +109,13 @@ prep_data <- function(
 #' Select features with p-value (computed from decision tree) < `p_thres`
 #' or all features if `show_all_feats == TRUE`.
 #'
-#' @param dat Tidy dataset with dependent variable labeled 'my_target'.
+#' @param dat Tidy dataset.
 #' @param fit constparty object of the decision tree.
 #' @inheritParams compute_tree
 #' @return A dataframe of prediction values with scaled columns
 #' and clustered samples.
 #'
-prediction_df <- function(dat, fit, data_test, task, clust_samps, clust_target){
+prediction_df <- function(dat, fit, data_test, target_lab, task, clust_samps, clust_target){
   node_pred <- stats::predict(fit, newdata = data_test, type = 'node')
   y_pred <- stats::predict(fit, newdata = data_test, type = 'response', simplify = FALSE) %>%
     .simplify_pred(id = node_pred, nam = as.character(node_pred))
@@ -131,7 +126,7 @@ prediction_df <- function(dat, fit, data_test, task, clust_samps, clust_target){
     cbind(node_id = node_pred, y_hat = y_pred) %>%
     lapply(
       unique(.$node_id), clust_samp_func, dat = .,
-      clust_vec = if (clust_target) colnames(dat_ana) else setdiff(colnames(dat_ana), 'my_target'),
+      clust_vec = if (clust_target) colnames(dat_ana) else setdiff(colnames(dat_ana), target_lab),
       clust_samps = clust_samps) %>%
     bind_rows() %>%
     mutate(Sample = row_number())

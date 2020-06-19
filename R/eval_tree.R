@@ -1,25 +1,29 @@
 #' Print decision tree performance according to different metrics.
 #'
-#' @param dat Dataframe with truths (column `my_target`) and estimates (column `y_hat`)
+#' @param dat Dataframe with truths (column `target_lab`) and estimates (column `y_hat`)
 #' of samples from original dataset.
+#' @param target_lab Name of the column in data that contains target/label information.
 #' @inheritParams draw_tree
 #'
 #' @return Character string of the decision tree evaluation.
 #' @export
 #' @examples eval_tree(compute_tree(penguins, target_lab = 'species')$dat)
 #'
-eval_tree <- function(dat, task = c('classification', 'regression'), metrics = NULL){
+eval_tree <- function(
+  dat, target_lab = colnames(dat)[1], task = c('classification', 'regression'),
+  metrics = NULL){
+
   task <- match.arg(task)
   switch(
     task,
-    classification = eval_class(dat, metrics),
-    regression = eval_reg(dat, metrics),
+    classification = eval_class(dat, target_lab, metrics),
+    regression = eval_reg(dat, target_lab, metrics),
   )
 }
 
-eval_class <- function(dat, metrics = NULL){
-  if (!('my_target' %in% colnames(dat) && 'y_hat' %in% colnames(dat)))
-    stop('Prediction dataframes must have columns `my_target` and `y_hat`')
+eval_class <- function(dat, target_lab, metrics = NULL){
+  if (!(target_lab %in% colnames(dat) && 'y_hat' %in% colnames(dat)))
+    stop(sprintf('Prediction dataframes must have columns %s and `y_hat`', target_lab))
 
   # Classification metrics:
   metrics <- metrics %||%
@@ -30,10 +34,10 @@ eval_class <- function(dat, metrics = NULL){
       yardstick::roc_auc,
       yardstick::pr_auc)
 
-  my_levs <- levels(dat$my_target)
+  my_levs <- levels(dat[, target_lab])
   text_eval <- metrics(
     dat,
-    truth = my_target,
+    truth = !! target_lab,
     estimate = y_hat,
     !! if (length(my_levs) > 2) my_levs else my_levs[1]) %>%
     transmute(print_metric = paste(
@@ -45,9 +49,9 @@ eval_class <- function(dat, metrics = NULL){
   text_eval
 }
 
-eval_reg <- function(dat, metrics = NULL){
-  if (!('my_target' %in% colnames(dat) && 'y_hat' %in% colnames(dat)))
-    stop('Prediction dataframes must have columns `my_target` and `y_hat`')
+eval_reg <- function(dat, target_lab, metrics = NULL){
+  if (!(target_lab %in% colnames(dat) && 'y_hat' %in% colnames(dat)))
+    stop(sprintf('Prediction dataframes must have columns %s and `y_hat`', target_lab))
 
   # Regression metrics:
   metrics <- metrics %||%
@@ -57,7 +61,7 @@ eval_reg <- function(dat, metrics = NULL){
       yardstick::rmse,
       yardstick::ccc)
 
-  text_eval <- metrics(dat, truth = my_target, estimate = y_hat) %>%
+  text_eval <- metrics(dat, truth = !!target_lab, estimate = y_hat) %>%
     transmute(print_metric = paste(
       toupper(.metric),
       format(.estimate, digits = 3),

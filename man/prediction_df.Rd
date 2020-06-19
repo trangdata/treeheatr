@@ -4,14 +4,16 @@
 \alias{prediction_df}
 \title{Apply the predicted tree on either new test data or training data.}
 \usage{
-prediction_df(dat, fit, data_test, task, clust_samps, clust_target)
+prediction_df(dat, fit, data_test, target_lab, task, clust_samps, clust_target)
 }
 \arguments{
-\item{dat}{Tidy dataset with dependent variable labeled 'my_target'.}
+\item{dat}{Tidy dataset.}
 
 \item{fit}{constparty object of the decision tree.}
 
 \item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
+
+\item{target_lab}{Name of the column in data that contains target/label information.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}

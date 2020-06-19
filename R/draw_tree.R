@@ -56,7 +56,9 @@ draw_tree <- function(
     mapping = aes(label = paste(breaks_label, "*NA")))
   ){
 
-  text_eval <- if (print_eval) eval_tree(dat, match.arg(task), metrics) else ''
+  text_eval <- if (print_eval){
+    eval_tree(dat, all.vars(stats::update(fit$terms, . ~ 0)), match.arg(task), metrics)
+  } else {''}
 
   ggparty::ggparty(fit, terminal_space = 0, layout = layout) +
     do.call(ggparty::geom_edge, edge_vars) +

@@ -64,7 +64,8 @@ draw_heat <- function(
   cont_cols <- do.call(cont_cols, list(begin = 0.1, guide = cont_legend))
   cate_cols <- do.call(cate_cols, list(begin = 0.3, end = 0.9, guide = cate_legend))
 
-  feat_names <- setdiff(colnames(fit$data), 'my_target')
+  target_lab <- all.vars(stats::update(fit$terms, . ~ 0))
+  feat_names <- setdiff(colnames(fit$data), target_lab)
 
   # if feature types are not supplied, infer from column type:
   feat_types <- feat_types %||% sapply(dat[, feat_names], class)
@@ -88,7 +89,7 @@ draw_heat <- function(
     target_cols +
     facet_grid(cols = vars(node_id), scales = 'free_x', space = 'free') +
     geom_tile(data = dat,
-      aes(x = Sample, y = target_y, fill = my_target)) +
+      aes(x = Sample, y = target_y, fill = !! sym(target_lab))) +
     scale_x_continuous(expand =  c(0,0)) +
     labs(x = NULL, y = NULL) +
     theme_minimal() +
