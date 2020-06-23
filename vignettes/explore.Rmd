@@ -26,7 +26,7 @@ library(treeheatr)
 
 ## Let's begin
 
-with the iris dataset!
+with the penguins dataset!
 Running the `heat_tree()` function can be as simple as:
 
 ```{r fig.height=3, fig.width=7}
