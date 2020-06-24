@@ -15,7 +15,7 @@ clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE
   if (clust_samps && length(clust_vec) > 1 && nrow(df) > 1){
     new_samp_order <- df[, clust_vec] %>%
       cluster::daisy(metric = 'gower') %>%
-      seriation::seriate() %>%
+      seriation::seriate(method = 'ARSA') %>%
       seriation::get_order()
 
     df[new_samp_order, ] # return ordered dataframe
