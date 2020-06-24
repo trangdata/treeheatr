@@ -22,7 +22,7 @@ compute_tree <- function(
   dat <- preped_data$dat
   data_test <- preped_data$data_test
 
-  my_formula <- stats::as.formula(paste(target_lab, '~ .'))
+  my_formula <- stats::as.formula(paste0('`', target_lab, '` ~ .'))
   if (is.null(custom_tree)){
     fit <- partykit::ctree(my_formula, data = dat)
   } else if (class(custom_tree)[1] == 'partynode'){
