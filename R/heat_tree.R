@@ -23,6 +23,8 @@
 #' If NULL, a conditional inference tree is computed.
 #' @param custom_layout Dataframe with 3 columns: id, x and y
 #' for manually input custom layout.
+#' @param draw Character string indicating which components of the decision tree-heatmap
+#' should be drawn. Can be 'heat-tree', 'heat-only' or 'tree-only'.
 #' @param heat_rel_height Relative height of heatmap compared to whole figure (with tree).
 #' @param lev_fac Relative weight of child node positions
 #' according to their levels, commonly ranges from 1 to 1.5.
@@ -48,7 +50,7 @@ heat_tree <- function(
   data, data_test = NULL, target_lab, task = c('classification', 'regression'),
   feat_types = NULL, label_map = NULL, target_cols = NULL, target_lab_disp = target_lab,
   clust_samps = TRUE, clust_target = TRUE, custom_tree = NULL, custom_layout = NULL,
-  heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001, ...){
+  draw = 'heat-tree', heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001, ...){
 
   stopifnot(target_lab %in% colnames(data))
   target_cols <- get_cols(target_cols, match.arg(task))
@@ -99,18 +101,8 @@ heat_tree <- function(
   ################################################################
   ##### Align decision tree and heatmap:
 
-  g <- ggplot2::ggplotGrob(dheat)
-  panel_id <- g$layout[grep('panel', g$layout$name),]
-  heat_height <- g$heights[panel_id[1, 't']]
-
-  new_g <- g %>%
-    gtable::gtable_add_rows(heat_height*(1/heat_rel_height - 1), 0) %>%
-    gtable::gtable_add_grob(
-      ggplot2::ggplotGrob(dtree),
-      t = 1, l = min(panel_id$l), r = max(panel_id$l))
-  class(new_g) <- c("ggHeatTree", class(new_g))
-
-  new_g
-
+  g <- align_plots(dheat, dtree, heat_rel_height, draw)
+  class(g) <- c("ggHeatTree", class(g))
+  g
 }
 

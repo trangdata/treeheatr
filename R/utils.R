@@ -48,6 +48,38 @@ get_cols <- function(my_cols, task) {
   my_cols
 }
 
+#' Align decision tree and heatmap:
+#'
+#' @param dheat ggplot2 grob object of the heatmap.
+#' @param dtree ggplot2 grob object of the decision tree
+#' @inheritParams heat_tree
+#'
+#' @return  A gtable/grob object of the decision tree (top) and heatmap (bottom).
+#'
+align_plots <- function(
+  dheat, dtree, heat_rel_height, draw = c('heat-tree', 'heat-only', 'tree-only')) {
+
+  draw <- match.arg(draw)
+
+  g_tree <- ggplot2::ggplotGrob(dtree)
+  g_heat <- ggplot2::ggplotGrob(dheat)
+
+  if (draw == 'tree-only'){
+    g <- g_tree
+  } else if (draw == 'heat-only'){
+    g <- g_heat
+  } else {
+    panel_id <- g_heat$layout[grep('panel', g_heat$layout$name),]
+    heat_height <- g_heat$heights[panel_id[1, 't']]
+
+    g <- g_heat %>%
+      gtable::gtable_add_rows(heat_height*(1/heat_rel_height - 1), 0) %>%
+      gtable::gtable_add_grob(g_tree, t = 1, l = min(panel_id$l), r = max(panel_id$l))
+  }
+
+  g
+}
+
 #' Print a ggHeatTree object.
 #' Adopted from
 #' https://github.com/daattali/ggExtra/blob/master/R/ggMarginal.R#L207-L244.
