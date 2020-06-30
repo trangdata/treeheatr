@@ -25,6 +25,9 @@ compute_tree <- function(
   my_formula <- stats::as.formula(paste0('`', target_lab, '` ~ .'))
   if (is.null(custom_tree)){
     fit <- partykit::ctree(my_formula, data = dat)
+    if (length(fit$node) == 0){
+      stop('The computed conditional tree has only one node. It is likely that more observations or more features are needed.')
+    }
   } else if (class(custom_tree)[1] == 'partynode'){
     fit <- partykit::party(
       custom_tree, data = dat,
