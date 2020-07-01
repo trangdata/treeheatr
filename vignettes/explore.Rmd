@@ -72,6 +72,26 @@ heat_tree(
   edge_vars = list(size = 1, color = 'grey'))
 ```
 
+What if we only want to show the decision tree?
+We can toggle this option using the `show` argument, which takes either `'heat-tree'`, `'heat-only'` or `'tree-only'`.
+For example:
+
+```{r}
+heat_tree(dat_raw, target_lab = 'species', show = 'tree-only')
+```
+
+We can also choose to display other features in the heatmap that may not be in the tree.
+
+```{r}
+heat_tree(dat_raw, target_lab = 'species', feats = c('body_mass_g', 'sex'))
+```
+
+`feats = NA` displays the tree with only the target label, which may be simple and still helpful:
+
+```{r}
+heat_tree(dat_raw, target_lab = 'species', feats = NA, heat_rel_height = 0.1)
+```
+
 ## Smart node layout
 
 These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size.
