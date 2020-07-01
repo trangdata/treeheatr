@@ -12,6 +12,8 @@
 #' More information on what transformation to choose can be acquired here:
 #' https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize
 #' @param clust_feats Logical. If TRUE, performs cluster on the features.
+#' @param feats Character vector of feature names to be displayed in the heatmap.
+#' If NULL, display features of which P values are less than `p_thres`.
 #' @param show_all_feats Logical. If TRUE, show all features regardless of `p_thres`.
 #' @param p_thres Numeric value indicating the p-value threshold of feature importance.
 #' Feature with p-values computed from the decision tree below this value
@@ -46,7 +48,7 @@
 draw_heat <- function(
   dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = '',
   trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
-  show_all_feats = FALSE, p_thres = 0.05, custom_tree = NULL, cont_legend = FALSE,
+  feats = NULL, show_all_feats = FALSE, p_thres = 0.05, custom_tree = NULL, cont_legend = FALSE,
   cate_legend = FALSE, cont_cols = ggplot2::scale_fill_viridis_c,
   cate_cols = ggplot2::scale_fill_viridis_d, panel_space = 0.001, target_space = 0.05,
   target_pos = 'top'){
@@ -69,7 +71,7 @@ draw_heat <- function(
 
   # if feature types are not supplied, infer from column type:
   feat_types <- feat_types %||% sapply(dat[, feat_names], class)
-  disp_feats <- get_disp_feats(
+  disp_feats <- feats %||% get_disp_feats(
     fit, feat_names, show_all_feats, custom_tree, p_thres)
 
   # prepare feature orders:
@@ -80,7 +82,8 @@ draw_heat <- function(
   n_cates <- length(unique(tile_cate$cate_feat))
 
   # number of features displayed:
-  n_feats <- length(disp_feats)
+  n_feats <- n_conts + n_cates
+
   target_y <- dplyr::case_when(
     target_pos == 'top' ~ (n_feats + 1 + target_space),
     target_pos == 'bottom' ~ (- target_space)) # if 'none', returns NA
@@ -137,7 +140,7 @@ draw_heat <- function(
   dheat <- dheat +
     scale_y_continuous(
       expand = c(0, 0),
-      breaks = c(target_y, seq.int(n_feats)),
+      breaks = c(target_y, if (n_feats > 0) seq.int(n_feats)),
       labels = c(target_lab_disp, levels(tile_cate$cate_feat), levels(tile_cont$cont_feat)))
 
   return(dheat)
@@ -188,6 +191,11 @@ get_disp_feats <- function(fit, feat_names, show_all_feats, custom_tree, p_thres
 #' from the original dataset.
 #'
 prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
+
+  if (is.na(disp_feats[1])){
+    return(list(df_cont = NULL, df_cate = NULL))
+  }
+
   cont_feats <- names(feat_types[feat_types == 'numeric'| feat_types == 'integer'])
   cate_feats <- names(feat_types[feat_types == 'factor'])
 

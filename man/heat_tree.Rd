@@ -17,6 +17,7 @@ heat_tree(
   clust_target = TRUE,
   custom_tree = NULL,
   custom_layout = NULL,
+  show = "heat-tree",
   heat_rel_height = 0.2,
   lev_fac = 1.3,
   panel_space = 0.001,
@@ -58,6 +59,9 @@ If NULL, a conditional inference tree is computed.}
 
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
 for manually input custom layout.}
+
+\item{show}{Character string indicating which components of the decision tree-heatmap
+should be drawn. Can be 'heat-tree', 'heat-only' or 'tree-only'.}
 
 \item{heat_rel_height}{Relative height of heatmap compared to whole figure (with tree).}
 

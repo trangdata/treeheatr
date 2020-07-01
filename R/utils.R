@@ -57,16 +57,16 @@ get_cols <- function(my_cols, task) {
 #' @return  A gtable/grob object of the decision tree (top) and heatmap (bottom).
 #'
 align_plots <- function(
-  dheat, dtree, heat_rel_height, draw = c('heat-tree', 'heat-only', 'tree-only')) {
+  dheat, dtree, heat_rel_height, show = c('heat-tree', 'heat-only', 'tree-only')) {
 
-  draw <- match.arg(draw)
+  show <- match.arg(show)
 
   g_tree <- ggplot2::ggplotGrob(dtree)
   g_heat <- ggplot2::ggplotGrob(dheat)
 
-  if (draw == 'tree-only'){
+  if (show == 'tree-only'){
     g <- g_tree
-  } else if (draw == 'heat-only'){
+  } else if (show == 'heat-only'){
     g <- g_heat
   } else {
     panel_id <- g_heat$layout[grep('panel', g_heat$layout$name),]

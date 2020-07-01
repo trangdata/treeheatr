@@ -12,6 +12,7 @@ draw_heat(
   target_lab_disp = "",
   trans_type = c("percentize", "normalize", "scale", "none"),
   clust_feats = TRUE,
+  feats = NULL,
   show_all_feats = FALSE,
   p_thres = 0.05,
   custom_tree = NULL,
@@ -48,6 +49,9 @@ More information on what transformation to choose can be acquired here:
 https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize}
 
 \item{clust_feats}{Logical. If TRUE, performs cluster on the features.}
+
+\item{feats}{Character vector of feature names to be displayed in the heatmap.
+If NULL, display features of which P values are less than `p_thres`.}
 
 \item{show_all_feats}{Logical. If TRUE, show all features regardless of `p_thres`.}
 
@@ -91,7 +95,6 @@ A ggplot2 grob object of the heatmap.
 Draws the heatmap to be placed below the decision tree.
 }
 \examples{
-x <- compute_tree(penguins, target_lab = 'species')
 draw_heat(x$dat, x$fit)
 
 

@@ -23,7 +23,7 @@
 #' If NULL, a conditional inference tree is computed.
 #' @param custom_layout Dataframe with 3 columns: id, x and y
 #' for manually input custom layout.
-#' @param draw Character string indicating which components of the decision tree-heatmap
+#' @param show Character string indicating which components of the decision tree-heatmap
 #' should be drawn. Can be 'heat-tree', 'heat-only' or 'tree-only'.
 #' @param heat_rel_height Relative height of heatmap compared to whole figure (with tree).
 #' @param lev_fac Relative weight of child node positions
@@ -47,10 +47,10 @@
 #'   tree_space_bottom = 0)
 #'
 heat_tree <- function(
-  data, data_test = NULL, target_lab, task = c('classification', 'regression'),
+  data, target_lab, data_test = NULL, task = c('classification', 'regression'),
   feat_types = NULL, label_map = NULL, target_cols = NULL, target_lab_disp = target_lab,
   clust_samps = TRUE, clust_target = TRUE, custom_tree = NULL, custom_layout = NULL,
-  draw = 'heat-tree', heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001, ...){
+  show = 'heat-tree', heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001, ...){
 
   stopifnot(target_lab %in% colnames(data))
   target_cols <- get_cols(target_cols, match.arg(task))
@@ -63,8 +63,8 @@ heat_tree <- function(
       'edge_vars', 'edge_text_vars', 'print_eval', 'metrics', 'x_eval', 'y_eval')
   heat_vars <-
     c('feat_types', 'trans_type', 'cont_cols', 'cate_cols', 'clust_feats', 'cont_legend',
-      'cate_legend', 'target_space', 'panel_space', 'target_pos', 'show_all_feats', 'p_thres',
-      'custom_tree')
+      'cate_legend', 'target_space', 'panel_space', 'target_pos', 'feats', 'show_all_feats',
+      'p_thres', 'custom_tree')
 
   m_ctree <- match(ctree_vars, names(mf), 0L)
   m_tree <- match(tree_vars, names(mf), 0L)
@@ -101,7 +101,7 @@ heat_tree <- function(
   ################################################################
   ##### Align decision tree and heatmap:
 
-  g <- align_plots(dheat, dtree, heat_rel_height, draw)
+  g <- align_plots(dheat, dtree, heat_rel_height, show)
   class(g) <- c("ggHeatTree", class(g))
   g
 }
