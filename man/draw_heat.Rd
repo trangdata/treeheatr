@@ -95,6 +95,7 @@ A ggplot2 grob object of the heatmap.
 Draws the heatmap to be placed below the decision tree.
 }
 \examples{
+x <- compute_tree(penguins, target_lab = 'species')
 draw_heat(x$dat, x$fit)
 
 

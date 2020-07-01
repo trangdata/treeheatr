@@ -6,8 +6,8 @@
 \usage{
 heat_tree(
   data,
-  data_test = NULL,
   target_lab,
+  data_test = NULL,
   task = c("classification", "regression"),
   feat_types = NULL,
   label_map = NULL,
@@ -27,9 +27,9 @@ heat_tree(
 \arguments{
 \item{data}{Tidy dataset.}
 
-\item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
-
 \item{target_lab}{Name of the column in data that contains target/label information.}
+
+\item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
