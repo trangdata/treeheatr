@@ -142,6 +142,7 @@
   <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"percentize"</span>, <span class='st'>"normalize"</span>, <span class='st'>"scale"</span>, <span class='st'>"none"</span>),
   <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>feats</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>show_all_feats</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>p_thres</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -194,6 +195,11 @@ https://cran.rstudio.com/package=heatmaply/vignettes/heatmaply.html#data-transfo
     <tr>
       <th>clust_feats</th>
       <td><p>Logical. If TRUE, performs cluster on the features.</p></td>
+    </tr>
+    <tr>
+      <th>feats</th>
+      <td><p>Character vector of feature names to be displayed in the heatmap.
+If NULL, display features of which P values are less than `p_thres`.</p></td>
     </tr>
     <tr>
       <th>show_all_feats</th>

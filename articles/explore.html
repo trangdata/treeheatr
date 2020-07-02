@@ -88,7 +88,7 @@
 </h1>
                         <h4 class="author">Trang Le</h4>
             
-            <h4 class="date">2020-06-30</h4>
+            <h4 class="date">2020-07-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/trang1618/treeheatr/blob/master/vignettes/explore.Rmd"><code>vignettes/explore.Rmd</code></a></small>
       <div class="hidden name"><code>explore.Rmd</code></div>
@@ -137,15 +137,24 @@
   <span class="kw">cont_legend</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">cate_legend</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
   <span class="kw">edge_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">'grey'</span>))</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<p>What if we only want to show the decision tree? We can toggle this option using the <code>show</code> argument, which takes either <code>'heat-tree'</code>, <code>'heat-only'</code> or <code>'tree-only'</code>. For example:</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'species'</span>, <span class="kw">show</span> <span class="kw">=</span> <span class="st">'tree-only'</span>)</pre></body></html></div>
+<p><img src="explore_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p>We can also choose to display other features in the heatmap that may not be in the tree.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'species'</span>, <span class="kw">feats</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'body_mass_g'</span>, <span class="st">'sex'</span>))</pre></body></html></div>
+<p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><code>feats = NA</code> displays the tree with only the target label, which may be simple and still helpful:</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">dat_raw</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'species'</span>, <span class="kw">feats</span> <span class="kw">=</span> <span class="fl">NA</span>, <span class="kw">heat_rel_height</span> <span class="kw">=</span> <span class="fl">0.1</span>)</pre></body></html></div>
+<p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
 <div id="smart-node-layout" class="section level2">
 <h2 class="hasAnchor">
 <a href="#smart-node-layout" class="anchor"></a>Smart node layout</h2>
 <p>These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size. The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches. This relative weight can be adjusted with the <code>lev_fac</code> parameter in <code><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree()</a></code>. The default <code>lev_fac = 1.3</code> seems to provide aesthetically pleasing trees, independent of the tree size.</p>
 <p>In this next figure, on the top, <code>lev_fac = 1</code> makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts <code>lev_fac = 1.3</code> (default) on the bottom.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">title</span> <span class="kw">=</span> <span class="st">'lev_fac = 1'</span>)
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">title</span> <span class="kw">=</span> <span class="st">'lev_fac = 1'</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="no">wine_quality_red</span>, <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>, <span class="kw">title</span> <span class="kw">=</span> <span class="st">'lev_fac = 1.3'</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-5-1.png" width="864"><img src="explore_files/figure-html/unnamed-chunk-5-2.png" width="864"></p>
+<p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="864"><img src="explore_files/figure-html/unnamed-chunk-8-2.png" width="864"></p>
 </div>
 <div id="clustering" class="section level2">
 <h2 class="hasAnchor">
@@ -165,12 +174,12 @@
 <h2 class="hasAnchor">
 <a href="#regression" class="anchor"></a>Regression</h2>
 <p>In general, compared to classification, regression task is more difficult to interpret with a decision tree. However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes. Also, removing the terminal node label may show the groups better. Here’s an example:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">galaxy</span>,
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">galaxy</span>,
           <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'target'</span>,
           <span class="kw">task</span> <span class="kw">=</span> <span class="st">'regression'</span>,
           <span class="kw">terminal_vars</span> <span class="kw">=</span> <span class="kw">NULL</span>,
           <span class="kw">tree_space_bottom</span> <span class="kw">=</span> <span class="fl">0</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
+<p><img src="explore_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
 <div id="youre-the-warren-beatty-of-your-heat_tree" class="section level2">
 <h2 class="hasAnchor">
@@ -180,7 +189,7 @@
 <p>You can manually define your own tree for the <code>custom_tree</code> argument following the <a href="https://cran.r-project.org/package=partykit/vignettes/partykit.pdf">partykit vignette</a>.</p>
 <p>As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a <a href="https://doi.org/10.1038/s42256-020-0180-7">recent study</a> with the conditional decision tree.</p>
 <p>First, a quick simplification of the column names:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">partykit</span>)
 
 <span class="no">selected_train</span> <span class="kw">&lt;-</span> <span class="no">train_covid</span> <span class="kw">%&gt;%</span>
@@ -200,7 +209,7 @@
     <span class="st">'outcome'</span>
   )</pre></body></html></div>
 <p>We now apply the tree structure in <a href="https://www.nature.com/articles/s42256-020-0180-7/figures/2">Figure 2</a> of the original study (only show the training set for now):</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># first argument indicates the index of the feature used for splitting</span>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="co"># first argument indicates the index of the feature used for splitting</span>
 
 <span class="no">split_ldh</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html">partysplit</a></span>(<span class="fl">1L</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">365</span>)
 <span class="no">split_crp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html">partysplit</a></span>(<span class="fl">2L</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fl">41.2</span>)
@@ -219,7 +228,7 @@
   <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
   <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Death'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survival'</span>),
   <span class="kw">custom_tree</span> <span class="kw">=</span> <span class="no">custom_tree</span>)</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<p><img src="explore_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
 <div id="apply-the-learned-tree-on-externalholdouttestvalidation-dataset" class="section level2">
 <h2 class="hasAnchor">
@@ -240,11 +249,11 @@
 <li>Concordance correlation coefficient (CCC).</li>
 </ul>
 <p>You can also choose to show performance based on any other set of appropriate metrics listed on the <a href="https://yardstick.tidymodels.org/reference/index.html">yardstick reference page</a>, for example, with</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">metrics</span> <span class="kw">=</span> <span class="kw pkg">yardstick</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/yardstick/man/metric_set.html">metric_set</a></span>(<span class="kw pkg">yardstick</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/yardstick/man/f_meas.html">f_meas</a></span>)</pre></body></html></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">metrics</span> <span class="kw">=</span> <span class="kw pkg">yardstick</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/yardstick/man/metric_set.html">metric_set</a></span>(<span class="kw pkg">yardstick</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/yardstick/man/f_meas.html">f_meas</a></span>)</pre></body></html></div>
 <p>as a <code>heat_tree</code> argument to show the <em>F</em> score (a combination of precision and recall).</p>
 <p><strong>Warning</strong>: We do not recommend <code>print_eval</code> on the training set because these measures may gives you an over-optimistic view of how the tree performs (this would show pure training accuracy, not cross-validated).</p>
 <p>Let’s now apply the custom tree we (or really, Yan et al.) designed earlier and see how it performs on the test set:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="no">selected_train</span>,
   <span class="kw">data_test</span> <span class="kw">=</span> <span class="no">selected_test</span>,
   <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
@@ -253,7 +262,7 @@
   <span class="kw">custom_tree</span> <span class="kw">=</span> <span class="no">custom_tree</span>,
   <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">3</span>
 )</pre></body></html></div>
-<p><img src="explore_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
+<p><img src="explore_files/figure-html/unnamed-chunk-13-1.png" width="672"></p>
 </div>
   </div>
 

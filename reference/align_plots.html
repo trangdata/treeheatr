@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • treeheatr</title>
+<title>Align decision tree and heatmap: — align_plots • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Align decision tree and heatmap: — align_plots" />
+<meta property="og:description" content="Align decision tree and heatmap:" />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -63,7 +64,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -124,45 +125,54 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/trang1618/treeheatr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Align decision tree and heatmap:</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trang1618/treeheatr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>align_plots.Rd</code></div>
     </div>
 
-    <div id="treeheatr-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#treeheatr-development-version" class="anchor"></a>treeheatr (development version)<small> Unreleased </small>
-</h1>
-<ul>
-<li>include the diabetes dataset</li>
-<li>reduce legend margin</li>
-<li>remove <code>my_target</code> as column names within functions</li>
-<li>allow wrapping as.party() around rpart object for custom_tree</li>
-<li>use ARSA as seriation method for samples</li>
-<li>swap the position of two arguments: <code>target_lab</code> and <code>data_test</code>
-</li>
-<li>allow the user to choose features to show in the heatmap</li>
-</ul>
-</div>
-    <div id="treeheatr-010-2020-06-17" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#treeheatr-010-2020-06-17" class="anchor"></a>treeheatr 0.1.0 (2020-06-17)<small> 2020-06-17 </small>
-</h1>
-<div id="announcements" class="section level3">
-<h3 class="hasAnchor">
-<a href="#announcements" class="anchor"></a>ANNOUNCEMENTS</h3>
-<ul>
-<li>treeheatr 0.1.0 - first CRAN release!</li>
-</ul>
-</div>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Align decision tree and heatmap:</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>align_plots</span>(
+  <span class='no'>dheat</span>,
+  <span class='no'>dtree</span>,
+  <span class='no'>heat_rel_height</span>,
+  <span class='kw'>show</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"heat-tree"</span>, <span class='st'>"heat-only"</span>, <span class='st'>"tree-only"</span>)
+)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dheat</th>
+      <td><p>ggplot2 grob object of the heatmap.</p></td>
+    </tr>
+    <tr>
+      <th>dtree</th>
+      <td><p>ggplot2 grob object of the decision tree</p></td>
+    </tr>
+    <tr>
+      <th>heat_rel_height</th>
+      <td><p>Relative height of heatmap compared to whole figure (with tree).</p></td>
+    </tr>
+    <tr>
+      <th>show</th>
+      <td><p>Character string indicating which components of the decision tree-heatmap
+should be drawn. Can be 'heat-tree', 'heat-only' or 'tree-only'.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A gtable/grob object of the decision tree (top) and heatmap (bottom).</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

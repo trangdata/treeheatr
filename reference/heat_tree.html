@@ -136,8 +136,8 @@
 
     <pre class="usage"><span class='fu'>heat_tree</span>(
   <span class='no'>data</span>,
-  <span class='kw'>data_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='no'>target_lab</span>,
+  <span class='kw'>data_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classification"</span>, <span class='st'>"regression"</span>),
   <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -147,6 +147,7 @@
   <span class='kw'>clust_target</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>custom_layout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>show</span> <span class='kw'>=</span> <span class='st'>"heat-tree"</span>,
   <span class='kw'>heat_rel_height</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
   <span class='kw'>lev_fac</span> <span class='kw'>=</span> <span class='fl'>1.3</span>,
   <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
@@ -161,12 +162,12 @@
       <td><p>Tidy dataset.</p></td>
     </tr>
     <tr>
-      <th>data_test</th>
-      <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
-    </tr>
-    <tr>
       <th>target_lab</th>
       <td><p>Name of the column in data that contains target/label information.</p></td>
+    </tr>
+    <tr>
+      <th>data_test</th>
+      <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
     </tr>
     <tr>
       <th>task</th>
@@ -214,6 +215,11 @@ If NULL, a conditional inference tree is computed.</p></td>
       <th>custom_layout</th>
       <td><p>Dataframe with 3 columns: id, x and y
 for manually input custom layout.</p></td>
+    </tr>
+    <tr>
+      <th>show</th>
+      <td><p>Character string indicating which components of the decision tree-heatmap
+should be drawn. Can be 'heat-tree', 'heat-only' or 'tree-only'.</p></td>
     </tr>
     <tr>
       <th>heat_rel_height</th>
