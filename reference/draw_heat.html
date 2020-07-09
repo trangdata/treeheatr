@@ -139,7 +139,7 @@
   <span class='no'>fit</span>,
   <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='no'>fit</span>$<span class='no'>target_lab</span>,
   <span class='kw'>trans_type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"percentize"</span>, <span class='st'>"normalize"</span>, <span class='st'>"scale"</span>, <span class='st'>"none"</span>),
   <span class='kw'>clust_feats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>feats</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -180,7 +180,7 @@ level colors for targets, defaults to viridis option B.</p></td>
     <tr>
       <th>target_lab_disp</th>
       <td><p>Character string for displaying the label of target label.
-If NULL, use `target_lab`.</p></td>
+If not provided, use `target_lab`.</p></td>
     </tr>
     <tr>
       <th>trans_type</th>

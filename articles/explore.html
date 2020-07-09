@@ -158,15 +158,14 @@
 <a href="#pre-train-your-tree" class="anchor"></a>Pre-train your tree</h3>
 <p>If the default conditional tree is not desired, you can create your tree (e.g. with <code>rpart</code>) and wrap <code><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html">as.party()</a></code> around this object to plug into <code><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree()</a></code>. As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a <a href="https://doi.org/10.1038/s42256-020-0180-7">recent study</a>.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># # same tree as letting `x = train_covid`:</span>
-<span class="co"># x &lt;- partykit::ctree(outcome ~ ., data = train_covid)</span>
+<span class="co"># x &lt;- partykit::ctree(Outcome ~ ., data = train_covid)</span>
 
 <span class="co"># build tree using rpart:</span>
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="kw pkg">partykit</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html">as.party</a></span>(<span class="kw pkg">rpart</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart</a></span>(<span class="no">outcome</span> ~ <span class="no">.</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">train_covid</span>))
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="kw pkg">partykit</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html">as.party</a></span>(<span class="kw pkg">rpart</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart</a></span>(<span class="no">Outcome</span> ~ <span class="no">.</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">train_covid</span>))
 
 <span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>,
-  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
-  <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Death'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survival'</span>))</pre></body></html></div>
+  <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Deceased'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survived'</span>))</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 <div id="manually-define-your-tree-with-partysplit-and-partynode" class="section level3">
@@ -193,8 +192,8 @@
   <span class="kw">x</span> <span class="kw">=</span> <span class="no">custom_tree</span>,
   <span class="kw">data_test</span> <span class="kw">=</span> <span class="no">train_covid</span>,
   <span class="kw">print_eval</span> <span class="kw">=</span> <span class="fl">FALSE</span>,
-  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
-  <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Death'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survival'</span>))</pre></body></html></div>
+  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Outcome'</span>,
+  <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Deceased'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survived'</span>))</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
 </div>
@@ -224,7 +223,7 @@
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/treeheatr/man/heat_tree.html">heat_tree</a></span>(
   <span class="kw">x</span> <span class="kw">=</span> <span class="no">custom_tree</span>,
   <span class="kw">data_test</span> <span class="kw">=</span> <span class="no">test_covid</span>,
-  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'outcome'</span>,
+  <span class="kw">target_lab</span> <span class="kw">=</span> <span class="st">'Outcome'</span>,
   <span class="kw">label_map</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">`1`</span> <span class="kw">=</span> <span class="st">'Death'</span>, <span class="kw">`0`</span> <span class="kw">=</span> <span class="st">'Survival'</span>),
   <span class="kw">lev_fac</span> <span class="kw">=</span> <span class="fl">3</span>)</pre></body></html></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
