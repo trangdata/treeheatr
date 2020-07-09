@@ -15,8 +15,8 @@ penguins <- readr::read_csv(
 
 train_covid_raw <- readr::read_tsv(
   'https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_train.tsv')
-colnames(train_covid) <- iconv(colnames(train_covid), from="UTF-8", to="ASCII")
-attr(train_covid, "spec") <- NULL
+colnames(train_covid_raw) <- iconv(colnames(train_covid_raw), from="UTF-8", to="ASCII")
+attr(train_covid_raw, "spec") <- NULL
 
 test_covid_raw <- readr::read_tsv(
   'https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_test.tsv')
@@ -26,9 +26,9 @@ train_covid <- train_covid_raw %>%
     LDH = 'Lactate dehydrogenase',
     hs_CRP = 'High sensitivity C-reactive protein',
     Lymphocyte = '(%)lymphocyte',
-    outcome = Type2
+    Outcome = Type2
   ) %>%
-  mutate(outcome = as.factor(outcome)) %>%
+  mutate(Outcome = as.factor(Outcome)) %>%
   na.omit()
 
 test_covid <- test_covid_raw %>%
@@ -36,9 +36,9 @@ test_covid <- test_covid_raw %>%
     LDH = 'Lactate dehydrogenase',
     hs_CRP = 'High sensitivity C-reactive protein',
     Lymphocyte = '(%)lymphocyte',
-    'outcome'
+    Outcome = 'outcome'
   ) %>%
-  mutate(outcome = as.factor(outcome))
+  mutate(Outcome = as.factor(Outcome))
 
 data(wine, package = 'rattle')
 
@@ -48,4 +48,5 @@ usethis::use_data(wine_quality_red, diabetes,
                   overwrite = TRUE)
 
 # cat(colnames(test_covid), sep = '}, \\code{')
-# usethis::use_data(train_covid, test_covid, overwrite = TRUE)
+usethis::use_data(train_covid, test_covid, overwrite = TRUE)
+#

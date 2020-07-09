@@ -104,15 +104,14 @@ As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020
 
 ```{r}
 # # same tree as letting `x = train_covid`:
-# x <- partykit::ctree(outcome ~ ., data = train_covid)
+# x <- partykit::ctree(Outcome ~ ., data = train_covid)
 
 # build tree using rpart:
-x <- partykit::as.party(rpart::rpart(outcome ~ ., data = train_covid))
+x <- partykit::as.party(rpart::rpart(Outcome ~ ., data = train_covid))
 
 heat_tree(
   x = x,
-  target_lab = 'outcome',
-  label_map = c(`1` = 'Death', `0` = 'Survival'))
+  label_map = c(`1` = 'Deceased', `0` = 'Survived'))
 ```
 
 ### Manually define your tree with `partysplit` and `partynode`
@@ -140,8 +139,8 @@ heat_tree(
   x = custom_tree,
   data_test = train_covid,
   print_eval = FALSE,
-  target_lab = 'outcome',
-  label_map = c(`1` = 'Death', `0` = 'Survival'))
+  target_lab = 'Outcome',
+  label_map = c(`1` = 'Deceased', `0` = 'Survived'))
 ```
 
 ## Apply the learned tree on external/holdout/test/validation dataset
@@ -178,7 +177,7 @@ Let's now apply the custom tree we (or really, Yan et al.) designed earlier and 
 heat_tree(
   x = custom_tree,
   data_test = test_covid,
-  target_lab = 'outcome',
+  target_lab = 'Outcome',
   label_map = c(`1` = 'Death', `0` = 'Survival'),
   lev_fac = 3)
 ```
