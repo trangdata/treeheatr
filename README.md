@@ -7,6 +7,13 @@
 
 #### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
+## Changes in treeheatr 0.2.0
+
+The first argument of `heat_tree()`, `data` is now replaced with `x`,
+which can be a dataframe (or tibble), a party (or constparty) object
+specifying the precomputed tree, or partynode object specifying the
+customized tree. `custom_tree` argument is no longer needed.
+
 ## Install
 
 Please make sure your version of R \>= 3.5.0 before installation.

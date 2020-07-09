@@ -77,92 +77,53 @@ What if we only want to show the decision tree?
 We can toggle this option using the `show` argument, which takes either `'heat-tree'`, `'heat-only'` or `'tree-only'`.
 For example:
 
-```{r}
+```{r fig.height=3}
 heat_tree(penguins, target_lab = 'species', show = 'tree-only')
 ```
 
 We can also choose to display other features in the heatmap that may not be in the tree.
 
-```{r}
+```{r fig.height=4}
 heat_tree(penguins, target_lab = 'species', feats = c('body_mass_g', 'sex'))
 ```
 
 `feats = NA` displays the tree with only the target label, which may be simple and still helpful:
 
-```{r}
+```{r fig.height=3}
 heat_tree(penguins, target_lab = 'species', feats = NA, heat_rel_height = 0.1)
 ```
-
-## Smart node layout
-
-These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size.
-The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches.
-This relative weight can be adjusted with the `lev_fac` parameter in `heat_tree()`.
-The default `lev_fac = 1.3` seems to provide aesthetically pleasing trees, independent of the tree size.
-
-In this next figure, on the top, `lev_fac = 1` makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts `lev_fac = 1.3` (default) on the bottom.
-
-
-```{r fig.width=9, fig.height=3.5, fig.show='hold', warning=FALSE, message=FALSE}
-heat_tree(wine_quality_red, target_lab = 'target', lev_fac = 1, title = 'lev_fac = 1')
-heat_tree(wine_quality_red, target_lab = 'target', title = 'lev_fac = 1.3')
-```
-
-## Seriation
-
-Unless you turn it off (`clust_feats = FALSE`, `clust_samps = FALSE`), **treeheatr** automatically performs grouping of features and samples when organizing the heatmap.
-Features are ordered within each of the two groups of features, continuous and categorical (including the target label, unless `clust_target = FALSE`).
-Samples are grouped within each terminal node of all features (not only the displayed features).
-**treeheatr** uses `cluster::daisy()` to compute distances with the Gower metric to incorporate both continuous and nominal categorical feature types.
-Now, `cluster::daisy()` may throw this warning if your dataset contains binary features:
-
-```binary variable(s) treated as interval scaled```
-
-but in general this is safe to ignore because the goal of seriation is to simply reduce the amount of stochasticity of the tree-based model and not to make precise inference about each group.
-
-## Mixed data/feature types
-
-As shown above in the *penguins* example, **treeheatr** supports mixed feature types.
-
-For continuous variables/features, we can choose to either *percentize* (scale-rank), *normalize* (subtract the min and divide by the max) or *scale* (subtract the mean and divide by the standard deviation) each feature.
-Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
-Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette](https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
-
-We highly recommend that, when dealing with mixed feature types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
-When `feat_types` is not specified, **treeheatr** automatically inferred each column type from the original dataset.
-
-## Regression
-
-In general, compared to classification, regression task is more difficult to interpret with a decision tree.
-However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes.
-Also, removing the terminal node label may show the groups better.
-Here's an example:
-
-
-```{r fig.height=4, fig.width=7, warning=F, message=F}
-heat_tree(x = galaxy,
-          target_lab = 'target',
-          task = 'regression',
-          terminal_vars = NULL,
-          tree_space_bottom = 0)
-```
-
 
 ## You're the Warren Beatty of your `heat_tree()`
 
 *Anyone got that [Food Wishes reference](https://youtu.be/fyMQ2203pQM?t=82)?*
 
-You can manually define your own tree for the `custom_tree` argument following the [partykit vignette](https://cran.r-project.org/package=partykit/vignettes/partykit.pdf).
+### Pre-train your tree
 
-As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a [recent study](https://doi.org/10.1038/s42256-020-0180-7) with the conditional decision tree.
-We apply the tree structure in [Figure 2](https://www.nature.com/articles/s42256-020-0180-7/figures/2) of the original study (only show the training set for now):
+If the default conditional tree is not desired, you can create your tree (e.g. with `rpart`) and wrap `as.party()` around this object to plug into `heat_tree()`.
+As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a [recent study](https://doi.org/10.1038/s42256-020-0180-7).
 
-```{r fig.height=4.5, fig.width=7}
-library(dplyr)
+```{r}
+# # same tree as letting `x = train_covid`:
+# x <- partykit::ctree(outcome ~ ., data = train_covid)
+
+# build tree using rpart:
+x <- partykit::as.party(rpart::rpart(outcome ~ ., data = train_covid))
+
+heat_tree(
+  x = x,
+  target_lab = 'outcome',
+  label_map = c(`1` = 'Death', `0` = 'Survival'))
+```
+
+### Manually define your tree with `partysplit` and `partynode`
+
+You can also manually define your own tree for the `custom_tree` argument following the [partykit vignette](https://cran.r-project.org/package=partykit/vignettes/partykit.pdf).
+Let's apply the tree structure in [Figure 2](https://www.nature.com/articles/s42256-020-0180-7/figures/2) of the original study (only show the training set for now):
+
+```{r fig.height=4.5, fig.width=7, warning=FALSE, message=FALSE}
 library(partykit)
 
 # first argument indicates the index of the feature used for splitting
-
 split_ldh <- partysplit(1L, breaks = 365)
 split_crp <- partysplit(2L, breaks = 41.2)
 split_lymp <- partysplit(3L, breaks = 14.7)
@@ -221,3 +182,58 @@ heat_tree(
   label_map = c(`1` = 'Death', `0` = 'Survival'),
   lev_fac = 3)
 ```
+
+## Smart node layout
+
+These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size.
+The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches.
+This relative weight can be adjusted with the `lev_fac` parameter in `heat_tree()`.
+The default `lev_fac = 1.3` seems to provide aesthetically pleasing trees, independent of the tree size.
+
+In this next figure, on the top, `lev_fac = 1` makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts `lev_fac = 1.3` (default) on the bottom.
+
+
+```{r fig.width=9, fig.height=3.5, fig.show='hold', warning=FALSE, message=FALSE}
+heat_tree(wine_quality_red, target_lab = 'target', lev_fac = 1, title = 'lev_fac = 1')
+heat_tree(wine_quality_red, target_lab = 'target', title = 'lev_fac = 1.3')
+```
+
+## Seriation
+
+Unless you turn it off (`clust_feats = FALSE`, `clust_samps = FALSE`), **treeheatr** automatically performs grouping of features and samples when organizing the heatmap.
+Features are ordered within each of the two groups of features, continuous and categorical (including the target label, unless `clust_target = FALSE`).
+Samples are grouped within each terminal node of all features (not only the displayed features).
+**treeheatr** uses `cluster::daisy()` to compute distances with the Gower metric to incorporate both continuous and nominal categorical feature types.
+Now, `cluster::daisy()` may throw this warning if your dataset contains binary features:
+
+```binary variable(s) treated as interval scaled```
+
+but in general this is safe to ignore because the goal of seriation is to simply reduce the amount of stochasticity of the tree-based model and not to make precise inference about each group.
+
+## Mixed data/feature types
+
+As shown above in the *penguins* example, **treeheatr** supports mixed feature types.
+
+For continuous variables/features, we can choose to either *percentize* (scale-rank), *normalize* (subtract the min and divide by the max) or *scale* (subtract the mean and divide by the standard deviation) each feature.
+Depending on what we want to show in the heatmap, one transformation method can be more effective than the other.
+Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in [this vignette](https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize) of the **heatmaply** package.
+
+We highly recommend that, when dealing with mixed feature types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
+When `feat_types` is not specified, **treeheatr** automatically inferred each column type from the original dataset.
+
+## Regression
+
+In general, compared to classification, regression task is more difficult to interpret with a decision tree.
+However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes.
+Also, removing the terminal node label may show the groups better.
+Here's an example:
+
+
+```{r fig.height=4, fig.width=7, warning=F, message=F}
+heat_tree(x = galaxy,
+          target_lab = 'target',
+          task = 'regression',
+          terminal_vars = NULL,
+          tree_space_bottom = 0)
+```
+

@@ -11,7 +11,7 @@ Get the fitted tree depending on the input `x`.}
 \usage{
 get_fit(x, ...)
 
-\method{get_fit}{default}(x)
+\method{get_fit}{default}(x, ...)
 
 \method{get_fit}{partynode}(x, data_test, target_lab, task)
 

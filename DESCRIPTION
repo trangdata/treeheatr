@@ -34,6 +34,7 @@ Suggests:
     forcats,
     knitr,
     rmarkdown,
+    rpart,
     testthat
 URL:
     https://trang1618.github.io/treeheatr/index.html,

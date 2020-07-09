@@ -1,6 +1,9 @@
 # treeheatr (development version)
 * Default of `print_eval` is TRUE when `data_test` is supplied.
 * `covid_train` and `covid_test` datasets are pre-processed.
+Bug fixes:
+* requires custom tree to be trained on dataset with dependent variable 
+as factor when task is classification.
 
 treeheatr 0.2.0 (2020-07-08)
 ==============================
