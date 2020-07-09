@@ -6,7 +6,7 @@
 \title{Draws and aligns decision tree and heatmap.}
 \usage{
 heat_tree(
-  data,
+  x,
   target_lab,
   data_test = NULL,
   task = c("classification", "regression"),
@@ -16,7 +16,6 @@ heat_tree(
   target_lab_disp = target_lab,
   clust_samps = TRUE,
   clust_target = TRUE,
-  custom_tree = NULL,
   custom_layout = NULL,
   show = "heat-tree",
   heat_rel_height = 0.2,
@@ -26,7 +25,7 @@ heat_tree(
 )
 
 treeheatr(
-  data,
+  x,
   target_lab,
   data_test = NULL,
   task = c("classification", "regression"),
@@ -36,7 +35,6 @@ treeheatr(
   target_lab_disp = target_lab,
   clust_samps = TRUE,
   clust_target = TRUE,
-  custom_tree = NULL,
   custom_layout = NULL,
   show = "heat-tree",
   heat_rel_height = 0.2,
@@ -46,11 +44,15 @@ treeheatr(
 )
 }
 \arguments{
-\item{data}{Tidy dataset.}
+\item{x}{Dataframe or a `party` or `partynode` object representing a custom tree.
+If a dataframe is supplied, conditional inference tree is computed.
+If a custom tree is supplied, it must follow the partykit syntax:
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf}
 
 \item{target_lab}{Name of the column in data that contains target/label information.}
 
-\item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
+\item{data_test}{Tidy test dataset. Required if `x` is a `partynode` object.
+If NULL, heatmap displays (training) data `x`.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
@@ -73,10 +75,6 @@ among samples within each leaf node.}
 
 \item{clust_target}{Logical. If TRUE, target/label is included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.}
-
-\item{custom_tree}{Custom tree with the partykit syntax.
-https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-If NULL, a conditional inference tree is computed.}
 
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
 for manually input custom layout.}
@@ -105,7 +103,7 @@ heat_tree() alias.
 heat_tree(penguins, target_lab = 'species')
 
 heat_tree(
-  data = galaxy[1:100, ],
+  x = galaxy[1:100, ],
   target_lab = 'target',
   task = 'regression',
   terminal_vars = NULL,
@@ -114,7 +112,7 @@ heat_tree(
 treeheatr(penguins, target_lab = 'species')
 
 treeheatr(
-  data = galaxy[1:100, ],
+  x = galaxy[1:100, ],
   target_lab = 'target',
   task = 'regression',
   terminal_vars = NULL,

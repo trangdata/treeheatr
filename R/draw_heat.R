@@ -48,7 +48,7 @@
 draw_heat <- function(
   dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = '',
   trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
-  feats = NULL, show_all_feats = FALSE, p_thres = 0.05, custom_tree = NULL, cont_legend = FALSE,
+  feats = NULL, show_all_feats = FALSE, p_thres = 0.05, cont_legend = FALSE,
   cate_legend = FALSE, cont_cols = ggplot2::scale_fill_viridis_c,
   cate_cols = ggplot2::scale_fill_viridis_d, panel_space = 0.001, target_space = 0.05,
   target_pos = 'top'){
@@ -72,7 +72,7 @@ draw_heat <- function(
   # if feature types are not supplied, infer from column type:
   feat_types <- feat_types %||% sapply(dat[, feat_names], class)
   disp_feats <- feats %||% get_disp_feats(
-    fit, feat_names, show_all_feats, custom_tree, p_thres)
+    fit, feat_names, show_all_feats, p_thres)
 
   # prepare feature orders:
   feat_list <- prepare_feats(dat, disp_feats, feat_types, clust_feats, trans_type)
@@ -158,8 +158,8 @@ draw_heat <- function(
 #' @inheritParams draw_heat
 #' @return A character vector of feature names.
 #'
-get_disp_feats <- function(fit, feat_names, show_all_feats, custom_tree, p_thres){
-  if (show_all_feats || (!is.null(custom_tree))){
+get_disp_feats <- function(fit, feat_names, show_all_feats, p_thres){
+  if (show_all_feats || (!(fit$autotree))){
     disp_feats <- feat_names
   } else {
     # important features to display in decision trees

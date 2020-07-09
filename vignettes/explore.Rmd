@@ -139,7 +139,7 @@ Here's an example:
 
 
 ```{r fig.height=4, fig.width=7, warning=F, message=F}
-heat_tree(data = galaxy,
+heat_tree(x = galaxy,
           target_lab = 'target',
           task = 'regression',
           terminal_vars = NULL,
@@ -197,10 +197,10 @@ custom_tree <- partynode(1L, split = split_ldh , kids = list(
   partynode(7L, info = 'Death')))
 
 heat_tree(
-  selected_train,
+  x = custom_tree,
+  data_test = selected_train,
   target_lab = 'outcome',
-  label_map = c(`1` = 'Death', `0` = 'Survival'),
-  custom_tree = custom_tree)
+  label_map = c(`1` = 'Death', `0` = 'Survival'))
 ```
 
 ## Apply the learned tree on external/holdout/test/validation dataset
@@ -235,12 +235,10 @@ Let's now apply the custom tree we (or really, Yan et al.) designed earlier and 
 
 ```{r fig.height=4.5, fig.width=7}
 heat_tree(
-  selected_train,
+  x = custom_tree,
   data_test = selected_test,
   target_lab = 'outcome',
   label_map = c(`1` = 'Death', `0` = 'Survival'),
   print_eval = TRUE,
-  custom_tree = custom_tree,
-  lev_fac = 3
-)
+  lev_fac = 3)
 ```

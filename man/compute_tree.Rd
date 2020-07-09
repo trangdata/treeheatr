@@ -5,7 +5,7 @@
 \title{Compute decision tree from data set}
 \usage{
 compute_tree(
-  data,
+  x,
   data_test = NULL,
   target_lab,
   task = c("classification", "regression"),
@@ -13,16 +13,19 @@ compute_tree(
   label_map = NULL,
   clust_samps = TRUE,
   clust_target = TRUE,
-  custom_tree = NULL,
   custom_layout = NULL,
   lev_fac = 1.3,
   panel_space = 0.001
 )
 }
 \arguments{
-\item{data}{Tidy dataset.}
+\item{x}{Dataframe or a `party` or `partynode` object representing a custom tree.
+If a dataframe is supplied, conditional inference tree is computed.
+If a custom tree is supplied, it must follow the partykit syntax:
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf}
 
-\item{data_test}{Tidy test dataset. If NULL, heatmap displays (training) `data`.}
+\item{data_test}{Tidy test dataset. Required if `x` is a `partynode` object.
+If NULL, heatmap displays (training) data `x`.}
 
 \item{target_lab}{Name of the column in data that contains target/label information.}
 
@@ -42,10 +45,6 @@ among samples within each leaf node.}
 \item{clust_target}{Logical. If TRUE, target/label is included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.}
 
-\item{custom_tree}{Custom tree with the partykit syntax.
-https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-If NULL, a conditional inference tree is computed.}
-
 \item{custom_layout}{Dataframe with 3 columns: id, x and y
 for manually input custom layout.}
 
@@ -64,9 +63,9 @@ fit, estimates, smart layout and terminal data.
 Compute decision tree from data set
 }
 \examples{
-x <- compute_tree(penguins, target_lab = 'species')
-x$fit
-x$layout
-dplyr::select(x$term_dat, - contains('nodedata'))
+fit_tree <- compute_tree(penguins, target_lab = 'species')
+fit_tree$fit
+fit_tree$layout
+dplyr::select(fit_tree$term_dat, - contains('nodedata'))
 
 }

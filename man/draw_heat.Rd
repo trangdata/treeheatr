@@ -15,7 +15,6 @@ draw_heat(
   feats = NULL,
   show_all_feats = FALSE,
   p_thres = 0.05,
-  custom_tree = NULL,
   cont_legend = FALSE,
   cate_legend = FALSE,
   cont_cols = ggplot2::scale_fill_viridis_c,
@@ -58,10 +57,6 @@ If NULL, display features of which P values are less than `p_thres`.}
 \item{p_thres}{Numeric value indicating the p-value threshold of feature importance.
 Feature with p-values computed from the decision tree below this value
 will be displayed on the heatmap.}
-
-\item{custom_tree}{Custom tree with the partykit syntax.
-https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-If NULL, a conditional inference tree is computed.}
 
 \item{cont_legend}{Function determining the options for legend of continuous variables,
 defaults to FALSE. If TRUE, use `guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL)`.

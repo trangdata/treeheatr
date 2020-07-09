@@ -1,7 +1,11 @@
 #' Draws and aligns decision tree and heatmap.
 #'
-#' @param data Tidy dataset.
-#' @param data_test Tidy test dataset. If NULL, heatmap displays (training) `data`.
+#' @param x Dataframe or a `party` or `partynode` object representing a custom tree.
+#' If a dataframe is supplied, conditional inference tree is computed.
+#' If a custom tree is supplied, it must follow the partykit syntax:
+#' https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
+#' @param data_test Tidy test dataset. Required if `x` is a `partynode` object.
+#' If NULL, heatmap displays (training) data `x`.
 #' @param target_lab Name of the column in data that contains target/label information.
 #' @param task Character string indicating the type of problem,
 #' either 'classification' (categorical outcome) or 'regression' (continuous outcome).
@@ -18,9 +22,6 @@
 #' among samples within each leaf node.
 #' @param clust_target Logical. If TRUE, target/label is included in hierarchical clustering
 #' of samples within each leaf node and might yield a more interpretable heatmap.
-#' @param custom_tree Custom tree with the partykit syntax.
-#' https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-#' If NULL, a conditional inference tree is computed.
 #' @param custom_layout Dataframe with 3 columns: id, x and y
 #' for manually input custom layout.
 #' @param show Character string indicating which components of the decision tree-heatmap
@@ -40,31 +41,30 @@
 #' heat_tree(penguins, target_lab = 'species')
 #'
 #' heat_tree(
-#'   data = galaxy[1:100, ],
+#'   x = galaxy[1:100, ],
 #'   target_lab = 'target',
 #'   task = 'regression',
 #'   terminal_vars = NULL,
 #'   tree_space_bottom = 0)
 #'
 heat_tree <- function(
-  data, target_lab, data_test = NULL, task = c('classification', 'regression'),
+  x, target_lab, data_test = NULL, task = c('classification', 'regression'),
   feat_types = NULL, label_map = NULL, target_cols = NULL, target_lab_disp = target_lab,
-  clust_samps = TRUE, clust_target = TRUE, custom_tree = NULL, custom_layout = NULL,
+  clust_samps = TRUE, clust_target = TRUE, custom_layout = NULL,
   show = 'heat-tree', heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001, ...){
 
-  stopifnot(target_lab %in% colnames(data))
   target_cols <- get_cols(target_cols, match.arg(task))
   mf <- match.call()
   ctree_vars <-
-    c('data', 'data_test', 'target_lab', 'task', 'feat_types', 'label_map', 'clust_samps',
-      'clust_target', 'custom_tree', 'custom_layout', 'lev_fac', 'panel_space')
+    c('x', 'data_test', 'target_lab', 'task', 'feat_types', 'label_map', 'clust_samps',
+      'clust_target', 'custom_layout', 'lev_fac', 'panel_space')
   tree_vars <-
     c('title', 'task', 'tree_space_top', 'tree_space_bottom', 'par_node_vars', 'terminal_vars',
       'edge_vars', 'edge_text_vars', 'print_eval', 'metrics', 'x_eval', 'y_eval')
   heat_vars <-
     c('feat_types', 'trans_type', 'cont_cols', 'cate_cols', 'clust_feats', 'cont_legend',
       'cate_legend', 'target_space', 'panel_space', 'target_pos', 'feats', 'show_all_feats',
-      'p_thres', 'custom_tree')
+      'p_thres')
 
   m_ctree <- match(ctree_vars, names(mf), 0L)
   m_tree <- match(tree_vars, names(mf), 0L)
@@ -105,4 +105,5 @@ heat_tree <- function(
   class(g) <- c("ggHeatTree", class(g))
   g
 }
+
 

@@ -7,7 +7,7 @@
 #' treeheatr(penguins, target_lab = 'species')
 #'
 #' treeheatr(
-#'   data = galaxy[1:100, ],
+#'   x = galaxy[1:100, ],
 #'   target_lab = 'target',
 #'   task = 'regression',
 #'   terminal_vars = NULL,
