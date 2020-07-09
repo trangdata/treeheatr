@@ -5,6 +5,8 @@
 #' @param dat Dataframe with samples from original dataset ordered according to
 #' the clustering within each leaf node.
 #' @param fit party object, e.g., as output from partykit::ctree()
+#' @param target_lab_disp Character string for displaying the label of target label.
+#' If not provided, use `target_lab`.
 #' @param trans_type Character string of 'normalize', 'scale' or 'none'.
 #' If 'scale', subtract the mean and divide by the standard deviation.
 #' If 'normalize', i.e., max-min normalize, subtract the min and divide by the max.
@@ -46,7 +48,7 @@
 #'
 #'
 draw_heat <- function(
-  dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = '',
+  dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = fit$target_lab,
   trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
   feats = NULL, show_all_feats = FALSE, p_thres = 0.05, cont_legend = FALSE,
   cate_legend = FALSE, cont_cols = ggplot2::scale_fill_viridis_c,

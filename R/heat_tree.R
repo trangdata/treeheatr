@@ -16,8 +16,6 @@
 #' e.g., c(`0` = 'Edible', `1` = 'Poisonous').
 #' @param target_cols Character vectors representing the hex values of different
 #' level colors for targets, defaults to viridis option B.
-#' @param target_lab_disp Character string for displaying the label of target label.
-#' If NULL, use `target_lab`.
 #' @param clust_samps Logical. If TRUE, hierarchical clustering would be performed
 #' among samples within each leaf node.
 #' @param clust_target Logical. If TRUE, target/label is included in hierarchical clustering
@@ -50,8 +48,8 @@
 #'   tree_space_bottom = 0)
 #'
 heat_tree <- function(
-  x, target_lab, data_test = NULL, task = c('classification', 'regression'),
-  feat_types = NULL, label_map = NULL, target_cols = NULL, target_lab_disp = target_lab,
+  x, target_lab = NULL, data_test = NULL, task = c('classification', 'regression'),
+  feat_types = NULL, label_map = NULL, target_cols = NULL,
   clust_samps = TRUE, clust_target = TRUE, custom_layout = NULL,
   show = 'heat-tree', heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001,
   print_eval = (!is.null(data_test)), ...){
@@ -67,7 +65,7 @@ heat_tree <- function(
   heat_vars <-
     c('feat_types', 'trans_type', 'cont_cols', 'cate_cols', 'clust_feats', 'cont_legend',
       'cate_legend', 'target_space', 'panel_space', 'target_pos', 'feats', 'show_all_feats',
-      'p_thres')
+      'p_thres', 'target_lab_disp')
 
   m_ctree <- match(ctree_vars, names(mf), 0L)
   m_tree <- match(tree_vars, names(mf), 0L)
@@ -97,7 +95,6 @@ heat_tree <- function(
   dheat <- mf[c(1L, m_heat)]
   dheat$fit <- ctree_result$fit
   dheat$dat <- ctree_result$dat
-  dheat$target_lab_disp <- target_lab_disp # b/c/ default in draw_heat() is NULL
   dheat$target_cols <- target_cols
   dheat[[1L]] <- quote(draw_heat)
   dheat <- eval(dheat, parent.frame())

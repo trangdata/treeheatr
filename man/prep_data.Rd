@@ -5,7 +5,7 @@
 \title{------------------------------------------------------------------------------------
 Prepare dataset}
 \usage{
-prep_data(data, target_lab, task, feat_types = NULL, label_map = NULL)
+prep_data(data, target_lab, task, feat_types = NULL)
 }
 \arguments{
 \item{data}{Original data frame with features to be converted to correct types.}
@@ -18,9 +18,6 @@ either 'classification' (categorical outcome) or 'regression' (continuous outcom
 \item{feat_types}{Named vector indicating the type of each features,
 e.g., c(sex = 'factor', age = 'numeric').
 If feature types are not supplied, infer from column type.}
-
-\item{label_map}{Named vector of the meaning of the target values,
-e.g., c(`0` = 'Edible', `1` = 'Poisonous').}
 }
 \value{
 List of dataframes (training + test) with proper feature types and target name.

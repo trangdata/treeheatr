@@ -9,7 +9,7 @@ draw_heat(
   fit,
   feat_types = NULL,
   target_cols = NULL,
-  target_lab_disp = "",
+  target_lab_disp = fit$target_lab,
   trans_type = c("percentize", "normalize", "scale", "none"),
   clust_feats = TRUE,
   feats = NULL,
@@ -38,7 +38,7 @@ If feature types are not supplied, infer from column type.}
 level colors for targets, defaults to viridis option B.}
 
 \item{target_lab_disp}{Character string for displaying the label of target label.
-If NULL, use `target_lab`.}
+If not provided, use `target_lab`.}
 
 \item{trans_type}{Character string of 'normalize', 'scale' or 'none'.
 If 'scale', subtract the mean and divide by the standard deviation.

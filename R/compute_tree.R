@@ -13,12 +13,13 @@
 #'
 
 compute_tree <- function(
-  x, data_test = NULL, target_lab, task = c('classification', 'regression'),
+  x, data_test = NULL, target_lab = NULL, task = c('classification', 'regression'),
   feat_types = NULL, label_map = NULL, clust_samps = TRUE, clust_target = TRUE,
   custom_layout = NULL, lev_fac = 1.3, panel_space = 0.001){
 
   task <- match.arg(task)
-  fit <- get_fit(x = x, data_test = data_test, target_lab = target_lab, task = task)
+  fit <- get_fit(x = x, data_test = data_test, target_lab = target_lab,
+                 task = task, feat_types = feat_types)
 
   if ('data.frame' %in% class(x)){
     fit$autotree <- TRUE
@@ -26,7 +27,7 @@ compute_tree <- function(
     fit$autotree <- FALSE
   }
 
-  dat <- prediction_df(fit, target_lab, task, clust_samps, clust_target)
+  dat <- prediction_df(fit, task, clust_samps, clust_target)
 
   ################################################################
   ##### Prepare layout, terminal data, add node labels:
@@ -39,8 +40,14 @@ compute_tree <- function(
   term_dat <- terminal_data %>%
     select(- c(x, y)) %>%
     left_join(layout, by = 'id') %>%
-    mutate(
-      term_node = if (task == 'classification') as.factor(y_hat) else round(y_hat, 2))
+    mutate(term_node = (
+      if (task == 'classification')
+        if (!is.null(label_map))
+          recode(as.factor(y_hat), !!!label_map)
+        else
+          as.factor(y_hat)
+      else
+        round(y_hat, 2)))
 
   list(fit = fit,
        dat = dat,
@@ -60,8 +67,8 @@ compute_tree <- function(
 #' @return A dataframe of prediction values with scaled columns
 #' and clustered samples.
 #'
-prediction_df <- function(fit, target_lab, task, clust_samps, clust_target){
-  data <- fit$data
+prediction_df <- function(fit, task, clust_samps, clust_target){
+  data <- fit$data_test %||% fit$data
   node_pred <- stats::predict(fit, newdata = data, type = 'node')
   y_pred <- stats::predict(fit, newdata = data, type = 'response', simplify = FALSE) %>%
     .simplify_pred(id = node_pred, nam = as.character(node_pred))
@@ -70,7 +77,7 @@ prediction_df <- function(fit, target_lab, task, clust_samps, clust_target){
     cbind(node_id = node_pred, y_hat = y_pred) %>%
     lapply(
       unique(.$node_id), clust_samp_func, dat = .,
-      clust_vec = if (clust_target) colnames(data) else setdiff(colnames(data), target_lab),
+      clust_vec = if (clust_target) colnames(data) else setdiff(colnames(data), fit$target_lab),
       clust_samps = clust_samps) %>%
     bind_rows() %>%
     mutate(Sample = row_number())

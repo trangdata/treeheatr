@@ -4,12 +4,10 @@
 \alias{prediction_df}
 \title{Apply the predicted tree on either new test data or training data.}
 \usage{
-prediction_df(fit, target_lab, task, clust_samps, clust_target)
+prediction_df(fit, task, clust_samps, clust_target)
 }
 \arguments{
 \item{fit}{constparty object of the decision tree.}
-
-\item{target_lab}{Name of the column in data that contains target/label information.}
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}

@@ -7,7 +7,7 @@
 compute_tree(
   x,
   data_test = NULL,
-  target_lab,
+  target_lab = NULL,
   task = c("classification", "regression"),
   feat_types = NULL,
   label_map = NULL,

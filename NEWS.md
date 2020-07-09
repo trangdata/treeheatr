@@ -1,17 +1,16 @@
 # treeheatr (development version)
 * Default of `print_eval` is TRUE when `data_test` is supplied.
 * `covid_train` and `covid_test` datasets are pre-processed.
+
 Bug fixes:
-* requires custom tree to be trained on dataset with dependent variable 
-as factor when task is classification.
+* requires custom tree to be trained on dataset with dependent variable as factor when task is classification.
+* `label_map` works again
 
 treeheatr 0.2.0 (2020-07-08)
 ==============================
 
 Significant changes:
-* `data` argument is now replaced with `x`, which can be a dataframe (or tibble), 
-a party (or constparty) object specifying the precomputed tree,
-or partynode object specifying the customized tree. 
+* `data` argument is now replaced with `x`, which can be a dataframe (or tibble), a party (or constparty) object specifying the precomputed tree, or partynode object specifying the customized tree.
 `custom_tree` argument is no longer needed.
 * treeheatr() is now an alias for heat_tree()
 

@@ -13,11 +13,11 @@ get_fit(x, ...)
 
 \method{get_fit}{default}(x, ...)
 
-\method{get_fit}{partynode}(x, data_test, target_lab, task)
+\method{get_fit}{partynode}(x, data_test, target_lab, ...)
 
-\method{get_fit}{party}(x, data_test, target_lab, task)
+\method{get_fit}{party}(x, data_test, target_lab, task, ...)
 
-\method{get_fit}{data.frame}(x, data_test, target_lab, task)
+\method{get_fit}{data.frame}(x, data_test, target_lab, ...)
 }
 \arguments{
 \item{x}{Dataframe or a `party` or `partynode` object representing a custom tree.
