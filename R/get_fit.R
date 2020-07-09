@@ -18,7 +18,7 @@ get_fit <- function(x, ...){
 
 
 #' @rdname get_fit-methods
-get_fit.default <- function(x){
+get_fit.default <- function(x, ...){
   stop('`x` must be of class `party` or `party_node`.')
 }
 
@@ -49,6 +49,10 @@ get_fit.partynode <- function(x, data_test, target_lab, task){
 #' @rdname get_fit-methods
 get_fit.party <- function(x, data_test, target_lab, task){
   fit <- partykit::as.constparty(x)
+
+  if (!('factor' %in% class(fit$data[, target_lab])) && task == 'classification')
+    stop('Please ensure the tree was trained on a dataset with dependent variable of class factor or switch task to regression.')
+
   if (!is.null(data_test))
     fit$data <- prep_data(data_test, target_lab = target_lab, task = task)
 
