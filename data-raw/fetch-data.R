@@ -11,13 +11,31 @@ galaxy <- pmlblite::fetch_data('690_visualizing_galaxy')
 penguins <- readr::read_csv(
   'https://github.com/allisonhorst/penguins/raw/master/data/penguins_size.csv',
   col_types = 'ffnnnnf')
-train_covid <- readr::read_tsv(
+
+train_covid_raw <- readr::read_tsv(
   'https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_train.tsv')
 colnames(train_covid) <- iconv(colnames(train_covid), from="UTF-8", to="ASCII")
 attr(train_covid, "spec") <- NULL
 
-test_covid <- readr::read_tsv(
+test_covid_raw <- readr::read_tsv(
   'https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_test.tsv')
+
+train_covid <- train_covid_raw %>%
+  select(
+    LDH = 'Lactate dehydrogenase',
+    hs_CRP = 'High sensitivity C-reactive protein',
+    Lymphocyte = '(%)lymphocyte',
+    outcome = Type2
+  ) %>%
+  na.omit()
+
+test_covid <- test_covid_raw %>%
+  select(
+    LDH = 'Lactate dehydrogenase',
+    hs_CRP = 'High sensitivity C-reactive protein',
+    Lymphocyte = '(%)lymphocyte',
+    'outcome'
+  )
 
 data(wine, package = 'rattle')
 

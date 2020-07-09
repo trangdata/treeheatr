@@ -30,8 +30,9 @@ with the penguins dataset!
 Running the `heat_tree()` function can be as simple as:
 
 ```{r fig.height=3, fig.width=7}
-dat_raw <- na.omit(penguins)
-heat_tree(dat_raw, target_lab = 'species')
+# To avoid warnings, for now, apply na.omit():
+penguins <- na.omit(penguins)
+heat_tree(penguins, target_lab = 'species')
 ```
 
 But we can adjust a few graphical parameters.
@@ -40,7 +41,7 @@ And we can relax the p value threshold `p_thres` to include more features that m
 
 ```{r fig.height=3, fig.width=7}
 heat_tree(
-  dat_raw, target_lab = 'species',
+  penguins, target_lab = 'species',
   target_cols = c('#E69F00', '#56B4E9', '#009E73'),
   # moving node 3 a bit to the left:
   custom_layout = data.frame(id = 3, x = 0.1, y = 0.5), 
@@ -54,7 +55,7 @@ For example:
 
 ```{r fig.height=4, fig.width=7}
 heat_tree(
-  dat_raw, target_lab = 'species',
+  penguins, target_lab = 'species',
   par_node_vars = list(
     label.size = 0.2,
     label.padding = ggplot2::unit(0.1, 'lines'),
@@ -77,19 +78,19 @@ We can toggle this option using the `show` argument, which takes either `'heat-t
 For example:
 
 ```{r}
-heat_tree(dat_raw, target_lab = 'species', show = 'tree-only')
+heat_tree(penguins, target_lab = 'species', show = 'tree-only')
 ```
 
 We can also choose to display other features in the heatmap that may not be in the tree.
 
 ```{r}
-heat_tree(dat_raw, target_lab = 'species', feats = c('body_mass_g', 'sex'))
+heat_tree(penguins, target_lab = 'species', feats = c('body_mass_g', 'sex'))
 ```
 
 `feats = NA` displays the tree with only the target label, which may be simple and still helpful:
 
 ```{r}
-heat_tree(dat_raw, target_lab = 'species', feats = NA, heat_rel_height = 0.1)
+heat_tree(penguins, target_lab = 'species', feats = NA, heat_rel_height = 0.1)
 ```
 
 ## Smart node layout
@@ -154,34 +155,12 @@ heat_tree(x = galaxy,
 You can manually define your own tree for the `custom_tree` argument following the [partykit vignette](https://cran.r-project.org/package=partykit/vignettes/partykit.pdf).
 
 As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a [recent study](https://doi.org/10.1038/s42256-020-0180-7) with the conditional decision tree.
+We apply the tree structure in [Figure 2](https://www.nature.com/articles/s42256-020-0180-7/figures/2) of the original study (only show the training set for now):
 
-
-First, a quick simplification of the column names:
-```{r warning=FALSE, message=FALSE}
+```{r fig.height=4.5, fig.width=7}
 library(dplyr)
 library(partykit)
 
-selected_train <- train_covid %>%
-  select(
-    LDH = 'Lactate dehydrogenase',
-    hs_CRP = 'High sensitivity C-reactive protein',
-    Lymphocyte = '(%)lymphocyte',
-    outcome = Type2
-  ) %>%
-  na.omit()
-
-selected_test <- test_covid %>%
-  select(
-    LDH = 'Lactate dehydrogenase',
-    hs_CRP = 'High sensitivity C-reactive protein',
-    Lymphocyte = '(%)lymphocyte',
-    'outcome'
-  )
-```
-
-We now apply the tree structure in [Figure 2](https://www.nature.com/articles/s42256-020-0180-7/figures/2) of the original study (only show the training set for now):
-
-```{r fig.height=4.5, fig.width=7}
 # first argument indicates the index of the feature used for splitting
 
 split_ldh <- partysplit(1L, breaks = 365)
@@ -198,7 +177,8 @@ custom_tree <- partynode(1L, split = split_ldh , kids = list(
 
 heat_tree(
   x = custom_tree,
-  data_test = selected_train,
+  data_test = train_covid,
+  print_eval = FALSE,
   target_lab = 'outcome',
   label_map = c(`1` = 'Death', `0` = 'Survival'))
 ```
@@ -236,9 +216,8 @@ Let's now apply the custom tree we (or really, Yan et al.) designed earlier and 
 ```{r fig.height=4.5, fig.width=7}
 heat_tree(
   x = custom_tree,
-  data_test = selected_test,
+  data_test = test_covid,
   target_lab = 'outcome',
   label_map = c(`1` = 'Death', `0` = 'Survival'),
-  print_eval = TRUE,
   lev_fac = 3)
 ```

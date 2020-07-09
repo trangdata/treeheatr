@@ -1,5 +1,6 @@
 # treeheatr (development version)
-
+* Default of `print_eval` is TRUE when `data_test` is supplied.
+* `covid_train` and `covid_test` datasets are pre-processed.
 
 treeheatr 0.2.0 (2020-07-08)
 ==============================

@@ -21,6 +21,7 @@ heat_tree(
   heat_rel_height = 0.2,
   lev_fac = 1.3,
   panel_space = 0.001,
+  print_eval = (!is.null(data_test)),
   ...
 )
 
@@ -40,6 +41,7 @@ treeheatr(
   heat_rel_height = 0.2,
   lev_fac = 1.3,
   panel_space = 0.001,
+  print_eval = (!is.null(data_test)),
   ...
 )
 }
@@ -90,6 +92,9 @@ according to their levels, commonly ranges from 1 to 1.5.
 
 \item{panel_space}{Spacing between facets relative to viewport,
 recommended to range from 0.001 to 0.01.}
+
+\item{print_eval}{Logical. If TRUE, print evaluation of the tree performance.
+Defaults to TRUE when `data_test` is supplied.}
 
 \item{\dots}{Further arguments passed to `draw_tree()` and/or `draw_heat()`.}
 }

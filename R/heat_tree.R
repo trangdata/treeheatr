@@ -32,6 +32,8 @@
 #' 1 for parent node perfectly in the middle of child nodes.
 #' @param panel_space Spacing between facets relative to viewport,
 #' recommended to range from 0.001 to 0.01.
+#' @param print_eval Logical. If TRUE, print evaluation of the tree performance.
+#' Defaults to TRUE when `data_test` is supplied.
 #' @param \dots Further arguments passed to `draw_tree()` and/or `draw_heat()`.
 #'
 #' @return A gtable/grob object of the decision tree (top) and heatmap (bottom).
@@ -51,7 +53,8 @@ heat_tree <- function(
   x, target_lab, data_test = NULL, task = c('classification', 'regression'),
   feat_types = NULL, label_map = NULL, target_cols = NULL, target_lab_disp = target_lab,
   clust_samps = TRUE, clust_target = TRUE, custom_layout = NULL,
-  show = 'heat-tree', heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001, ...){
+  show = 'heat-tree', heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001,
+  print_eval = (!is.null(data_test)), ...){
 
   target_cols <- get_cols(target_cols, match.arg(task))
   mf <- match.call()
@@ -83,6 +86,7 @@ heat_tree <- function(
 
   dtree <- mf[c(1L, m_tree)]
   dtree$target_cols <- target_cols
+  dtree$print_eval <- print_eval
   for (argg in c('fit', 'dat', 'layout', 'term_dat')){
     dtree[[argg]] <- ctree_result[[argg]]
   }
