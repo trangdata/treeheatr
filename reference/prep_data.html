@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Prepare dataset — prep_data • treeheatr</title>
+<title>------------------------------------------------------------------------------------
+Prepare dataset — prep_data • treeheatr</title>
 
 
 <!-- jquery -->
@@ -39,8 +40,10 @@
 
 
 
-<meta property="og:title" content="Prepare dataset — prep_data" />
-<meta property="og:description" content="Prepare dataset" />
+<meta property="og:title" content="------------------------------------------------------------------------------------
+Prepare dataset — prep_data" />
+<meta property="og:description" content="------------------------------------------------------------------------------------
+Prepare dataset" />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -77,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">treeheatr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -125,34 +128,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Prepare dataset</h1>
-    <small class="dont-index">Source: <a href='https://github.com/trang1618/treeheatr/blob/master/R/compute_tree.R'><code>R/compute_tree.R</code></a></small>
+    <h1>------------------------------------------------------------------------------------
+Prepare dataset</h1>
+    <small class="dont-index">Source: <a href='https://github.com/trang1618/treeheatr/blob/master/R/get_fit.R'><code>R/get_fit.R</code></a></small>
     <div class="hidden name"><code>prep_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Prepare dataset</p>
+    <p>------------------------------------------------------------------------------------
+Prepare dataset</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prep_data</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>data_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>target_lab</span>,
-  <span class='no'>task</span>,
-  <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>prep_data</span>(<span class='no'>data</span>, <span class='no'>target_lab</span>, <span class='no'>task</span>, <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>Tidy dataset.</p></td>
-    </tr>
-    <tr>
-      <th>data_test</th>
-      <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
+      <td><p>Original data frame with features to be converted to correct types.</p></td>
     </tr>
     <tr>
       <th>target_lab</th>

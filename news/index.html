@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">treeheatr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -132,11 +132,23 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#treeheatr-development-version" class="anchor"></a>treeheatr (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="treeheatr-020-2020-07-08" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#treeheatr-020-2020-07-08" class="anchor"></a>treeheatr 0.2.0 (2020-07-08)<small> Unreleased </small>
+</h1>
+<p>Significant changes:</p>
+<ul>
+<li>
+<code>data</code> argument is now replaced with <code>x</code>, which can be a dataframe (or tibble), a party (or constparty) object specifying the precomputed tree, or partynode object specifying the customized tree. <code>custom_tree</code> argument is no longer needed.</li>
+<li>treeheatr() is now an alias for heat_tree()</li>
+</ul>
+<p>Others:</p>
 <ul>
 <li>include the diabetes dataset</li>
 <li>reduce legend margin</li>
 <li>remove <code>my_target</code> as column names within functions</li>
-<li>allow wrapping as.party() around rpart object for custom_tree</li>
+<li>allow wrapping as.party() around rpart object</li>
 <li>use ARSA as seriation method for samples</li>
 <li>swap the position of two arguments: <code>target_lab</code> and <code>data_test</code>
 </li>

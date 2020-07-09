@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Draws and aligns decision tree and heatmap. — heat_tree" />
-<meta property="og:description" content="Draws and aligns decision tree and heatmap." />
+<meta property="og:description" content="heat_tree() alias." />
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png" />
 <meta property="og:image:alt" content="treeheatr" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">treeheatr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -126,16 +126,16 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Draws and aligns decision tree and heatmap.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/trang1618/treeheatr/blob/master/R/heat_tree.R'><code>R/heat_tree.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/trang1618/treeheatr/blob/master/R/heat_tree.R'><code>R/heat_tree.R</code></a>, <a href='https://github.com/trang1618/treeheatr/blob/master/R/treeheatr.R'><code>R/treeheatr.R</code></a></small>
     <div class="hidden name"><code>heat_tree.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Draws and aligns decision tree and heatmap.</p>
+    <p>heat_tree() alias.</p>
     </div>
 
     <pre class="usage"><span class='fu'>heat_tree</span>(
-  <span class='no'>data</span>,
+  <span class='no'>x</span>,
   <span class='no'>target_lab</span>,
   <span class='kw'>data_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classification"</span>, <span class='st'>"regression"</span>),
@@ -145,7 +145,25 @@
   <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='no'>target_lab</span>,
   <span class='kw'>clust_samps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>clust_target</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>custom_layout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>show</span> <span class='kw'>=</span> <span class='st'>"heat-tree"</span>,
+  <span class='kw'>heat_rel_height</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
+  <span class='kw'>lev_fac</span> <span class='kw'>=</span> <span class='fl'>1.3</span>,
+  <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='no'>...</span>
+)
+
+<span class='fu'>treeheatr</span>(
+  <span class='no'>x</span>,
+  <span class='no'>target_lab</span>,
+  <span class='kw'>data_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classification"</span>, <span class='st'>"regression"</span>),
+  <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_lab_disp</span> <span class='kw'>=</span> <span class='no'>target_lab</span>,
+  <span class='kw'>clust_samps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>clust_target</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>custom_layout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>show</span> <span class='kw'>=</span> <span class='st'>"heat-tree"</span>,
   <span class='kw'>heat_rel_height</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
@@ -158,8 +176,11 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>Tidy dataset.</p></td>
+      <th>x</th>
+      <td><p>Dataframe or a `party` or `partynode` object representing a custom tree.
+If a dataframe is supplied, conditional inference tree is computed.
+If a custom tree is supplied, it must follow the partykit syntax:
+https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf</p></td>
     </tr>
     <tr>
       <th>target_lab</th>
@@ -167,7 +188,8 @@
     </tr>
     <tr>
       <th>data_test</th>
-      <td><p>Tidy test dataset. If NULL, heatmap displays (training) `data`.</p></td>
+      <td><p>Tidy test dataset. Required if `x` is a `partynode` object.
+If NULL, heatmap displays (training) data `x`.</p></td>
     </tr>
     <tr>
       <th>task</th>
@@ -204,12 +226,6 @@ among samples within each leaf node.</p></td>
       <th>clust_target</th>
       <td><p>Logical. If TRUE, target/label is included in hierarchical clustering
 of samples within each leaf node and might yield a more interpretable heatmap.</p></td>
-    </tr>
-    <tr>
-      <th>custom_tree</th>
-      <td><p>Custom tree with the partykit syntax.
-https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-If NULL, a conditional inference tree is computed.</p></td>
     </tr>
     <tr>
       <th>custom_layout</th>
@@ -249,12 +265,18 @@ recommended to range from 0.001 to 0.01.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>heat_tree</span>(<span class='no'>penguins</span>, <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'species'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to min; returning Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to min; returning Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='img'><img src='heat_tree-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'>heat_tree</span>(
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>galaxy</span>[<span class='fl'>1</span>:<span class='fl'>100</span>, ],
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>galaxy</span>[<span class='fl'>1</span>:<span class='fl'>100</span>, ],
   <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'target'</span>,
   <span class='kw'>task</span> <span class='kw'>=</span> <span class='st'>'regression'</span>,
   <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: binary variable(s) 3 treated as interval scaled</span></div><div class='img'><img src='heat_tree-2.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+  <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: binary variable(s) 4 treated as interval scaled</span></div><div class='img'><img src='heat_tree-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>treeheatr</span>(<span class='no'>penguins</span>, <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'species'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to min; returning Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to min; returning Inf</span></div><div class='output co'>#&gt; <span class='warning'>Warning: no non-missing arguments to max; returning -Inf</span></div><div class='img'><img src='heat_tree-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>treeheatr</span>(
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>galaxy</span>[<span class='fl'>1</span>:<span class='fl'>100</span>, ],
+  <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'target'</span>,
+  <span class='kw'>task</span> <span class='kw'>=</span> <span class='st'>'regression'</span>,
+  <span class='kw'>terminal_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>tree_space_bottom</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: binary variable(s) 4 treated as interval scaled</span></div><div class='img'><img src='heat_tree-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

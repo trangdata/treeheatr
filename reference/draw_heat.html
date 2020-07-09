@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">treeheatr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -145,7 +145,6 @@
   <span class='kw'>feats</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>show_all_feats</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>p_thres</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>custom_tree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>cont_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>cate_legend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>cont_cols</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='no'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span>,
@@ -210,12 +209,6 @@ If NULL, display features of which P values are less than `p_thres`.</p></td>
       <td><p>Numeric value indicating the p-value threshold of feature importance.
 Feature with p-values computed from the decision tree below this value
 will be displayed on the heatmap.</p></td>
-    </tr>
-    <tr>
-      <th>custom_tree</th>
-      <td><p>Custom tree with the partykit syntax.
-https://cran.r-project.org/web/packages/partykit/vignettes/partykit.pdf
-If NULL, a conditional inference tree is computed.</p></td>
     </tr>
     <tr>
       <th>cont_legend</th>
