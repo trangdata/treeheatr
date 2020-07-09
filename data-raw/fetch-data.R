@@ -1,4 +1,5 @@
 library(pmlblite)
+library(dplyr)
 
 wine_quality_red <- pmlblite::fetch_data('wine-quality-red')
 # mushroom <- pmlblite::fetch_data('mushroom')
@@ -27,6 +28,7 @@ train_covid <- train_covid_raw %>%
     Lymphocyte = '(%)lymphocyte',
     outcome = Type2
   ) %>%
+  mutate(outcome = as.factor(outcome)) %>%
   na.omit()
 
 test_covid <- test_covid_raw %>%
@@ -35,7 +37,8 @@ test_covid <- test_covid_raw %>%
     hs_CRP = 'High sensitivity C-reactive protein',
     Lymphocyte = '(%)lymphocyte',
     'outcome'
-  )
+  ) %>%
+  mutate(outcome = as.factor(outcome))
 
 data(wine, package = 'rattle')
 
@@ -45,4 +48,4 @@ usethis::use_data(wine_quality_red, diabetes,
                   overwrite = TRUE)
 
 # cat(colnames(test_covid), sep = '}, \\code{')
-# usethis::use_data(train_covid, overwrite = TRUE)
+# usethis::use_data(train_covid, test_covid, overwrite = TRUE)
