@@ -39,7 +39,6 @@ reference:
 - contents:
   - penguins
   - diabetes
-  - titanic
   - wine
   - wine_quality_red
   - galaxy
