@@ -11,6 +11,9 @@ get_cols(my_cols, task, guide = FALSE)
 
 \item{task}{Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).}
+
+\item{guide}{A function used to create a guide or its name.
+Inherit from [`ggplot2::guides()`](https://ggplot2.tidyverse.org/reference/guides.html).}
 }
 \description{
 Get color functions from character vectors

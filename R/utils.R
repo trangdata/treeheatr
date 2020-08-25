@@ -34,15 +34,17 @@
 
 #' Get color functions from character vectors
 #' @param my_cols Character vectors of different hex values
+#' @param guide A function used to create a guide or its name.
+#' Inherit from [`ggplot2::guides()`](https://ggplot2.tidyverse.org/reference/guides.html).
 #' @inheritParams heat_tree
 #'
 get_cols <- function(my_cols, task, guide = FALSE) {
-  vir_opts <- list(option = 'A', begin = 0.3, end = 0.9, drop = FALSE)
+  vir_opts <- list(option = 'A', begin = 0.3, end = 0.9)
   my_cols <- if (!is.null(my_cols)){
     my_cols <- do.call(ggplot2::scale_fill_manual, list(values = my_cols, guide = guide, drop = FALSE))
   } else {
     switch(task,
-           classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),
+           classification = do.call(ggplot2::scale_fill_viridis_d, c(vir_opts, drop = FALSE)),
            regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts))
   }
   my_cols
