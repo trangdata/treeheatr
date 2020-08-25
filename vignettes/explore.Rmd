@@ -109,9 +109,7 @@ As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020
 # build tree using rpart:
 x <- partykit::as.party(rpart::rpart(Outcome ~ ., data = train_covid))
 
-heat_tree(
-  x = x,
-  label_map = c(`1` = 'Deceased', `0` = 'Survived'))
+heat_tree(x = x, label_map = c(`1` = 'Deceased', `0` = 'Survived'))
 ```
 
 ### Manually define your tree with `partysplit` and `partynode`
@@ -182,6 +180,22 @@ heat_tree(
   lev_fac = 3)
 ```
 
+## Regression
+
+In general, compared to classification, regression task is more difficult to interpret with a decision tree.
+However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes.
+Also, removing the terminal node label may show the groups better.
+Here's an example:
+
+
+```{r fig.height=4, fig.width=7, warning=F, message=F}
+heat_tree(x = galaxy,
+          target_lab = 'target',
+          task = 'regression',
+          terminal_vars = NULL,
+          tree_space_bottom = 0)
+```
+
 ## Smart node layout
 
 These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size.
@@ -219,20 +233,4 @@ Details on the strengths and weaknesses of different types of data transformatio
 
 We highly recommend that, when dealing with mixed feature types, the user supply `feat_types` to indicate whether a feature should be considered 'numeric' (continuous) or 'factor' (categorical) as shown below.
 When `feat_types` is not specified, **treeheatr** automatically inferred each column type from the original dataset.
-
-## Regression
-
-In general, compared to classification, regression task is more difficult to interpret with a decision tree.
-However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes.
-Also, removing the terminal node label may show the groups better.
-Here's an example:
-
-
-```{r fig.height=4, fig.width=7, warning=F, message=F}
-heat_tree(x = galaxy,
-          target_lab = 'target',
-          task = 'regression',
-          terminal_vars = NULL,
-          tree_space_bottom = 0)
-```
 

@@ -36,10 +36,10 @@
 #' @param my_cols Character vectors of different hex values
 #' @inheritParams heat_tree
 #'
-get_cols <- function(my_cols, task) {
-  vir_opts <- list(option = 'A', begin = 0.3, end = 0.9, guide = FALSE)
+get_cols <- function(my_cols, task, guide = FALSE) {
+  vir_opts <- list(option = 'A', begin = 0.3, end = 0.9, drop = FALSE)
   my_cols <- if (!is.null(my_cols)){
-    my_cols <- do.call(ggplot2::scale_fill_manual, list(values = my_cols, guide = FALSE))
+    my_cols <- do.call(ggplot2::scale_fill_manual, list(values = my_cols, guide = guide, drop = FALSE))
   } else {
     switch(task,
            classification = do.call(ggplot2::scale_fill_viridis_d, vir_opts),

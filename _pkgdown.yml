@@ -16,13 +16,15 @@ reference:
     Package primary functions
 - contents:
   - heat_tree
-  - compute_tree
+  - treeheatr
   - draw_tree
   - draw_heat
 - title: "Utility functions"
   desc: >
     Package primary functions
 - contents:
+  - get_fit
+  - compute_tree
   - prediction_df
   - clust_samp_func
   - clust_feat_func
