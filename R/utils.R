@@ -44,8 +44,8 @@ get_cols <- function(my_cols, task, guide = FALSE) {
     my_cols <- do.call(ggplot2::scale_fill_manual, list(values = my_cols, guide = guide, drop = FALSE))
   } else {
     switch(task,
-           classification = do.call(ggplot2::scale_fill_viridis_d, c(vir_opts, drop = FALSE)),
-           regression = do.call(ggplot2::scale_fill_viridis_c, vir_opts))
+           classification = do.call(ggplot2::scale_fill_viridis_d, c(vir_opts, guide = guide, drop = FALSE)),
+           regression = do.call(ggplot2::scale_fill_viridis_c, c(vir_opts, guide = guide)))
   }
   my_cols
 }

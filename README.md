@@ -55,6 +55,27 @@ heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 
 ![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
+## Citing treeheatr
+
+If you use treeheatr in a scientific publication, please consider citing
+the following paper:
+
+Le TT, Moore JH. [treeheatr: an R package for interpretable decision
+tree visualizations](https://doi.org/10.1093/bioinformatics/btaa662).
+*Bioinformatics*. 2020 Jan 1.
+
+BibTeX entry:
+
+``` bibtex
+@article{le2020treeheatr,
+  title={treeheatr: an R package for interpretable decision tree visualizations},
+  author={Le, Trang T and Moore, Jason H},
+  journal={Bioinformatics},
+  year={2020},
+  doi="10.1093/bioinformatics/btaa662"
+}
+```
+
 ## How to Use
 
 **treeheatr** incorporates a heatmap at the terminal node of your
