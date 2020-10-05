@@ -134,7 +134,7 @@
     <p>Get color functions from character vectors</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_cols</span>(<span class='no'>my_cols</span>, <span class='no'>task</span>)</pre>
+    <pre class="usage"><span class='fu'>get_cols</span><span class='op'>(</span><span class='va'>my_cols</span>, <span class='va'>task</span>, guide <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +147,11 @@
       <th>task</th>
       <td><p>Character string indicating the type of problem,
 either 'classification' (categorical outcome) or 'regression' (continuous outcome).</p></td>
+    </tr>
+    <tr>
+      <th>guide</th>
+      <td><p>A function used to create a guide or its name.
+Inherit from [`ggplot2::guides()`](https://ggplot2.tidyverse.org/reference/guides.html).</p></td>
     </tr>
     </table>
 
@@ -166,7 +171,7 @@ either 'classification' (categorical outcome) or 'regression' (continuous outcom
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

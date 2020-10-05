@@ -134,19 +134,19 @@
     <p>Compute decision tree from data set</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compute_tree</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>data_test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>task</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"classification"</span>, <span class='st'>"regression"</span>),
-  <span class='kw'>feat_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>label_map</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>clust_samps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>clust_target</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>custom_layout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lev_fac</span> <span class='kw'>=</span> <span class='fl'>1.3</span>,
-  <span class='kw'>panel_space</span> <span class='kw'>=</span> <span class='fl'>0.001</span>
-)</pre>
+    <pre class="usage"><span class='fu'>compute_tree</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  data_test <span class='op'>=</span> <span class='cn'>NULL</span>,
+  target_lab <span class='op'>=</span> <span class='cn'>NULL</span>,
+  task <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"classification"</span>, <span class='st'>"regression"</span><span class='op'>)</span>,
+  feat_types <span class='op'>=</span> <span class='cn'>NULL</span>,
+  label_map <span class='op'>=</span> <span class='cn'>NULL</span>,
+  clust_samps <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  clust_target <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  custom_layout <span class='op'>=</span> <span class='cn'>NULL</span>,
+  lev_fac <span class='op'>=</span> <span class='fl'>1.3</span>,
+  panel_space <span class='op'>=</span> <span class='fl'>0.001</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,9 +217,9 @@ recommended to range from 0.001 to 0.01.</p></td>
 fit, estimates, smart layout and terminal data.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>fit_tree</span> <span class='kw'>&lt;-</span> <span class='fu'>compute_tree</span>(<span class='no'>penguins</span>, <span class='kw'>target_lab</span> <span class='kw'>=</span> <span class='st'>'species'</span>)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'seriation':</span>
-#&gt; <span class='message'>  method         from </span>
-#&gt; <span class='message'>  reorder.hclust gclus</span></div><div class='input'><span class='no'>fit_tree</span>$<span class='no'>fit</span></div><div class='output co'>#&gt; 
+    <pre class="examples"><div class='input'><span class='va'>fit_tree</span> <span class='op'>&lt;-</span> <span class='fu'>compute_tree</span><span class='op'>(</span><span class='va'>penguins</span>, target_lab <span class='op'>=</span> <span class='st'>'species'</span><span class='op'>)</span>
+<span class='va'>fit_tree</span><span class='op'>$</span><span class='va'>fit</span>
+</div><div class='output co'>#&gt; 
 #&gt; Model formula:
 #&gt; species ~ island + culmen_length_mm + culmen_depth_mm + flipper_length_mm + 
 #&gt;     body_mass_g + sex
@@ -238,18 +238,20 @@ fit, estimates, smart layout and terminal data.</p>
 #&gt; |   |   [11] flipper_length_mm &gt; 203: Gentoo (n = 123, err = 0.0%)
 #&gt; 
 #&gt; Number of inner nodes:    5
-#&gt; Number of terminal nodes: 6</div><div class='input'><span class='no'>fit_tree</span>$<span class='no'>layout</span></div><div class='output co'>#&gt;    id         x   y
-#&gt; 1   1 0.5310957 1.0
-#&gt; 2   2 0.3348589 0.8
-#&gt; 3   3 0.2261105 0.6
-#&gt; 4   7 0.7273325 0.8
-#&gt; 5   8 0.6022355 0.6
-#&gt; 6   4 0.1446221 0.0
-#&gt; 7   5 0.3075988 0.0
-#&gt; 8   6 0.4185116 0.0
-#&gt; 9   9 0.5684724 0.0
-#&gt; 10 10 0.6359985 0.0
-#&gt; 11 11 0.8235610 0.0</div><div class='input'><span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>fit_tree</span>$<span class='no'>term_dat</span>, - <span class='fu'>contains</span>(<span class='st'>'nodedata'</span>))</div><div class='output co'>#&gt;   id parent birth_order breaks_label info    info_list splitvar level kids
+#&gt; Number of terminal nodes: 6</div><div class='input'><span class='va'>fit_tree</span><span class='op'>$</span><span class='va'>layout</span>
+</div><div class='output co'>#&gt;    id         x   y
+#&gt; 1   1 0.5274183 1.0
+#&gt; 2   2 0.3289129 0.8
+#&gt; 3   3 0.2194596 0.6
+#&gt; 4   7 0.7259236 0.8
+#&gt; 5   8 0.6000531 0.6
+#&gt; 6   4 0.1400150 0.0
+#&gt; 7   5 0.2989042 0.0
+#&gt; 8   6 0.4131078 0.0
+#&gt; 9   9 0.5660389 0.0
+#&gt; 10 10 0.6340674 0.0
+#&gt; 11 11 0.8227470 0.0</div><div class='input'><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>fit_tree</span><span class='op'>$</span><span class='va'>term_dat</span>, <span class='op'>-</span> <span class='fu'>contains</span><span class='op'>(</span><span class='st'>'nodedata'</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   id parent birth_order breaks_label info    info_list splitvar level kids
 #&gt; 1  4      3           1 NA &lt;= NA....   NA c(0.8181....     &lt;NA&gt;     3    0
 #&gt; 2  5      3           2 NA &gt;  NA....   NA           NA     &lt;NA&gt;     3    0
 #&gt; 3  6      2           2 NA &gt;  NA....   NA c(63, 1.....     &lt;NA&gt;     3    0
@@ -257,12 +259,12 @@ fit, estimates, smart layout and terminal data.</p>
 #&gt; 5 10      8           2 NA &gt;  NA....   NA           NA     &lt;NA&gt;     3    0
 #&gt; 6 11      7           2 NA &gt;  NA....   NA           NA     &lt;NA&gt;     3    0
 #&gt;   nodesize      p.value horizontal  x_parent y_parent     y_hat   n         x y
-#&gt; 1      100 6.811624e-01      FALSE 0.1666667      0.6    Adelie 100 0.1446221 0
-#&gt; 2       12           NA      FALSE 0.1666667      0.6    Adelie  12 0.3075988 0
-#&gt; 3       64 1.240239e-14      FALSE 0.2500000      0.8 Chinstrap  64 0.4185116 0
-#&gt; 4       38           NA      FALSE 0.6666667      0.6    Adelie  39 0.5684724 0
-#&gt; 5        7           NA      FALSE 0.6666667      0.6    Adelie   7 0.6359985 0
-#&gt; 6      123           NA      FALSE 0.7500000      0.8    Gentoo 122 0.8235610 0
+#&gt; 1      100 6.811624e-01      FALSE 0.1666667      0.6    Adelie  94 0.1400150 0
+#&gt; 2       12           NA      FALSE 0.1666667      0.6    Adelie  12 0.2989042 0
+#&gt; 3       64 1.240239e-14      FALSE 0.2500000      0.8 Chinstrap  64 0.4131078 0
+#&gt; 4       38           NA      FALSE 0.6666667      0.6    Adelie  38 0.5660389 0
+#&gt; 5        7           NA      FALSE 0.6666667      0.6    Adelie   7 0.6340674 0
+#&gt; 6      123           NA      FALSE 0.7500000      0.8    Gentoo 119 0.8227470 0
 #&gt;   term_node
 #&gt; 1    Adelie
 #&gt; 2    Adelie
@@ -286,7 +288,7 @@ fit, estimates, smart layout and terminal data.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
