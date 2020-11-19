@@ -4,6 +4,7 @@
 .Ruserdata
 .DS_Store
 .Rprofile
+.Renviron
 inst/doc
 doc
 docs/
