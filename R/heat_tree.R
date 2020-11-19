@@ -41,13 +41,14 @@
 #' @examples
 #' heat_tree(penguins, target_lab = 'species')
 #'
+#' \donttest{
 #' heat_tree(
 #'   x = galaxy[1:100, ],
 #'   target_lab = 'target',
 #'   task = 'regression',
 #'   terminal_vars = NULL,
 #'   tree_space_bottom = 0)
-#'
+#' }
 heat_tree <- function(
   x, target_lab = NULL, data_test = NULL, task = c('classification', 'regression'),
   feat_types = NULL, label_map = NULL, target_cols = NULL, target_legend = FALSE,

@@ -69,7 +69,7 @@ compute_tree <- function(
 #'
 prediction_df <- function(fit, task, clust_samps, clust_target){
   data <- fit$data_test %||% fit$data
-  data <- na.omit(data)
+  data <- stats::na.omit(data)
   node_pred <- stats::predict(fit, newdata = data, type = 'node')
   y_pred <- stats::predict(fit, newdata = data, type = 'response', simplify = FALSE) %>%
     .simplify_pred(id = node_pred, nam = as.character(node_pred))
