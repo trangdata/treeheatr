@@ -68,7 +68,7 @@ heat_tree(
       list(size = 8),
       list(size = 6)),
     id = 'inner'),
-  terminal_vars = list(size = 0),
+  # terminal_vars = list(size = 0),
   cont_legend = TRUE, cate_legend = TRUE,
   edge_vars = list(size = 1, color = 'grey'))
 ```
