@@ -46,7 +46,7 @@ remotes::install_github('trang1618/treeheatr')
 
 Classification of different types of penguin species.
 
-```{r, fig.height=3.5, message=FALSE, warning=FALSE}
+```{r, fig.height=3.5, message=FALSE, warning=FALSE, dpi = 200}
 library(treeheatr)
 
 heat_tree(penguins, target_lab = 'species')
@@ -56,7 +56,7 @@ heat_tree(penguins, target_lab = 'species')
 
 Classification of different cultivars of wine.
 
-```{r fig.height=3.5}
+```{r fig.height=3.5, dpi = 200}
 heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 ```
 
