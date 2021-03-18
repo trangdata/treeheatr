@@ -1,5 +1,5 @@
 ---
-title: 'Explore **treeheatr**'
+title: 'Explore treeheatr'
 author: 'Trang Le'
 date: '`r Sys.Date()`'
 output: rmarkdown::html_vignette
