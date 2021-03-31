@@ -60,10 +60,8 @@ navbar:
       text: Vignette
       href: articles/explore.html
     github:
-      icon: fa-github
+      icon: fa-github fab
       href: https://github.com/trang1618/treeheatr
     twitter:
-      icon: fa-twitter
+      icon: fa-twitter fab
       href: https://twitter.com/trang1618
-
-
