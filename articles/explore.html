@@ -44,7 +44,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa-home"></span>
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -61,13 +61,13 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/trang1618/treeheatr">
-    <span class="fas fa-github fab"></span>
+    <span class="fa fa-github fab"></span>
      
   </a>
 </li>
 <li>
   <a href="https://twitter.com/trang1618">
-    <span class="fas fa-twitter fab"></span>
+    <span class="fa fa-twitter fab"></span>
      
   </a>
 </li>
@@ -87,7 +87,7 @@
       <h1 data-toc-skip>Explore treeheatr</h1>
                         <h4 class="author">Trang Le</h4>
             
-            <h4 class="date">2021-03-31</h4>
+            <h4 class="date">2021-07-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/trang1618/treeheatr/blob/master/vignettes/explore.Rmd"><code>vignettes/explore.Rmd</code></a></small>
       <div class="hidden name"><code>explore.Rmd</code></div>
@@ -106,7 +106,14 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># To avoid warnings, for now, apply na.omit():</span>
 <span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span>
-<span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
+<span class="co">#&gt; "none")` instead.</span>
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span>
+
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
 <p>But we can adjust a few graphical parameters. We can also add a custom layout for a subset of the nodes by specifying it in the <code>custom_layout</code> parameter. And we can relax the p value threshold <code>p_thres</code> to include more features that might be less important in classifying the samples but still included in the decision tree, or set <code>show_all_feats = TRUE</code> to include all features, even the ones that were not used to build the tree.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -116,7 +123,14 @@
   <span class="co"># moving node 3 a bit to the left:</span>
   custom_layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="fl">0.1</span>, y <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, 
   show_all_feats <span class="op">=</span> <span class="cn">TRUE</span>,
-  panel_space <span class="op">=</span> <span class="fl">0.05</span>, target_space <span class="op">=</span> <span class="fl">0.2</span>, tree_space_bottom <span class="op">=</span> <span class="fl">0.1</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></code></pre></div>
+  panel_space <span class="op">=</span> <span class="fl">0.05</span>, target_space <span class="op">=</span> <span class="fl">0.2</span>, tree_space_bottom <span class="op">=</span> <span class="fl">0.1</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
+<span class="co">#&gt; "none")` instead.</span>
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span>
+
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>We can also customize our heattree by passing parameters through to different <strong>ggparty</strong> geoms. These list parameters are named <code>*_vars</code>. For example:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -136,19 +150,41 @@
     id <span class="op">=</span> <span class="st">'inner'</span><span class="op">)</span>,
   <span class="co"># terminal_vars = list(size = 0),</span>
   cont_legend <span class="op">=</span> <span class="cn">TRUE</span>, cate_legend <span class="op">=</span> <span class="cn">TRUE</span>,
-  edge_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  edge_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
+<span class="co">#&gt; "none")` instead.</span>
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>What if we only want to show the decision tree? We can toggle this option using the <code>show</code> argument, which takes either <code>'heat-tree'</code>, <code>'heat-only'</code> or <code>'tree-only'</code>. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, show <span class="op">=</span> <span class="st">'tree-only'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, show <span class="op">=</span> <span class="st">'tree-only'</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
+<span class="co">#&gt; "none")` instead.</span>
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span>
+
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>We can also choose to display other features in the heatmap that may not be in the tree.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'body_mass_g'</span>, <span class="st">'sex'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'body_mass_g'</span>, <span class="st">'sex'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
+<span class="co">#&gt; "none")` instead.</span>
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span>
+
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p><code>feats = NA</code> displays the tree with only the target label, which may be simple and still helpful:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="cn">NA</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="cn">NA</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
+<span class="co">#&gt; "none")` instead.</span>
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
 <div id="youre-the-warren-beatty-of-your-heat_tree" class="section level2">
@@ -167,7 +203,14 @@
 <span class="co"># build tree using rpart:</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html">as.party</a></span><span class="op">(</span><span class="fu">rpart</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart</a></span><span class="op">(</span><span class="va">Outcome</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">train_covid</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Deceased'</span>, `0` <span class="op">=</span> <span class="st">'Survived'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Deceased'</span>, `0` <span class="op">=</span> <span class="st">'Survived'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
+<span class="co">#&gt; "none")` instead.</span>
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span>
+
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 <div id="manually-define-your-tree-with-partysplit-and-partynode" class="section level3">
@@ -230,7 +273,14 @@
   data_test <span class="op">=</span> <span class="va">test_covid</span>,
   target_lab <span class="op">=</span> <span class="st">'Outcome'</span>,
   label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Death'</span>, `0` <span class="op">=</span> <span class="st">'Survival'</span><span class="op">)</span>,
-  lev_fac <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+  lev_fac <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
+<span class="co">#&gt; "none")` instead.</span>
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span>
+
+<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
+<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
 <div id="regression" class="section level2">
