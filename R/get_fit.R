@@ -112,10 +112,12 @@ prep_data <- function(
     data[, target_lab] <- as.factor(data[, target_lab])
 
   # convert character features to categorical:
-  data <- dplyr::mutate_if(data, is.character, as.factor)
+  data <- data %>%
+    mutate_if(is.logical, ~ ifelse(.x, "Yes", "No")) %>%
+    mutate_if(is.character, as.factor)
 
   if (any(feat_types[names(which(sapply(data, class) == 'character'))] != 'factor'))
-    warning('Character variables are considered categorical.')
+    warning('Character and variables are considered categorical.')
 
   data
 }
