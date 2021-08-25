@@ -107,8 +107,6 @@
 <code class="sourceCode R"><span class="co"># To avoid warnings, for now, apply na.omit():</span>
 <span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span>
 <span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span>
-<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
-<span class="co">#&gt; "none")` instead.</span>
 <span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
 <span class="co">#&gt; use `guide = "none"` instead.</span>
 
@@ -124,8 +122,6 @@
   custom_layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="fl">0.1</span>, y <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, 
   show_all_feats <span class="op">=</span> <span class="cn">TRUE</span>,
   panel_space <span class="op">=</span> <span class="fl">0.05</span>, target_space <span class="op">=</span> <span class="fl">0.2</span>, tree_space_bottom <span class="op">=</span> <span class="fl">0.1</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>
-<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
-<span class="co">#&gt; "none")` instead.</span>
 <span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
 <span class="co">#&gt; use `guide = "none"` instead.</span>
 
@@ -151,16 +147,12 @@
   <span class="co"># terminal_vars = list(size = 0),</span>
   cont_legend <span class="op">=</span> <span class="cn">TRUE</span>, cate_legend <span class="op">=</span> <span class="cn">TRUE</span>,
   edge_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
-<span class="co">#&gt; "none")` instead.</span>
 <span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
 <span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>What if we only want to show the decision tree? We can toggle this option using the <code>show</code> argument, which takes either <code>'heat-tree'</code>, <code>'heat-only'</code> or <code>'tree-only'</code>. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, show <span class="op">=</span> <span class="st">'tree-only'</span><span class="op">)</span>
-<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
-<span class="co">#&gt; "none")` instead.</span>
 <span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
 <span class="co">#&gt; use `guide = "none"` instead.</span>
 
@@ -170,8 +162,6 @@
 <p>We can also choose to display other features in the heatmap that may not be in the tree.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'body_mass_g'</span>, <span class="st">'sex'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
-<span class="co">#&gt; "none")` instead.</span>
 <span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
 <span class="co">#&gt; use `guide = "none"` instead.</span>
 
@@ -181,8 +171,6 @@
 <p><code>feats = NA</code> displays the tree with only the target label, which may be simple and still helpful:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="cn">NA</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
-<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
-<span class="co">#&gt; "none")` instead.</span>
 <span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
 <span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
@@ -204,8 +192,6 @@
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html">as.party</a></span><span class="op">(</span><span class="fu">rpart</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart</a></span><span class="op">(</span><span class="va">Outcome</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">train_covid</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Deceased'</span>, `0` <span class="op">=</span> <span class="st">'Survived'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
-<span class="co">#&gt; "none")` instead.</span>
 <span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
 <span class="co">#&gt; use `guide = "none"` instead.</span>
 
@@ -274,8 +260,6 @@
   target_lab <span class="op">=</span> <span class="st">'Outcome'</span>,
   label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Death'</span>, `0` <span class="op">=</span> <span class="st">'Survival'</span><span class="op">)</span>,
   lev_fac <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; Warning: `guides(&lt;scale&gt; = FALSE)` is deprecated. Please use `guides(&lt;scale&gt; =</span>
-<span class="co">#&gt; "none")` instead.</span>
 <span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
 <span class="co">#&gt; use `guide = "none"` instead.</span>
 
