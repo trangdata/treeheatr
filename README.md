@@ -37,6 +37,10 @@ remotes::install_github('trang1618/treeheatr')
 
 ### Penguin dataset
 
+These data were collected and made available by [Dr. Kristen
+Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php)
+and the [Palmer Station, Antarctica LTER](https://pal.lternet.edu/).
+
 Classification of different types of penguin species.
 
 ``` r
@@ -54,6 +58,12 @@ Classification of different cultivars of wine.
 ``` r
 heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 ```
+
+    ## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
+    ## use `guide = "none"` instead.
+
+    ## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
+    ## use `guide = "none"` instead.
 
 ![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 

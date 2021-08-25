@@ -74,7 +74,7 @@ draw_tree <- function(
       expand = expansion(c(0,0), c(tree_space_bottom, tree_space_top))) +
     labs(title = title) +
     coord_cartesian(xlim = c(0, 1)) +
-    guides(fill = FALSE) +
+    guides(fill = "none") +
     {if (print_eval) annotate(
       'text', x = x_eval, y = y_eval, label = text_eval,
       hjust = 0, size = edge_text_vars$size %||% 5)}
