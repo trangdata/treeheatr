@@ -35,9 +35,10 @@ Suggests:
     knitr,
     rmarkdown,
     rpart,
-    testthat
+    testthat (>= 3.0.0)
 URL:
     https://trang1618.github.io/treeheatr/index.html,
     https://trang1618.github.io/treeheatr-manuscript/
 BugReports: https://github.com/trang1618/treeheatr/issues
 VignetteBuilder: knitr
+Config/testthat/edition: 3
