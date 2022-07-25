@@ -33,6 +33,10 @@ reference:
   - position_nodes
   - prepare_feats
   - eval_tree
+  - align_plots
+  - get_cols
+  - get_disp_feats
+  - prep_data
 - title: "Datasets"
   desc: >
     Attached datasets available for use via lazy-loading
