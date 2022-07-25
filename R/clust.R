@@ -9,13 +9,13 @@
 #'
 #' @return Dataframe of reordered original dataset when clust_samps == TRUE.
 #'
-clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE){
+clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE) {
   df <- dat[dat$node_id == leaf_node, ]
 
-  if (clust_samps && length(clust_vec) > 1 && nrow(df) > 1){
+  if (clust_samps && length(clust_vec) > 1 && nrow(df) > 1) {
     new_samp_order <- df[, clust_vec] %>%
-      cluster::daisy(metric = 'gower') %>%
-      seriation::seriate(method = 'ARSA') %>%
+      cluster::daisy(metric = "gower") %>%
+      seriation::seriate(method = "ARSA") %>%
       seriation::get_order()
 
     df[new_samp_order, ] # return ordered dataframe
@@ -40,13 +40,12 @@ clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE
 #'
 #' @return Character vector of reordered features when `clust_feats == TRUE`.
 #'
-clust_feat_func <- function(dat, clust_vec, clust_feats = TRUE){
-
-  if (clust_feats){
+clust_feat_func <- function(dat, clust_vec, clust_feats = TRUE) {
+  if (clust_feats) {
     new_feat_order <- dat[, clust_vec] %>%
       as.matrix() %>%
       t() %>%
-      cluster::daisy(metric = 'gower') %>%
+      cluster::daisy(metric = "gower") %>%
       seriation::seriate() %>%
       seriation::get_order()
 

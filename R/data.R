@@ -106,5 +106,3 @@
 #' https://github.com/HAIRLAB/Pre_Surv_COVID_19
 #'
 "test_covid"
-
-
