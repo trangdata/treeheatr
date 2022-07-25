@@ -24,6 +24,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -36,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">treeheatr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
       </span>
     </div>
 
@@ -54,19 +56,16 @@
 <li>
   <a href="../articles/explore.html">Vignette</a>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/trang1618/treeheatr">
+  <a href="https://github.com/trang1618/treeheatr" class="external-link">
     <span class="fa fa-github fab"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/trang1618">
+  <a href="https://twitter.com/trang1618" class="external-link">
     <span class="fa fa-twitter fab"></span>
      
   </a>
@@ -85,11 +84,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Explore treeheatr</h1>
-                        <h4 class="author">Trang Le</h4>
+                        <h4 data-toc-skip class="author">Trang Le</h4>
             
-            <h4 class="date">2021-09-13</h4>
+            <h4 data-toc-skip class="date">2022-07-25</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/trang1618/treeheatr/blob/master/vignettes/explore.Rmd"><code>vignettes/explore.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/trang1618/treeheatr/blob/HEAD/vignettes/explore.Rmd" class="external-link"><code>vignettes/explore.Rmd</code></a></small>
       <div class="hidden name"><code>explore.Rmd</code></div>
 
     </div>
@@ -98,140 +97,123 @@
     
 <p><strong>treeheatr</strong> displays a more interpretable decision tree visualization by integrating a heatmap at its terminal nodes. Let’s explore the package <strong>treeheatr</strong> a little deeper and see what it can do!</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://trang1618.github.io/treeheatr/index.html">treeheatr</a></span><span class="op">)</span></code></pre></div>
-<div id="lets-begin" class="section level2">
-<h2 class="hasAnchor">
-<a href="#lets-begin" class="anchor"></a>Let’s begin</h2>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://trang1618.github.io/treeheatr/index.html" class="external-link">treeheatr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="lets-begin">Let’s begin<a class="anchor" aria-label="anchor" href="#lets-begin"></a>
+</h2>
 <p>with the penguins dataset! Running the <code><a href="../reference/heat_tree.html">heat_tree()</a></code> function can be as simple as:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># To avoid warnings, for now, apply na.omit():</span>
-<span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span>
-<span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span>
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span>
-
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># To avoid warnings, for now, apply na.omit():</span></span>
+<span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span>
+<span><span class="co">#&gt; It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
 <p>But we can adjust a few graphical parameters. We can also add a custom layout for a subset of the nodes by specifying it in the <code>custom_layout</code> parameter. And we can relax the p value threshold <code>p_thres</code> to include more features that might be less important in classifying the samples but still included in the decision tree, or set <code>show_all_feats = TRUE</code> to include all features, even the ones that were not used to build the tree.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>
-  <span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>,
-  target_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'#E69F00'</span>, <span class="st">'#56B4E9'</span>, <span class="st">'#009E73'</span><span class="op">)</span>,
-  <span class="co"># moving node 3 a bit to the left:</span>
-  custom_layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="fl">0.1</span>, y <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, 
-  show_all_feats <span class="op">=</span> <span class="cn">TRUE</span>,
-  panel_space <span class="op">=</span> <span class="fl">0.05</span>, target_space <span class="op">=</span> <span class="fl">0.2</span>, tree_space_bottom <span class="op">=</span> <span class="fl">0.1</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span>
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span>
-
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span></span>
+<span>  <span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>,</span>
+<span>  target_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'#E69F00'</span>, <span class="st">'#56B4E9'</span>, <span class="st">'#009E73'</span><span class="op">)</span>,</span>
+<span>  <span class="co"># moving node 3 a bit to the left:</span></span>
+<span>  custom_layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">3</span>, x <span class="op">=</span> <span class="fl">0.1</span>, y <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, </span>
+<span>  show_all_feats <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  panel_space <span class="op">=</span> <span class="fl">0.05</span>, target_space <span class="op">=</span> <span class="fl">0.2</span>, tree_space_bottom <span class="op">=</span> <span class="fl">0.1</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span>
+<span><span class="co">#&gt; It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>We can also customize our heattree by passing parameters through to different <strong>ggparty</strong> geoms. These list parameters are named <code>*_vars</code>. For example:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>
-  <span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>,
-  par_node_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    label.size <span class="op">=</span> <span class="fl">0.2</span>,
-    label.padding <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">'lines'</span><span class="op">)</span>,
-    line_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">'Node'</span>, <span class="va">id</span><span class="op">)</span><span class="op">)</span>,
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">splitvar</span><span class="op">)</span>,
-      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">'p ='</span>, <span class="fu"><a href="https://rdrr.io/r/base/formatc.html">formatC</a></span><span class="op">(</span><span class="va">p.value</span>, format <span class="op">=</span> <span class="st">'e'</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
-    line_gpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span>,
-    id <span class="op">=</span> <span class="st">'inner'</span><span class="op">)</span>,
-  <span class="co"># terminal_vars = list(size = 0),</span>
-  cont_legend <span class="op">=</span> <span class="cn">TRUE</span>, cate_legend <span class="op">=</span> <span class="cn">TRUE</span>,
-  edge_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span></span>
+<span>  <span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>,</span>
+<span>  par_node_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    label.size <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>    label.padding <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">'lines'</span><span class="op">)</span>,</span>
+<span>    line_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">'Node'</span>, <span class="va">id</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">splitvar</span><span class="op">)</span>,</span>
+<span>      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">'p ='</span>, <span class="fu"><a href="https://rdrr.io/r/base/formatc.html" class="external-link">formatC</a></span><span class="op">(</span><span class="va">p.value</span>, format <span class="op">=</span> <span class="st">'e'</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    line_gpar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    id <span class="op">=</span> <span class="st">'inner'</span><span class="op">)</span>,</span>
+<span>  <span class="co"># terminal_vars = list(size = 0),</span></span>
+<span>  cont_legend <span class="op">=</span> <span class="cn">TRUE</span>, cate_legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  edge_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span></span>
+<span><span class="co">#&gt; use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
 <p>What if we only want to show the decision tree? We can toggle this option using the <code>show</code> argument, which takes either <code>'heat-tree'</code>, <code>'heat-only'</code> or <code>'tree-only'</code>. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, show <span class="op">=</span> <span class="st">'tree-only'</span><span class="op">)</span>
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span>
-
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, show <span class="op">=</span> <span class="st">'tree-only'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span>
+<span><span class="co">#&gt; It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>We can also choose to display other features in the heatmap that may not be in the tree.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'body_mass_g'</span>, <span class="st">'sex'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span>
-
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'body_mass_g'</span>, <span class="st">'sex'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span>
+<span><span class="co">#&gt; It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p><code>feats = NA</code> displays the tree with only the target label, which may be simple and still helpful:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="cn">NA</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="cn">NA</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span></span>
+<span><span class="co">#&gt; use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
-<div id="youre-the-warren-beatty-of-your-heat_tree" class="section level2">
-<h2 class="hasAnchor">
-<a href="#youre-the-warren-beatty-of-your-heat_tree" class="anchor"></a>You’re the Warren Beatty of your <code>heat_tree()</code>
+<div class="section level2">
+<h2 id="youre-the-warren-beatty-of-your-heat_tree">You’re the Warren Beatty of your <code>heat_tree()</code><a class="anchor" aria-label="anchor" href="#youre-the-warren-beatty-of-your-heat_tree"></a>
 </h2>
-<p><em>Anyone got that <a href="https://youtu.be/fyMQ2203pQM?t=82">Food Wishes reference</a>?</em></p>
-<div id="pre-train-your-tree" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pre-train-your-tree" class="anchor"></a>Pre-train your tree</h3>
-<p>If the default conditional tree is not desired, you can create your tree (e.g. with <code>rpart</code>) and wrap <code><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html">as.party()</a></code> around this object to plug into <code><a href="../reference/heat_tree.html">heat_tree()</a></code>. As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a <a href="https://doi.org/10.1038/s42256-020-0180-7">recent study</a>.</p>
+<p><em>Anyone got that <a href="https://youtu.be/fyMQ2203pQM?t=82" class="external-link">Food Wishes reference</a>?</em></p>
+<div class="section level3">
+<h3 id="pre-train-your-tree">Pre-train your tree<a class="anchor" aria-label="anchor" href="#pre-train-your-tree"></a>
+</h3>
+<p>If the default conditional tree is not desired, you can create your tree (e.g. with <code>rpart</code>) and wrap <code><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html" class="external-link">as.party()</a></code> around this object to plug into <code><a href="../reference/heat_tree.html">heat_tree()</a></code>. As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a <a href="https://doi.org/10.1038/s42256-020-0180-7" class="external-link">recent study</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># # same tree as letting `x = train_covid`:</span>
-<span class="co"># x &lt;- partykit::ctree(Outcome ~ ., data = train_covid)</span>
-
-<span class="co"># build tree using rpart:</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html">as.party</a></span><span class="op">(</span><span class="fu">rpart</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart</a></span><span class="op">(</span><span class="va">Outcome</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">train_covid</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Deceased'</span>, `0` <span class="op">=</span> <span class="st">'Survived'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span>
-
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># # same tree as letting `x = train_covid`:</span></span>
+<span><span class="co"># x &lt;- partykit::ctree(Outcome ~ ., data = train_covid)</span></span>
+<span></span>
+<span><span class="co"># build tree using rpart:</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html" class="external-link">as.party</a></span><span class="op">(</span><span class="fu">rpart</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rpart/man/rpart.html" class="external-link">rpart</a></span><span class="op">(</span><span class="va">Outcome</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">train_covid</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Deceased'</span>, `0` <span class="op">=</span> <span class="st">'Survived'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span>
+<span><span class="co">#&gt; It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
-<div id="manually-define-your-tree-with-partysplit-and-partynode" class="section level3">
-<h3 class="hasAnchor">
-<a href="#manually-define-your-tree-with-partysplit-and-partynode" class="anchor"></a>Manually define your tree with <code>partysplit</code> and <code>partynode</code>
+<div class="section level3">
+<h3 id="manually-define-your-tree-with-partysplit-and-partynode">Manually define your tree with <code>partysplit</code> and <code>partynode</code><a class="anchor" aria-label="anchor" href="#manually-define-your-tree-with-partysplit-and-partynode"></a>
 </h3>
-<p>You can also manually define your own tree for the <code>custom_tree</code> argument following the <a href="https://cran.r-project.org/package=partykit/vignettes/partykit.pdf">partykit vignette</a>. Let’s apply the tree structure in <a href="https://www.nature.com/articles/s42256-020-0180-7/figures/2">Figure 2</a> of the original study (only show the training set for now):</p>
+<p>You can also manually define your own tree for the <code>custom_tree</code> argument following the <a href="https://cran.r-project.org/package=partykit/vignettes/partykit.pdf" class="external-link">partykit vignette</a>. Let’s apply the tree structure in <a href="https://www.nature.com/articles/s42256-020-0180-7/figures/2" class="external-link">Figure 2</a> of the original study (only show the training set for now):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://partykit.r-forge.r-project.org/partykit/">partykit</a></span><span class="op">)</span>
-
-<span class="co"># first argument indicates the index of the feature used for splitting</span>
-<span class="va">split_ldh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html">partysplit</a></span><span class="op">(</span><span class="fl">1L</span>, breaks <span class="op">=</span> <span class="fl">365</span><span class="op">)</span>
-<span class="va">split_crp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html">partysplit</a></span><span class="op">(</span><span class="fl">2L</span>, breaks <span class="op">=</span> <span class="fl">41.2</span><span class="op">)</span>
-<span class="va">split_lymp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html">partysplit</a></span><span class="op">(</span><span class="fl">3L</span>, breaks <span class="op">=</span> <span class="fl">14.7</span><span class="op">)</span>
-
-<span class="va">custom_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html">partynode</a></span><span class="op">(</span><span class="fl">1L</span>, split <span class="op">=</span> <span class="va">split_ldh</span> , kids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html">partynode</a></span><span class="op">(</span><span class="fl">2L</span>, split <span class="op">=</span> <span class="va">split_crp</span>, kids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html">partynode</a></span><span class="op">(</span><span class="fl">3L</span>, info <span class="op">=</span> <span class="st">'Survival'</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html">partynode</a></span><span class="op">(</span><span class="fl">4L</span>, split <span class="op">=</span> <span class="va">split_lymp</span>, kids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-      <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html">partynode</a></span><span class="op">(</span><span class="fl">5L</span>, info <span class="op">=</span> <span class="st">'Death'</span><span class="op">)</span>,
-      <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html">partynode</a></span><span class="op">(</span><span class="fl">6L</span>, info <span class="op">=</span> <span class="st">'Survival'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html">partynode</a></span><span class="op">(</span><span class="fl">7L</span>, info <span class="op">=</span> <span class="st">'Death'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="va">custom_tree</span>,
-  data_test <span class="op">=</span> <span class="va">train_covid</span>,
-  print_eval <span class="op">=</span> <span class="cn">FALSE</span>,
-  target_lab <span class="op">=</span> <span class="st">'Outcome'</span>,
-  label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Deceased'</span>, `0` <span class="op">=</span> <span class="st">'Survived'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://partykit.r-forge.r-project.org/partykit/" class="external-link">partykit</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># first argument indicates the index of the feature used for splitting</span></span>
+<span><span class="va">split_ldh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html" class="external-link">partysplit</a></span><span class="op">(</span><span class="fl">1L</span>, breaks <span class="op">=</span> <span class="fl">365</span><span class="op">)</span></span>
+<span><span class="va">split_crp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html" class="external-link">partysplit</a></span><span class="op">(</span><span class="fl">2L</span>, breaks <span class="op">=</span> <span class="fl">41.2</span><span class="op">)</span></span>
+<span><span class="va">split_lymp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partysplit.html" class="external-link">partysplit</a></span><span class="op">(</span><span class="fl">3L</span>, breaks <span class="op">=</span> <span class="fl">14.7</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">custom_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">partynode</a></span><span class="op">(</span><span class="fl">1L</span>, split <span class="op">=</span> <span class="va">split_ldh</span> , kids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">partynode</a></span><span class="op">(</span><span class="fl">2L</span>, split <span class="op">=</span> <span class="va">split_crp</span>, kids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">partynode</a></span><span class="op">(</span><span class="fl">3L</span>, info <span class="op">=</span> <span class="st">'Survival'</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">partynode</a></span><span class="op">(</span><span class="fl">4L</span>, split <span class="op">=</span> <span class="va">split_lymp</span>, kids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">partynode</a></span><span class="op">(</span><span class="fl">5L</span>, info <span class="op">=</span> <span class="st">'Death'</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">partynode</a></span><span class="op">(</span><span class="fl">6L</span>, info <span class="op">=</span> <span class="st">'Survival'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/partynode.html" class="external-link">partynode</a></span><span class="op">(</span><span class="fl">7L</span>, info <span class="op">=</span> <span class="st">'Death'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">custom_tree</span>,</span>
+<span>  data_test <span class="op">=</span> <span class="va">train_covid</span>,</span>
+<span>  print_eval <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  target_lab <span class="op">=</span> <span class="st">'Outcome'</span>,</span>
+<span>  label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Deceased'</span>, `0` <span class="op">=</span> <span class="st">'Survived'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 </div>
 </div>
-<div id="apply-the-learned-tree-on-externalholdouttestvalidation-dataset" class="section level2">
-<h2 class="hasAnchor">
-<a href="#apply-the-learned-tree-on-externalholdouttestvalidation-dataset" class="anchor"></a>Apply the learned tree on external/holdout/test/validation dataset</h2>
+<div class="section level2">
+<h2 id="apply-the-learned-tree-on-externalholdouttestvalidation-dataset">Apply the learned tree on external/holdout/test/validation dataset<a class="anchor" aria-label="anchor" href="#apply-the-learned-tree-on-externalholdouttestvalidation-dataset"></a>
+</h2>
 <p>You can print measures evaluating the conditional decision tree’s performance by setting <code>print_eval = TRUE</code>. By defaults, we show 5 measures for classification tasks:</p>
 <ul>
 <li>Accuracy</li>
@@ -247,60 +229,57 @@
 <li>Root mean squared error (RMSE)</li>
 <li>Concordance correlation coefficient (CCC).</li>
 </ul>
-<p>You can also choose to show performance based on any other set of appropriate metrics listed on the <a href="https://yardstick.tidymodels.org/reference/index.html">yardstick reference page</a>, for example, with</p>
+<p>You can also choose to show performance based on any other set of appropriate metrics listed on the <a href="https://yardstick.tidymodels.org/reference/index.html" class="external-link">yardstick reference page</a>, for example, with</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">metrics</span> <span class="op">=</span> <span class="fu">yardstick</span><span class="fu">::</span><span class="fu"><a href="https://yardstick.tidymodels.org/reference/metric_set.html">metric_set</a></span><span class="op">(</span><span class="fu">yardstick</span><span class="fu">::</span><span class="va"><a href="https://yardstick.tidymodels.org/reference/f_meas.html">f_meas</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">metrics</span> <span class="op">=</span> <span class="fu">yardstick</span><span class="fu">::</span><span class="fu"><a href="https://yardstick.tidymodels.org/reference/metric_set.html" class="external-link">metric_set</a></span><span class="op">(</span><span class="fu">yardstick</span><span class="fu">::</span><span class="va"><a href="https://yardstick.tidymodels.org/reference/f_meas.html" class="external-link">f_meas</a></span><span class="op">)</span></span></code></pre></div>
 <p>as a <code>heat_tree</code> argument to show the <em>F</em> score (a combination of precision and recall).</p>
 <p><strong>Warning</strong>: We do not recommend <code>print_eval</code> on the training set because these measures may gives you an over-optimistic view of how the tree performs (this would show pure training accuracy, not cross-validated).</p>
 <p>Let’s now apply the custom tree we (or really, Yan et al.) designed earlier and see how it performs on the test set:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="va">custom_tree</span>,
-  data_test <span class="op">=</span> <span class="va">test_covid</span>,
-  target_lab <span class="op">=</span> <span class="st">'Outcome'</span>,
-  label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Death'</span>, `0` <span class="op">=</span> <span class="st">'Survival'</span><span class="op">)</span>,
-  lev_fac <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span>
-
-<span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span>
-<span class="co">#&gt; use `guide = "none"` instead.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">custom_tree</span>,</span>
+<span>  data_test <span class="op">=</span> <span class="va">test_covid</span>,</span>
+<span>  target_lab <span class="op">=</span> <span class="st">'Outcome'</span>,</span>
+<span>  label_map <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>`1` <span class="op">=</span> <span class="st">'Death'</span>, `0` <span class="op">=</span> <span class="st">'Survival'</span><span class="op">)</span>,</span>
+<span>  lev_fac <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span>
+<span><span class="co">#&gt; It is deprecated to specify `guide = FALSE` to remove a guide. Please use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-11-1.png" width="672"></p>
 </div>
-<div id="regression" class="section level2">
-<h2 class="hasAnchor">
-<a href="#regression" class="anchor"></a>Regression</h2>
+<div class="section level2">
+<h2 id="regression">Regression<a class="anchor" aria-label="anchor" href="#regression"></a>
+</h2>
 <p>In general, compared to classification, regression task is more difficult to interpret with a decision tree. However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes. Also, removing the terminal node label may show the groups better. Here’s an example:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">galaxy</span>,
-          target_lab <span class="op">=</span> <span class="st">'target'</span>,
-          task <span class="op">=</span> <span class="st">'regression'</span>,
-          terminal_vars <span class="op">=</span> <span class="cn">NULL</span>,
-          tree_space_bottom <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">galaxy</span>,</span>
+<span>          target_lab <span class="op">=</span> <span class="st">'target'</span>,</span>
+<span>          task <span class="op">=</span> <span class="st">'regression'</span>,</span>
+<span>          terminal_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>          tree_space_bottom <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
 </div>
-<div id="smart-node-layout" class="section level2">
-<h2 class="hasAnchor">
-<a href="#smart-node-layout" class="anchor"></a>Smart node layout</h2>
+<div class="section level2">
+<h2 id="smart-node-layout">Smart node layout<a class="anchor" aria-label="anchor" href="#smart-node-layout"></a>
+</h2>
 <p>These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size. The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches. This relative weight can be adjusted with the <code>lev_fac</code> parameter in <code><a href="../reference/heat_tree.html">heat_tree()</a></code>. The default <code>lev_fac = 1.3</code> seems to provide aesthetically pleasing trees, independent of the tree size.</p>
 <p>In this next figure, on the top, <code>lev_fac = 1</code> makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts <code>lev_fac = 1.3</code> (default) on the bottom.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine_quality_red</span>, target_lab <span class="op">=</span> <span class="st">'target'</span>, lev_fac <span class="op">=</span> <span class="fl">1</span>, title <span class="op">=</span> <span class="st">'lev_fac = 1'</span><span class="op">)</span>
-<span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine_quality_red</span>, target_lab <span class="op">=</span> <span class="st">'target'</span>, title <span class="op">=</span> <span class="st">'lev_fac = 1.3'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine_quality_red</span>, target_lab <span class="op">=</span> <span class="st">'target'</span>, lev_fac <span class="op">=</span> <span class="fl">1</span>, title <span class="op">=</span> <span class="st">'lev_fac = 1'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine_quality_red</span>, target_lab <span class="op">=</span> <span class="st">'target'</span>, title <span class="op">=</span> <span class="st">'lev_fac = 1.3'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-13-1.png" width="864"><img src="explore_files/figure-html/unnamed-chunk-13-2.png" width="864"></p>
 </div>
-<div id="seriation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#seriation" class="anchor"></a>Seriation</h2>
-<p>Unless you turn it off (<code>clust_feats = FALSE</code>, <code>clust_samps = FALSE</code>), <strong>treeheatr</strong> automatically performs grouping of features and samples when organizing the heatmap. Features are ordered within each of the two groups of features, continuous and categorical (including the target label, unless <code>clust_target = FALSE</code>). Samples are grouped within each terminal node of all features (not only the displayed features). <strong>treeheatr</strong> uses <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html">cluster::daisy()</a></code> to compute distances with the Gower metric to incorporate both continuous and nominal categorical feature types. Now, <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html">cluster::daisy()</a></code> may throw this warning if your dataset contains binary features:</p>
+<div class="section level2">
+<h2 id="seriation">Seriation<a class="anchor" aria-label="anchor" href="#seriation"></a>
+</h2>
+<p>Unless you turn it off (<code>clust_feats = FALSE</code>, <code>clust_samps = FALSE</code>), <strong>treeheatr</strong> automatically performs grouping of features and samples when organizing the heatmap. Features are ordered within each of the two groups of features, continuous and categorical (including the target label, unless <code>clust_target = FALSE</code>). Samples are grouped within each terminal node of all features (not only the displayed features). <strong>treeheatr</strong> uses <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">cluster::daisy()</a></code> to compute distances with the Gower metric to incorporate both continuous and nominal categorical feature types. Now, <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">cluster::daisy()</a></code> may throw this warning if your dataset contains binary features:</p>
 <p><code>binary variable(s) treated as interval scaled</code></p>
 <p>but in general this is safe to ignore because the goal of seriation is to simply reduce the amount of stochasticity of the tree-based model and not to make precise inference about each group.</p>
 </div>
-<div id="mixed-datafeature-types" class="section level2">
-<h2 class="hasAnchor">
-<a href="#mixed-datafeature-types" class="anchor"></a>Mixed data/feature types</h2>
+<div class="section level2">
+<h2 id="mixed-datafeature-types">Mixed data/feature types<a class="anchor" aria-label="anchor" href="#mixed-datafeature-types"></a>
+</h2>
 <p>As shown above in the <em>penguins</em> example, <strong>treeheatr</strong> supports mixed feature types.</p>
-<p>For continuous variables/features, we can choose to either <em>percentize</em> (scale-rank), <em>normalize</em> (subtract the min and divide by the max) or <em>scale</em> (subtract the mean and divide by the standard deviation) each feature. Depending on what we want to show in the heatmap, one transformation method can be more effective than the other. Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in <a href="https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize">this vignette</a> of the <strong>heatmaply</strong> package.</p>
+<p>For continuous variables/features, we can choose to either <em>percentize</em> (scale-rank), <em>normalize</em> (subtract the min and divide by the max) or <em>scale</em> (subtract the mean and divide by the standard deviation) each feature. Depending on what we want to show in the heatmap, one transformation method can be more effective than the other. Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in <a href="https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize" class="external-link">this vignette</a> of the <strong>heatmaply</strong> package.</p>
 <p>We highly recommend that, when dealing with mixed feature types, the user supply <code>feat_types</code> to indicate whether a feature should be considered ‘numeric’ (continuous) or ‘factor’ (categorical) as shown below. When <code>feat_types</code> is not specified, <strong>treeheatr</strong> automatically inferred each column type from the original dataset.</p>
 </div>
   </div>
@@ -316,11 +295,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Trang Le, Jason Moore.</p>
+  <p></p>
+<p>Developed by Trang Le, Jason Moore.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -328,6 +309,8 @@
 
   
 
+
+  
 
   </body>
 </html>

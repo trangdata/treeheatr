@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Heatmap-Integrated Decision Tree Visualizations">
-<meta property="og:description" content="Creates interpretable decision tree visualizations 
-    with the data represented as a heatmap at the trees leaf nodes.
-    treeheatr utilizes the customizable ggparty' package for 
-    drawing decision trees.">
+<meta property="og:description" content="Creates interpretable decision tree visualizations with the
+    data represented as a heatmap at the trees leaf nodes.  treeheatr
+    utilizes the customizable ggparty' package for drawing decision
+    trees.">
 <meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png">
 <meta property="og:image:alt" content="treeheatr">
 <meta name="twitter:card" content="summary_large_image">
@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">treeheatr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
       </span>
     </div>
 
@@ -57,19 +59,16 @@
 <li>
   <a href="articles/explore.html">Vignette</a>
 </li>
-<li>
-  <a href="news/index.html">Changelog</a>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/trang1618/treeheatr">
+  <a href="https://github.com/trang1618/treeheatr" class="external-link">
     <span class="fa fa-github fab"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/trang1618">
+  <a href="https://twitter.com/trang1618" class="external-link">
     <span class="fa fa-twitter fab"></span>
      
   </a>
@@ -86,52 +85,51 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="treeheatr-an-introduction" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#treeheatr-an-introduction" class="anchor"></a><strong>treeheatr</strong>: an introduction</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="treeheatr-an-introduction">
+<strong>treeheatr</strong>: an introduction<a class="anchor" aria-label="anchor" href="#treeheatr-an-introduction"></a>
+</h1></div>
 
-<div id="your-decision-tree-may-be-cool-but-what-if-i-tell-you-you-can-make-it-hot" class="section level4">
-<h4 class="hasAnchor">
-<a href="#your-decision-tree-may-be-cool-but-what-if-i-tell-you-you-can-make-it-hot" class="anchor"></a><em>Your decision tree may be cool, but what if I tell you you can make it hot?</em>
-</h4>
-</div>
-<div id="changes-in-treeheatr-020" class="section level2">
-<h2 class="hasAnchor">
-<a href="#changes-in-treeheatr-020" class="anchor"></a>Changes in treeheatr 0.2.0</h2>
+<div class="section level4"><h4 id="your-decision-tree-may-be-cool-but-what-if-i-tell-you-you-can-make-it-hot">
+<em>Your decision tree may be cool, but what if I tell you you can make it hot?</em><a class="anchor" aria-label="anchor" href="#your-decision-tree-may-be-cool-but-what-if-i-tell-you-you-can-make-it-hot"></a>
+</h4></div>
+<div class="section level2">
+<h2 id="changes-in-treeheatr-020">Changes in treeheatr 0.2.0<a class="anchor" aria-label="anchor" href="#changes-in-treeheatr-020"></a>
+</h2>
 <p>The first argument of <code><a href="reference/heat_tree.html">heat_tree()</a></code>, <code>data</code> is now replaced with <code>x</code>, which can be a dataframe (or tibble), a party (or constparty) object specifying the precomputed tree, or partynode object specifying the customized tree. <code>custom_tree</code> argument is no longer needed.</p>
 </div>
-<div id="install" class="section level2">
-<h2 class="hasAnchor">
-<a href="#install" class="anchor"></a>Install</h2>
+<div class="section level2">
+<h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
+</h2>
 <p>Please make sure your version of R &gt;= 3.5.0 before installation.</p>
 <p>You can install the released version of <strong>treeheatr</strong> from CRAN with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'treeheatr'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'treeheatr'</span><span class="op">)</span></span></code></pre></div>
 <p>Or the development version from GitHub with remotes:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages('remotes') # uncomment to install devtools</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'trang1618/treeheatr'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages('remotes') # uncomment to install devtools</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'trang1618/treeheatr'</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<div id="penguin-dataset" class="section level3">
-<h3 class="hasAnchor">
-<a href="#penguin-dataset" class="anchor"></a>Penguin dataset</h3>
-<p>These data were collected and made available by <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php">Dr. Kristen Gorman</a> and the <a href="https://pal.lternet.edu/">Palmer Station, Antarctica LTER</a>.</p>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="penguin-dataset">Penguin dataset<a class="anchor" aria-label="anchor" href="#penguin-dataset"></a>
+</h3>
+<p>These data were collected and made available by <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php" class="external-link">Dr. Kristen Gorman</a> and the <a href="https://pal.lternet.edu/" class="external-link">Palmer Station, Antarctica LTER</a>.</p>
 <p>Classification of different types of penguin species.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://trang1618.github.io/treeheatr/index.html">treeheatr</a></span><span class="op">)</span>
-
-<span class="fu"><a href="reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://trang1618.github.io/treeheatr/index.html" class="external-link">treeheatr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-4-1.png"><!-- --></p>
 </div>
-<div id="wine-recognition-dataset" class="section level3">
-<h3 class="hasAnchor">
-<a href="#wine-recognition-dataset" class="anchor"></a>Wine recognition dataset</h3>
+<div class="section level3">
+<h3 id="wine-recognition-dataset">Wine recognition dataset<a class="anchor" aria-label="anchor" href="#wine-recognition-dataset"></a>
+</h3>
 <p>Classification of different cultivars of wine.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine</span>, target_lab <span class="op">=</span> <span class="st">'Type'</span>, target_lab_disp <span class="op">=</span> <span class="st">'Cultivar'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine</span>, target_lab <span class="op">=</span> <span class="st">'Type'</span>, target_lab_disp <span class="op">=</span> <span class="st">'Cultivar'</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="co">## use `guide = "none"` instead.</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
@@ -140,11 +138,11 @@
 <p><img src="reference/figures/unnamed-chunk-5-1.png"><!-- --></p>
 </div>
 </div>
-<div id="citing-treeheatr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citing-treeheatr" class="anchor"></a>Citing treeheatr</h2>
+<div class="section level2">
+<h2 id="citing-treeheatr">Citing treeheatr<a class="anchor" aria-label="anchor" href="#citing-treeheatr"></a>
+</h2>
 <p>If you use treeheatr in a scientific publication, please consider citing the following paper:</p>
-<p>Le TT, Moore JH. <a href="https://doi.org/10.1093/bioinformatics/btaa662">treeheatr: an R package for interpretable decision tree visualizations</a>. <em>Bioinformatics</em>. 2020 Jan 1.</p>
+<p>Le TT, Moore JH. <a href="https://doi.org/10.1093/bioinformatics/btaa662" class="external-link">treeheatr: an R package for interpretable decision tree visualizations</a>. <em>Bioinformatics</em>. 2020 Jan 1.</p>
 <p>BibTeX entry:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb6-1"><a href="#cb6-1"></a><span class="va">@article</span>{<span class="ot">le2020treeheatr</span>,</span>
 <span id="cb6-2"><a href="#cb6-2"></a>  <span class="dt">title</span>={treeheatr: an R package for interpretable decision tree visualizations},</span>
@@ -154,16 +152,16 @@
 <span id="cb6-6"><a href="#cb6-6"></a>  <span class="dt">doi</span>="<span class="st">10.1093/bioinformatics/btaa662</span>"</span>
 <span id="cb6-7"><a href="#cb6-7"></a>}</span></code></pre></div>
 </div>
-<div id="how-to-use" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-use" class="anchor"></a>How to Use</h2>
+<div class="section level2">
+<h2 id="how-to-use">How to Use<a class="anchor" aria-label="anchor" href="#how-to-use"></a>
+</h2>
 <p><strong>treeheatr</strong> incorporates a heatmap at the terminal node of your decision tree. The basic building blocks to a <strong>treeheatr</strong> plot are (yes, you guessed it!) a decision tree and a heatmap.</p>
 <ul>
-<li><p>The decision tree is computed with <code><a href="https://rdrr.io/pkg/partykit/man/ctree.html">partykit::ctree()</a></code> and plotted with the well-documented and flexible <a href="https://cran.r-project.org/package=ggparty/"><strong>ggparty</strong></a> package. The tree parameters can be passed to <strong>ggparty</strong> functions via the <code><a href="reference/heat_tree.html">heat_tree()</a></code> and <code><a href="reference/draw_tree.html">draw_tree()</a></code> functions of <strong>treeheatr</strong>. More details on different <strong>ggparty</strong> <em>geoms</em> can be found <a href="https://github.com/martin-borkovec/ggparty">here</a>.</p></li>
-<li><p>The heatmap is shown with <code><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">ggplot2::geom_tile()</a></code>. The user may choose to cluster the samples within each leaf node or the features across all samples.</p></li>
+<li><p>The decision tree is computed with <code><a href="https://rdrr.io/pkg/partykit/man/ctree.html" class="external-link">partykit::ctree()</a></code> and plotted with the well-documented and flexible <a href="https://cran.r-project.org/package=ggparty/" class="external-link"><strong>ggparty</strong></a> package. The tree parameters can be passed to <strong>ggparty</strong> functions via the <code><a href="reference/heat_tree.html">heat_tree()</a></code> and <code><a href="reference/draw_tree.html">draw_tree()</a></code> functions of <strong>treeheatr</strong>. More details on different <strong>ggparty</strong> <em>geoms</em> can be found <a href="https://github.com/martin-borkovec/ggparty" class="external-link">here</a>.</p></li>
+<li><p>The heatmap is shown with <code><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">ggplot2::geom_tile()</a></code>. The user may choose to cluster the samples within each leaf node or the features across all samples.</p></li>
 </ul>
-<p>Make sure to check out the <a href="https://trang1618.github.io/treeheatr/articles/explore.html">vignette</a> for detailed information on the usage of <strong>treeheatr</strong>.</p>
-<p>Please <a href="https://github.com/trang1618/treeheatr/issues/new">open an issue</a> for questions related to <strong>treeheatr</strong> usage, bug reports or general inquiries.</p>
+<p>Make sure to check out the <a href="https://trang1618.github.io/treeheatr/articles/explore.html" class="external-link">vignette</a> for detailed information on the usage of <strong>treeheatr</strong>.</p>
+<p>Please <a href="https://github.com/trang1618/treeheatr/issues/new" class="external-link">open an issue</a> for questions related to <strong>treeheatr</strong> usage, bug reports or general inquiries.</p>
 <p>Thank you very much for your support!</p>
 </div>
 </div>
@@ -171,54 +169,62 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=treeheatr">https://​cloud.r-project.org/​package=treeheatr</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/trang1618/treeheatr/">https://​github.com/​trang1618/​treeheatr/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/trang1618/treeheatr/issues">https://​github.com/​trang1618/​treeheatr/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Trang Le <br><small class="roles"> Author, maintainer </small>  <br><small>(https://trang.page/)</small>
-</li>
-<li>Jason Moore <br><small class="roles"> Author </small>  <br><small>(http://www.epistasisblog.org/)</small>
-</li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://cloud.r-project.org/package=treeheatr" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/trang1618/treeheatr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/trang1618/treeheatr/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://trang1618.github.io/treeheatr/articles/explore.html"><img src="https://img.shields.io/badge/-Vignette-green?logo=spinnaker" alt="vignette"></a></li>
-<li><a href="https://trang1618.github.io/treeheatr/reference/"><img src="https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs" alt="documentation"></a></li>
-<li><a href="https://github.com/trang1618/treeheatr/actions"><img src="https://img.shields.io/github/workflow/status/trang1618/treeheatr/R-CMD-check?logo=github" alt="github-action-status"></a></li>
-<li><a href="https://cran.r-project.org/package=treeheatr"><img src="http://cranlogs.r-pkg.org/badges/grand-total/treeheatr?color=blue"></a></li>
-<li><a href="https://doi.org/10.1093/bioinformatics/btaa662"><img src="https://img.shields.io/badge/doi-10.1093/bioinformatics/btaa662-yellow.svg"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing treeheatr</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Trang Le <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Jason Moore <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://trang1618.github.io/treeheatr/articles/explore.html" class="external-link"><img src="https://img.shields.io/badge/-Vignette-green?logo=spinnaker" alt="vignette"></a></li>
+<li><a href="https://trang1618.github.io/treeheatr/reference/" class="external-link"><img src="https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs" alt="documentation"></a></li>
+<li><a href="https://github.com/trang1618/treeheatr/actions" class="external-link"><img src="https://img.shields.io/github/workflow/status/trang1618/treeheatr/R-CMD-check?logo=github" alt="github-action-status"></a></li>
+<li><a href="https://cran.r-project.org/package=treeheatr" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/treeheatr?color=blue"></a></li>
+<li><a href="https://doi.org/10.1093/bioinformatics/btaa662" class="external-link"><img src="https://img.shields.io/badge/doi-10.1093/bioinformatics/btaa662-yellow.svg"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Trang Le, Jason Moore.</p>
+  <p></p>
+<p>Developed by Trang Le, Jason Moore.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -226,6 +232,8 @@
 
   
 
+
+  
 
   </body>
 </html>
