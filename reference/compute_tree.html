@@ -166,9 +166,9 @@ fit, estimates, smart layout and terminal data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   |   [6] culmen_length_mm &gt; 44.1: Chinstrap (n = 64, err = 3.1%)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   [7] island in Biscoe</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   |   [8] flipper_length_mm &lt;= 203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   |   |   [9] culmen_length_mm &lt;= 41.4: Adelie (n = 38, err = 0.0%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   |   |   [9] culmen_length_mm &lt;= 41.4: Adelie (n = 39, err = 2.6%)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   |   |   [10] culmen_length_mm &gt; 41.4: Adelie (n = 7, err = 14.3%)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   |   [11] flipper_length_mm &gt; 203: Gentoo (n = 123, err = 0.0%)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   |   [11] flipper_length_mm &gt; 203: Gentoo (n = 122, err = 0.0%)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of inner nodes:    5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of terminal nodes: 6</span>
@@ -187,19 +187,19 @@ fit, estimates, smart layout and terminal data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11 11 0.8227470 0.0</span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fit_tree</span><span class="op">$</span><span class="va">term_dat</span>, <span class="op">-</span> <span class="fu">contains</span><span class="op">(</span><span class="st">'nodedata'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id parent birth_order breaks_label info    info_list splitvar level kids</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  4      3           1 NA &lt;= NA....   NA c(0.8000....     &lt;NA&gt;     3    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  4      3           1 NA &lt;= NA....   NA c(0.8181....     &lt;NA&gt;     3    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  5      3           2 NA &gt;  NA....   NA           NA     &lt;NA&gt;     3    0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  6      2           2 NA &gt;  NA....   NA c(64, 7.....     &lt;NA&gt;     3    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  6      2           2 NA &gt;  NA....   NA c(63, 1.....     &lt;NA&gt;     3    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  9      8           1 NA &lt;= NA....   NA           NA     &lt;NA&gt;     3    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 10      8           2 NA &gt;  NA....   NA           NA     &lt;NA&gt;     3    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 11      7           2 NA &gt;  NA....   NA           NA     &lt;NA&gt;     3    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   nodesize      p.value horizontal  x_parent y_parent     y_hat   n         x y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1      100 6.811624e-01      FALSE 0.1666667      0.6    Adelie  94 0.1400150 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2       12           NA      FALSE 0.1666667      0.6    Adelie  12 0.2989042 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       64 7.465153e-15      FALSE 0.2500000      0.8 Chinstrap  64 0.4131078 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       38           NA      FALSE 0.6666667      0.6    Adelie  38 0.5660389 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       64 1.240239e-14      FALSE 0.2500000      0.8 Chinstrap  64 0.4131078 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       39           NA      FALSE 0.6666667      0.6    Adelie  38 0.5660389 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5        7           NA      FALSE 0.6666667      0.6    Adelie   7 0.6340674 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      123           NA      FALSE 0.7500000      0.8    Gentoo 119 0.8227470 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      122           NA      FALSE 0.7500000      0.8    Gentoo 119 0.8227470 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term_node</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    Adelie</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    Adelie</span>
