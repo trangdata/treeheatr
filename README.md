@@ -1,11 +1,11 @@
-**treeheatr**: an introduction
-================
 
 [![vignette](https://img.shields.io/badge/-Vignette-green?logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html)
 [![documentation](https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
 [![github-action-status](https://img.shields.io/github/workflow/status/trang1618/treeheatr/R-CMD-check?logo=github)](https://github.com/trang1618/treeheatr/actions)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/badger?color=blue)](https://cran.r-project.org/package=badger)
 [![](https://img.shields.io/badge/doi-10.1093/bioinformatics/btaa662-yellow.svg)](https://doi.org/10.1093/bioinformatics/btaa662)
+
+# treeheatr <img src="man/figures/logo.png" align="right" height="139" />
 
 #### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
@@ -18,7 +18,7 @@ customized tree. `custom_tree` argument is no longer needed.
 
 ## Install
 
-Please make sure your version of R &gt;= 3.5.0 before installation.
+Please make sure your version of R \>= 3.5.0 before installation.
 
 You can install the released version of **treeheatr** from CRAN with:
 
@@ -54,6 +54,15 @@ Classification of different cultivars of wine.
 ``` r
 heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 ```
+
+    ## Warning: `guides(<scale> = FALSE)` is deprecated. Please use `guides(<scale> =
+    ## "none")` instead.
+
+    ## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
+    ## use `guide = "none"` instead.
+
+    ## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
+    ## use `guide = "none"` instead.
 
 ![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
@@ -105,3 +114,9 @@ issue](https://github.com/trang1618/treeheatr/issues/new) for questions
 related to **treeheatr** usage, bug reports or general inquiries.
 
 Thank you very much for your support!
+
+## Acknowledgements
+
+Package hex was made with [Midjourney](https://www.midjourney.com/home/)
+which inherits a [CC BY-NC 4.0
+license](https://creativecommons.org/licenses/by-nc/4.0/legalcode).

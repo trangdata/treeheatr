@@ -1,5 +1,4 @@
 ---
-title: "**treeheatr**: an introduction"
 output: rmarkdown::github_document
 ---
 
@@ -14,6 +13,8 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/"
 )
 ```
+
+# treeheatr <img src="man/figures/logo.png" align="right" height="139" />
 
 #### *Your decision tree may be cool, but what if I tell you you can make it hot?*
 
@@ -96,3 +97,7 @@ Make sure to check out the [vignette](https://trang1618.github.io/treeheatr/arti
 Please [open an issue](https://github.com/trang1618/treeheatr/issues/new) for questions related to **treeheatr** usage, bug reports or general inquiries.
 
 Thank you very much for your support!
+
+## Acknowledgements
+
+Package hex was made with [Midjourney](https://www.midjourney.com/home/) which inherits a [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/legalcode).
