@@ -94,4 +94,5 @@ draw_tree <- function(dat, fit, term_dat, layout, target_cols = NULL, title = NU
         )
       }
     }
+
 }

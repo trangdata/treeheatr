@@ -20,12 +20,7 @@ compute_tree <- function(x, data_test = NULL, target_lab = NULL, task = c("class
     task = task, feat_types = feat_types
   )
 
-  if ("data.frame" %in% class(x)) {
-    fit$autotree <- TRUE
-  } else {
-    fit$autotree <- FALSE
-  }
-
+  fit$autotree <- 'data.frame' %in% class(x)
   dat <- prediction_df(fit, task, clust_samps, clust_target)
 
   ################################################################
@@ -35,6 +30,8 @@ compute_tree <- function(x, data_test = NULL, target_lab = NULL, task = c("class
   # node_size <- node_labels$n
   terminal_data <- term_node_pos(plot_data, dat)
   layout <- position_nodes(plot_data, terminal_data, custom_layout, lev_fac, panel_space)
+
+  # browser()
 
   term_dat <- terminal_data %>%
     select(-c(x, y)) %>%
@@ -116,7 +113,7 @@ term_node_pos <- function(plot_data, dat) {
     count(node_id, y_hat) %>%
     rename(id = node_id)
 
-  terminal_data <- plot_data %>%
+  plot_data %>%
     filter(kids == 0) %>%
     left_join(node_labels, by = "id") %>%
     mutate_at(vars(n), ~ replace(., is.na(.), 0))
@@ -182,10 +179,8 @@ position_nodes <- function(plot_data, terminal_data, custom_layout, lev_fac, pan
     }
   }
 
-  my_layout <- adj_plot_data %>%
+  adj_plot_data %>%
     filter(!(id %in% custom_layout$id)) %>%
     select(id, x, y) %>%
     bind_rows(custom_layout)
-
-  return(my_layout)
 }

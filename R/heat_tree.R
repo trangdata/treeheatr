@@ -56,7 +56,7 @@ heat_tree <- function(x, target_lab = NULL, data_test = NULL, task = c("classifi
                       show = "heat-tree", heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001,
                       print_eval = (!is.null(data_test)), ...) {
   target_cols <- get_cols(target_cols, match.arg(task),
-    guide = ifelse(target_legend, "legend", FALSE)
+    guide = ifelse(target_legend, "legend", "none")
   )
 
   mf <- match.call()

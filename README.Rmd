@@ -102,4 +102,4 @@ Thank you very much for your support!
 
 ## Acknowledgements
 
-Package hex was made with [Midjourney](https://www.midjourney.com/home/) which inherits a [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/legalcode).
+Package hex was made with [Midjourney](https://www.midjourney.com/home/) and thus inherits a [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/legalcode).

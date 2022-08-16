@@ -68,13 +68,10 @@ get_fit.party <- function(x, data_test, target_lab, task, ...) {
     stop("Please ensure the tree was trained on a dataset with dependent variable of class factor or switch task to regression.")
   }
 
-  if (!is.null(data_test)) {
-    fit$data_test <- prep_data(data_test, target_lab = target_lab, task = task, ...)
-  } else {
-    fit$data_test <- prep_data(fit$data, target_lab = target_lab, task = task, ...)
-  }
+  if (is.null(data_test))
+    data_test <- fit$data
 
-  # print(head(fit$data_test))
+  fit$data_test <- prep_data(data_test, target_lab = target_lab, task = task, ...)
   fit$target_lab <- target_lab
   fit
 }

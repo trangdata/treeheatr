@@ -4,7 +4,7 @@
 \alias{get_cols}
 \title{Get color functions from character vectors}
 \usage{
-get_cols(my_cols, task, guide = FALSE)
+get_cols(my_cols, task, guide = "none")
 }
 \arguments{
 \item{my_cols}{Character vectors of different hex values}

@@ -42,7 +42,8 @@
 #' Inherit from [`ggplot2::guides()`](https://ggplot2.tidyverse.org/reference/guides.html).
 #' @inheritParams heat_tree
 #'
-get_cols <- function(my_cols, task, guide = FALSE) {
+
+get_cols <- function(my_cols, task, guide = "none") {
   vir_opts <- list(option = "A", begin = 0.3, end = 0.9)
   if (!is.null(my_cols)) {
     return(do.call(ggplot2::scale_fill_manual, list(values = my_cols, guide = guide, drop = FALSE)))

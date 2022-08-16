@@ -59,15 +59,6 @@ Classification of different cultivars of wine.
 heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 ```
 
-    ## Warning: `guides(<scale> = FALSE)` is deprecated. Please use `guides(<scale> =
-    ## "none")` instead.
-
-    ## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
-    ## use `guide = "none"` instead.
-
-    ## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
-    ## use `guide = "none"` instead.
-
 ![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
 ## Citing treeheatr
@@ -122,5 +113,5 @@ Thank you very much for your support!
 ## Acknowledgements
 
 Package hex was made with [Midjourney](https://www.midjourney.com/home/)
-which inherits a [CC BY-NC 4.0
+and thus inherits a [CC BY-NC 4.0
 license](https://creativecommons.org/licenses/by-nc/4.0/legalcode).

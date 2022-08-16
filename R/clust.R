@@ -18,10 +18,10 @@ clust_samp_func <- function(leaf_node = NULL, dat, clust_vec, clust_samps = TRUE
       seriation::seriate(method = "ARSA") %>%
       seriation::get_order()
 
-    df[new_samp_order, ] # return ordered dataframe
-  } else {
-    df
+    return(df[new_samp_order, ]) # return ordered dataframe
   }
+
+  df
 }
 
 
@@ -49,8 +49,8 @@ clust_feat_func <- function(dat, clust_vec, clust_feats = TRUE) {
       seriation::seriate() %>%
       seriation::get_order()
 
-    clust_vec[new_feat_order] # return ordered features, not dataframe
-  } else {
-    clust_vec
+    return(clust_vec[new_feat_order]) # return ordered features, not dataframe
   }
+
+  clust_vec
 }

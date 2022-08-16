@@ -46,20 +46,20 @@
 #' x <- compute_tree(penguins, target_lab = "species")
 #' draw_heat(x$dat, x$fit)
 #'
-draw_heat <- function(dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = fit$target_lab,
-                      trans_type = c("percentize", "normalize", "scale", "none"), clust_feats = TRUE,
-                      feats = NULL, show_all_feats = FALSE, p_thres = 0.05, cont_legend = FALSE,
-                      cate_legend = FALSE, cont_cols = ggplot2::scale_fill_viridis_c,
-                      cate_cols = ggplot2::scale_fill_viridis_d, panel_space = 0.001, target_space = 0.05,
-                      target_pos = "top") {
+#'
+draw_heat <- function(
+  dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = fit$target_lab,
+  trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
+  feats = NULL, show_all_feats = FALSE, p_thres = 0.05, cont_legend = 'none',
+  cate_legend = 'none', cont_cols = ggplot2::scale_fill_viridis_c,
+  cate_cols = ggplot2::scale_fill_viridis_d, panel_space = 0.001, target_space = 0.05,
+  target_pos = 'top'){
+
   trans_type <- match.arg(trans_type)
 
-  if (is.logical(cont_legend) && cont_legend) {
+  if (cont_legend != "none")
     cont_legend <- guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL)
-  }
-  if (is.logical(cate_legend) && !cate_legend) {
-    cate_legend <- "none"
-  } else if (is.logical(cate_legend) && cate_legend) {
+  if (cate_legend != 'none'){
     cate_legend <- guide_legend(title = NULL)
   }
 
