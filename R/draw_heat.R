@@ -43,25 +43,23 @@
 #' @import ggplot2
 #' @export
 #' @examples
-#' x <- compute_tree(penguins, target_lab = 'species')
+#' x <- compute_tree(penguins, target_lab = "species")
 #' draw_heat(x$dat, x$fit)
 #'
-#'
-draw_heat <- function(
-  dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = fit$target_lab,
-  trans_type = c('percentize', 'normalize', 'scale', 'none'), clust_feats = TRUE,
-  feats = NULL, show_all_feats = FALSE, p_thres = 0.05, cont_legend = FALSE,
-  cate_legend = FALSE, cont_cols = ggplot2::scale_fill_viridis_c,
-  cate_cols = ggplot2::scale_fill_viridis_d, panel_space = 0.001, target_space = 0.05,
-  target_pos = 'top'){
-
+draw_heat <- function(dat, fit, feat_types = NULL, target_cols = NULL, target_lab_disp = fit$target_lab,
+                      trans_type = c("percentize", "normalize", "scale", "none"), clust_feats = TRUE,
+                      feats = NULL, show_all_feats = FALSE, p_thres = 0.05, cont_legend = FALSE,
+                      cate_legend = FALSE, cont_cols = ggplot2::scale_fill_viridis_c,
+                      cate_cols = ggplot2::scale_fill_viridis_d, panel_space = 0.001, target_space = 0.05,
+                      target_pos = "top") {
   trans_type <- match.arg(trans_type)
 
-  if (is.logical(cont_legend) && cont_legend)
+  if (is.logical(cont_legend) && cont_legend) {
     cont_legend <- guide_colorbar(barwidth = 10, barheight = 0.5, title = NULL)
-  if (is.logical(cate_legend) && !cate_legend){
-    cate_legend <- 'none'
-  } else if (is.logical(cate_legend) && cate_legend){
+  }
+  if (is.logical(cate_legend) && !cate_legend) {
+    cate_legend <- "none"
+  } else if (is.logical(cate_legend) && cate_legend) {
     cate_legend <- guide_legend(title = NULL)
   }
 
@@ -74,12 +72,13 @@ draw_heat <- function(
   # if feature types are not supplied, infer from column type:
   feat_types <- feat_types %||% sapply(dat[, feat_names], class)
   disp_feats <- feats %||% get_disp_feats(
-    fit, feat_names, show_all_feats, p_thres)
+    fit, feat_names, show_all_feats, p_thres
+  )
 
   # prepare feature orders:
   feat_list <- prepare_feats(dat, disp_feats, feat_types, clust_feats, trans_type)
-  tile_cont <- feat_list[['df_cont']]
-  tile_cate <- feat_list[['df_cate']]
+  tile_cont <- feat_list[["df_cont"]]
+  tile_cate <- feat_list[["df_cate"]]
   n_conts <- length(unique(tile_cont$cont_feat))
   n_cates <- length(unique(tile_cate$cate_feat))
 
@@ -87,15 +86,18 @@ draw_heat <- function(
   n_feats <- n_conts + n_cates
 
   target_y <- dplyr::case_when(
-    target_pos == 'top' ~ (n_feats + 1 + target_space),
-    target_pos == 'bottom' ~ (- target_space)) # if 'none', returns NA
+    target_pos == "top" ~ (n_feats + 1 + target_space),
+    target_pos == "bottom" ~ (-target_space)
+  ) # if 'none', returns NA
 
   dheat <- ggplot() +
     target_cols +
-    facet_grid(cols = vars(node_id), scales = 'free_x', space = 'free') +
-    geom_tile(data = dat,
-      aes(x = Sample, y = target_y, fill = !! sym(target_lab))) +
-    scale_x_continuous(expand =  c(0,0)) +
+    facet_grid(cols = vars(node_id), scales = "free_x", space = "free") +
+    geom_tile(
+      data = dat,
+      aes(x = Sample, y = target_y, fill = !!sym(target_lab))
+    ) +
+    scale_x_continuous(expand = c(0, 0)) +
     labs(x = NULL, y = NULL) +
     theme_minimal() +
     theme(
@@ -105,37 +107,42 @@ draw_heat <- function(
       panel.grid.minor = element_blank(),
       strip.background = element_blank(),
       strip.text.x = element_blank(),
-      panel.spacing = ggplot2::unit(panel_space, 'npc'),
-      plot.margin = ggplot2::unit(c(0, 5.5, 5.5, 5.5), 'pt')
+      panel.spacing = ggplot2::unit(panel_space, "npc"),
+      plot.margin = ggplot2::unit(c(0, 5.5, 5.5, 5.5), "pt")
     )
 
-  if (!is.null(tile_cate)){
+  if (!is.null(tile_cate)) {
     tile_cate <- tile_cate %>%
       mutate(y = cate_feat %>% `levels<-`(seq.int(n_cates)) %>% as.numeric())
 
-    for (i in levels(tile_cate$cate_feat)){
+    for (i in levels(tile_cate$cate_feat)) {
       dheat <- dheat +
         ggnewscale::new_scale_fill() +
-        geom_tile(data = tile_cate %>% filter(cate_feat == i),
-                           aes(y = y, x = Sample, fill = value)) +
+        geom_tile(
+          data = tile_cate %>% filter(cate_feat == i),
+          aes(y = y, x = Sample, fill = value)
+        ) +
         cate_cols
     }
   }
 
-  if (!is.null(tile_cont)){
+  if (!is.null(tile_cont)) {
     tile_cont <- tile_cont %>%
       mutate(
         y = cont_feat %>%
           `levels<-`(seq(n_cates + 1, n_conts + n_cates)) %>%
           as.character() %>%
-          as.numeric())
+          as.numeric()
+      )
 
     dheat <- dheat +
       ggnewscale::new_scale_fill() +
       geom_tile(data = tile_cont, aes(y = y, x = Sample, fill = value)) +
-      theme(legend.position = 'bottom',
-            legend.margin = margin(0, 0, 0, 0),
-            legend.box.margin = margin(-5, 0, 0, 0)) +
+      theme(
+        legend.position = "bottom",
+        legend.margin = margin(0, 0, 0, 0),
+        legend.box.margin = margin(-5, 0, 0, 0)
+      ) +
       cont_cols
   }
 
@@ -143,7 +150,8 @@ draw_heat <- function(
     scale_y_continuous(
       expand = c(0, 0),
       breaks = c(target_y, if (n_feats > 0) seq.int(n_feats)),
-      labels = c(target_lab_disp, levels(tile_cate$cate_feat), levels(tile_cont$cont_feat)))
+      labels = c(target_lab_disp, levels(tile_cate$cate_feat), levels(tile_cont$cont_feat))
+    )
 
   return(dheat)
 }
@@ -160,18 +168,20 @@ draw_heat <- function(
 #' @inheritParams draw_heat
 #' @return A character vector of feature names.
 #'
-get_disp_feats <- function(fit, feat_names, show_all_feats, p_thres){
-  if (show_all_feats || (!(fit$autotree))){
+get_disp_feats <- function(fit, feat_names, show_all_feats, p_thres) {
+  if (show_all_feats || (!(fit$autotree))) {
     disp_feats <- feat_names
   } else {
     # important features to display in decision trees
     # (pass p value threshold):
     disp_feats <- partykit::nodeapply(
-      fit, ids = partykit::nodeids(fit),
+      fit,
+      ids = partykit::nodeids(fit),
       FUN = function(n) {
         node_pvals <- partykit::info_node(n)$p.value
         names(node_pvals[node_pvals < p_thres])
-      }) %>%
+      }
+    ) %>%
       unlist() %>%
       unique()
   }
@@ -192,41 +202,40 @@ get_disp_feats <- function(fit, feat_names, show_all_feats, p_thres){
 #' @return A list of two dataframes (continuous and categorical)
 #' from the original dataset.
 #'
-prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
-
-  if (is.na(disp_feats[1])){
+prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type) {
+  if (is.na(disp_feats[1])) {
     return(list(df_cont = NULL, df_cate = NULL))
   }
 
-  cont_feats <- names(feat_types[feat_types == 'numeric'| feat_types == 'integer'])
-  cate_feats <- names(feat_types[feat_types == 'factor'])
+  cont_feats <- names(feat_types[feat_types == "numeric" | feat_types == "integer"])
+  cate_feats <- names(feat_types[feat_types == "factor"])
 
   n_conts <- sum(cont_feats %in% disp_feats)
   n_cates <- sum(cate_feats %in% disp_feats)
 
-  if (n_conts > 0){
+  if (n_conts > 0) {
     df_cont <- dat %>%
-      select(- cate_feats) %>%
+      select(-cate_feats) %>%
       mutate_at(cont_feats, ~ scale_norm(., trans_type = trans_type)) %>%
-      tidyr::pivot_longer(cont_feats, names_to = 'cont_feat') %>%
+      tidyr::pivot_longer(cont_feats, names_to = "cont_feat") %>%
       filter(cont_feat %in% disp_feats) %>%
       mutate(cont_feat = as.factor(cont_feat))
   } else {
     df_cont <- NULL
   }
 
-  if (n_cates > 0){
+  if (n_cates > 0) {
     df_cate <- dat %>%
-      select(- cont_feats) %>%
+      select(-cont_feats) %>%
       mutate_at(cate_feats, as.factor) %>%
-      tidyr::pivot_longer(cate_feats, names_to = 'cate_feat') %>%
+      tidyr::pivot_longer(cate_feats, names_to = "cate_feat") %>%
       filter(cate_feat %in% disp_feats) %>%
       mutate(cate_feat = as.factor(cate_feat))
   } else {
     df_cate <- NULL
   }
 
-  if (n_conts > 1){
+  if (n_conts > 1) {
     clustered_conts <-
       clust_feat_func(
         dat = dat,
@@ -236,7 +245,7 @@ prepare_feats <- function(dat, disp_feats, feat_types, clust_feats, trans_type){
     df_cont$cont_feat <- factor(df_cont$cont_feat, levels = clustered_conts)
   }
 
-  if (n_cates > 1){
+  if (n_cates > 1) {
     clustered_cates <-
       clust_feat_func(
         dat = dat %>% mutate_if(is.factor, as.numeric),

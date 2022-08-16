@@ -39,37 +39,43 @@
 #' @export
 #'
 #' @examples
-#' heat_tree(penguins, target_lab = 'species')
+#' heat_tree(penguins, target_lab = "species")
 #'
 #' \donttest{
 #' heat_tree(
 #'   x = galaxy[1:100, ],
-#'   target_lab = 'target',
-#'   task = 'regression',
+#'   target_lab = "target",
+#'   task = "regression",
 #'   terminal_vars = NULL,
-#'   tree_space_bottom = 0)
+#'   tree_space_bottom = 0
+#' )
 #' }
-heat_tree <- function(
-  x, target_lab = NULL, data_test = NULL, task = c('classification', 'regression'),
-  feat_types = NULL, label_map = NULL, target_cols = NULL, target_legend = FALSE,
-  clust_samps = TRUE, clust_target = TRUE, custom_layout = NULL,
-  show = 'heat-tree', heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001,
-  print_eval = (!is.null(data_test)), ...){
-
+heat_tree <- function(x, target_lab = NULL, data_test = NULL, task = c("classification", "regression"),
+                      feat_types = NULL, label_map = NULL, target_cols = NULL, target_legend = FALSE,
+                      clust_samps = TRUE, clust_target = TRUE, custom_layout = NULL,
+                      show = "heat-tree", heat_rel_height = 0.2, lev_fac = 1.3, panel_space = 0.001,
+                      print_eval = (!is.null(data_test)), ...) {
   target_cols <- get_cols(target_cols, match.arg(task),
-                          guide = ifelse(target_legend, 'legend', FALSE))
+    guide = ifelse(target_legend, "legend", FALSE)
+  )
 
   mf <- match.call()
   ctree_vars <-
-    c('x', 'data_test', 'target_lab', 'task', 'feat_types', 'label_map', 'clust_samps',
-      'clust_target', 'custom_layout', 'lev_fac', 'panel_space')
+    c(
+      "x", "data_test", "target_lab", "task", "feat_types", "label_map", "clust_samps",
+      "clust_target", "custom_layout", "lev_fac", "panel_space"
+    )
   tree_vars <-
-    c('title', 'task', 'tree_space_top', 'tree_space_bottom', 'par_node_vars', 'terminal_vars',
-      'edge_vars', 'edge_text_vars', 'print_eval', 'metrics', 'x_eval', 'y_eval')
+    c(
+      "title", "task", "tree_space_top", "tree_space_bottom", "par_node_vars", "terminal_vars",
+      "edge_vars", "edge_text_vars", "print_eval", "metrics", "x_eval", "y_eval"
+    )
   heat_vars <-
-    c('feat_types', 'trans_type', 'cont_cols', 'cate_cols', 'clust_feats', 'cont_legend',
-      'cate_legend', 'target_space', 'panel_space', 'target_pos', 'feats', 'show_all_feats',
-      'p_thres', 'target_lab_disp')
+    c(
+      "feat_types", "trans_type", "cont_cols", "cate_cols", "clust_feats", "cont_legend",
+      "cate_legend", "target_space", "panel_space", "target_pos", "feats", "show_all_feats",
+      "p_thres", "target_lab_disp"
+    )
 
   m_ctree <- match(ctree_vars, names(mf), 0L)
   m_tree <- match(tree_vars, names(mf), 0L)
@@ -89,7 +95,7 @@ heat_tree <- function(
   dtree <- mf[c(1L, m_tree)]
   dtree$target_cols <- target_cols
   dtree$print_eval <- print_eval
-  for (argg in c('fit', 'dat', 'layout', 'term_dat')){
+  for (argg in c("fit", "dat", "layout", "term_dat")) {
     dtree[[argg]] <- ctree_result[[argg]]
   }
   dtree[[1L]] <- quote(draw_tree)
@@ -110,5 +116,3 @@ heat_tree <- function(
   class(g) <- c("ggHeatTree", class(g))
   g
 }
-
-

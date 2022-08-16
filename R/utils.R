@@ -2,7 +2,7 @@
   if (is.null(x)) y else x
 }
 
-.simplify_pred <- function (tab, id, nam){
+.simplify_pred <- function(tab, id, nam) {
   # Modified from partykit:::.simplify_pred()
   # https://github.com/cran/partykit/blob/597245ef3dfc98411ce919b74c68ba565f077c47/R/party.R#L497-L520
   # to add as.numeric() after combining the list components with do.call()
@@ -10,21 +10,25 @@
   if (all(sapply(tab, length) == 1) & all(sapply(tab, is.atomic))) {
     ret <- do.call("c", tab) %>% as.numeric()
     names(ret) <- names(tab)
-    ret <- if (is.factor(tab[[1]]))
-      factor(ret[as.character(id)], levels = 1:length(levels(tab[[1]])),
-             labels = levels(tab[[1]]), ordered = is.ordered(tab[[1]]))
-    else ret[as.character(id)]
+    ret <- if (is.factor(tab[[1]])) {
+      factor(ret[as.character(id)],
+        levels = 1:length(levels(tab[[1]])),
+        labels = levels(tab[[1]]), ordered = is.ordered(tab[[1]])
+      )
+    } else {
+      ret[as.character(id)]
+    }
     names(ret) <- nam
-  }
-  else if (length(unique(sapply(tab, length))) == 1 & all(sapply(tab,
-                                                                 is.numeric))) {
+  } else if (length(unique(sapply(tab, length))) == 1 & all(sapply(
+    tab,
+    is.numeric
+  ))) {
     ret <- matrix(unlist(tab), nrow = length(tab), byrow = TRUE)
     colnames(ret) <- names(tab[[1]])
     rownames(ret) <- names(tab)
     ret <- ret[as.character(id), , drop = FALSE]
     rownames(ret) <- nam
-  }
-  else {
+  } else {
     ret <- tab[as.character(id)]
     names(ret) <- nam
   }
@@ -39,15 +43,15 @@
 #' @inheritParams heat_tree
 #'
 get_cols <- function(my_cols, task, guide = FALSE) {
-  vir_opts <- list(option = 'A', begin = 0.3, end = 0.9)
-  my_cols <- if (!is.null(my_cols)){
-    my_cols <- do.call(ggplot2::scale_fill_manual, list(values = my_cols, guide = guide, drop = FALSE))
-  } else {
-    switch(task,
-           classification = do.call(ggplot2::scale_fill_viridis_d, c(vir_opts, guide = guide, drop = FALSE)),
-           regression = do.call(ggplot2::scale_fill_viridis_c, c(vir_opts, guide = guide)))
+  vir_opts <- list(option = "A", begin = 0.3, end = 0.9)
+  if (!is.null(my_cols)) {
+    return(do.call(ggplot2::scale_fill_manual, list(values = my_cols, guide = guide, drop = FALSE)))
   }
-  my_cols
+
+  switch(task,
+    classification = do.call(ggplot2::scale_fill_viridis_d, c(vir_opts, guide = guide, drop = FALSE)),
+    regression = do.call(ggplot2::scale_fill_viridis_c, c(vir_opts, guide = guide))
+  )
 }
 
 #' Align decision tree and heatmap:
@@ -58,28 +62,26 @@ get_cols <- function(my_cols, task, guide = FALSE) {
 #'
 #' @return  A gtable/grob object of the decision tree (top) and heatmap (bottom).
 #'
-align_plots <- function(
-  dheat, dtree, heat_rel_height, show = c('heat-tree', 'heat-only', 'tree-only')) {
-
+align_plots <- function(dheat, dtree, heat_rel_height,
+                        show = c("heat-tree", "heat-only", "tree-only")) {
   show <- match.arg(show)
-
   g_tree <- ggplot2::ggplotGrob(dtree)
   g_heat <- ggplot2::ggplotGrob(dheat)
 
-  if (show == 'tree-only'){
-    g <- g_tree
-  } else if (show == 'heat-only'){
-    g <- g_heat
-  } else {
-    panel_id <- g_heat$layout[grep('panel', g_heat$layout$name),]
-    heat_height <- g_heat$heights[panel_id[1, 't']]
-
-    g <- g_heat %>%
-      gtable::gtable_add_rows(heat_height*(1/heat_rel_height - 1), 0) %>%
-      gtable::gtable_add_grob(g_tree, t = 1, l = min(panel_id$l), r = max(panel_id$l))
+  if (show == "tree-only") {
+    return(g_tree)
   }
 
-  g
+  if (show == "heat-only") {
+    return(g_heat)
+  }
+
+  panel_id <- g_heat$layout[grep("panel", g_heat$layout$name), ]
+  heat_height <- g_heat$heights[panel_id[1, "t"]]
+
+  g_heat %>%
+    gtable::gtable_add_rows(heat_height * (1 / heat_rel_height - 1), 0) %>%
+    gtable::gtable_add_grob(g_tree, t = 1, l = min(panel_id$l), r = max(panel_id$l))
 }
 
 #' Print a ggHeatTree object.
@@ -100,23 +102,25 @@ align_plots <- function(
 #'
 #' @export
 
-print.ggHeatTree <- function (x, newpage = is.null(vp), vp = NULL, ...)
-{
+print.ggHeatTree <- function(x, newpage = is.null(vp), vp = NULL, ...) {
   ggplot2::set_last_plot(x)
-  if (newpage)
+  if (newpage) {
     grid.newpage()
-  grDevices::recordGraphics(requireNamespace("ggplot2", quietly = TRUE),
-                            list(), getNamespace("ggplot2"))
+  }
+  grDevices::recordGraphics(
+    requireNamespace("ggplot2", quietly = TRUE),
+    list(), getNamespace("ggplot2")
+  )
   if (is.null(vp)) {
     grid.draw(x)
-  }
-  else {
-    if (is.character(vp))
+  } else {
+    if (is.character(vp)) {
       seekViewport(vp)
-    else pushViewport(vp)
+    } else {
+      pushViewport(vp)
+    }
     grid.draw(x)
     upViewport()
   }
   invisible(x)
 }
-

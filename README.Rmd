@@ -5,7 +5,7 @@ output: rmarkdown::github_document
 [![vignette](https://img.shields.io/badge/-Vignette-green?logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html)
 [![documentation](https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
 [![github-action-status](https://img.shields.io/github/workflow/status/trang1618/treeheatr/R-CMD-check?logo=github)](https://github.com/trang1618/treeheatr/actions)
-`r badger::badge_cran_download("badger", "grand-total", "blue")`
+`r badger::badge_cran_download("treeheatr", "grand-total", "blue")`
 `r badger::badge_doi("10.1093/bioinformatics/btaa662", "yellow")`
 
 ```{r, include = FALSE}
@@ -44,6 +44,8 @@ remotes::install_github('trang1618/treeheatr')
 ## Examples
 
 ### Penguin dataset
+
+These data were collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station, Antarctica LTER](https://pal.lternet.edu/).
 
 Classification of different types of penguin species.
 

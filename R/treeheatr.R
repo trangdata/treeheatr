@@ -4,13 +4,14 @@
 #'
 #' @rdname heat_tree
 #' @examples
-#' treeheatr(penguins, target_lab = 'species')
+#' treeheatr(penguins, target_lab = "species")
 #'
 #' treeheatr(
 #'   x = galaxy[1:100, ],
-#'   target_lab = 'target',
-#'   task = 'regression',
+#'   target_lab = "target",
+#'   task = "regression",
 #'   terminal_vars = NULL,
-#'   tree_space_bottom = 0)
+#'   tree_space_bottom = 0
+#' )
 #' @export
 treeheatr <- heat_tree
