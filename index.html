@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heatmap-Integrated Decision Tree Visualizations • treeheatr</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -85,11 +91,11 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="treeheatr-an-introduction">
-<strong>treeheatr</strong>: an introduction<a class="anchor" aria-label="anchor" href="#treeheatr-an-introduction"></a>
-</h1></div>
 
+
+<div class="section level1">
+<div class="page-header"><h1 id="treeheatr-">treeheatr <img src="reference/figures/logo.png" align="right" height="139"><a class="anchor" aria-label="anchor" href="#treeheatr-"></a>
+</h1></div>
 <div class="section level4"><h4 id="your-decision-tree-may-be-cool-but-what-if-i-tell-you-you-can-make-it-hot">
 <em>Your decision tree may be cool, but what if I tell you you can make it hot?</em><a class="anchor" aria-label="anchor" href="#your-decision-tree-may-be-cool-but-what-if-i-tell-you-you-can-make-it-hot"></a>
 </h4></div>
@@ -130,11 +136,6 @@
 <p>Classification of different cultivars of wine.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine</span>, target_lab <span class="op">=</span> <span class="st">'Type'</span>, target_lab_disp <span class="op">=</span> <span class="st">'Cultivar'</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">## use `guide = "none"` instead.</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## use `guide = "none"` instead.</span></span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-5-1.png"><!-- --></p>
 </div>
 </div>
@@ -144,13 +145,13 @@
 <p>If you use treeheatr in a scientific publication, please consider citing the following paper:</p>
 <p>Le TT, Moore JH. <a href="https://doi.org/10.1093/bioinformatics/btaa662" class="external-link">treeheatr: an R package for interpretable decision tree visualizations</a>. <em>Bioinformatics</em>. 2020 Jan 1.</p>
 <p>BibTeX entry:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb6-1"><a href="#cb6-1"></a><span class="va">@article</span>{<span class="ot">le2020treeheatr</span>,</span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="dt">title</span>={treeheatr: an R package for interpretable decision tree visualizations},</span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="dt">author</span>={Le, Trang T and Moore, Jason H},</span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="dt">journal</span>={Bioinformatics},</span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="dt">year</span>={2020},</span>
-<span id="cb6-6"><a href="#cb6-6"></a>  <span class="dt">doi</span>="<span class="st">10.1093/bioinformatics/btaa662</span>"</span>
-<span id="cb6-7"><a href="#cb6-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb5-1"><a href="#cb5-1"></a><span class="va">@article</span>{<span class="ot">le2020treeheatr</span>,</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">title</span>={treeheatr: an R package for interpretable decision tree visualizations},</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dt">author</span>={Le, Trang T and Moore, Jason H},</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="dt">journal</span>={Bioinformatics},</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="dt">year</span>={2020},</span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="dt">doi</span>="<span class="st">10.1093/bioinformatics/btaa662</span>"</span>
+<span id="cb5-7"><a href="#cb5-7"></a>}</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="how-to-use">How to Use<a class="anchor" aria-label="anchor" href="#how-to-use"></a>
@@ -164,7 +165,13 @@
 <p>Please <a href="https://github.com/trang1618/treeheatr/issues/new" class="external-link">open an issue</a> for questions related to <strong>treeheatr</strong> usage, bug reports or general inquiries.</p>
 <p>Thank you very much for your support!</p>
 </div>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h2>
+<p>Package hex was made with <a href="https://www.midjourney.com/home/" class="external-link">Midjourney</a> and thus inherits a <a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode" class="external-link">CC BY-NC 4.0 license</a>.</p>
 </div>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
