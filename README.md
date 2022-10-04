@@ -1,7 +1,7 @@
 
-[![vignette](https://img.shields.io/badge/-Vignette-green?logo=spinnaker)](https://trang1618.github.io/treeheatr/articles/explore.html)
-[![documentation](https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs)](https://trang1618.github.io/treeheatr/reference/)
-[![github-action-status](https://img.shields.io/github/workflow/status/trang1618/treeheatr/R-CMD-check?logo=github)](https://github.com/trang1618/treeheatr/actions)
+[![vignette](https://img.shields.io/badge/-Vignette-green?logo=spinnaker)](https://trangdata.github.io/treeheatr/articles/explore.html)
+[![documentation](https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs)](https://trangdata.github.io/treeheatr/reference/)
+[![github-action-status](https://img.shields.io/github/workflow/status/trangdata/treeheatr/R-CMD-check?logo=github)](https://github.com/trangdata/treeheatr/actions)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/treeheatr?color=blue)](https://cran.r-project.org/package=treeheatr)
 [![](https://img.shields.io/badge/doi-10.1093/bioinformatics/btaa662-yellow.svg)](https://doi.org/10.1093/bioinformatics/btaa662)
 
@@ -30,7 +30,7 @@ Or the development version from GitHub with remotes:
 
 ``` r
 # install.packages('remotes') # uncomment to install devtools
-remotes::install_github('trang1618/treeheatr')
+remotes::install_github('trangdata/treeheatr')
 ```
 
 ## Examples
@@ -101,11 +101,11 @@ decision tree. The basic building blocks to a **treeheatr** plot are
     across all samples.
 
 Make sure to check out the
-[vignette](https://trang1618.github.io/treeheatr/articles/explore.html)
+[vignette](https://trangdata.github.io/treeheatr/articles/explore.html)
 for detailed information on the usage of **treeheatr**.
 
 Please [open an
-issue](https://github.com/trang1618/treeheatr/issues/new) for questions
+issue](https://github.com/trangdata/treeheatr/issues/new) for questions
 related to **treeheatr** usage, bug reports or general inquiries.
 
 Thank you very much for your support!

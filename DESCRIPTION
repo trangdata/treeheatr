@@ -15,9 +15,9 @@ Description: Creates interpretable decision tree visualizations with the
     utilizes the customizable 'ggparty' package for drawing decision
     trees.
 License: MIT + file LICENSE
-URL:https://trang1618.github.io/treeheatr/index.html,
-    https://trang1618.github.io/treeheatr-manuscript/
-BugReports: https://github.com/trang1618/treeheatr/issues
+URL:https://trangdata.github.io/treeheatr/index.html,
+    https://trangdata.github.io/treeheatr-manuscript/
+BugReports: https://github.com/trangdata/treeheatr/issues
 Depends:
     R (>= 3.5.0)
 Imports:

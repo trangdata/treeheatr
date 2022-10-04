@@ -15,13 +15,13 @@ penguins <- readr::read_csv(
 )
 
 train_covid_raw <- readr::read_tsv(
-  "https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_train.tsv"
+  "https://raw.githubusercontent.com/trangdata/Pre_Surv_COVID_19/master/data/processed_covid_train.tsv"
 )
 colnames(train_covid_raw) <- iconv(colnames(train_covid_raw), from = "UTF-8", to = "ASCII")
 attr(train_covid_raw, "spec") <- NULL
 
 test_covid_raw <- readr::read_tsv(
-  "https://raw.githubusercontent.com/trang1618/Pre_Surv_COVID_19/master/data/processed_covid_test.tsv"
+  "https://raw.githubusercontent.com/trangdata/Pre_Surv_COVID_19/master/data/processed_covid_test.tsv"
 )
 
 train_covid <- train_covid_raw %>%

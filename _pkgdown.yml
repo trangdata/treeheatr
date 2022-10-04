@@ -4,10 +4,10 @@ template:
     bootswatch: flatly
   opengraph:
     image:
-      src: https://trang1618.github.io/treeheatr/reference/figures/card.png
+      src: https://trangdata.github.io/treeheatr/reference/figures/card.png
       alt: "treeheatr"
     twitter:
-      creator: "@trang1618"
+      creator: "@trangdata"
       card: summary_large_image
 
 reference:
@@ -65,7 +65,7 @@ navbar:
       href: articles/explore.html
     github:
       icon: fa-github fab
-      href: https://github.com/trang1618/treeheatr
+      href: https://github.com/trangdata/treeheatr
     twitter:
       icon: fa-twitter fab
-      href: https://twitter.com/trang1618
+      href: https://twitter.com/trangdata
