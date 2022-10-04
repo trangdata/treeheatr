@@ -22,11 +22,11 @@
     data represented as a heatmap at the trees leaf nodes.  treeheatr
     utilizes the customizable ggparty' package for drawing decision
     trees.">
-<meta property="og:image" content="https://trang1618.github.io/treeheatr/reference/figures/card.png">
+<meta property="og:image" content="https://trangdata.github.io/treeheatr/reference/figures/card.png">
 <meta property="og:image:alt" content="treeheatr">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:creator" content="@trang1618">
-<meta name="twitter:site" content="@trang1618">
+<meta name="twitter:creator" content="@trangdata">
+<meta name="twitter:site" content="@trangdata">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -68,13 +68,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/trang1618/treeheatr" class="external-link">
+  <a href="https://github.com/trangdata/treeheatr" class="external-link">
     <span class="fa fa-github fab"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/trang1618" class="external-link">
+  <a href="https://twitter.com/trangdata" class="external-link">
     <span class="fa fa-twitter fab"></span>
      
   </a>
@@ -114,7 +114,7 @@
 <p>Or the development version from GitHub with remotes:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages('remotes') # uncomment to install devtools</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'trang1618/treeheatr'</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'trangdata/treeheatr'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -125,7 +125,7 @@
 <p>These data were collected and made available by <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php" class="external-link">Dr. Kristen Gorman</a> and the <a href="https://pal.lternet.edu/" class="external-link">Palmer Station, Antarctica LTER</a>.</p>
 <p>Classification of different types of penguin species.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://trang1618.github.io/treeheatr/index.html" class="external-link">treeheatr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://trangdata.github.io/treeheatr/index.html" class="external-link">treeheatr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-4-1.png"><!-- --></p>
@@ -161,8 +161,8 @@
 <li><p>The decision tree is computed with <code><a href="https://rdrr.io/pkg/partykit/man/ctree.html" class="external-link">partykit::ctree()</a></code> and plotted with the well-documented and flexible <a href="https://cran.r-project.org/package=ggparty/" class="external-link"><strong>ggparty</strong></a> package. The tree parameters can be passed to <strong>ggparty</strong> functions via the <code><a href="reference/heat_tree.html">heat_tree()</a></code> and <code><a href="reference/draw_tree.html">draw_tree()</a></code> functions of <strong>treeheatr</strong>. More details on different <strong>ggparty</strong> <em>geoms</em> can be found <a href="https://github.com/martin-borkovec/ggparty" class="external-link">here</a>.</p></li>
 <li><p>The heatmap is shown with <code><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">ggplot2::geom_tile()</a></code>. The user may choose to cluster the samples within each leaf node or the features across all samples.</p></li>
 </ul>
-<p>Make sure to check out the <a href="https://trang1618.github.io/treeheatr/articles/explore.html" class="external-link">vignette</a> for detailed information on the usage of <strong>treeheatr</strong>.</p>
-<p>Please <a href="https://github.com/trang1618/treeheatr/issues/new" class="external-link">open an issue</a> for questions related to <strong>treeheatr</strong> usage, bug reports or general inquiries.</p>
+<p>Make sure to check out the <a href="https://trangdata.github.io/treeheatr/articles/explore.html" class="external-link">vignette</a> for detailed information on the usage of <strong>treeheatr</strong>.</p>
+<p>Please <a href="https://github.com/trangdata/treeheatr/issues/new" class="external-link">open an issue</a> for questions related to <strong>treeheatr</strong> usage, bug reports or general inquiries.</p>
 <p>Thank you very much for your support!</p>
 </div>
 <div class="section level2">
@@ -179,8 +179,8 @@
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://cloud.r-project.org/package=treeheatr" class="external-link">View on CRAN</a></li>
-<li><a href="https://github.com/trang1618/treeheatr/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/trang1618/treeheatr/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/trangdata/treeheatr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/trangdata/treeheatr/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -212,9 +212,9 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://trang1618.github.io/treeheatr/articles/explore.html" class="external-link"><img src="https://img.shields.io/badge/-Vignette-green?logo=spinnaker" alt="vignette"></a></li>
-<li><a href="https://trang1618.github.io/treeheatr/reference/" class="external-link"><img src="https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs" alt="documentation"></a></li>
-<li><a href="https://github.com/trang1618/treeheatr/actions" class="external-link"><img src="https://img.shields.io/github/workflow/status/trang1618/treeheatr/R-CMD-check?logo=github" alt="github-action-status"></a></li>
+<li><a href="https://trangdata.github.io/treeheatr/articles/explore.html" class="external-link"><img src="https://img.shields.io/badge/-Vignette-green?logo=spinnaker" alt="vignette"></a></li>
+<li><a href="https://trangdata.github.io/treeheatr/reference/" class="external-link"><img src="https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs" alt="documentation"></a></li>
+<li><a href="https://github.com/trangdata/treeheatr/actions" class="external-link"><img src="https://img.shields.io/github/workflow/status/trangdata/treeheatr/R-CMD-check?logo=github" alt="github-action-status"></a></li>
 <li><a href="https://cran.r-project.org/package=treeheatr" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/treeheatr?color=blue"></a></li>
 <li><a href="https://doi.org/10.1093/bioinformatics/btaa662" class="external-link"><img src="https://img.shields.io/badge/doi-10.1093/bioinformatics/btaa662-yellow.svg"></a></li>
 </ul>
