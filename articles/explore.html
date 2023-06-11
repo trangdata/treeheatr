@@ -86,13 +86,13 @@
 
       
 
-      </header><script src="explore_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Explore treeheatr</h1>
                         <h4 data-toc-skip class="author">Trang Le</h4>
             
-            <h4 data-toc-skip class="date">2022-10-04</h4>
+            <h4 data-toc-skip class="date">2023-06-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/trangdata/treeheatr/blob/HEAD/vignettes/explore.Rmd" class="external-link"><code>vignettes/explore.Rmd</code></a></small>
       <div class="hidden name"><code>explore.Rmd</code></div>
@@ -101,19 +101,29 @@
 
     
     
-<p><strong>treeheatr</strong> displays a more interpretable decision tree visualization by integrating a heatmap at its terminal nodes. Let’s explore the package <strong>treeheatr</strong> a little deeper and see what it can do!</p>
+<p><strong>treeheatr</strong> displays a more interpretable decision
+tree visualization by integrating a heatmap at its terminal nodes. Let’s
+explore the package <strong>treeheatr</strong> a little deeper and see
+what it can do!</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://trangdata.github.io/treeheatr/index.html" class="external-link">treeheatr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="lets-begin">Let’s begin<a class="anchor" aria-label="anchor" href="#lets-begin"></a>
 </h2>
-<p>with the penguins dataset! Running the <code><a href="../reference/heat_tree.html">heat_tree()</a></code> function can be as simple as:</p>
+<p>with the penguins dataset! Running the <code><a href="../reference/heat_tree.html">heat_tree()</a></code>
+function can be as simple as:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># To avoid warnings, for now, apply na.omit():</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
-<p>But we can adjust a few graphical parameters. We can also add a custom layout for a subset of the nodes by specifying it in the <code>custom_layout</code> parameter. And we can relax the p value threshold <code>p_thres</code> to include more features that might be less important in classifying the samples but still included in the decision tree, or set <code>show_all_feats = TRUE</code> to include all features, even the ones that were not used to build the tree.</p>
+<p>But we can adjust a few graphical parameters. We can also add a
+custom layout for a subset of the nodes by specifying it in the
+<code>custom_layout</code> parameter. And we can relax the p value
+threshold <code>p_thres</code> to include more features that might be
+less important in classifying the samples but still included in the
+decision tree, or set <code>show_all_feats = TRUE</code> to include all
+features, even the ones that were not used to build the tree.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span></span>
 <span>  <span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>,</span>
@@ -123,7 +133,9 @@
 <span>  show_all_feats <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  panel_space <span class="op">=</span> <span class="fl">0.05</span>, target_space <span class="op">=</span> <span class="fl">0.2</span>, tree_space_bottom <span class="op">=</span> <span class="fl">0.1</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
-<p>We can also customize our heattree by passing parameters through to different <strong>ggparty</strong> geoms. These list parameters are named <code>*_vars</code>. For example:</p>
+<p>We can also customize our heattree by passing parameters through to
+different <strong>ggparty</strong> geoms. These list parameters are
+named <code>*_vars</code>. For example:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span></span>
 <span>  <span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>,</span>
@@ -143,15 +155,20 @@
 <span>  cont_legend <span class="op">=</span> <span class="cn">TRUE</span>, cate_legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  edge_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
-<p>What if we only want to show the decision tree? We can toggle this option using the <code>show</code> argument, which takes either <code>'heat-tree'</code>, <code>'heat-only'</code> or <code>'tree-only'</code>. For example:</p>
+<p>What if we only want to show the decision tree? We can toggle this
+option using the <code>show</code> argument, which takes either
+<code>'heat-tree'</code>, <code>'heat-only'</code> or
+<code>'tree-only'</code>. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, show <span class="op">=</span> <span class="st">'tree-only'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<p>We can also choose to display other features in the heatmap that may not be in the tree.</p>
+<p>We can also choose to display other features in the heatmap that may
+not be in the tree.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'body_mass_g'</span>, <span class="st">'sex'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p><code>feats = NA</code> displays the tree with only the target label, which may be simple and still helpful:</p>
+<p><code>feats = NA</code> displays the tree with only the target label,
+which may be simple and still helpful:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span>, feats <span class="op">=</span> <span class="cn">NA</span>, heat_rel_height <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
@@ -159,11 +176,16 @@
 <div class="section level2">
 <h2 id="youre-the-warren-beatty-of-your-heat_tree">You’re the Warren Beatty of your <code>heat_tree()</code><a class="anchor" aria-label="anchor" href="#youre-the-warren-beatty-of-your-heat_tree"></a>
 </h2>
-<p><em>Anyone got that <a href="https://youtu.be/fyMQ2203pQM?t=82" class="external-link">Food Wishes reference</a>?</em></p>
+<p><em>Anyone got that <a href="https://youtu.be/fyMQ2203pQM?t=82" class="external-link">Food
+Wishes reference</a>?</em></p>
 <div class="section level3">
 <h3 id="pre-train-your-tree">Pre-train your tree<a class="anchor" aria-label="anchor" href="#pre-train-your-tree"></a>
 </h3>
-<p>If the default conditional tree is not desired, you can create your tree (e.g. with <code>rpart</code>) and wrap <code><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html" class="external-link">as.party()</a></code> around this object to plug into <code><a href="../reference/heat_tree.html">heat_tree()</a></code>. As an example, we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10 to 2020-02-18 from a <a href="https://doi.org/10.1038/s42256-020-0180-7" class="external-link">recent study</a>.</p>
+<p>If the default conditional tree is not desired, you can create your
+tree (e.g. with <code>rpart</code>) and wrap <code><a href="https://rdrr.io/pkg/partykit/man/party-coercion.html" class="external-link">as.party()</a></code>
+around this object to plug into <code><a href="../reference/heat_tree.html">heat_tree()</a></code>. As an example,
+we will examine the datasets of COVID-19 cases in Wuhan from 2020-01-10
+to 2020-02-18 from a <a href="https://doi.org/10.1038/s42256-020-0180-7" class="external-link">recent study</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># # same tree as letting `x = train_covid`:</span></span>
 <span><span class="co"># x &lt;- partykit::ctree(Outcome ~ ., data = train_covid)</span></span>
@@ -175,9 +197,13 @@
 <p><img src="explore_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 <div class="section level3">
-<h3 id="manually-define-your-tree-with-partysplit-and-partynode">Manually define your tree with <code>partysplit</code> and <code>partynode</code><a class="anchor" aria-label="anchor" href="#manually-define-your-tree-with-partysplit-and-partynode"></a>
+<h3 id="manually-define-your-tree-with-partysplit-and-partynode">Manually define your tree with <code>partysplit</code> and
+<code>partynode</code><a class="anchor" aria-label="anchor" href="#manually-define-your-tree-with-partysplit-and-partynode"></a>
 </h3>
-<p>You can also manually define your own tree for the <code>custom_tree</code> argument following the <a href="https://cran.r-project.org/package=partykit/vignettes/partykit.pdf" class="external-link">partykit vignette</a>. Let’s apply the tree structure in <a href="https://www.nature.com/articles/s42256-020-0180-7/figures/2" class="external-link">Figure 2</a> of the original study (only show the training set for now):</p>
+<p>You can also manually define your own tree for the
+<code>custom_tree</code> argument following the <a href="https://cran.r-project.org/package=partykit/vignettes/partykit.pdf" class="external-link">partykit
+vignette</a>. Let’s apply the tree structure in <a href="https://www.nature.com/articles/s42256-020-0180-7/figures/2" class="external-link">Figure
+2</a> of the original study (only show the training set for now):</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://partykit.r-forge.r-project.org/partykit/" class="external-link">partykit</a></span><span class="op">)</span></span>
 <span></span>
@@ -204,14 +230,18 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="apply-the-learned-tree-on-externalholdouttestvalidation-dataset">Apply the learned tree on external/holdout/test/validation dataset<a class="anchor" aria-label="anchor" href="#apply-the-learned-tree-on-externalholdouttestvalidation-dataset"></a>
+<h2 id="apply-the-learned-tree-on-externalholdouttestvalidation-dataset">Apply the learned tree on external/holdout/test/validation
+dataset<a class="anchor" aria-label="anchor" href="#apply-the-learned-tree-on-externalholdouttestvalidation-dataset"></a>
 </h2>
-<p>You can print measures evaluating the conditional decision tree’s performance by setting <code>print_eval = TRUE</code>. By defaults, we show 5 measures for classification tasks:</p>
+<p>You can print measures evaluating the conditional decision tree’s
+performance by setting <code>print_eval = TRUE</code>. By defaults, we
+show 5 measures for classification tasks:</p>
 <ul>
 <li>Accuracy</li>
 <li>Balanced accuracy (BAL_ACCURACY)</li>
 <li>Kappa coefficient (KAP)</li>
-<li>Area under the receiver operating characteristics curve (ROC_AUC)</li>
+<li>Area under the receiver operating characteristics curve
+(ROC_AUC)</li>
 <li>Area under the precision recall curve (PR_AUC)</li>
 </ul>
 <p>and 4 measures for regression tasks:</p>
@@ -221,12 +251,19 @@
 <li>Root mean squared error (RMSE)</li>
 <li>Concordance correlation coefficient (CCC).</li>
 </ul>
-<p>You can also choose to show performance based on any other set of appropriate metrics listed on the <a href="https://yardstick.tidymodels.org/reference/index.html" class="external-link">yardstick reference page</a>, for example, with</p>
+<p>You can also choose to show performance based on any other set of
+appropriate metrics listed on the <a href="https://yardstick.tidymodels.org/reference/index.html" class="external-link">yardstick
+reference page</a>, for example, with</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metrics</span> <span class="op">=</span> <span class="fu">yardstick</span><span class="fu">::</span><span class="fu"><a href="https://yardstick.tidymodels.org/reference/metric_set.html" class="external-link">metric_set</a></span><span class="op">(</span><span class="fu">yardstick</span><span class="fu">::</span><span class="va"><a href="https://yardstick.tidymodels.org/reference/f_meas.html" class="external-link">f_meas</a></span><span class="op">)</span></span></code></pre></div>
-<p>as a <code>heat_tree</code> argument to show the <em>F</em> score (a combination of precision and recall).</p>
-<p><strong>Warning</strong>: We do not recommend <code>print_eval</code> on the training set because these measures may gives you an over-optimistic view of how the tree performs (this would show pure training accuracy, not cross-validated).</p>
-<p>Let’s now apply the custom tree we (or really, Yan et al.) designed earlier and see how it performs on the test set:</p>
+<p>as a <code>heat_tree</code> argument to show the <em>F</em> score (a
+combination of precision and recall).</p>
+<p><strong>Warning</strong>: We do not recommend <code>print_eval</code>
+on the training set because these measures may gives you an
+over-optimistic view of how the tree performs (this would show pure
+training accuracy, not cross-validated).</p>
+<p>Let’s now apply the custom tree we (or really, Yan et al.) designed
+earlier and see how it performs on the test set:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">custom_tree</span>,</span>
@@ -239,7 +276,11 @@
 <div class="section level2">
 <h2 id="regression">Regression<a class="anchor" aria-label="anchor" href="#regression"></a>
 </h2>
-<p>In general, compared to classification, regression task is more difficult to interpret with a decision tree. However, a heatmap may shed some light on how the tree groups the samples in different terminal nodes. Also, removing the terminal node label may show the groups better. Here’s an example:</p>
+<p>In general, compared to classification, regression task is more
+difficult to interpret with a decision tree. However, a heatmap may shed
+some light on how the tree groups the samples in different terminal
+nodes. Also, removing the terminal node label may show the groups
+better. Here’s an example:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">galaxy</span>,</span>
 <span>          target_lab <span class="op">=</span> <span class="st">'target'</span>,</span>
@@ -251,8 +292,19 @@
 <div class="section level2">
 <h2 id="smart-node-layout">Smart node layout<a class="anchor" aria-label="anchor" href="#smart-node-layout"></a>
 </h2>
-<p>These extreme visualizations may not be very interpretable but serves the purpose of showing the ability to generalize of the node layout when the tree grows in size. The implemented smart layout weighs the x-position of the parent node according to the level of the child nodes as to avoid crossing of tree branches. This relative weight can be adjusted with the <code>lev_fac</code> parameter in <code><a href="../reference/heat_tree.html">heat_tree()</a></code>. The default <code>lev_fac = 1.3</code> seems to provide aesthetically pleasing trees, independent of the tree size.</p>
-<p>In this next figure, on the top, <code>lev_fac = 1</code> makes parent node perfectly in the middle of child nodes (note a few branch crossing), which contrasts <code>lev_fac = 1.3</code> (default) on the bottom.</p>
+<p>These extreme visualizations may not be very interpretable but serves
+the purpose of showing the ability to generalize of the node layout when
+the tree grows in size. The implemented smart layout weighs the
+x-position of the parent node according to the level of the child nodes
+as to avoid crossing of tree branches. This relative weight can be
+adjusted with the <code>lev_fac</code> parameter in
+<code><a href="../reference/heat_tree.html">heat_tree()</a></code>. The default <code>lev_fac = 1.3</code> seems
+to provide aesthetically pleasing trees, independent of the tree
+size.</p>
+<p>In this next figure, on the top, <code>lev_fac = 1</code> makes
+parent node perfectly in the middle of child nodes (note a few branch
+crossing), which contrasts <code>lev_fac = 1.3</code> (default) on the
+bottom.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine_quality_red</span>, target_lab <span class="op">=</span> <span class="st">'target'</span>, lev_fac <span class="op">=</span> <span class="fl">1</span>, title <span class="op">=</span> <span class="st">'lev_fac = 1'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/heat_tree.html">heat_tree</a></span><span class="op">(</span><span class="va">wine_quality_red</span>, target_lab <span class="op">=</span> <span class="st">'target'</span>, title <span class="op">=</span> <span class="st">'lev_fac = 1.3'</span><span class="op">)</span></span></code></pre></div>
@@ -261,16 +313,41 @@
 <div class="section level2">
 <h2 id="seriation">Seriation<a class="anchor" aria-label="anchor" href="#seriation"></a>
 </h2>
-<p>Unless you turn it off (<code>clust_feats = FALSE</code>, <code>clust_samps = FALSE</code>), <strong>treeheatr</strong> automatically performs grouping of features and samples when organizing the heatmap. Features are ordered within each of the two groups of features, continuous and categorical (including the target label, unless <code>clust_target = FALSE</code>). Samples are grouped within each terminal node of all features (not only the displayed features). <strong>treeheatr</strong> uses <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">cluster::daisy()</a></code> to compute distances with the Gower metric to incorporate both continuous and nominal categorical feature types. Now, <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">cluster::daisy()</a></code> may throw this warning if your dataset contains binary features:</p>
+<p>Unless you turn it off (<code>clust_feats = FALSE</code>,
+<code>clust_samps = FALSE</code>), <strong>treeheatr</strong>
+automatically performs grouping of features and samples when organizing
+the heatmap. Features are ordered within each of the two groups of
+features, continuous and categorical (including the target label, unless
+<code>clust_target = FALSE</code>). Samples are grouped within each
+terminal node of all features (not only the displayed features).
+<strong>treeheatr</strong> uses <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">cluster::daisy()</a></code> to compute
+distances with the Gower metric to incorporate both continuous and
+nominal categorical feature types. Now, <code><a href="https://rdrr.io/pkg/cluster/man/daisy.html" class="external-link">cluster::daisy()</a></code>
+may throw this warning if your dataset contains binary features:</p>
 <p><code>binary variable(s) treated as interval scaled</code></p>
-<p>but in general this is safe to ignore because the goal of seriation is to simply reduce the amount of stochasticity of the tree-based model and not to make precise inference about each group.</p>
+<p>but in general this is safe to ignore because the goal of seriation
+is to simply reduce the amount of stochasticity of the tree-based model
+and not to make precise inference about each group.</p>
 </div>
 <div class="section level2">
 <h2 id="mixed-datafeature-types">Mixed data/feature types<a class="anchor" aria-label="anchor" href="#mixed-datafeature-types"></a>
 </h2>
-<p>As shown above in the <em>penguins</em> example, <strong>treeheatr</strong> supports mixed feature types.</p>
-<p>For continuous variables/features, we can choose to either <em>percentize</em> (scale-rank), <em>normalize</em> (subtract the min and divide by the max) or <em>scale</em> (subtract the mean and divide by the standard deviation) each feature. Depending on what we want to show in the heatmap, one transformation method can be more effective than the other. Details on the strengths and weaknesses of different types of data transformation for heatmap display can be found in <a href="https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize" class="external-link">this vignette</a> of the <strong>heatmaply</strong> package.</p>
-<p>We highly recommend that, when dealing with mixed feature types, the user supply <code>feat_types</code> to indicate whether a feature should be considered ‘numeric’ (continuous) or ‘factor’ (categorical) as shown below. When <code>feat_types</code> is not specified, <strong>treeheatr</strong> automatically inferred each column type from the original dataset.</p>
+<p>As shown above in the <em>penguins</em> example,
+<strong>treeheatr</strong> supports mixed feature types.</p>
+<p>For continuous variables/features, we can choose to either
+<em>percentize</em> (scale-rank), <em>normalize</em> (subtract the min
+and divide by the max) or <em>scale</em> (subtract the mean and divide
+by the standard deviation) each feature. Depending on what we want to
+show in the heatmap, one transformation method can be more effective
+than the other. Details on the strengths and weaknesses of different
+types of data transformation for heatmap display can be found in <a href="https://cran.r-project.org/package=heatmaply/vignettes/heatmaply.html#data-transformation-scaling-normalize-and-percentize" class="external-link">this
+vignette</a> of the <strong>heatmaply</strong> package.</p>
+<p>We highly recommend that, when dealing with mixed feature types, the
+user supply <code>feat_types</code> to indicate whether a feature should
+be considered ‘numeric’ (continuous) or ‘factor’ (categorical) as shown
+below. When <code>feat_types</code> is not specified,
+<strong>treeheatr</strong> automatically inferred each column type from
+the original dataset.</p>
 </div>
   </div>
 
@@ -291,7 +368,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
