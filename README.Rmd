@@ -4,7 +4,7 @@ output: rmarkdown::github_document
 
 [![vignette](https://img.shields.io/badge/-Vignette-green?logo=spinnaker)](https://trangdata.github.io/treeheatr/articles/explore.html)
 [![documentation](https://img.shields.io/badge/-Documentation-purple?logo=read-the-docs)](https://trangdata.github.io/treeheatr/reference/)
-[![github-action-status](https://img.shields.io/github/workflow/status/trangdata/treeheatr/R-CMD-check?logo=github)](https://github.com/trangdata/treeheatr/actions)
+![github-action-status](https://github.com/trangdata/treeheatr/actions/workflows/R-CMD-check.yaml/badge.svg)
 `r badger::badge_cran_download("treeheatr", "grand-total", "blue")`
 `r badger::badge_doi("10.1093/bioinformatics/btaa662", "yellow")`
 
@@ -14,9 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-# treeheatr <img src="man/figures/logo.png" align="right" height="139" />
+# treeheatr <img src="man/figures/logo.png" style="float:right; height:175px;">
 
-#### *Your decision tree may be cool, but what if I tell you you can make it hot?*
+*Your decision tree may be cool, but what if I tell you you can make it hot?*
 
 ## Changes in treeheatr 0.2.0
 
