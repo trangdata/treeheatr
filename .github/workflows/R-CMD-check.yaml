@@ -7,14 +7,14 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@main
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck", "pkgdown"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Install Pandoc
-        uses: r-lib/actions/setup-pandoc@master
+        uses: r-lib/actions/setup-pandoc@main
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", timeout = 900)
         shell: Rscript {0}
@@ -22,7 +22,7 @@ jobs:
         run: pkgdown::build_site()
         shell: Rscript {0}
       - name: Deploy
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push' && !github.event.repository.fork
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && !github.event.repository.fork
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
