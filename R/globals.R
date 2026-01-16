@@ -5,6 +5,6 @@ if (getRversion() >= "2.15.1") {
     "breaks_label", "term_node",
     "level", "node_id", "parent",
     "splitvar", "value", "x", "y", "y_hat", ".",
-    ".metric", ".estimate"
+    ".metric", ".estimate", "id"
   ))
 }
