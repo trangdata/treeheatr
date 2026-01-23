@@ -5,7 +5,7 @@
 [![](http://cranlogs.r-pkg.org/badges/grand-total/treeheatr?color=blue)](https://cran.r-project.org/package=treeheatr)
 [![](https://img.shields.io/badge/doi-10.1093/bioinformatics/btaa662-yellow.svg)](https://doi.org/10.1093/bioinformatics/btaa662)
 
-# treeheatr <img src="man/figures/logo.png" style="float:right; height:175px;">
+# treeheatr <img src="man/figures/logo.png" align="right" height="139"/>
 
 *Your decision tree may be cool, but what if I tell you you can make it
 hot?*
@@ -60,6 +60,9 @@ Classification of different cultivars of wine.
 heat_tree(wine, target_lab = 'Type', target_lab_disp = 'Cultivar')
 ```
 
+    ## Warning in (function (mapping = NULL, nudge_x = 0, nudge_y = 0, ids = NULL, :
+    ## Ignoring unknown parameters: `label.size`
+
 ![](man/figures/unnamed-chunk-5-1.png)<!-- -->
 
 ## Citing treeheatr
@@ -89,17 +92,17 @@ BibTeX entry:
 decision tree. The basic building blocks to a **treeheatr** plot are
 (yes, you guessed it!) a decision tree and a heatmap.
 
--   The decision tree is computed with `partykit::ctree()` and plotted
-    with the well-documented and flexible
-    [**ggparty**](https://cran.r-project.org/package=ggparty/) package.
-    The tree parameters can be passed to **ggparty** functions via the
-    `heat_tree()` and `draw_tree()` functions of **treeheatr**. More
-    details on different **ggparty** *geoms* can be found
-    [here](https://github.com/martin-borkovec/ggparty).
+- The decision tree is computed with `partykit::ctree()` and plotted
+  with the well-documented and flexible
+  [**ggparty**](https://cran.r-project.org/package=ggparty/) package.
+  The tree parameters can be passed to **ggparty** functions via the
+  `heat_tree()` and `draw_tree()` functions of **treeheatr**. More
+  details on different **ggparty** *geoms* can be found
+  [here](https://github.com/martin-borkovec/ggparty).
 
--   The heatmap is shown with `ggplot2::geom_tile()`. The user may
-    choose to cluster the samples within each leaf node or the features
-    across all samples.
+- The heatmap is shown with `ggplot2::geom_tile()`. The user may choose
+  to cluster the samples within each leaf node or the features across
+  all samples.
 
 Make sure to check out the
 [vignette](https://trangdata.github.io/treeheatr/articles/explore.html)
