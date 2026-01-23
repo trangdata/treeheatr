@@ -1,6 +1,9 @@
-# treeheatr 0.2.1
+# treeheatr development
 
-treeheatr 0.2.1 (2020-11-19)
+# treeheatr 0.2.2
+* Add id to global variables
+
+# treeheatr 0.2.1 (2020-11-19)
 ==============================
 * Default of `print_eval` is TRUE when `data_test` is supplied.
 * `covid_train` and `covid_test` datasets are pre-processed.
@@ -29,7 +32,7 @@ Others:
 * allow the user to choose features to show in the heatmap
 
 
-treeheatr 0.1.0 (2020-06-17)
+# treeheatr 0.1.0 (2020-06-17)
 ==============================
 
 ### ANNOUNCEMENTS
