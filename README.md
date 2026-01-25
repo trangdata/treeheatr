@@ -40,7 +40,8 @@ remotes::install_github('trangdata/treeheatr')
 
 These data were collected and made available by [Dr. Kristen
 Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php)
-and the [Palmer Station, Antarctica LTER](https://pal.lternet.edu/).
+and the [Palmer Station, Antarctica
+LTER](https://pallter.marine.rutgers.edu/).
 
 Classification of different types of penguin species.
 
