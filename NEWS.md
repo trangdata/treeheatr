@@ -1,8 +1,5 @@
+
 # treeheatr 0.2.3
-
-# treeheatr development
-
-# treeheatr 0.2.2
 * Add id to global variables
 
 # treeheatr 0.2.1 (2020-11-19)
