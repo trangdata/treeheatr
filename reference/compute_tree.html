@@ -150,7 +150,7 @@ fit, estimates, smart layout and terminal data.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fit_tree</span> <span class="op">&lt;-</span> <span class="fu">compute_tree</span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">'species'</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">fit_tree</span> <span class="op">&lt;-</span> <span class="fu">compute_tree</span><span class="op">(</span><span class="va">penguins</span>, target_lab <span class="op">=</span> <span class="st">"species"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit_tree</span><span class="op">$</span><span class="va">fit</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model formula:</span>
@@ -185,7 +185,7 @@ fit, estimates, smart layout and terminal data.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9   9 0.5660389 0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 10 0.6340674 0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11 11 0.8227470 0.0</span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fit_tree</span><span class="op">$</span><span class="va">term_dat</span>, <span class="op">-</span> <span class="fu">contains</span><span class="op">(</span><span class="st">'nodedata'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fit_tree</span><span class="op">$</span><span class="va">term_dat</span>, <span class="op">-</span><span class="fu">contains</span><span class="op">(</span><span class="st">"nodedata"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   id parent birth_order breaks_label info    info_list splitvar level kids</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  4      3           1 NA &lt;= NA....   NA c(0.8181....     &lt;NA&gt;     3    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  5      3           2 NA &gt;  NA....   NA           NA     &lt;NA&gt;     3    0</span>
