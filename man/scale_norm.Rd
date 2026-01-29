@@ -24,6 +24,6 @@ Performs transformation on continuous variables for the heatmap color scales.
 }
 \examples{
 scale_norm(1:5)
-scale_norm(1:5, 'normalize')
+scale_norm(1:5, "normalize")
 
 }

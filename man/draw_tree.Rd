@@ -18,10 +18,10 @@ draw_tree(
   x_eval = 0,
   y_eval = 0.9,
   task = c("classification", "regression"),
-  par_node_vars = list(label.size = 0, label.padding = unit(0.15, "lines"), line_list =
-    list(aes(label = splitvar)), line_gpar = list(list(size = 9)), ids = "inner"),
+  par_node_vars = list(label.padding = unit(0.15, "lines"), line_list = list(aes(label =
+    splitvar)), line_gpar = list(list(size = 9)), ids = "inner"),
   terminal_vars = list(label.padding = unit(0.25, "lines"), size = 3, col = "white"),
-  edge_vars = list(color = "grey70", size = 0.5),
+  edge_vars = list(color = "grey70", linewidth = 0.5),
   edge_text_vars = list(color = "grey30", size = 3, mapping = aes(label =
     paste(breaks_label, "*NA")))
 )
@@ -80,7 +80,7 @@ Draws the conditional decision tree output from partykit::ctree(),
 utilizing ggparty geoms: geom_edge, geom_edge_label, geom_node_label.
 }
 \examples{
-x <- compute_tree(penguins, target_lab = 'species')
+x <- compute_tree(penguins, target_lab = "species")
 draw_tree(x$dat, x$fit, x$term_dat, x$layout)
 
 }

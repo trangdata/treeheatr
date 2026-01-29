@@ -14,3 +14,4 @@
 ^CRAN-RELEASE$
 ^data-raw\.csv$
 ^R/test\.R$
+^CRAN-SUBMISSION$

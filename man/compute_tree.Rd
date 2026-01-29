@@ -63,9 +63,9 @@ fit, estimates, smart layout and terminal data.
 Compute decision tree from data set
 }
 \examples{
-fit_tree <- compute_tree(penguins, target_lab = 'species')
+fit_tree <- compute_tree(penguins, target_lab = "species")
 fit_tree$fit
 fit_tree$layout
-dplyr::select(fit_tree$term_dat, - contains('nodedata'))
+dplyr::select(fit_tree$term_dat, -contains("nodedata"))
 
 }

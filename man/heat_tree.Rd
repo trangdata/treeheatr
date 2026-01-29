@@ -104,22 +104,24 @@ A gtable/grob object of the decision tree (top) and heatmap (bottom).
 heat_tree() alias.
 }
 \examples{
-heat_tree(penguins, target_lab = 'species')
 
 \donttest{
+heat_tree(penguins, target_lab = "species")
 heat_tree(
   x = galaxy[1:100, ],
-  target_lab = 'target',
-  task = 'regression',
+  target_lab = "target",
+  task = "regression",
   terminal_vars = NULL,
-  tree_space_bottom = 0)
+  tree_space_bottom = 0
+)
 }
-treeheatr(penguins, target_lab = 'species')
+treeheatr(penguins, target_lab = "species")
 
 treeheatr(
   x = galaxy[1:100, ],
-  target_lab = 'target',
-  task = 'regression',
+  target_lab = "target",
+  task = "regression",
   terminal_vars = NULL,
-  tree_space_bottom = 0)
+  tree_space_bottom = 0
+)
 }
